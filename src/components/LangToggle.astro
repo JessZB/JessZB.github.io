@@ -1,0 +1,102 @@
+---
+// LangToggle — switches between ES and EN
+---
+
+<div class="lang-toggle" role="group" aria-label="Cambiar idioma / Switch language">
+  <button
+    id="lang-es"
+    class="lang-btn"
+    data-lang-label="es"
+    aria-current="true"
+    aria-label="Español"
+    title="Español"
+  >
+    ES
+  </button>
+  <span class="lang-divider" aria-hidden="true">/</span>
+  <button
+    id="lang-en"
+    class="lang-btn"
+    data-lang-label="en"
+    aria-current="false"
+    aria-label="English"
+    title="English"
+  >
+    EN
+  </button>
+</div>
+
+<style>
+  .lang-toggle {
+    display: flex;
+    align-items: center;
+    gap: 0.15rem;
+    background: color-mix(in srgb, var(--color-text-primary) 5%, transparent);
+    border: 1px solid color-mix(in srgb, var(--color-text-primary) 10%, transparent);
+    border-radius: 9999px;
+    padding: 0.25rem 0.5rem;
+  }
+
+  .lang-btn {
+    font-family: var(--font-heading);
+    font-size: 0.7rem;
+    font-weight: 600;
+    letter-spacing: 0.05em;
+    padding: 0.15rem 0.35rem;
+    border-radius: 9999px;
+    cursor: pointer;
+    background: transparent;
+    border: none;
+    color: var(--color-text-muted);
+    transition: all 0.2s ease;
+  }
+
+  .lang-btn:hover {
+    color: var(--color-primary);
+  }
+
+  .lang-btn[aria-current="true"] {
+    background: var(--color-primary);
+    color: var(--color-bg-deep);
+    box-shadow: 0 0 8px rgba(245,197,66,0.3);
+  }
+
+  :global([data-theme="coffee"]) .lang-btn[aria-current="true"] {
+    box-shadow: 0 0 8px rgba(200,135,74,0.3);
+  }
+
+  .lang-divider {
+    color: var(--color-text-muted);
+    font-size: 0.65rem;
+    opacity: 0.4;
+  }
+</style>
+
+<script>
+  const esBtn = document.getElementById('lang-es');
+  const enBtn = document.getElementById('lang-en');
+
+  function setLang(lang: string): void {
+    localStorage.setItem('jesszb-lang', lang);
+    document.documentElement.setAttribute('data-lang', lang);
+
+    // Update button states
+    document.querySelectorAll<HTMLElement>('[data-lang-label]').forEach((el) => {
+      el.setAttribute('aria-current', el.dataset.langLabel === lang ? 'true' : 'false');
+    });
+
+    // Trigger i18n engine update via custom event
+    window.dispatchEvent(new CustomEvent('jesszb:lang-change', { detail: { lang } }));
+  }
+
+  esBtn?.addEventListener('click', () => setLang('es'));
+  enBtn?.addEventListener('click', () => setLang('en'));
+
+  // Sync initial state from localStorage
+  document.addEventListener('DOMContentLoaded', () => {
+    const stored = localStorage.getItem('jesszb-lang') || 'es';
+    document.querySelectorAll<HTMLElement>('[data-lang-label]').forEach((el) => {
+      el.setAttribute('aria-current', el.dataset.langLabel === stored ? 'true' : 'false');
+    });
+  });
+</script>

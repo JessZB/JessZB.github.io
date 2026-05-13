@@ -1,0 +1,188 @@
+---
+import type { Project } from '../data/projects';
+
+interface Props {
+  project: Project;
+  lang?: 'es' | 'en';
+}
+
+const { project, lang = 'es' } = Astro.props;
+
+const colorMap: Record<string, { border: string; text: string; badge: string; glow: string; gradient: string }> = {
+  primary:   { border: 'border-primary/25', text: 'text-primary', badge: 'bg-primary/15 text-primary border-primary/20', glow: 'hover:shadow-glow-gold', gradient: 'from-primary/30 via-primary/15 to-bg-surface' },
+  secondary: { border: 'border-secondary/25', text: 'text-secondary', badge: 'bg-secondary/15 text-secondary border-secondary/20', glow: 'hover:shadow-glow-teal', gradient: 'from-secondary/30 via-secondary/15 to-bg-surface' },
+  highlight: { border: 'border-highlight/25', text: 'text-highlight-light', badge: 'bg-highlight/15 text-highlight-light border-highlight/20', glow: 'hover:shadow-glow-lavender', gradient: 'from-highlight/30 via-highlight/15 to-bg-surface' },
+  accent:    { border: 'border-accent/25', text: 'text-accent-light', badge: 'bg-accent/15 text-accent-light border-accent/20', glow: 'hover:shadow-glow-coral', gradient: 'from-accent/30 via-accent/15 to-bg-surface' },
+};
+
+const c = colorMap[project.color] || colorMap.primary;
+const hasImages = project.images && project.images.length > 0;
+const description = project.description[lang] || project.description.es;
+
+const categoryLabels: Record<string, string> = {
+  own: lang === 'es' ? 'Propios' : 'Own',
+  collab: lang === 'es' ? 'Colaborativos' : 'Collab',
+};
+
+const statusLabel = {
+  completed: lang === 'es' ? 'Completado' : 'Completed',
+  'in-progress': lang === 'es' ? 'En desarrollo' : 'In progress',
+}[project.status];
+---
+
+<div
+  class={`project-card card-base overflow-hidden group border transition-all duration-300 ${c.border} ${c.glow}`}
+  data-category={project.category}
+>
+  <!-- Image Carousel / Placeholder -->
+  <div class="relative h-48 overflow-hidden">
+    {hasImages ? (
+      <!-- Real carousel when images exist -->
+      <div class="carousel-track flex w-full h-full" data-carousel>
+        {project.images.map((img, i) => (
+          <img
+            src={img}
+            alt={`${project.title} screenshot ${i + 1}`}
+            class="carousel-slide w-full h-full object-cover flex-shrink-0"
+            loading={i === 0 ? 'eager' : 'lazy'}
+          />
+        ))}
+      </div>
+    ) : (
+      <!-- Elegant gradient placeholder -->
+      <div class={`w-full h-full bg-gradient-to-br ${c.gradient} flex items-center justify-center relative`}>
+        <!-- Decorative geo shape -->
+        <svg viewBox="0 0 200 160" class="w-32 h-32 opacity-15 group-hover:opacity-25 transition-opacity duration-500" aria-hidden="true">
+          <polygon points="100,20 170,70 150,140 50,140 30,70" fill="currentColor" class={c.text}/>
+          <circle cx="100" cy="85" r="20" fill="none" stroke="currentColor" stroke-width="2" class={c.text} opacity="0.6"/>
+          <line x1="60" y1="85" x2="140" y2="85" stroke="currentColor" stroke-width="1" class={c.text} opacity="0.4"/>
+          <line x1="100" y1="45" x2="100" y2="125" stroke="currentColor" stroke-width="1" class={c.text} opacity="0.4"/>
+        </svg>
+
+        <!-- Project initial -->
+        <span class={`absolute font-heading text-6xl font-black opacity-10 ${c.text} select-none`}>
+          {project.title.charAt(0)}
+        </span>
+      </div>
+    )}
+
+    <!-- Carousel controls (only if has images) -->
+    {hasImages && project.images.length > 1 && (
+      <div class="carousel-controls absolute bottom-2 left-1/2 -translate-x-1/2 flex gap-1.5">
+        {project.images.map((_, i) => (
+          <button
+            class={`carousel-dot w-1.5 h-1.5 rounded-full transition-all ${i === 0 ? 'bg-white w-4' : 'bg-white/40'}`}
+            data-index={i}
+            aria-label={`Image ${i + 1}`}
+          />
+        ))}
+      </div>
+    )}
+
+    <!-- Status badge -->
+    <div class="absolute top-3 right-3">
+      <span class={`tag text-xs border ${c.badge}`} data-i18n={`projects.status.${project.status}`}>{statusLabel}</span>
+    </div>
+
+    <!-- Category badge -->
+    <div class="absolute top-3 left-3">
+      <span class={`tag text-xs border ${c.badge}`} data-i18n={`projects.filters.${project.category}`}>{categoryLabels[project.category]}</span>
+    </div>
+
+    <!-- Hover overlay with actions -->
+    <div class="absolute inset-0 bg-bg-deep/85 backdrop-blur-sm opacity-0 group-hover:opacity-100 transition-all duration-300 flex items-center justify-center gap-3">
+      {project.demo && (
+        <a
+          href={project.demo}
+          class="btn-primary text-sm px-4 py-2 flex items-center gap-1.5"
+          target="_blank"
+          rel="noopener noreferrer"
+          data-i18n="projects.demo"
+        >
+          <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M1 12s4-8 11-8 11 8 11 8-4 8-11 8-11-8-11-8z"/><circle cx="12" cy="12" r="3"/></svg>
+          Demo
+        </a>
+      )}
+      <a
+        href={`/projects/${project.slug}`}
+        class="btn-outline text-sm px-4 py-2 flex items-center gap-1.5"
+        data-i18n="projects.viewDetails"
+      >
+        <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M5 12h14"/><path d="m12 5 7 7-7 7"/></svg>
+        Ver detalles
+      </a>
+    </div>
+  </div>
+
+  <!-- Card body -->
+  <div class="p-5">
+    <h3 class="font-heading font-semibold text-lg mb-2 text-text-primary group-hover:text-primary transition-colors">
+      {project.title}
+    </h3>
+    <p class="text-sm text-text-secondary leading-relaxed mb-4 line-clamp-2" data-i18n-text-es={project.description.es} data-i18n-text-en={project.description.en}>
+      {description}
+    </p>
+
+    <!-- Tech chips -->
+    <div class="flex flex-wrap gap-1.5">
+      {project.techs.slice(0, 4).map((tech) => (
+        <span class="tag text-xs">{tech}</span>
+      ))}
+      {project.techs.length > 4 && (
+        <span class="tag text-xs text-text-muted">+{project.techs.length - 4}</span>
+      )}
+    </div>
+  </div>
+</div>
+
+<script>
+  // Auto-play carousel for cards that have real images
+  document.querySelectorAll<HTMLElement>('[data-carousel]').forEach((track) => {
+    const slides = track.querySelectorAll<HTMLElement>('.carousel-slide');
+    const card = track.closest('.project-card');
+    const dots = card?.querySelectorAll<HTMLElement>('.carousel-dot');
+    if (slides.length <= 1) return;
+
+    let current = 0;
+    let interval: ReturnType<typeof setInterval>;
+
+    function goTo(index: number): void {
+      current = index;
+      track.style.transform = `translateX(-${index * 100}%)`;
+      track.style.transition = 'transform 0.5s ease';
+      dots?.forEach((dot, i) => {
+        dot.classList.toggle('bg-white', i === index);
+        dot.classList.toggle('w-4', i === index);
+        dot.classList.toggle('bg-white/40', i !== index);
+        dot.classList.toggle('w-1.5', i !== index);
+      });
+    }
+
+    function next(): void {
+      goTo((current + 1) % slides.length);
+    }
+
+    function startAuto(): void {
+      interval = setInterval(next, 3000);
+    }
+
+    function stopAuto(): void {
+      clearInterval(interval);
+    }
+
+    dots?.forEach((dot, i) => {
+      dot.addEventListener('click', (e) => {
+        e.preventDefault();
+        stopAuto();
+        goTo(i);
+        startAuto();
+      });
+    });
+
+    // Pause on hover
+    card?.addEventListener('mouseenter', stopAuto);
+    card?.addEventListener('mouseleave', startAuto);
+
+    startAuto();
+  });
+</script>

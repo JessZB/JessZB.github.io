@@ -1,0 +1,392 @@
+@import url('https://fonts.googleapis.com/css2?family=Chakra+Petch:wght@400;500;600;700&family=Inter:wght@300;400;500;600;700&family=Playfair+Display:wght@400;600;700&display=swap');
+@import "tailwindcss";
+
+
+/* ─── Arepa-Tropical (default) ─────────────────────────────── */
+@theme {
+  /* Backgrounds — clean, warm light */
+  --color-bg: #FDFBF7;
+  --color-bg-surface: #FFFFFF;
+  --color-bg-deep: #F5F0E6;
+
+  /* Primary — warm gold/orange (Arepa) */
+  --color-primary: #F5A623;
+  --color-primary-light: #FFD966;
+
+  /* Secondary — tropical teal */
+  --color-secondary: #16A085;
+  --color-secondary-light: #1ABC9C;
+
+  /* Accent — bright coral/red */
+  --color-accent: #E74C3C;
+  --color-accent-light: #FF6B6B;
+
+  /* Highlight — vibrant purple */
+  --color-highlight: #9B59B6;
+  --color-highlight-light: #BB8FCE;
+
+  /* Text — dark slate/charcoal for readability on light */
+  --color-text-primary: #2D3748;
+  --color-text-secondary: #4A5568;
+  --color-text-muted: #718096;
+
+  --font-heading: 'Chakra Petch', sans-serif;
+  --font-body: 'Inter', sans-serif;
+
+  /* Shadows for light theme (softer, less neon) */
+  --shadow-glow-gold: 0 4px 15px rgba(245, 166, 35, 0.3);
+  --shadow-glow-teal: 0 4px 15px rgba(22, 160, 133, 0.3);
+  --shadow-glow-coral: 0 4px 15px rgba(231, 76, 60, 0.3);
+  --shadow-glow-lavender: 0 4px 15px rgba(155, 89, 182, 0.3);
+  --shadow-glow-gold-lg: 0 8px 25px rgba(245, 166, 35, 0.4);
+  --shadow-card: 0 4px 20px rgba(0, 0, 0, 0.05);
+  --shadow-card-hover: 0 8px 30px rgba(0, 0, 0, 0.1);
+
+  --animate-glow-pulse: glow-pulse 2s ease-in-out infinite;
+  --animate-float: float 6s ease-in-out infinite;
+  --animate-scanline: scanline 8s linear infinite;
+  --animate-fade-in-up: fade-in-up 0.6s ease-out;
+  --animate-fade-in: fade-in 0.8s ease-out;
+  --animate-slide-in-left: slide-in-left 0.6s ease-out;
+  --animate-slide-in-right: slide-in-right 0.6s ease-out;
+  --animate-bar-fill: bar-fill 1.5s ease-out forwards;
+  --animate-pulse-gold: pulse-gold 2s ease-in-out infinite;
+  --animate-spin-slow: spin 8s linear infinite;
+}
+
+@keyframes glow-pulse {
+  0%, 100% { box-shadow: 0 0 5px rgba(245, 197, 66, 0.5); }
+  50% { box-shadow: 0 0 20px rgba(245, 197, 66, 0.8), 0 0 40px rgba(245, 197, 66, 0.3); }
+}
+
+@keyframes float {
+  0%, 100% { transform: translateY(0px); }
+  50% { transform: translateY(-20px); }
+}
+
+@keyframes scanline {
+  0% { transform: translateY(-100%); }
+  100% { transform: translateY(100%); }
+}
+
+@keyframes fade-in-up {
+  0% { opacity: 0; transform: translateY(30px); }
+  100% { opacity: 1; transform: translateY(0); }
+}
+
+@keyframes fade-in {
+  0% { opacity: 0; }
+  100% { opacity: 1; }
+}
+
+@keyframes slide-in-left {
+  0% { opacity: 0; transform: translateX(-50px); }
+  100% { opacity: 1; transform: translateX(0); }
+}
+
+@keyframes slide-in-right {
+  0% { opacity: 0; transform: translateX(50px); }
+  100% { opacity: 1; transform: translateX(0); }
+}
+
+@keyframes bar-fill {
+  0% { width: 0%; }
+}
+
+@keyframes pulse-gold {
+  0%, 100% { opacity: 1; }
+  50% { opacity: 0.5; }
+}
+
+@layer base {
+  * {
+    scrollbar-width: thin;
+    scrollbar-color: rgba(245, 197, 66, 0.3) transparent;
+  }
+
+  *::-webkit-scrollbar { width: 6px; }
+  *::-webkit-scrollbar-track { background: transparent; }
+  *::-webkit-scrollbar-thumb {
+    background: rgba(245, 197, 66, 0.3);
+    border-radius: 3px;
+  }
+  *::-webkit-scrollbar-thumb:hover {
+    background: rgba(245, 197, 66, 0.5);
+  }
+
+  html {
+    scroll-behavior: smooth;
+    background-color: #0F0F23;
+  }
+
+  body {
+    font-family: var(--font-body);
+    background-color: var(--color-bg);
+    color: var(--color-text-primary);
+    -webkit-font-smoothing: antialiased;
+    -moz-osx-font-smoothing: grayscale;
+  }
+
+  h1, h2, h3, h4, h5, h6 {
+    font-family: var(--font-heading);
+  }
+
+  ::selection {
+    background: rgba(245, 166, 35, 0.2);
+    color: #2D3748;
+  }
+}
+
+@utility section-container {
+  max-width: 80rem;
+  margin-inline: auto;
+  padding: 5rem 1rem;
+}
+
+@layer components {
+  .section-container {
+    @apply max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-20 md:py-28;
+  }
+
+  .section-title {
+    @apply font-heading text-3xl md:text-4xl font-bold mb-2 text-text-primary;
+  }
+
+  .section-subtitle {
+    @apply font-heading text-lg md:text-xl text-text-secondary mb-12;
+  }
+
+  .section-alt {
+    @apply bg-bg-surface border-y border-primary/10;
+    background-image: linear-gradient(180deg, rgba(245, 197, 66, 0.02) 0%, transparent 50%, rgba(22, 160, 133, 0.02) 100%);
+  }
+
+  .section-dark {
+    @apply bg-bg-deep border-y border-primary/5;
+    background-image:
+      linear-gradient(180deg, transparent 0%, rgba(155, 89, 182, 0.03) 50%, transparent 100%);
+  }
+
+  .glow-text {
+    text-shadow: 0 0 20px rgba(245, 197, 66, 0.5),
+                 0 0 40px rgba(245, 197, 66, 0.2),
+                 0 0 80px rgba(245, 197, 66, 0.1);
+  }
+
+  .glow-text-teal {
+    text-shadow: 0 0 20px rgba(22, 160, 133, 0.5),
+                 0 0 40px rgba(22, 160, 133, 0.2);
+  }
+
+  .glow-text-coral {
+    text-shadow: 0 0 20px rgba(231, 76, 60, 0.5),
+                 0 0 40px rgba(231, 76, 60, 0.2);
+  }
+
+  .glow-text-lavender {
+    text-shadow: 0 0 20px rgba(155, 89, 182, 0.5),
+                 0 0 40px rgba(155, 89, 182, 0.2);
+  }
+
+  .glow-border {
+    box-shadow: 0 0 10px rgba(245, 197, 66, 0.3),
+                inset 0 0 10px rgba(245, 197, 66, 0.05);
+  }
+
+  .card-base {
+    @apply bg-bg-surface border border-white/5 rounded-2xl;
+    box-shadow: 0 4px 20px rgba(0, 0, 0, 0.3);
+    transition: transform 0.3s ease, box-shadow 0.3s ease;
+  }
+
+  .card-base:hover {
+    transform: translateY(-6px);
+    box-shadow: 0 8px 30px rgba(0, 0, 0, 0.5), 0 0 20px rgba(245, 197, 66, 0.1);
+  }
+
+  .neon-line {
+    position: relative;
+  }
+
+  .neon-line::after {
+    content: '';
+    position: absolute;
+    bottom: 0;
+    left: 50%;
+    transform: translateX(-50%);
+    width: 60px;
+    height: 3px;
+    background: linear-gradient(90deg, transparent, #F5C542, transparent);
+    border-radius: 2px;
+    box-shadow: 0 0 10px rgba(245, 197, 66, 0.5);
+  }
+
+  .section-divider {
+    @apply w-20 h-1 mx-auto rounded-full mb-16;
+    background: linear-gradient(90deg, transparent, #F5C542, #E74C3C, #9B59B6, transparent);
+  }
+
+  .tag {
+    @apply inline-flex items-center px-3 py-1 rounded-full text-xs font-medium
+           bg-bg-deep border border-white/10 text-text-secondary;
+  }
+
+  .btn-primary {
+    @apply inline-flex items-center gap-2 px-6 py-3 rounded-full font-heading font-semibold
+           text-bg-deep
+           hover:scale-105 transition-all duration-300;
+    background-image: linear-gradient(135deg, #F5C542, #FFD966);
+    box-shadow: 0 0 15px rgba(245, 197, 66, 0.4);
+  }
+
+  .btn-primary:hover {
+    box-shadow: 0 0 30px rgba(245, 197, 66, 0.6);
+  }
+
+  .btn-outline {
+    @apply inline-flex items-center gap-2 px-6 py-3 rounded-full font-heading font-semibold
+           border-2 border-primary text-primary
+           hover:bg-primary hover:text-bg-deep
+           transition-all duration-300;
+  }
+
+  .card-glow-gold {
+    box-shadow: 0 0 15px rgba(245, 197, 66, 0.15);
+  }
+
+  .card-glow-teal {
+    box-shadow: 0 0 15px rgba(22, 160, 133, 0.15);
+  }
+
+  .card-glow-coral {
+    box-shadow: 0 0 15px rgba(231, 76, 60, 0.15);
+  }
+
+  .card-glow-lavender {
+    box-shadow: 0 0 15px rgba(155, 89, 182, 0.15);
+  }
+
+  .scanline-overlay {
+    position: relative;
+    overflow: hidden;
+  }
+
+  .scanline-overlay::after {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: 0;
+    right: 0;
+    height: 2px;
+    background: linear-gradient(90deg, transparent, rgba(245, 197, 66, 0.1), transparent);
+    animation: scanline 8s linear infinite;
+    pointer-events: none;
+  }
+
+  .particle {
+    position: absolute;
+    border-radius: 50%;
+    pointer-events: none;
+  }
+}
+
+@utility text-balance {
+  text-wrap: balance;
+}
+
+@utility will-change-transform {
+  will-change: transform;
+}
+
+.bg-grid {
+  background-image:
+    linear-gradient(rgba(245, 197, 66, 0.03) 1px, transparent 1px),
+    linear-gradient(90deg, rgba(245, 197, 66, 0.03) 1px, transparent 1px);
+  background-size: 64px 64px;
+}
+
+/* ─── Midnight-Coffee Theme Override ────────────────────────── */
+[data-theme="coffee"] {
+  /* Backgrounds — warm dark browns */
+  --color-bg: #1C1410;
+  --color-bg-surface: #241A14;
+  --color-bg-deep: #110D0A;
+
+  /* Primary — coffee amber / caramel */
+  --color-primary: #C8874A;
+  --color-primary-light: #E8A96B;
+
+  /* Secondary — warm teal / sage */
+  --color-secondary: #7BAE8C;
+  --color-secondary-light: #9DC9AB;
+
+  /* Accent — burgundy / deep wine */
+  --color-accent: #A0404A;
+  --color-accent-light: #C4606A;
+
+  /* Highlight — antique lavender / mauve */
+  --color-highlight: #8B6B8B;
+  --color-highlight-light: #AA8DAA;
+
+  /* Text — warm cream and parchment */
+  --color-text-primary: #F5EBD8;
+  --color-text-secondary: #C9B89A;
+  --color-text-muted: #7A6852;
+
+  /* Glow shadows adapted for coffee palette */
+  --shadow-glow-gold: 0 0 15px rgba(200, 135, 74, 0.4);
+  --shadow-glow-teal: 0 0 15px rgba(123, 174, 140, 0.4);
+  --shadow-glow-coral: 0 0 15px rgba(160, 64, 74, 0.4);
+  --shadow-glow-lavender: 0 0 15px rgba(139, 107, 139, 0.4);
+  --shadow-glow-gold-lg: 0 0 30px rgba(200, 135, 74, 0.6);
+}
+
+[data-theme="coffee"] .bg-grid {
+  background-image:
+    linear-gradient(rgba(200, 135, 74, 0.04) 1px, transparent 1px),
+    linear-gradient(90deg, rgba(200, 135, 74, 0.04) 1px, transparent 1px);
+}
+
+[data-theme="coffee"] .glow-text {
+  text-shadow: 0 0 20px rgba(200, 135, 74, 0.5),
+               0 0 40px rgba(200, 135, 74, 0.2),
+               0 0 80px rgba(200, 135, 74, 0.1);
+}
+
+[data-theme="coffee"] .neon-line::after {
+  background: linear-gradient(90deg, transparent, #C8874A, transparent);
+  box-shadow: 0 0 10px rgba(200, 135, 74, 0.5);
+}
+
+[data-theme="coffee"] .section-divider {
+  background: linear-gradient(90deg, transparent, #C8874A, #A0404A, #8B6B8B, transparent);
+}
+
+[data-theme="coffee"] .btn-primary {
+  background-image: linear-gradient(135deg, #C8874A, #E8A96B);
+  box-shadow: 0 0 15px rgba(200, 135, 74, 0.4);
+}
+
+[data-theme="coffee"] .btn-primary:hover {
+  box-shadow: 0 0 30px rgba(200, 135, 74, 0.6);
+}
+
+[data-theme="coffee"] html {
+  background-color: #110D0A;
+}
+
+/* Curtain animation */
+@keyframes curtain-down {
+  0% { transform: translateY(-100%); }
+  100% { transform: translateY(0%); }
+}
+@keyframes curtain-up {
+  0% { transform: translateY(0%); }
+  100% { transform: translateY(-100%); }
+}
+
+/* Theme transition */
+html {
+  transition: background-color 0.3s ease;
+}
+

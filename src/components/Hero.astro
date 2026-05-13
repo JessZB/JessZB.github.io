@@ -1,0 +1,271 @@
+---
+// Hero — merged with About section content
+// Uses data-i18n and data-i18n-arepa/coffee for theme-aware texts
+---
+
+<section id="hero" class="relative min-h-screen flex items-center justify-center overflow-hidden bg-bg-deep bg-grid">
+
+  <!-- Ambient blobs -->
+  <div class="absolute inset-0 pointer-events-none" aria-hidden="true">
+    <div class="absolute top-0 left-1/4 w-96 h-96 bg-primary/10 rounded-full blur-[120px] animate-float"></div>
+    <div class="absolute bottom-0 right-1/4 w-96 h-96 bg-secondary/10 rounded-full blur-[120px] animate-float" style="animation-delay: 2s;"></div>
+    <div class="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-[500px] h-[500px] bg-highlight/5 rounded-full blur-[150px]"></div>
+  </div>
+
+  <!-- Particles -->
+  <div id="particles-container" class="absolute inset-0 pointer-events-none" aria-hidden="true"></div>
+
+  <!-- Scanline -->
+  <div class="scanline-overlay absolute inset-0 pointer-events-none" aria-hidden="true"></div>
+
+  <!-- Main content -->
+  <div class="relative z-10 text-center px-4 max-w-5xl mx-auto pt-24 pb-16">
+
+    <!-- Avatar / Hero icon — theme-aware -->
+    <div class="mb-8 inline-block" aria-hidden="true">
+      <div id="hero-icon-arepa" class="hero-icon">
+        <!-- Arepa SVG -->
+        <svg width="110" height="110" viewBox="0 0 100 100" class="mx-auto animate-float drop-shadow-[0_0_24px_rgba(245,197,66,0.45)]">
+          <circle cx="50" cy="48" r="36" fill="url(#hero-arepa-grad)" opacity="0.95"/>
+          <circle cx="50" cy="48" r="28" fill="#1A1A2E"/>
+          <ellipse cx="50" cy="35" rx="14" ry="7" fill="#F5C542" opacity="0.7"/>
+          <circle cx="50" cy="48" r="5" fill="#E74C3C" opacity="0.5"/>
+          <path d="M 33 55 Q 50 67 67 55" stroke="#16A085" stroke-width="2" fill="none" opacity="0.7"/>
+          <defs>
+            <linearGradient id="hero-arepa-grad" x1="0%" y1="0%" x2="100%" y2="100%">
+              <stop offset="0%" style="stop-color:#F5C542"/>
+              <stop offset="100%" style="stop-color:#FFD966"/>
+            </linearGradient>
+          </defs>
+        </svg>
+      </div>
+      <div id="hero-icon-coffee" class="hero-icon hidden">
+        <!-- Coffee cup SVG -->
+        <svg width="110" height="110" viewBox="0 0 100 100" class="mx-auto animate-float drop-shadow-[0_0_24px_rgba(200,135,74,0.45)]">
+          <rect x="20" y="35" width="45" height="40" rx="6" fill="url(#hero-coffee-grad)" opacity="0.95"/>
+          <path d="M65 42 Q80 42 80 52 Q80 62 65 62" stroke="#C8874A" stroke-width="4" fill="none"/>
+          <rect x="28" y="75" width="30" height="5" rx="2.5" fill="#C8874A" opacity="0.7"/>
+          <path d="M35 20 Q38 12 42 20" stroke="#C9B89A" stroke-width="2" fill="none" opacity="0.6"/>
+          <path d="M48 20 Q51 12 55 20" stroke="#C9B89A" stroke-width="2" fill="none" opacity="0.6"/>
+          <defs>
+            <linearGradient id="hero-coffee-grad" x1="0%" y1="0%" x2="100%" y2="100%">
+              <stop offset="0%" style="stop-color:#C8874A"/>
+              <stop offset="100%" style="stop-color:#E8A96B"/>
+            </linearGradient>
+          </defs>
+        </svg>
+      </div>
+    </div>
+
+    <!-- Badge -->
+    <div class="mb-6 inline-flex items-center gap-2.5 px-4 py-2 rounded-full bg-bg-surface border border-primary/30 shadow-sm text-sm font-heading font-medium text-text-primary hover:border-primary transition-colors">
+      <span class="relative flex h-2.5 w-2.5">
+        <span class="animate-ping absolute inline-flex h-full w-full rounded-full bg-secondary opacity-75"></span>
+        <span class="relative inline-flex rounded-full h-2.5 w-2.5 bg-secondary"></span>
+      </span>
+      <span data-i18n="hero.badge">Disponible para proyectos</span>
+    </div>
+
+    <!-- Greeting + Name -->
+    <div class="mb-2">
+      <p class="text-text-muted font-body text-lg mb-1" data-i18n="hero.greeting">Hola, soy</p>
+      <h1 class="font-heading text-5xl sm:text-6xl md:text-7xl lg:text-8xl font-bold">
+        <span class="glow-text">JESSZB</span><span class="text-accent">.</span><span class="glow-text">DEV</span>
+      </h1>
+    </div>
+
+    <!-- Role -->
+    <p class="font-heading text-xl sm:text-2xl text-text-secondary mb-2 tracking-widest uppercase" data-i18n="hero.role">
+      Full-Stack Developer
+    </p>
+
+    <!-- Typing subtitle — theme-aware -->
+    <div class="inline-block mb-10 min-h-[2rem]">
+      <p
+        id="typing-text"
+        class="font-heading text-base sm:text-lg md:text-xl text-secondary font-medium"
+        aria-live="polite"
+      ></p>
+    </div>
+
+    <!-- CTAs -->
+    <div class="flex flex-col sm:flex-row items-center justify-center gap-4 mb-16">
+      <a href="#projects" id="cta-projects" class="btn-primary text-base px-8 py-3.5 flex items-center gap-2">
+        <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="m6 9 6 6 6-6"/></svg>
+        <span data-i18n="hero.cta1">Ver Proyectos</span>
+      </a>
+      <a href="#contact" id="cta-contact" class="btn-outline text-base px-8 py-3.5 flex items-center gap-2">
+        <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M22 16.92v3a2 2 0 0 1-2.18 2 19.79 19.79 0 0 1-8.63-3.07 19.5 19.5 0 0 1-6-6 19.79 19.79 0 0 1-3.07-8.67A2 2 0 0 1 4.11 2h3a2 2 0 0 1 2 1.72 12.84 12.84 0 0 0 .7 2.81 2 2 0 0 1-.45 2.11L8.09 9.91a16 16 0 0 0 6 6l1.27-1.27a2 2 0 0 1 2.11-.45 12.84 12.84 0 0 0 2.81.7A2 2 0 0 1 22 16.92z"/></svg>
+        <span data-i18n="hero.cta2">Contactar</span>
+      </a>
+    </div>
+
+    <!-- About Me — merged section -->
+    <div id="about" class="about-merged max-w-3xl mx-auto text-left" data-animate>
+      <div class="card-base p-8 relative overflow-hidden">
+        <!-- Decorative accent -->
+        <div class="absolute top-0 left-0 w-1 h-full bg-gradient-to-b from-primary via-secondary to-highlight rounded-l-xl"></div>
+
+        <div class="pl-4">
+          <h2 class="font-heading text-2xl font-bold text-primary mb-1" data-i18n="about.title">Sobre Mí</h2>
+          <p class="text-xs text-text-muted font-heading tracking-widest mb-6" data-i18n="about.subtitle">La historia detrás del código</p>
+
+          <p
+            class="text-text-secondary leading-relaxed mb-4"
+            data-i18n-arepa="about.bio.arepa"
+            data-i18n-coffee="about.bio.coffee"
+          >
+            Como una arepa bien hecha — por fuera dorada, por dentro llena de sabor — así es mi enfoque con el software.
+          </p>
+          <p class="text-text-secondary leading-relaxed mb-6" data-i18n="about.bio2">
+            Me especializo en crear experiencias web modernas, desde backends robustos hasta interfaces que enamoran.
+          </p>
+
+          <!-- Stats -->
+          <div class="grid grid-cols-3 gap-4 pt-4 border-t border-white/5">
+            <div class="text-center">
+              <p class="font-heading text-3xl font-bold text-primary glow-text">3+</p>
+              <p class="text-xs text-text-muted mt-1" data-i18n="about.stats.years">Años de experiencia</p>
+            </div>
+            <div class="text-center">
+              <p class="font-heading text-3xl font-bold text-secondary">15+</p>
+              <p class="text-xs text-text-muted mt-1" data-i18n="about.stats.projects">Proyectos completados</p>
+            </div>
+            <div class="text-center">
+              <p
+                class="font-heading text-2xl font-bold text-accent"
+                data-i18n-arepa="about.stats.arepas.arepa"
+                data-i18n-coffee="about.stats.arepas.coffee"
+              >∞ Arepas</p>
+              <p class="text-xs text-text-muted mt-1">&nbsp;</p>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- Scroll hint -->
+  <div class="absolute bottom-8 left-1/2 -translate-x-1/2 animate-bounce">
+    <a href="#skills" class="block text-text-muted hover:text-primary transition-colors" aria-label="Scroll down">
+      <svg width="28" height="28" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M12 5v14"/><path d="m19 12-7 7-7-7"/></svg>
+    </a>
+  </div>
+</section>
+
+<style>
+  .hero-icon {
+    transition: opacity 0.5s ease;
+  }
+
+  .hero-icon.hidden {
+    display: none;
+  }
+
+  .about-merged {
+    scroll-margin-top: 5rem;
+  }
+</style>
+
+<script>
+  // Theme-aware hero icon swap
+  function syncHeroIcon(): void {
+    const theme = document.documentElement.getAttribute('data-theme') || 'arepa';
+    const arepaIcon = document.getElementById('hero-icon-arepa');
+    const coffeeIcon = document.getElementById('hero-icon-coffee');
+    if (theme === 'coffee') {
+      arepaIcon?.classList.add('hidden');
+      coffeeIcon?.classList.remove('hidden');
+    } else {
+      arepaIcon?.classList.remove('hidden');
+      coffeeIcon?.classList.add('hidden');
+    }
+  }
+
+  // Typing animation — reads from i18n engine
+  function startTyping(): void {
+    const typingEl = document.getElementById('typing-text');
+    if (!typingEl) return;
+
+    const theme = document.documentElement.getAttribute('data-theme') || 'arepa';
+    const lang = document.documentElement.getAttribute('data-lang') || 'es';
+
+    // Fallback subtitles if i18n engine hasn't run yet
+    const subtitles: Record<string, Record<string, string>> = {
+      es: {
+        arepa: '> Construyendo capas de software, como una buena arepa_',
+        coffee: '> Código que despierta, como el primer café del día_',
+      },
+      en: {
+        arepa: '> Building software layers, like a perfect arepa_',
+        coffee: '> Code that wakes you up, like the first coffee of the day_',
+      },
+    };
+
+    const subtitle = subtitles[lang]?.[theme] || subtitles.es.arepa;
+    let i = 0;
+    typingEl.textContent = '';
+
+    function type(): void {
+      if (i < subtitle.length) {
+        typingEl!.textContent = subtitle.substring(0, i + 1);
+        i++;
+        setTimeout(type, 60 + Math.random() * 40);
+      }
+    }
+
+    setTimeout(type, 600);
+  }
+
+  // Particles
+  function createParticles(): void {
+    const colors = ['#F5C542', '#E74C3C', '#16A085', '#9B59B6', '#FFD966', '#1ABC9C', '#FF6B6B', '#BB8FCE'];
+    const coffeeColors = ['#C8874A', '#A0404A', '#7BAE8C', '#8B6B8B', '#E8A96B', '#C4606A', '#9DC9AB', '#AA8DAA'];
+    const container = document.getElementById('particles-container');
+    if (!container) return;
+
+    const theme = document.documentElement.getAttribute('data-theme') || 'arepa';
+    const palette = theme === 'coffee' ? coffeeColors : colors;
+
+    container.innerHTML = '';
+    for (let i = 0; i < 45; i++) {
+      const particle = document.createElement('div');
+      particle.classList.add('particle');
+      const size = Math.random() * 4 + 2;
+      particle.style.cssText = `
+        position: absolute;
+        border-radius: 50%;
+        width: ${size}px;
+        height: ${size}px;
+        background: ${palette[Math.floor(Math.random() * palette.length)]};
+        left: ${Math.random() * 100}%;
+        top: ${Math.random() * 100}%;
+        opacity: ${Math.random() * 0.5 + 0.1};
+        box-shadow: 0 0 ${size * 2}px currentColor;
+        animation: float ${Math.random() * 6 + 4}s ease-in-out ${Math.random() * 6}s infinite;
+        pointer-events: none;
+      `;
+      container.appendChild(particle);
+    }
+  }
+
+  document.addEventListener('DOMContentLoaded', () => {
+    syncHeroIcon();
+    createParticles();
+    startTyping();
+  });
+
+  // Listen for theme changes
+  const htmlEl = document.documentElement;
+  const themeObserver = new MutationObserver(() => {
+    syncHeroIcon();
+    createParticles();
+    // Re-type with new theme text
+    const typingEl = document.getElementById('typing-text');
+    if (typingEl) {
+      typingEl.textContent = '';
+      startTyping();
+    }
+  });
+  themeObserver.observe(htmlEl, { attributes: true, attributeFilter: ['data-theme'] });
+</script>

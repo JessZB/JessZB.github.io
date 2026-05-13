@@ -1,0 +1,124 @@
+---
+// Tools — updated tool list per PRD
+// Opencode, Gemini CLI, VS Code, Antigravity, Git, GitHub, Obsidian, Insomnia, Prisma
+
+interface Tool {
+  name: string;
+  type: string;
+  color: 'primary' | 'secondary' | 'highlight' | 'accent';
+  iconPath: string;
+}
+
+const tools: Tool[] = [
+  {
+    name: 'VS Code',
+    type: 'Editor',
+    color: 'primary',
+    iconPath: 'M16.5 2L3 9l4 2.5L16.5 5l4 2.5-9.5 6L7 11 3 13.5 16.5 22l4-2.5V5L16.5 2Z',
+  },
+  {
+    name: 'Gemini CLI',
+    type: 'AI Agent',
+    color: 'secondary',
+    iconPath: 'M12 2a10 10 0 1 0 0 20A10 10 0 0 0 12 2Zm0 2c1.66 0 3.18.54 4.42 1.43L5.43 16.42A7.96 7.96 0 0 1 4 12c0-4.42 3.58-8 8-8Zm0 16c-1.66 0-3.18-.54-4.42-1.43L18.57 7.58A7.96 7.96 0 0 1 20 12c0 4.42-3.58 8-8 8Z',
+  },
+  {
+    name: 'Opencode',
+    type: 'AI Editor',
+    color: 'primary',
+    iconPath: 'M10 20l4-16m4 4l4 4-4 4M6 16l-4-4 4-4',
+  },
+  {
+    name: 'Antigravity',
+    type: 'AI Agent',
+    color: 'highlight',
+    iconPath: 'M9.663 17h4.673M12 3v1m6.364 1.636l-.707.707M21 12h-1M4 12H3m3.343-5.657l-.707-.707m2.828 9.9a5 5 0 1 1 7.072 0l-.548.547A3.374 3.374 0 0 0 14 18.469V19a2 2 0 1 1-4 0v-.531c0-.895-.356-1.754-.988-2.386l-.548-.547Z',
+  },
+  {
+    name: 'Git',
+    type: 'Versionado',
+    color: 'accent',
+    iconPath: 'M6 3v18M18 3v18M3 6h18M3 18h18',
+  },
+  {
+    name: 'GitHub',
+    type: 'Repositorios',
+    color: 'secondary',
+    iconPath: 'M15 22v-4a4.8 4.8 0 0 0-1-3.5c3 0 6-2 6-5.5.08-1.25-.27-2.48-1-3.5.28-1.15.28-2.35 0-3.5 0 0-1 0-3 1.5-2.64-.5-5.36-.5-8 0C6 2 5 2 5 2c-.3 1.15-.3 2.35 0 3.5A5.403 5.403 0 0 0 4 9c0 3.5 3 5.5 6 5.5-.39.49-.68 1.05-.85 1.65-.17.6-.22 1.23-.15 1.85v4',
+  },
+  {
+    name: 'Obsidian',
+    type: 'Notas',
+    color: 'highlight',
+    iconPath: 'M12 2l3.5 7h7l-5.5 4 2 7L12 16.5 5 20l2-7L1.5 9h7z',
+  },
+  {
+    name: 'Insomnia',
+    type: 'API Testing',
+    color: 'accent',
+    iconPath: 'M12 2C6.48 2 2 6.48 2 12s4.48 10 10 10 10-4.48 10-10S17.52 2 12 2zm-1 14H9V8h2v8zm4 0h-2V8h2v8z',
+  },
+  {
+    name: 'Prisma',
+    type: 'ORM',
+    color: 'secondary',
+    iconPath: 'M4 22L12 2l8 20-8-4-8 4z',
+  },
+];
+
+function getColorClasses(color: string): { card: string, icon: string } {
+  const map: Record<string, { card: string, icon: string }> = {
+    primary:   { card: 'border-primary/20 text-text-primary bg-bg-surface hover:border-primary hover:shadow-glow-gold', icon: 'text-primary' },
+    secondary: { card: 'border-secondary/20 text-text-primary bg-bg-surface hover:border-secondary hover:shadow-glow-teal', icon: 'text-secondary' },
+    highlight: { card: 'border-highlight/20 text-text-primary bg-bg-surface hover:border-highlight hover:shadow-glow-lavender', icon: 'text-highlight' },
+    accent:    { card: 'border-accent/20 text-text-primary bg-bg-surface hover:border-accent hover:shadow-glow-coral', icon: 'text-accent' },
+  };
+  return map[color] || map.primary;
+}
+---
+
+<section id="tools" class="relative overflow-hidden">
+  <div class="section-container" data-animate>
+
+    <h2 class="section-title text-center neon-line pb-4" data-i18n="tools.title">Herramientas</h2>
+    <p
+      class="section-subtitle text-center"
+      data-i18n-arepa="tools.subtitle.arepa"
+      data-i18n-coffee="tools.subtitle.coffee"
+    >
+      El arsenal ninja del arepero
+    </p>
+
+    <div class="section-divider"></div>
+
+    <div class="grid grid-cols-3 sm:grid-cols-4 md:grid-cols-5 lg:grid-cols-9 gap-4" data-animate-stagger>
+      {tools.map((tool) => {
+        const cls = getColorClasses(tool.color);
+        return (
+          <div class={`card-base p-4 text-center group border cursor-default transition-all duration-200 ${cls.card}`}>
+            <div class={`w-10 h-10 mx-auto mb-3 rounded-xl flex items-center justify-center bg-text-primary/5 ${cls.icon}`}>
+              <svg
+                width="22"
+                height="22"
+                viewBox="0 0 24 24"
+                fill="none"
+                stroke="currentColor"
+                stroke-width="1.8"
+                stroke-linecap="round"
+                stroke-linejoin="round"
+                aria-hidden="true"
+              >
+                <path d={tool.iconPath}/>
+              </svg>
+            </div>
+            <p class="text-sm font-semibold font-heading leading-tight">{tool.name}</p>
+            <p class="text-xs text-text-muted mt-0.5 opacity-0 group-hover:opacity-100 transition-opacity">{tool.type}</p>
+          </div>
+        );
+      })}
+    </div>
+  </div>
+
+  <!-- Ambient -->
+  <div class="absolute bottom-0 left-1/2 -translate-x-1/2 w-96 h-32 bg-secondary/5 rounded-full blur-[80px] pointer-events-none" aria-hidden="true"></div>
+</section>

@@ -1,0 +1,168 @@
+---
+// ThemeCurtain — full-screen overlay animation during theme switch
+// Spinner: CSS Loaders pulse variant (css-loaders.com)
+---
+
+<div id="theme-curtain" class="curtain" aria-hidden="true" role="presentation">
+  <div class="curtain-content">
+    <!-- Themed message -->
+    <p id="curtain-message-arepa" class="curtain-message" data-show-on="arepa">
+      <span class="curtain-emoji">🧆</span>
+      <span class="curtain-text">Haciendo las arepas...</span>
+    </p>
+    <p id="curtain-message-coffee" class="curtain-message" data-show-on="coffee">
+      <span class="curtain-emoji">☕</span>
+      <span class="curtain-text">Sirviendo café...</span>
+    </p>
+
+    <!-- CSS Loaders — Pulse spinner -->
+    <div class="loader" aria-hidden="true"></div>
+  </div>
+</div>
+
+<style>
+  .curtain {
+    position: fixed;
+    inset: 0;
+    z-index: 9999;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    pointer-events: none;
+    opacity: 0;
+    transform: translateY(-100%);
+    transition: opacity 0.3s ease;
+  }
+
+  /* Arepa theme curtain background */
+  .curtain::before {
+    content: '';
+    position: absolute;
+    inset: 0;
+    background: linear-gradient(135deg, #0F0F23 0%, #1A1A2E 50%, #16213E 100%);
+    z-index: -1;
+  }
+
+  /* Coffee theme curtain background */
+  [data-theme="coffee"] .curtain::before {
+    background: linear-gradient(135deg, #110D0A 0%, #1C1410 50%, #241A14 100%);
+  }
+
+  .curtain.curtain-active {
+    opacity: 1;
+    transform: translateY(0);
+    pointer-events: all;
+    animation: curtain-slide-in 0.4s cubic-bezier(0.16, 1, 0.3, 1) forwards;
+  }
+
+  .curtain.curtain-leaving {
+    animation: curtain-slide-out 0.5s cubic-bezier(0.16, 1, 0.3, 1) forwards;
+  }
+
+  @keyframes curtain-slide-in {
+    from { transform: translateY(-100%); opacity: 0; }
+    to   { transform: translateY(0); opacity: 1; }
+  }
+
+  @keyframes curtain-slide-out {
+    from { transform: translateY(0); opacity: 1; }
+    to   { transform: translateY(100%); opacity: 0; }
+  }
+
+  .curtain-content {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 1.5rem;
+  }
+
+  .curtain-message {
+    display: none;
+    flex-direction: column;
+    align-items: center;
+    gap: 0.75rem;
+    font-family: var(--font-heading);
+    text-align: center;
+  }
+
+  .curtain-message.visible {
+    display: flex;
+  }
+
+  .curtain-emoji {
+    font-size: 3rem;
+    animation: bounce-in 0.5s cubic-bezier(0.34, 1.56, 0.64, 1) forwards;
+  }
+
+  .curtain-text {
+    font-size: 1.25rem;
+    font-weight: 600;
+    color: var(--color-primary);
+    text-shadow: 0 0 20px var(--color-primary);
+    letter-spacing: 0.05em;
+    animation: fade-slide-up 0.4s ease 0.1s both;
+  }
+
+  @keyframes bounce-in {
+    from { transform: scale(0.3); opacity: 0; }
+    to   { transform: scale(1); opacity: 1; }
+  }
+
+  @keyframes fade-slide-up {
+    from { transform: translateY(10px); opacity: 0; }
+    to   { transform: translateY(0); opacity: 1; }
+  }
+
+  /* ── CSS Loaders — Pulse ── */
+  .loader {
+    width: 40px;
+    aspect-ratio: 1;
+    border-radius: 50%;
+    background: var(--color-primary);
+    box-shadow: 0 0 0 0 var(--color-primary);
+    animation: pulse-loader 1.2s ease-in-out infinite;
+    opacity: 0.8;
+  }
+
+  @keyframes pulse-loader {
+    0%   { box-shadow: 0 0 0 0 rgba(245,197,66,0.6); }
+    70%  { box-shadow: 0 0 0 20px rgba(245,197,66,0); }
+    100% { box-shadow: 0 0 0 0 rgba(245,197,66,0); }
+  }
+
+  [data-theme="coffee"] .loader {
+    background: #C8874A;
+    animation: pulse-loader-coffee 1.2s ease-in-out infinite;
+  }
+
+  @keyframes pulse-loader-coffee {
+    0%   { box-shadow: 0 0 0 0 rgba(200,135,74,0.6); }
+    70%  { box-shadow: 0 0 0 20px rgba(200,135,74,0); }
+    100% { box-shadow: 0 0 0 0 rgba(200,135,74,0); }
+  }
+</style>
+
+<script>
+  const curtain = document.getElementById('theme-curtain');
+
+  function updateCurtainMessage(targetTheme: string): void {
+    document.querySelectorAll<HTMLElement>('.curtain-message').forEach((msg) => {
+      msg.classList.remove('visible');
+    });
+    const target = document.querySelector<HTMLElement>(
+      `.curtain-message[data-show-on="${targetTheme}"]`
+    );
+    target?.classList.add('visible');
+  }
+
+  // Watch for curtain-active class via MutationObserver
+  if (curtain) {
+    const observer = new MutationObserver(() => {
+      if (curtain.classList.contains('curtain-active')) {
+        const targetTheme = curtain.getAttribute('data-target-theme') || 'coffee';
+        updateCurtainMessage(targetTheme);
+      }
+    });
+    observer.observe(curtain, { attributes: true, attributeFilter: ['class'] });
+  }
+</script>

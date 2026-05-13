@@ -1,0 +1,158 @@
+---
+// ThemeToggle — switches between arepa (default) and coffee themes
+---
+
+<button
+  id="theme-toggle"
+  class="theme-toggle-btn"
+  aria-label="Cambiar tema / Switch theme"
+  title="Cambiar tema"
+>
+  <!-- Arepa icon (Light mode) -->
+  <span id="theme-icon-arepa" class="theme-icon arepa-icon" aria-hidden="true">
+    <svg width="22" height="22" viewBox="0 0 100 60" fill="none">
+      <!-- Arepa shape -->
+      <ellipse cx="50" cy="30" rx="45" ry="22" fill="currentColor" opacity="0.9"/>
+      <ellipse cx="50" cy="22" rx="38" ry="14" fill="currentColor" opacity="0.6"/>
+      <ellipse cx="50" cy="26" rx="28" ry="8" fill="rgba(0,0,0,0.15)" opacity="0.3"/>
+    </svg>
+  </span>
+
+  <!-- Toggle pill -->
+  <span class="toggle-pill">
+    <span class="toggle-knob"></span>
+  </span>
+
+  <!-- Coffee icon (Dark mode) -->
+  <span id="theme-icon-coffee" class="theme-icon coffee-icon" aria-hidden="true">
+    <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round">
+      <path d="M17 8h1a4 4 0 0 1 0 8h-1"/>
+      <path d="M3 8h14v9a4 4 0 0 1-4 4H7a4 4 0 0 1-4-4Z"/>
+      <line x1="6" y1="2" x2="6" y2="4"/>
+      <line x1="10" y1="2" x2="10" y2="4"/>
+      <line x1="14" y1="2" x2="14" y2="4"/>
+    </svg>
+  </span>
+</button>
+
+<style>
+  .theme-toggle-btn {
+    display: flex;
+    align-items: center;
+    gap: 0.5rem;
+    background: color-mix(in srgb, var(--color-text-primary) 5%, transparent);
+    border: 1px solid color-mix(in srgb, var(--color-text-primary) 10%, transparent);
+    border-radius: 9999px;
+    padding: 0.3rem 0.6rem;
+    cursor: pointer;
+    transition: all 0.3s ease;
+    color: var(--color-text-secondary);
+  }
+
+  .theme-toggle-btn:hover {
+    border-color: var(--color-primary);
+    color: var(--color-primary);
+    box-shadow: 0 0 10px rgba(var(--color-primary), 0.2); /* this works globally */
+  }
+
+  .theme-icon {
+    display: flex;
+    align-items: center;
+    transition: opacity 0.3s ease, transform 0.3s ease;
+  }
+
+  .toggle-pill {
+    width: 2.2rem;
+    height: 1.1rem;
+    background: color-mix(in srgb, var(--color-text-primary) 10%, transparent);
+    border-radius: 9999px;
+    position: relative;
+    border: 1px solid color-mix(in srgb, var(--color-text-primary) 15%, transparent);
+    transition: background 0.3s ease;
+  }
+
+  .toggle-knob {
+    position: absolute;
+    top: 50%;
+    left: 2px;
+    transform: translateY(-50%);
+    width: 0.75rem;
+    height: 0.75rem;
+    border-radius: 50%;
+    background: var(--color-primary);
+    transition: left 0.3s ease, background 0.3s ease;
+    box-shadow: 0 0 6px rgba(245, 197, 66, 0.5);
+  }
+
+  /* Active/Inactive Icon States */
+  .arepa-icon {
+    color: var(--color-primary);
+    opacity: 1;
+  }
+  .coffee-icon {
+    color: var(--color-text-secondary);
+    opacity: 0.4;
+  }
+
+  :global([data-theme="coffee"]) .arepa-icon {
+    color: var(--color-text-secondary);
+    opacity: 0.4;
+  }
+  :global([data-theme="coffee"]) .coffee-icon {
+    color: var(--color-primary);
+    opacity: 1;
+  }
+
+  /* Coffee state knob */
+  :global([data-theme="coffee"]) .toggle-knob {
+    left: calc(100% - 14px);
+    background: var(--color-primary);
+    box-shadow: 0 0 6px rgba(200, 135, 74, 0.5);
+  }
+
+  :global([data-theme="coffee"]) .toggle-pill {
+    background: rgba(200, 135, 74, 0.15);
+  }
+</style>
+
+<script>
+  const btn = document.getElementById('theme-toggle');
+  const curtain = document.getElementById('theme-curtain');
+
+  function getCurrentTheme(): string {
+    return document.documentElement.getAttribute('data-theme') || 'arepa';
+  }
+
+  function switchTheme(): void {
+    const current = getCurrentTheme();
+    const next = current === 'arepa' ? 'coffee' : 'arepa';
+
+    // Show curtain
+    if (curtain) {
+      curtain.setAttribute('data-target-theme', next);
+      curtain.classList.add('curtain-active');
+
+      setTimeout(() => {
+        // Apply theme
+        document.documentElement.setAttribute('data-theme', next);
+        localStorage.setItem('jesszb-theme', next);
+
+        // Update theme-aware texts
+        if (typeof (window as any).refreshThemeTexts === 'function') {
+          (window as any).refreshThemeTexts();
+        }
+
+        // Hide curtain
+        setTimeout(() => {
+          curtain.classList.remove('curtain-active');
+        }, 600);
+      }, 900);
+    } else {
+      // No curtain fallback
+      document.documentElement.setAttribute('data-theme', next);
+      localStorage.setItem('jesszb-theme', next);
+    }
+  }
+
+  btn?.addEventListener('click', switchTheme);
+</script>

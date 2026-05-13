@@ -1,0 +1,112 @@
+---
+import { projects } from '../data/projects';
+import ProjectCard from './ProjectCard.astro';
+---
+
+<section id="projects" class="section-alt relative overflow-hidden">
+  <div class="section-container" data-animate>
+
+    <h2 class="section-title text-center neon-line pb-4" data-i18n="projects.title">Proyectos</h2>
+    <p
+      class="section-subtitle text-center"
+      data-i18n-arepa="projects.subtitle.arepa"
+      data-i18n-coffee="projects.subtitle.coffee"
+    >
+      Lo que he cocinado
+    </p>
+
+    <div class="section-divider"></div>
+
+    <!-- Filters -->
+    <div id="project-filters" class="flex justify-center gap-3 mb-10 flex-wrap" role="group" aria-label="Filtrar proyectos">
+      <button
+        data-filter="all"
+        class="filter-btn active px-4 py-2 rounded-full text-sm font-medium border border-primary text-primary bg-primary/10 transition-all"
+        data-i18n="projects.filters.all"
+      >
+        Todos
+      </button>
+      <button
+        data-filter="own"
+        class="filter-btn px-4 py-2 rounded-full text-sm font-medium border border-secondary/30 text-secondary hover:bg-secondary/10 transition-all"
+        data-i18n="projects.filters.own"
+      >
+        Propios
+      </button>
+      <button
+        data-filter="collab"
+        class="filter-btn px-4 py-2 rounded-full text-sm font-medium border border-highlight/30 text-highlight hover:bg-highlight/10 transition-all"
+        data-i18n="projects.filters.collab"
+      >
+        Colaborativos
+      </button>
+    </div>
+
+    <!-- Projects grid -->
+    <div id="projects-grid" class="grid sm:grid-cols-2 lg:grid-cols-3 gap-5" data-animate-stagger>
+      {projects.map((project) => (
+        <ProjectCard project={project} lang="es" />
+      ))}
+    </div>
+
+    <!-- Empty state (hidden by default) -->
+    <div id="projects-empty" class="hidden text-center py-16 text-text-muted">
+      <p class="font-heading text-lg">No hay proyectos en esta categoría</p>
+    </div>
+
+  </div>
+
+  <!-- Ambient -->
+  <div class="absolute top-1/4 -left-32 w-64 h-64 bg-primary/5 rounded-full blur-[100px] pointer-events-none" aria-hidden="true"></div>
+  <div class="absolute bottom-1/4 -right-32 w-64 h-64 bg-secondary/5 rounded-full blur-[100px] pointer-events-none" aria-hidden="true"></div>
+</section>
+
+<style>
+  .filter-btn {
+    cursor: pointer;
+    transition: all 0.2s ease;
+  }
+
+  .filter-btn.active {
+    background: rgba(var(--color-primary), 0.15);
+  }
+</style>
+
+<script>
+  const filterBtns = document.querySelectorAll<HTMLButtonElement>('.filter-btn');
+  const cards = document.querySelectorAll<HTMLElement>('.project-card');
+  const emptyState = document.getElementById('projects-empty');
+
+  filterBtns.forEach((btn) => {
+    btn.addEventListener('click', () => {
+      // Update active button
+      filterBtns.forEach((b) => b.classList.remove('active'));
+      btn.classList.add('active');
+
+      const filter = btn.dataset.filter;
+      let visibleCount = 0;
+
+      cards.forEach((card, index) => {
+        const matches = filter === 'all' || card.dataset.category === filter;
+        card.style.transition = `opacity 0.35s ease ${(index % 3) * 0.06}s, transform 0.35s ease ${(index % 3) * 0.06}s`;
+
+        if (matches) {
+          card.style.opacity = '1';
+          card.style.transform = 'scale(1)';
+          card.style.pointerEvents = 'auto';
+          card.style.position = '';
+          visibleCount++;
+        } else {
+          card.style.opacity = '0';
+          card.style.transform = 'scale(0.92)';
+          card.style.pointerEvents = 'none';
+          card.style.position = 'absolute';
+        }
+      });
+
+      if (emptyState) {
+        emptyState.classList.toggle('hidden', visibleCount > 0);
+      }
+    });
+  });
+</script>

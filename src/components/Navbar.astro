@@ -1,0 +1,197 @@
+---
+import ThemeToggle from './ThemeToggle.astro';
+import LangToggle from './LangToggle.astro';
+---
+
+<nav
+  id="navbar"
+  class="fixed top-0 left-0 right-0 z-50 transition-transform duration-300"
+>
+  <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+    <div class="flex items-center justify-between h-16 md:h-20">
+
+      <!-- Logotipo JESSZB.DEV -->
+      <a href="/#hero" class="flex items-center gap-2 group" aria-label="JESSZB.DEV — inicio">
+        <span class="font-heading text-xl md:text-2xl font-bold">
+          <span class="text-primary glow-text">JESS</span><span class="zb-gradient">ZB</span><span class="text-accent">.</span><span class="text-primary glow-text">DEV</span>
+        </span>
+      </a>
+
+      <!-- Nav links (desktop) -->
+      <div class="hidden md:flex items-center gap-6">
+        <a href="/#about" class="nav-link" data-i18n="nav.about">Sobre Mí</a>
+        <a href="/#skills" class="nav-link" data-i18n="nav.skills">Habilidades</a>
+        <a href="/#tools" class="nav-link" data-i18n="nav.tools">Herramientas</a>
+        <a href="/#projects" class="nav-link" data-i18n="nav.projects">Proyectos</a>
+        <a href="/#experience" class="nav-link" data-i18n="nav.experience">Experiencia</a>
+        <a href="/#contact" class="nav-link" data-i18n="nav.contact">Contacto</a>
+      </div>
+
+      <!-- Controls -->
+      <div class="flex items-center gap-2">
+        <LangToggle />
+        <ThemeToggle />
+
+        <!-- Mobile burger -->
+        <button
+          id="mobile-menu-btn"
+          class="md:hidden flex flex-col gap-1.5 p-2 ml-1"
+          aria-label="Toggle menu"
+          aria-expanded="false"
+        >
+          <span class="burger-line"></span>
+          <span class="burger-line"></span>
+          <span class="burger-line"></span>
+        </button>
+      </div>
+    </div>
+  </div>
+
+  <!-- Mobile menu -->
+  <div
+    id="mobile-menu"
+    class="md:hidden fixed inset-x-0 top-16 bg-bg-surface/95 backdrop-blur-lg border-b border-primary/10 transform -translate-y-full opacity-0 transition-all duration-300 pointer-events-none"
+  >
+    <div class="flex flex-col gap-1 px-4 py-4">
+      <a href="/#about" class="mobile-nav-link" data-i18n="nav.about">Sobre Mí</a>
+      <a href="/#skills" class="mobile-nav-link" data-i18n="nav.skills">Habilidades</a>
+      <a href="/#tools" class="mobile-nav-link" data-i18n="nav.tools">Herramientas</a>
+      <a href="/#projects" class="mobile-nav-link" data-i18n="nav.projects">Proyectos</a>
+      <a href="/#experience" class="mobile-nav-link" data-i18n="nav.experience">Experiencia</a>
+      <a href="/#contact" class="mobile-nav-link" data-i18n="nav.contact">Contacto</a>
+    </div>
+  </div>
+</nav>
+
+<style>
+  .zb-gradient {
+    background: linear-gradient(135deg, #FF6B9D, #E84545);
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+    background-clip: text;
+    font-weight: 800;
+  }
+
+  .nav-link {
+    color: var(--color-text-secondary);
+    font-size: 0.875rem;
+    font-weight: 500;
+    text-decoration: none;
+    transition: color 0.2s ease;
+    position: relative;
+  }
+
+  .nav-link::after {
+    content: '';
+    position: absolute;
+    bottom: -2px;
+    left: 0;
+    width: 0;
+    height: 1px;
+    background: var(--color-primary);
+    transition: width 0.3s ease;
+  }
+
+  .nav-link:hover {
+    color: var(--color-primary);
+  }
+
+  .nav-link:hover::after {
+    width: 100%;
+  }
+
+  .mobile-nav-link {
+    display: block;
+    padding: 0.75rem 1rem;
+    color: var(--color-text-secondary);
+    text-decoration: none;
+    border-radius: 0.5rem;
+    transition: all 0.2s ease;
+  }
+
+  .mobile-nav-link:hover {
+    color: var(--color-primary);
+    background: rgba(var(--color-primary), 0.05); /* Optional: Use hex or adjust if needed, or leave as was. Actually, let's keep it simple: */
+    /* wait, var(--color-primary) is hex. So we can't do rgba. We'll use opacity or just background. */
+  }
+  
+  #navbar.scrolled {
+    background-color: color-mix(in srgb, var(--color-bg-deep) 92%, transparent);
+    backdrop-filter: blur(16px);
+    border-bottom: 1px solid color-mix(in srgb, var(--color-primary) 10%, transparent);
+  }
+
+  /* Just fixing the hover with color-mix */
+  .mobile-nav-link:hover {
+    color: var(--color-primary);
+    background-color: color-mix(in srgb, var(--color-primary) 5%, transparent);
+  }
+
+  .burger-line {
+    display: block;
+    width: 1.5rem;
+    height: 2px;
+    background: var(--color-text-primary);
+    border-radius: 9999px;
+    transition: transform 0.3s ease, opacity 0.3s ease;
+  }
+</style>
+
+<script>
+  let lastScroll = 0;
+  const navbar = document.getElementById('navbar');
+  const menuBtn = document.getElementById('mobile-menu-btn');
+  const mobileMenu = document.getElementById('mobile-menu');
+  let menuOpen = false;
+
+  window.addEventListener('scroll', () => {
+    const current = window.scrollY;
+
+    // Hide/show on scroll direction
+    if (current > lastScroll && current > 100) {
+      navbar!.style.transform = 'translateY(-100%)';
+      if (menuOpen) closeMenu();
+    } else {
+      navbar!.style.transform = 'translateY(0)';
+    }
+
+    // Frosted glass background on scroll
+    if (current > 50) {
+      navbar!.classList.add('scrolled');
+    } else {
+      navbar!.classList.remove('scrolled');
+    }
+
+    lastScroll = current;
+  });
+
+  function closeMenu() {
+    menuOpen = false;
+    const lines = menuBtn?.querySelectorAll('.burger-line');
+    if (lines) {
+      (lines[0] as HTMLElement).style.transform = '';
+      (lines[1] as HTMLElement).style.opacity = '1';
+      (lines[2] as HTMLElement).style.transform = '';
+    }
+    mobileMenu?.classList.add('-translate-y-full', 'opacity-0', 'pointer-events-none');
+    menuBtn?.setAttribute('aria-expanded', 'false');
+  }
+
+  menuBtn?.addEventListener('click', () => {
+    menuOpen = !menuOpen;
+    const lines = menuBtn.querySelectorAll('.burger-line');
+    if (menuOpen) {
+      (lines[0] as HTMLElement).style.transform = 'translateY(7px) rotate(45deg)';
+      (lines[1] as HTMLElement).style.opacity = '0';
+      (lines[2] as HTMLElement).style.transform = 'translateY(-7px) rotate(-45deg)';
+      mobileMenu?.classList.remove('-translate-y-full', 'opacity-0', 'pointer-events-none');
+      menuBtn.setAttribute('aria-expanded', 'true');
+    } else {
+      closeMenu();
+    }
+  });
+
+  mobileMenu?.querySelectorAll('a').forEach((link) => {
+    link.addEventListener('click', closeMenu);
+  });
+</script>

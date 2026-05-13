@@ -1,0 +1,289 @@
+---
+import '../styles/global.css';
+import ThemeCurtain from '../components/ThemeCurtain.astro';
+import esData from '../data/es.json';
+import enData from '../data/en.json';
+
+interface Props {
+  title?: string;
+  description?: string;
+  locale?: 'es' | 'en';
+  ogImage?: string;
+  canonicalPath?: string;
+}
+
+const {
+  title,
+  description,
+  locale = 'es',
+  ogImage = '/og-image.png',
+  canonicalPath = '',
+} = Astro.props;
+
+const siteName = 'JESSZB.DEV';
+const siteUrl = 'https://jesszb.dev';
+const pageTitle = title
+  ? `${title} | ${siteName}`
+  : `${siteName} — Jesús Ordosgoitty | Full-Stack Developer`;
+const pageDesc =
+  description ||
+  (locale === 'es'
+    ? 'Portafolio de Jesús Ordosgoitty — Desarrollador Full-Stack venezolano. Construyo aplicaciones capa por capa, con precisión y sazón.'
+    : 'Portfolio of Jesús Ordosgoitty — Venezuelan Full-Stack Developer. Building applications layer by layer, with precision and seasoning.');
+
+const canonicalUrl = `${siteUrl}${canonicalPath}`;
+
+// Pass translations as JSON strings for client-side i18n engine
+const translations = {
+  es: JSON.stringify(esData),
+  en: JSON.stringify(enData),
+};
+---
+
+<!doctype html>
+<html lang={locale} data-theme="arepa" data-lang={locale}>
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+
+    <!-- Primary Meta Tags -->
+    <title>{pageTitle}</title>
+    <meta name="title" content={pageTitle} />
+    <meta name="description" content={pageDesc} />
+    <meta name="author" content="Jesús Ordosgoitty" />
+    <meta name="robots" content="index, follow" />
+    <meta name="theme-color" content="#F5C542" />
+
+    <!-- Canonical -->
+    <link rel="canonical" href={canonicalUrl} />
+
+    <!-- Open Graph -->
+    <meta property="og:type" content="website" />
+    <meta property="og:url" content={canonicalUrl} />
+    <meta property="og:title" content={pageTitle} />
+    <meta property="og:description" content={pageDesc} />
+    <meta property="og:image" content={`${siteUrl}${ogImage}`} />
+    <meta property="og:site_name" content={siteName} />
+    <meta property="og:locale" content={locale === 'es' ? 'es_VE' : 'en_US'} />
+
+    <!-- Twitter Card -->
+    <meta name="twitter:card" content="summary_large_image" />
+    <meta name="twitter:url" content={canonicalUrl} />
+    <meta name="twitter:title" content={pageTitle} />
+    <meta name="twitter:description" content={pageDesc} />
+    <meta name="twitter:image" content={`${siteUrl}${ogImage}`} />
+
+    <!-- Favicon -->
+    <link rel="icon" type="image/svg+xml" href="/favicon.svg" />
+    <link rel="apple-touch-icon" href="/favicon.svg" />
+
+    <!-- Fonts -->
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link
+      href="https://fonts.googleapis.com/css2?family=Chakra+Petch:wght@400;500;600;700&family=Inter:wght@300;400;500;600;700&family=Playfair+Display:ital,wght@0,400;0,600;0,700;1,400&display=swap"
+      rel="stylesheet"
+    />
+
+    <!-- Structured Data: Person -->
+    <script type="application/ld+json">
+      {
+        "@context": "https://schema.org",
+        "@type": "Person",
+        "name": "Jesús Ordosgoitty",
+        "url": "https://jesszb.dev",
+        "jobTitle": "Full-Stack Developer",
+        "nationality": "Venezuelan",
+        "sameAs": [
+          "https://github.com/JessZB",
+          "https://linkedin.com/in/jesusordosgoitty"
+        ]
+      }
+    </script>
+
+    <!-- Theme Init (must run BEFORE paint to avoid flash) -->
+    <script is:inline>
+      (function () {
+        var stored = localStorage.getItem('jesszb-theme');
+        var theme = stored === 'coffee' ? 'coffee' : 'arepa';
+        document.documentElement.setAttribute('data-theme', theme);
+      })();
+    </script>
+
+    <!-- GSAP -->
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.5/gsap.min.js" is:inline></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.5/ScrollTrigger.min.js" is:inline></script>
+  </head>
+
+  <body class="min-h-screen bg-bg-deep">
+    <!-- Theme curtain (must be first child for z-index stacking) -->
+    <ThemeCurtain />
+
+    <slot />
+
+    <!-- i18n Engine — inlined translations to avoid fetch issues in static Astro -->
+    <script is:inline define:vars={{ translations }}>
+      (function () {
+        var _translations = {
+          es: JSON.parse(translations.es),
+          en: JSON.parse(translations.en),
+        };
+
+        function flattenObj(obj, prefix) {
+          return Object.entries(obj).reduce(function (acc, pair) {
+            var key = pair[0];
+            var val = pair[1];
+            var fullKey = prefix ? prefix + '.' + key : key;
+            if (typeof val === 'object' && val !== null && !Array.isArray(val)) {
+              Object.assign(acc, flattenObj(val, fullKey));
+            } else {
+              acc[fullKey] = String(val);
+            }
+            return acc;
+          }, {});
+        }
+
+        function detectLang() {
+          var stored = localStorage.getItem('jesszb-lang');
+          if (stored === 'es' || stored === 'en') return stored;
+          var browser = navigator.language ? navigator.language.slice(0, 2).toLowerCase() : 'es';
+          return browser === 'en' ? 'en' : 'es';
+        }
+
+        function getTheme() {
+          return document.documentElement.getAttribute('data-theme') || 'arepa';
+        }
+
+        function applyTranslations(lang, theme) {
+          var raw = _translations[lang] || _translations.es;
+          var t = flattenObj(raw, '');
+
+          // Standard keys
+          document.querySelectorAll('[data-i18n]').forEach(function (el) {
+            var key = el.getAttribute('data-i18n');
+            if (t[key] !== undefined) el.textContent = t[key];
+          });
+
+          // Placeholder keys
+          document.querySelectorAll('[data-i18n-placeholder]').forEach(function (el) {
+            var key = el.getAttribute('data-i18n-placeholder');
+            if (t[key] !== undefined) el.placeholder = t[key];
+          });
+
+          // Theme-aware keys
+          document.querySelectorAll('[data-i18n-arepa]').forEach(function (el) {
+            var keyArepa = el.getAttribute('data-i18n-arepa');
+            var keyCoffee = el.getAttribute('data-i18n-coffee');
+            var key = theme === 'coffee' ? keyCoffee : keyArepa;
+            if (key && t[key] !== undefined) el.textContent = t[key];
+          });
+
+          // Direct dynamic texts (bypasses JSON, reads direct attribute)
+          document.querySelectorAll('[data-i18n-text-es]').forEach(function (el) {
+            var val = el.getAttribute('data-i18n-text-' + lang);
+            if (val !== null) el.textContent = val;
+          });
+
+          // html lang attribute
+          document.documentElement.setAttribute('lang', lang);
+        }
+
+        function updateLang(lang) {
+          var activeLang = lang || detectLang();
+          var theme = getTheme();
+          localStorage.setItem('jesszb-lang', activeLang);
+          document.documentElement.setAttribute('data-lang', activeLang);
+          applyTranslations(activeLang, theme);
+
+          // Sync lang toggle buttons
+          document.querySelectorAll('[data-lang-label]').forEach(function (el) {
+            el.setAttribute('aria-current', el.getAttribute('data-lang-label') === activeLang ? 'true' : 'false');
+          });
+        }
+
+        function refreshThemeTexts() {
+          var lang = detectLang();
+          var theme = getTheme();
+          var raw = _translations[lang] || _translations.es;
+          var t = flattenObj(raw, '');
+          document.querySelectorAll('[data-i18n-arepa]').forEach(function (el) {
+            var keyArepa = el.getAttribute('data-i18n-arepa');
+            var keyCoffee = el.getAttribute('data-i18n-coffee');
+            var key = theme === 'coffee' ? keyCoffee : keyArepa;
+            if (key && t[key] !== undefined) el.textContent = t[key];
+          });
+        }
+
+        // Expose globally for ThemeToggle script
+        window.refreshThemeTexts = refreshThemeTexts;
+        window.updateLang = updateLang;
+
+        // Listen for lang-change event from LangToggle
+        window.addEventListener('jesszb:lang-change', function (e) {
+          updateLang(e.detail.lang);
+        });
+
+        // Auto-init
+        document.addEventListener('DOMContentLoaded', function () {
+          updateLang();
+        });
+      })();
+    </script>
+
+    <!-- GSAP Scroll Animations -->
+    <script is:inline>
+      document.addEventListener('DOMContentLoaded', function () {
+        if (typeof gsap === 'undefined' || typeof ScrollTrigger === 'undefined') return;
+        gsap.registerPlugin(ScrollTrigger);
+
+        var prefersReduced = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+        if (prefersReduced) return;
+
+        document.querySelectorAll('[data-animate]').forEach(function (el) {
+          gsap.fromTo(el,
+            { opacity: 0, y: 40 },
+            {
+              opacity: 1, y: 0,
+              duration: 0.8,
+              scrollTrigger: { trigger: el, start: 'top 85%', toggleActions: 'play none none none' }
+            }
+          );
+        });
+
+        document.querySelectorAll('[data-animate-left]').forEach(function (el) {
+          gsap.fromTo(el,
+            { opacity: 0, x: -60 },
+            {
+              opacity: 1, x: 0,
+              duration: 0.8,
+              scrollTrigger: { trigger: el, start: 'top 85%', toggleActions: 'play none none none' }
+            }
+          );
+        });
+
+        document.querySelectorAll('[data-animate-right]').forEach(function (el) {
+          gsap.fromTo(el,
+            { opacity: 0, x: 60 },
+            {
+              opacity: 1, x: 0,
+              duration: 0.8,
+              scrollTrigger: { trigger: el, start: 'top 85%', toggleActions: 'play none none none' }
+            }
+          );
+        });
+
+        document.querySelectorAll('[data-animate-stagger]').forEach(function (el) {
+          gsap.fromTo(el.children,
+            { opacity: 0, y: 30 },
+            {
+              opacity: 1, y: 0,
+              duration: 0.6,
+              stagger: 0.1,
+              scrollTrigger: { trigger: el, start: 'top 85%', toggleActions: 'play none none none' }
+            }
+          );
+        });
+      });
+    </script>
+  </body>
+</html>

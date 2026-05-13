@@ -1,0 +1,208 @@
+---
+// Skills — merged with TechStack. No progress bars, grouped by category.
+// Uses data-i18n for i18n support.
+
+interface SkillItem {
+  name: string;
+  icon?: string;
+}
+
+interface SkillCategory {
+  key: string;
+  labelKey: string;
+  color: 'primary' | 'secondary' | 'highlight' | 'accent';
+  glow: string;
+  items: SkillItem[];
+}
+
+const categories: SkillCategory[] = [
+  {
+    key: 'frontend',
+    labelKey: 'skills.categories.frontend',
+    color: 'primary',
+    glow: 'shadow-glow-gold',
+    items: [
+      { name: 'React / Next.js' },
+      { name: 'TypeScript' },
+      { name: 'Astro' },
+      { name: 'Tailwind CSS' },
+      { name: 'HTML / CSS / JS' },
+      { name: 'GSAP' },
+    ],
+  },
+  {
+    key: 'backend',
+    labelKey: 'skills.categories.backend',
+    color: 'secondary',
+    glow: 'shadow-glow-teal',
+    items: [
+      { name: 'Node.js / Express' },
+      { name: 'Python / FastAPI' },
+      { name: 'REST APIs' },
+      { name: 'GraphQL' },
+      { name: 'WebSockets' },
+      { name: 'JWT / Auth' },
+    ],
+  },
+  {
+    key: 'databases',
+    labelKey: 'skills.categories.databases',
+    color: 'highlight',
+    glow: 'shadow-glow-lavender',
+    items: [
+      { name: 'PostgreSQL' },
+      { name: 'MongoDB' },
+      { name: 'Redis' },
+      { name: 'Prisma ORM' },
+      { name: 'SQL Server' },
+      { name: 'Firebase' },
+    ],
+  },
+  {
+    key: 'devops',
+    labelKey: 'skills.categories.devops',
+    color: 'accent',
+    glow: 'shadow-glow-coral',
+    items: [
+      { name: 'Docker' },
+      { name: 'AWS' },
+      { name: 'GitHub Actions' },
+      { name: 'Linux / Shell' },
+      { name: 'Vercel / Netlify' },
+      { name: 'CI/CD' },
+    ],
+  },
+];
+
+const colorMap: Record<string, { text: string; bg: string; border: string; chip: string }> = {
+  primary: {
+    text: 'text-primary',
+    bg: 'bg-primary/5',
+    border: 'border-primary/20',
+    chip: 'bg-bg-surface text-text-primary border-primary/30 hover:border-primary hover:text-primary',
+  },
+  secondary: {
+    text: 'text-secondary',
+    bg: 'bg-secondary/5',
+    border: 'border-secondary/20',
+    chip: 'bg-bg-surface text-text-primary border-secondary/30 hover:border-secondary hover:text-secondary',
+  },
+  highlight: {
+    text: 'text-highlight',
+    bg: 'bg-highlight/5',
+    border: 'border-highlight/20',
+    chip: 'bg-bg-surface text-text-primary border-highlight/30 hover:border-highlight hover:text-highlight',
+  },
+  accent: {
+    text: 'text-accent',
+    bg: 'bg-accent/5',
+    border: 'border-accent/20',
+    chip: 'bg-bg-surface text-text-primary border-accent/30 hover:border-accent hover:text-accent',
+  },
+};
+
+// Category icons (SVG paths)
+const catIcons: Record<string, string> = {
+  frontend: 'M3 9l9-7 9 7v11a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2z',
+  backend: 'M5 12s2.545-.01 5 0c4.978.032 7-3.5 7-3.5M5 12s2.545.01 5 0c4.978-.032 7 3.5 7 3.5M5 12H3m9 0h7',
+  databases: 'M12 2a8 3 0 1 0 0 6 8 3 0 0 0 0-6zM4 5v6c0 1.657 3.582 3 8 3s8-1.343 8-3V5M4 11v6c0 1.657 3.582 3 8 3s8-1.343 8-3v-6',
+  devops: 'M12 2v4M12 18v4M4.93 4.93l2.83 2.83M16.24 16.24l2.83 2.83M2 12h4M18 12h4M4.93 19.07l2.83-2.83M16.24 7.76l2.83-2.83',
+};
+---
+
+<section id="skills" class="section-alt relative overflow-hidden">
+  <div class="section-container" data-animate>
+
+    <h2 class="section-title text-center neon-line pb-4" data-i18n="skills.title">Habilidades</h2>
+    <p
+      class="section-subtitle text-center"
+      data-i18n-arepa="skills.subtitle.arepa"
+      data-i18n-coffee="skills.subtitle.coffee"
+    >
+      Tecnologías con las que he cocinado código
+    </p>
+
+    <div class="section-divider"></div>
+
+    <!-- Skill categories grid -->
+    <div class="grid sm:grid-cols-2 gap-6 mb-16" data-animate-stagger>
+      {categories.map((cat) => {
+        const c = colorMap[cat.color];
+        return (
+          <div class={`card-base p-6 ${cat.glow} border ${c.border}`}>
+            <!-- Category header -->
+            <div class="flex items-center gap-3 mb-5">
+              <div class={`w-10 h-10 rounded-xl ${c.bg} flex items-center justify-center flex-shrink-0`}>
+                <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class={c.text} aria-hidden="true">
+                  <path d={catIcons[cat.key]}/>
+                </svg>
+              </div>
+              <h3 class={`font-heading text-lg font-semibold ${c.text}`} data-i18n={cat.labelKey}>
+                {cat.key}
+              </h3>
+            </div>
+
+            <!-- Skill chips — no bars, no percentages -->
+            <div class="flex flex-wrap gap-2">
+              {cat.items.map((item) => (
+                <span class={`skill-chip text-sm font-medium px-3 py-1.5 rounded-full border ${c.chip} transition-all duration-200 cursor-default`}>
+                  {item.name}
+                </span>
+              ))}
+            </div>
+          </div>
+        );
+      })}
+    </div>
+
+    <!-- Tech Stack visual row (merged from TechStack) -->
+    <div class="text-center mb-8" data-animate>
+      <p class="text-text-muted text-sm font-heading tracking-widest uppercase mb-6">— Stack principal —</p>
+      <div class="flex flex-wrap justify-center gap-3" data-animate-stagger>
+        {[
+          { name: 'React', color: 'primary' },
+          { name: 'Next.js', color: 'primary' },
+          { name: 'TypeScript', color: 'secondary' },
+          { name: 'Astro', color: 'secondary' },
+          { name: 'Node.js', color: 'highlight' },
+          { name: 'Python', color: 'highlight' },
+          { name: 'PostgreSQL', color: 'accent' },
+          { name: 'Docker', color: 'accent' },
+          { name: 'Tailwind', color: 'primary' },
+          { name: 'GSAP', color: 'secondary' },
+          { name: 'Prisma', color: 'highlight' },
+          { name: 'AWS', color: 'accent' },
+        ].map((tech) => {
+          const c = colorMap[tech.color];
+          return (
+            <span class={`tech-badge font-heading text-xs font-semibold px-4 py-2 rounded-full border ${c.chip} tracking-wide`}>
+              {tech.name}
+            </span>
+          );
+        })}
+      </div>
+    </div>
+
+  </div>
+
+  <!-- Ambient glow -->
+  <div class="absolute top-1/2 -translate-y-1/2 right-0 w-64 h-64 bg-highlight/5 rounded-full blur-[100px] pointer-events-none" aria-hidden="true"></div>
+  <div class="absolute top-1/3 left-0 w-48 h-48 bg-primary/5 rounded-full blur-[80px] pointer-events-none" aria-hidden="true"></div>
+</section>
+
+<style>
+  .skill-chip:hover {
+    transform: translateY(-2px);
+    filter: brightness(1.15);
+    box-shadow: 0 4px 12px rgba(0,0,0,0.2);
+  }
+
+  .tech-badge {
+    transition: transform 0.2s ease, filter 0.2s ease;
+  }
+
+  .tech-badge:hover {
+    transform: translateY(-2px) scale(1.05);
+    filter: brightness(1.2);
+  }
+</style>

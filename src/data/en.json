@@ -1,0 +1,148 @@
+{
+  "site": {
+    "name": "JESSZB.DEV",
+    "tagline": "Code with Venezuelan flavor",
+    "description": "Portfolio of Jesús Ordosgoitty — Venezuelan Full-Stack Developer. Building applications layer by layer, with precision and seasoning."
+  },
+  "hero": {
+    "greeting": "Hi, I'm",
+    "name": "Jesús Ordosgoitty",
+    "role": "Full-Stack Developer",
+    "subtitle": {
+      "arepa": "> Building software layers, like a perfect arepa_",
+      "coffee": "> Code that wakes you up, like the first coffee of the day_"
+    },
+    "cta1": "View Projects",
+    "cta2": "Contact",
+    "badge": "Available for projects",
+    "scrollHint": "Keep reading"
+  },
+  "about": {
+    "title": "About Me",
+    "subtitle": "The story behind the code",
+    "bio": {
+      "arepa": "Like a well-made arepa — golden on the outside, full of flavor inside — that's my approach to software. I'm a Venezuelan full-stack developer who builds applications layer by layer, with precision and seasoning.",
+      "coffee": "Like a good pour-over coffee — it takes time, technique, and passion to be perfect — that's how I build projects. Every line of code is intentional, every decision has purpose."
+    },
+    "bio2": "I specialize in creating modern web experiences, from robust backends to lovable interfaces. When I'm not coding, you'll find me exploring new technologies.",
+    "stats": {
+      "years": "Years of experience",
+      "projects": "Projects completed",
+      "arepas": {
+        "arepa": "∞ Arepas",
+        "coffee": "∞ Coffees"
+      }
+    },
+    "avatarAlt": "Anime avatar of Venezuelan developer"
+  },
+  "skills": {
+    "title": "Skills",
+    "subtitle": {
+      "arepa": "Technologies I've used to cook code",
+      "coffee": "The arsenal I use to brew great software"
+    },
+    "categories": {
+      "frontend": "Frontend",
+      "backend": "Backend",
+      "databases": "Databases",
+      "devops": "DevOps & Cloud",
+      "soft": "Soft Skills"
+    },
+    "tooltipHint": "View related projects"
+  },
+  "tools": {
+    "title": "Tools",
+    "subtitle": {
+      "arepa": "The ninja arsenal of the arepero",
+      "coffee": "The barista's instruments for great code"
+    }
+  },
+  "projects": {
+    "title": "Projects",
+    "subtitle": {
+      "arepa": "What I've cooked",
+      "coffee": "What I've distilled"
+    },
+    "filters": {
+      "all": "All",
+      "own": "Own Projects",
+      "collab": "Collaborations"
+    },
+    "viewDetails": "View details",
+    "demo": "Demo",
+    "code": "Code",
+    "status": {
+      "completed": "Completed",
+      "in-progress": "In progress"
+    },
+    "detail": {
+      "timeWorked": "Development time",
+      "techStack": "Tech stack",
+      "tools": "Tools",
+      "description": "Description",
+      "gallery": "Gallery",
+      "otherProjects": "Other projects",
+      "back": "← Back to projects",
+      "backHome": "Go to home"
+    }
+  },
+  "timeline": {
+    "title": "Experience",
+    "subtitle": "The road traveled",
+    "present": "Present"
+  },
+  "contact": {
+    "title": "Contact",
+    "subtitle": "Let's talk?",
+    "terminal": {
+      "arepa": "arepa@jesszb.dev",
+      "coffee": "coffee@jesszb.dev"
+    },
+    "init": {
+      "arepa": "start_contact.sh",
+      "coffee": "brew_contact.sh"
+    },
+    "initMessage": {
+      "arepa": "Initializing communication protocol...",
+      "coffee": "Preparing the connection... ☕"
+    },
+    "name": "echo \"What's your name?\"",
+    "email": "echo \"Your email?\"",
+    "message": "echo \"What's on your mind?\"",
+    "send": "Send Message",
+    "success": "¡Sugoi! Message sent successfully",
+    "alt": "Or find me at:",
+    "namePlaceholder": "Your name",
+    "emailPlaceholder": "you@email.com",
+    "messagePlaceholder": "Write your message..."
+  },
+  "nav": {
+    "about": "About",
+    "skills": "Skills",
+    "tools": "Tools",
+    "projects": "Projects",
+    "experience": "Experience",
+    "contact": "Contact"
+  },
+  "footer": {
+    "tagline": {
+      "arepa": "Code with Venezuelan flavor",
+      "coffee": "Code brewed with patience and craft"
+    },
+    "copyright": "© 2026 JESSZB.DEV — Jesús Ordosgoitty",
+    "counter": {
+      "arepa": "arepas consumed",
+      "coffee": "coffees drunk"
+    }
+  },
+  "theme": {
+    "switchToArepa": "Making the arepas...",
+    "switchToCoffee": "Serving coffee...",
+    "arepaLabel": "Arepa Theme",
+    "coffeeLabel": "Coffee Theme"
+  },
+  "lang": {
+    "es": "ES",
+    "en": "EN"
+  }
+}

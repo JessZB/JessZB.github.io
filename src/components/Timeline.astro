@@ -1,0 +1,157 @@
+---
+
+const experiences = [
+  {
+    period: { es: '2024 - Presente', en: '2024 - Present' },
+    role: { es: 'Senior Full-Stack Developer', en: 'Senior Full-Stack Developer' },
+    company: 'TechVenezuela',
+    location: { es: 'Remoto', en: 'Remote' },
+    description: { 
+      es: 'Liderazgo técnico de equipo de 5 desarrolladores. Arquitectura de microservicios. Migración de monolith a micro-frontends.', 
+      en: 'Technical lead for a 5-developer team. Microservices architecture. Migration from monolith to micro-frontends.' 
+    },
+    techs: ['React', 'Node.js', 'AWS', 'Docker'],
+    color: 'primary',
+  },
+  {
+    period: { es: '2022 - 2024', en: '2022 - 2024' },
+    role: { es: 'Full-Stack Developer', en: 'Full-Stack Developer' },
+    company: 'Startup Caribe',
+    location: { es: 'Caracas / Remoto', en: 'Caracas / Remote' },
+    description: { 
+      es: 'Desarrollo de plataforma SaaS de gestión empresarial. Implementación de CI/CD. Optimización de rendimiento frontend.', 
+      en: 'Development of an enterprise management SaaS platform. CI/CD implementation. Frontend performance optimization.' 
+    },
+    techs: ['Next.js', 'Python', 'PostgreSQL', 'GCP'],
+    color: 'secondary',
+  },
+  {
+    period: { es: '2021 - 2022', en: '2021 - 2022' },
+    role: { es: 'Frontend Developer', en: 'Frontend Developer' },
+    company: 'Agencia Creativa Zulia',
+    location: { es: 'Maracaibo', en: 'Maracaibo' },
+    description: { 
+      es: 'Creación de landing pages y aplicaciones web interactivas. Integración de APIs. Animaciones avanzadas con GSAP y Framer Motion.', 
+      en: 'Creation of landing pages and interactive web apps. API integrations. Advanced animations using GSAP and Framer Motion.' 
+    },
+    techs: ['React', 'GSAP', 'Figma', 'TypeScript'],
+    color: 'highlight',
+  },
+  {
+    period: { es: '2019 - 2021', en: '2019 - 2021' },
+    role: { es: 'Junior Developer', en: 'Junior Developer' },
+    company: 'Devs Venezuela',
+    location: { es: 'Valencia', en: 'Valencia' },
+    description: { 
+      es: 'Desarrollo de funcionalidades frontend y backend. Participación en sprints ágiles. Testing unitario y documentación.', 
+      en: 'Development of frontend and backend features. Agile sprint participation. Unit testing and documentation.' 
+    },
+    techs: ['JavaScript', 'Node.js', 'MongoDB', 'CSS'],
+    color: 'accent',
+  },
+];
+
+function getNodeColor(color: string) {
+  const map: Record<string, string> = {
+    primary: 'bg-primary shadow-glow-gold',
+    secondary: 'bg-secondary shadow-glow-teal',
+    highlight: 'bg-highlight shadow-glow-lavender',
+    accent: 'bg-accent shadow-glow-coral',
+  };
+  return map[color] || map.primary;
+}
+
+function getBorderColor(color: string) {
+  const map: Record<string, string> = {
+    primary: 'border-primary/20',
+    secondary: 'border-secondary/20',
+    highlight: 'border-highlight/20',
+    accent: 'border-accent/20',
+  };
+  return map[color] || map.primary;
+}
+---
+
+<section id="experience" class="relative overflow-hidden">
+  <div class="section-container" data-animate>
+
+    <h2 class="section-title text-center neon-line pb-4" data-i18n="timeline.title">Experiencia</h2>
+    <p class="section-subtitle text-center" data-i18n="timeline.subtitle">El camino recorrido</p>
+
+    <div class="section-divider"></div>
+
+    <div class="relative max-w-3xl mx-auto">
+      <div class="timeline-line absolute left-1/2 top-0 bottom-0 w-0.5 -translate-x-1/2 hidden md:block"></div>
+
+      <div class="space-y-0">
+        {
+          experiences.map((exp, i) => {
+            const isLeft = i % 2 === 0;
+            const nc = getNodeColor(exp.color);
+            const bc = getBorderColor(exp.color);
+            return (
+              <div class={`relative flex items-start gap-6 mb-8 md:mb-12 ${isLeft ? 'md:flex-row' : 'md:flex-row-reverse'}`} data-animate>
+                <div class={`hidden md:flex flex-1 ${isLeft ? 'justify-end' : 'justify-start'}`}>
+                  <div class={`card-base p-5 max-w-sm ${bc} border`}
+                    style={`${isLeft ? 'margin-right: 40px;' : 'margin-left: 40px;'}`}>
+                    <span class="font-mono text-xs text-text-muted" data-i18n-text-es={exp.period.es} data-i18n-text-en={exp.period.en}>{exp.period.es}</span>
+                    <h3 class="font-heading font-semibold text-lg text-text-primary mt-1" data-i18n-text-es={exp.role.es} data-i18n-text-en={exp.role.en}>{exp.role.es}</h3>
+                    <p class="text-sm text-text-secondary mt-1">
+                      {exp.company} · <span data-i18n-text-es={exp.location.es} data-i18n-text-en={exp.location.en}>{exp.location.es}</span>
+                    </p>
+                    <p class="text-sm text-text-secondary mt-3 leading-relaxed" data-i18n-text-es={exp.description.es} data-i18n-text-en={exp.description.en}>{exp.description.es}</p>
+                    <div class="flex flex-wrap gap-1.5 mt-3">
+                      {exp.techs.map((t: string) => (
+                        <span class="tag text-xs">{t}</span>
+                      ))}
+                    </div>
+                  </div>
+                </div>
+
+                <div class="absolute left-1/2 -translate-x-1/2 hidden md:flex items-center justify-center z-10">
+                  <div class={`w-10 h-10 ${nc} rounded-full flex items-center justify-center border-2 border-bg-surface`}>
+                    <svg width="16" height="16" viewBox="0 0 100 100" class="text-bg-deep">
+                      <circle cx="50" cy="48" r="28" fill="currentColor"/>
+                      <ellipse cx="50" cy="40" rx="10" ry="4" fill="#1A1A2E" opacity="0.3"/>
+                    </svg>
+                  </div>
+                </div>
+
+                <div class="flex-1 hidden md:block"></div>
+
+                <div class={`card-base p-5 md:hidden w-full ${bc} border`}>
+                  <span class="font-mono text-xs text-text-muted" data-i18n-text-es={exp.period.es} data-i18n-text-en={exp.period.en}>{exp.period.es}</span>
+                  <h3 class="font-heading font-semibold text-lg text-text-primary mt-1" data-i18n-text-es={exp.role.es} data-i18n-text-en={exp.role.en}>{exp.role.es}</h3>
+                  <p class="text-sm text-text-secondary mt-1">
+                    {exp.company} · <span data-i18n-text-es={exp.location.es} data-i18n-text-en={exp.location.en}>{exp.location.es}</span>
+                  </p>
+                  <p class="text-sm text-text-secondary mt-3 leading-relaxed" data-i18n-text-es={exp.description.es} data-i18n-text-en={exp.description.en}>{exp.description.es}</p>
+                  <div class="flex flex-wrap gap-1.5 mt-3">
+                    {exp.techs.map((t: string) => (
+                      <span class="tag text-xs">{t}</span>
+                    ))}
+                  </div>
+                </div>
+              </div>
+            );
+          })
+        }
+      </div>
+    </div>
+  </div>
+
+  <div class="absolute top-0 left-0 w-64 h-64 bg-primary/5 rounded-full blur-[100px] pointer-events-none" aria-hidden="true"></div>
+</section>
+
+<style>
+  .timeline-line {
+    background: linear-gradient(
+      180deg,
+      var(--color-primary) 0%,
+      var(--color-secondary) 35%,
+      var(--color-highlight) 70%,
+      var(--color-accent) 100%
+    );
+    box-shadow: 0 0 15px color-mix(in srgb, var(--color-primary) 30%, transparent);
+  }
+</style>

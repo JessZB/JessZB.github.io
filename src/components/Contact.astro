@@ -1,0 +1,227 @@
+---
+// Contact — theme-aware terminal header + full i18n via data-i18n attrs
+---
+
+<section id="contact" class="section-dark relative overflow-hidden">
+  <div class="section-container" data-animate>
+
+    <h2 class="section-title text-center neon-line pb-4" data-i18n="contact.title">Contacto</h2>
+    <p class="section-subtitle text-center" data-i18n="contact.subtitle">¿Hablamos?</p>
+
+    <div class="section-divider"></div>
+
+    <div class="max-w-2xl mx-auto">
+      <div class="card-base p-6 sm:p-8 border-primary/10">
+
+        <!-- Terminal header — theme-aware -->
+        <div class="relative mb-8 px-4 pb-4 pt-8 bg-bg-deep rounded-lg border border-primary/10 font-mono text-sm text-text-muted overflow-hidden">
+          <!-- Traffic lights + title bar -->
+          <div class="absolute top-0 left-0 right-0 h-7 bg-bg-surface/80 flex items-center gap-1.5 px-3 rounded-t-lg">
+            <span class="w-2.5 h-2.5 rounded-full bg-accent hover:opacity-80 transition-opacity cursor-default"></span>
+            <span class="w-2.5 h-2.5 rounded-full bg-primary hover:opacity-80 transition-opacity cursor-default"></span>
+            <span class="w-2.5 h-2.5 rounded-full bg-secondary hover:opacity-80 transition-opacity cursor-default"></span>
+            <span class="text-xs text-text-muted ml-2 font-mono" id="terminal-title">terminal.exe</span>
+          </div>
+
+          <!-- Terminal lines -->
+          <div class="space-y-1">
+            <p>
+              <span id="terminal-user" class="text-secondary" data-i18n-arepa="contact.terminal.arepa" data-i18n-coffee="contact.terminal.coffee">arepa@jesszb.dev</span>
+              <span class="text-text-muted">:</span>
+              <span class="text-highlight-light">~</span>
+              <span class="text-text-primary">$ </span>
+              <span id="terminal-cmd" data-i18n-arepa="contact.init.arepa" data-i18n-coffee="contact.init.coffee">iniciar_contacto.sh</span>
+            </p>
+            <p class="text-text-muted" id="terminal-msg" data-i18n-arepa="contact.initMessage.arepa" data-i18n-coffee="contact.initMessage.coffee">
+              Inicializando protocolo de comunicación...
+            </p>
+            <p class="text-secondary flex items-center gap-1">
+              <span class="terminal-cursor inline-block w-2 h-4 bg-current animate-pulse rounded-sm"></span>
+            </p>
+          </div>
+        </div>
+
+        <!-- Form -->
+        <form id="contact-form" class="space-y-5" novalidate>
+          <div>
+            <label for="contact-name" class="block font-mono text-sm text-secondary mb-2" data-i18n="contact.name">
+              echo "¿Cuál es tu nombre?"
+            </label>
+            <input
+              id="contact-name"
+              type="text"
+              name="name"
+              required
+              autocomplete="name"
+              class="contact-input w-full"
+              data-i18n-placeholder="contact.namePlaceholder"
+              placeholder="Tu nombre"
+            />
+          </div>
+
+          <div>
+            <label for="contact-email" class="block font-mono text-sm text-secondary mb-2" data-i18n="contact.email">
+              echo "¿Tu correo electrónico?"
+            </label>
+            <input
+              id="contact-email"
+              type="email"
+              name="email"
+              required
+              autocomplete="email"
+              class="contact-input w-full"
+              data-i18n-placeholder="contact.emailPlaceholder"
+              placeholder="tu@email.com"
+            />
+          </div>
+
+          <div>
+            <label for="contact-message" class="block font-mono text-sm text-secondary mb-2" data-i18n="contact.message">
+              echo "¿Qué tenés en mente?"
+            </label>
+            <textarea
+              id="contact-message"
+              name="message"
+              rows="4"
+              required
+              class="contact-input w-full resize-none"
+              data-i18n-placeholder="contact.messagePlaceholder"
+              placeholder="Escribí tu mensaje..."
+            ></textarea>
+          </div>
+
+          <button
+            type="submit"
+            id="contact-submit"
+            class="btn-primary w-full justify-center text-base py-3.5 flex items-center gap-2"
+          >
+            <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
+              <path d="m22 2-7 20-4-9-9-4Z"/><path d="M22 2 11 13"/>
+            </svg>
+            <span data-i18n="contact.send">Enviar Mensaje</span>
+          </button>
+        </form>
+
+        <!-- Success state -->
+        <div id="form-success" class="hidden text-center py-8">
+          <div class="text-5xl mb-4" id="success-emoji">🧆✨</div>
+          <p class="font-heading text-xl text-primary glow-text" data-i18n="contact.success">¡Sugoi! Mensaje enviado con éxito</p>
+          <p class="text-text-muted text-sm mt-2">¡Gracias! Te responderé pronto.</p>
+        </div>
+      </div>
+
+      <!-- Social links -->
+      <div class="mt-10 text-center">
+        <p class="text-text-muted text-sm mb-4" data-i18n="contact.alt">O encontrame en:</p>
+        <div class="flex justify-center gap-6">
+          <a href="mailto:hola@jesszb.dev" class="social-link" aria-label="Email">
+            <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><rect width="20" height="16" x="2" y="4" rx="2"/><path d="m22 7-8.97 5.7a1.94 1.94 0 0 1-2.06 0L2 7"/></svg>
+            <span class="text-sm">Email</span>
+          </a>
+          <a href="https://github.com/JessZB" target="_blank" rel="noopener noreferrer" class="social-link" aria-label="GitHub">
+            <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M15 22v-4a4.8 4.8 0 0 0-1-3.5c3 0 6-2 6-5.5.08-1.25-.27-2.48-1-3.5.28-1.15.28-2.35 0-3.5 0 0-1 0-3 1.5-2.64-.5-5.36-.5-8 0C6 2 5 2 5 2c-.3 1.15-.3 2.35 0 3.5A5.403 5.403 0 0 0 4 9c0 3.5 3 5.5 6 5.5-.39.49-.68 1.05-.85 1.65-.17.6-.22 1.23-.15 1.85v4"/><path d="M9 18c-4.51 2-5-2-7-2"/></svg>
+            <span class="text-sm">GitHub</span>
+          </a>
+          <a href="https://linkedin.com/in/jesusordosgoitty" target="_blank" rel="noopener noreferrer" class="social-link" aria-label="LinkedIn">
+            <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M16 8a6 6 0 0 1 6 6v7h-4v-7a2 2 0 0 0-2-2 2 2 0 0 0-2 2v7h-4v-7a6 6 0 0 1 6-6z"/><rect width="4" height="12" x="2" y="9"/><circle cx="4" cy="4" r="2"/></svg>
+            <span class="text-sm">LinkedIn</span>
+          </a>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- Ambient -->
+  <div class="absolute -top-20 right-0 w-72 h-72 bg-primary/5 rounded-full blur-[100px] pointer-events-none" aria-hidden="true"></div>
+  <div class="absolute -bottom-20 left-0 w-72 h-72 bg-secondary/5 rounded-full blur-[100px] pointer-events-none" aria-hidden="true"></div>
+</section>
+
+<style>
+  .contact-input {
+    padding: 0.75rem 1rem;
+    background: var(--color-bg-deep);
+    border: 1px solid rgba(255,255,255,0.1);
+    border-radius: 0.75rem;
+    color: var(--color-text-primary);
+    font-family: var(--font-body);
+    font-size: 0.875rem;
+    transition: border-color 0.2s ease, box-shadow 0.2s ease;
+  }
+
+  .contact-input::placeholder {
+    color: var(--color-text-muted);
+    opacity: 0.5;
+  }
+
+  .contact-input:focus {
+    outline: none;
+    border-color: rgba(var(--color-primary-raw, 245 197 66), 0.5);
+    box-shadow: var(--shadow-glow-gold);
+  }
+
+  [data-theme="coffee"] .contact-input:focus {
+    box-shadow: var(--shadow-glow-gold);
+  }
+
+  .social-link {
+    display: flex;
+    align-items: center;
+    gap: 0.5rem;
+    color: var(--color-text-secondary);
+    text-decoration: none;
+    transition: color 0.2s ease, transform 0.2s ease;
+  }
+
+  .social-link:hover {
+    color: var(--color-primary);
+    transform: translateY(-2px);
+  }
+</style>
+
+<script>
+  const form = document.getElementById('contact-form') as HTMLFormElement | null;
+  const success = document.getElementById('form-success');
+  const successEmoji = document.getElementById('success-emoji');
+  const terminalTitle = document.getElementById('terminal-title');
+
+  // Sync terminal title with theme
+  function updateTerminalTheme(): void {
+    const theme = document.documentElement.getAttribute('data-theme') || 'arepa';
+    if (terminalTitle) {
+      terminalTitle.textContent = theme === 'coffee' ? 'coffee-shop.sh' : 'terminal.exe';
+    }
+    if (successEmoji) {
+      successEmoji.textContent = theme === 'coffee' ? '☕✨' : '🧆✨';
+    }
+  }
+
+  updateTerminalTheme();
+
+  const htmlEl = document.documentElement;
+  const themeObserver = new MutationObserver(updateTerminalTheme);
+  themeObserver.observe(htmlEl, { attributes: true, attributeFilter: ['data-theme'] });
+
+  // Form submit
+  if (form && success) {
+    form.addEventListener('submit', (e) => {
+      e.preventDefault();
+      const data = Object.fromEntries(new FormData(form));
+      console.log('Contact form:', data);
+
+      form.classList.add('opacity-0', 'pointer-events-none');
+      setTimeout(() => {
+        form.style.display = 'none';
+        success.classList.remove('hidden');
+        success.classList.add('animate-fade-in-up');
+      }, 300);
+
+      setTimeout(() => {
+        form.style.display = '';
+        form.classList.remove('opacity-0', 'pointer-events-none');
+        form.reset();
+        success.classList.add('hidden');
+        success.classList.remove('animate-fade-in-up');
+      }, 5000);
+    });
+  }
+</script>
