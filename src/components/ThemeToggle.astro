@@ -142,9 +142,14 @@
           (window as any).refreshThemeTexts();
         }
 
-        // Hide curtain
+        // Hide curtain with leaving animation
         setTimeout(() => {
+          curtain.classList.add('curtain-leaving');
           curtain.classList.remove('curtain-active');
+          
+          setTimeout(() => {
+            curtain.classList.remove('curtain-leaving');
+          }, 500);
         }, 600);
       }, 900);
     } else {

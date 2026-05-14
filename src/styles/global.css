@@ -173,6 +173,14 @@
                  0 0 80px rgba(245, 197, 66, 0.1);
   }
 
+  .zb-gradient {
+    background: linear-gradient(135deg, #FF6B9D, #E84545);
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+    background-clip: text;
+    font-weight: 800;
+  }
+
   .glow-text-teal {
     text-shadow: 0 0 20px rgba(22, 160, 133, 0.5),
                  0 0 40px rgba(22, 160, 133, 0.2);
@@ -233,21 +241,25 @@
 
   .btn-primary {
     @apply inline-flex items-center gap-2 px-6 py-3 rounded-full font-heading font-semibold
-           text-bg-deep
            hover:scale-105 transition-all duration-300;
-    background-image: linear-gradient(135deg, #F5C542, #FFD966);
-    box-shadow: 0 0 15px rgba(245, 197, 66, 0.4);
+    color: #110D0A;
+    background-image: linear-gradient(135deg, var(--color-primary), var(--color-primary-light));
+    box-shadow: 0 4px 10px rgba(245, 166, 35, 0.2);
   }
 
   .btn-primary:hover {
-    box-shadow: 0 0 30px rgba(245, 197, 66, 0.6);
+    box-shadow: 0 6px 20px rgba(245, 166, 35, 0.4);
   }
 
   .btn-outline {
     @apply inline-flex items-center gap-2 px-6 py-3 rounded-full font-heading font-semibold
-           border-2 border-primary text-primary
-           hover:bg-primary hover:text-bg-deep
+           border-2 border-primary text-text-primary
+           hover:bg-primary
            transition-all duration-300;
+  }
+
+  .btn-outline:hover {
+    color: #110D0A;
   }
 
   .card-glow-gold {

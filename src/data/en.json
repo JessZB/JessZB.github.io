@@ -2,11 +2,11 @@
   "site": {
     "name": "JESSZB.DEV",
     "tagline": "Code with Venezuelan flavor",
-    "description": "Portfolio of Jesús Ordosgoitty — Venezuelan Full-Stack Developer. Building applications layer by layer, with precision and seasoning."
+    "description": "Portfolio of Jesús Zapata — Venezuelan Full-Stack Developer. Building applications layer by layer, with precision and seasoning."
   },
   "hero": {
     "greeting": "Hi, I'm",
-    "name": "Jesús Ordosgoitty",
+    "name": "Jesús Zapata",
     "role": "Full-Stack Developer",
     "subtitle": {
       "arepa": "> Building software layers, like a perfect arepa_",
@@ -129,7 +129,7 @@
       "arepa": "Code with Venezuelan flavor",
       "coffee": "Code brewed with patience and craft"
     },
-    "copyright": "© 2026 JESSZB.DEV — Jesús Ordosgoitty",
+    "copyright": "© 2026 JESS<span class='zb-gradient'>ZB</span>.DEV — Jesús Zapata",
     "counter": {
       "arepa": "arepas consumed",
       "coffee": "coffees drunk"

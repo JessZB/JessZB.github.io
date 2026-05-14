@@ -2,11 +2,11 @@
   "site": {
     "name": "JESSZB.DEV",
     "tagline": "Código con sazón venezolana",
-    "description": "Portafolio de Jesús Ordosgoitty — Desarrollador Full-Stack venezolano. Construyo aplicaciones capa por capa, con precisión y sazón."
+    "description": "Portafolio de Jesús Zapata — Desarrollador Full-Stack venezolano. Construyo aplicaciones capa por capa, con precisión y sazón."
   },
   "hero": {
     "greeting": "Hola, soy",
-    "name": "Jesús Ordosgoitty",
+    "name": "Jesús Zapata",
     "role": "Full-Stack Developer",
     "subtitle": {
       "arepa": "> Construyendo capas de software, como una buena arepa_",
@@ -129,7 +129,7 @@
       "arepa": "Código con sazón venezolana",
       "coffee": "Código preparado con paciencia y técnica"
     },
-    "copyright": "© 2026 JESSZB.DEV — Jesús Ordosgoitty",
+    "copyright": "© 2026 JESS<span class='zb-gradient'>ZB</span>.DEV — Jesús Zapata",
     "counter": {
       "arepa": "arepas consumidas",
       "coffee": "cafés tomados"

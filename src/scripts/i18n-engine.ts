@@ -47,7 +47,7 @@ function applyTranslations(t: Record<string, string>, theme: Theme): void {
   document.querySelectorAll<HTMLElement>('[data-i18n]').forEach((el) => {
     const key = el.dataset.i18n!;
     if (t[key] !== undefined) {
-      el.textContent = t[key];
+      el.innerHTML = t[key];
     }
   });
 

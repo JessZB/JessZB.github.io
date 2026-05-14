@@ -24,12 +24,12 @@ const siteName = 'JESSZB.DEV';
 const siteUrl = 'https://jesszb.dev';
 const pageTitle = title
   ? `${title} | ${siteName}`
-  : `${siteName} — Jesús Ordosgoitty | Full-Stack Developer`;
+  : `${siteName} — Jesús Zapata | Full-Stack Developer`;
 const pageDesc =
   description ||
   (locale === 'es'
-    ? 'Portafolio de Jesús Ordosgoitty — Desarrollador Full-Stack venezolano. Construyo aplicaciones capa por capa, con precisión y sazón.'
-    : 'Portfolio of Jesús Ordosgoitty — Venezuelan Full-Stack Developer. Building applications layer by layer, with precision and seasoning.');
+    ? 'Portafolio de Jesús Zapata — Desarrollador Full-Stack venezolano. Construyo aplicaciones capa por capa, con precisión y sazón.'
+    : 'Portfolio of Jesús Zapata — Venezuelan Full-Stack Developer. Building applications layer by layer, with precision and seasoning.');
 
 const canonicalUrl = `${siteUrl}${canonicalPath}`;
 
@@ -50,7 +50,7 @@ const translations = {
     <title>{pageTitle}</title>
     <meta name="title" content={pageTitle} />
     <meta name="description" content={pageDesc} />
-    <meta name="author" content="Jesús Ordosgoitty" />
+    <meta name="author" content="Jesús Zapata" />
     <meta name="robots" content="index, follow" />
     <meta name="theme-color" content="#F5C542" />
 
@@ -90,13 +90,13 @@ const translations = {
       {
         "@context": "https://schema.org",
         "@type": "Person",
-        "name": "Jesús Ordosgoitty",
+        "name": "Jesús Zapata",
         "url": "https://jesszb.dev",
         "jobTitle": "Full-Stack Developer",
         "nationality": "Venezuelan",
         "sameAs": [
           "https://github.com/JessZB",
-          "https://linkedin.com/in/jesusordosgoitty"
+          "https://linkedin.com/in/jesusZapata"
         ]
       }
     </script>
@@ -161,7 +161,7 @@ const translations = {
           // Standard keys
           document.querySelectorAll('[data-i18n]').forEach(function (el) {
             var key = el.getAttribute('data-i18n');
-            if (t[key] !== undefined) el.textContent = t[key];
+            if (t[key] !== undefined) el.innerHTML = t[key];
           });
 
           // Placeholder keys
@@ -175,13 +175,13 @@ const translations = {
             var keyArepa = el.getAttribute('data-i18n-arepa');
             var keyCoffee = el.getAttribute('data-i18n-coffee');
             var key = theme === 'coffee' ? keyCoffee : keyArepa;
-            if (key && t[key] !== undefined) el.textContent = t[key];
+            if (key && t[key] !== undefined) el.innerHTML = t[key];
           });
 
           // Direct dynamic texts (bypasses JSON, reads direct attribute)
           document.querySelectorAll('[data-i18n-text-es]').forEach(function (el) {
             var val = el.getAttribute('data-i18n-text-' + lang);
-            if (val !== null) el.textContent = val;
+            if (val !== null) el.innerHTML = val;
           });
 
           // html lang attribute
