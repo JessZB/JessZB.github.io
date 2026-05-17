@@ -51,7 +51,9 @@ import identity from '../data/identity.json';
           title="¡Hacé click!"
           aria-label="Contador de diversión"
         >
-          <span id="counter-emoji" class="text-lg group-hover:scale-125 transition-transform" aria-hidden="true">🧆</span>
+          <span id="counter-icon" class="flex items-center justify-center group-hover:scale-125 transition-transform text-primary" aria-hidden="true">
+            <!-- Icon will be injected by script -->
+          </span>
           <span id="counter-count" class="font-mono font-medium">0</span>
           <span
             class="hidden sm:inline"
@@ -67,8 +69,11 @@ import identity from '../data/identity.json';
       <p class="text-text-muted text-xs" data-i18n="footer.copyright">
         © 2026 JESS<span class="zb-gradient">ZB</span>.DEV — Jesús Zapata
       </p>
-      <p class="text-text-muted text-xs opacity-50">
-        Built with Astro · Tailwind · GSAP ♥
+      <p class="text-text-muted text-xs opacity-50 flex items-center gap-1">
+        Built with Astro · Tailwind · GSAP 
+        <svg width="10" height="10" viewBox="0 0 24 24" fill="currentColor" class="text-accent inline-block">
+          <path d="M12 21.35l-1.45-1.32C5.4 15.36 2 12.28 2 8.5 2 5.42 4.42 3 7.5 3c1.74 0 3.41.81 4.5 2.09C13.09 3.81 14.76 3 16.5 3 19.58 3 22 5.42 22 8.5c0 3.78-3.4 6.86-8.55 11.54L12 21.35z"/>
+        </svg>
       </p>
     </div>
   </div>
@@ -94,10 +99,15 @@ import identity from '../data/identity.json';
   let count = 0;
   let themeObserver: MutationObserver | null = null;
 
+  const ICONS = {
+    arepa: `<svg width="20" height="20" viewBox="0 0 100 60" fill="currentColor"><ellipse cx="50" cy="30" rx="45" ry="22" opacity="0.9"/><ellipse cx="50" cy="22" rx="38" ry="14" opacity="0.6"/></svg>`,
+    coffee: `<svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M17 8h1a4 4 0 0 1 0 8h-1"/><path d="M3 8h14v9a4 4 0 0 1-4 4H7a4 4 0 0 1-4-4Z"/><line x1="6" y1="2" x2="6" y2="4"/><line x1="10" y1="2" x2="10" y2="4"/><line x1="14" y1="2" x2="14" y2="4"/></svg>`
+  };
+
   function initFooter(): void {
     const btn = document.getElementById('fun-counter');
     const display = document.getElementById('counter-count');
-    const emoji = document.getElementById('counter-emoji');
+    const iconContainer = document.getElementById('counter-icon');
 
     // Disconnect existing observer before re-creating
     if (themeObserver) {
@@ -109,18 +119,20 @@ import identity from '../data/identity.json';
     count = 0;
     if (display) display.textContent = '0';
 
-    function getEmoji(): string {
+    function updateIcon(): void {
       const theme = document.documentElement.getAttribute('data-theme') || 'arepa';
-      return theme === 'coffee' ? '☕' : '🧆';
+      if (iconContainer) {
+        iconContainer.innerHTML = theme === 'coffee' ? ICONS.coffee : ICONS.arepa;
+      }
     }
 
-    // Init emoji
-    if (emoji) emoji.textContent = getEmoji();
+    // Init icon
+    updateIcon();
 
     // Watch theme changes on <html>
     const htmlEl = document.documentElement;
     themeObserver = new MutationObserver(() => {
-      if (emoji) emoji.textContent = getEmoji();
+      updateIcon();
       count = 0;
       if (display) display.textContent = '0';
     });

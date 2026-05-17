@@ -105,7 +105,9 @@ import identity from '../data/identity.json';
 
         <!-- Success state -->
         <div id="form-success" class="hidden text-center py-8">
-          <div class="text-5xl mb-4" id="success-emoji">🧆✨</div>
+          <div class="mb-6 flex justify-center" id="success-icon">
+            <!-- SVG will be injected here -->
+          </div>
           <p class="font-heading text-xl text-primary glow-text" data-i18n="contact.success">¡Sugoi! Mensaje enviado con éxito</p>
           <p class="text-text-muted text-sm mt-2">¡Gracias! Te responderé pronto.</p>
         </div>
@@ -186,8 +188,41 @@ import identity from '../data/identity.json';
   function initContact(): void {
     const form = document.getElementById('contact-form') as HTMLFormElement | null;
     const success = document.getElementById('form-success');
-    const successEmoji = document.getElementById('success-emoji');
+    const successIcon = document.getElementById('success-icon');
     const terminalTitle = document.getElementById('terminal-title');
+
+    const SUCCESS_ICONS = {
+      arepa: `
+        <div class="relative inline-flex flex-col items-center">
+          <svg width="70" height="70" viewBox="0 0 100 100" class="text-primary drop-shadow-[0_0_15px_rgba(245,197,66,0.3)]">
+            <circle cx="50" cy="50" r="40" fill="currentColor" opacity="0.1" stroke="currentColor" stroke-width="2"/>
+            <path d="M30 50 Q50 65 70 50" fill="none" stroke="currentColor" stroke-width="4" stroke-linecap="round"/>
+            <circle cx="50" cy="50" r="32" fill="none" stroke="currentColor" stroke-width="1" opacity="0.2" stroke-dasharray="4 4"/>
+          </svg>
+          <div class="absolute -bottom-1 -right-1 bg-bg-surface rounded-full p-1 border border-primary shadow-lg scale-110">
+            <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="#16A085" stroke-width="3" stroke-linecap="round" stroke-linejoin="round">
+              <polyline points="20 6 9 17 4 12"></polyline>
+            </svg>
+          </div>
+        </div>
+      `,
+      coffee: `
+        <div class="relative inline-flex flex-col items-center">
+          <svg width="70" height="70" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" class="text-primary drop-shadow-[0_0_15px_rgba(200,135,74,0.3)]">
+            <path d="M17 8h1a4 4 0 1 1 0 8h-1"/>
+            <path d="M3 8h14v9a4 4 0 0 1-4 4H7a4 4 0 0 1-4-4Z"/>
+            <line x1="6" y1="2" x2="6" y2="4"/>
+            <line x1="10" y1="2" x2="10" y2="4"/>
+            <line x1="14" y1="2" x2="14" y2="4"/>
+          </svg>
+          <div class="absolute -bottom-1 -right-1 bg-bg-surface rounded-full p-1 border border-primary shadow-lg scale-110">
+            <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="#16A085" stroke-width="3" stroke-linecap="round" stroke-linejoin="round">
+              <polyline points="20 6 9 17 4 12"></polyline>
+            </svg>
+          </div>
+        </div>
+      `
+    };
 
     // Disconnect existing observer before re-creating
     if (themeObserver) {
@@ -202,12 +237,12 @@ import identity from '../data/identity.json';
 
     // Sync terminal title with theme
     function updateTerminalTheme(): void {
-      const theme = document.documentElement.getAttribute('data-theme') || 'arepa';
+      const theme = (document.documentElement.getAttribute('data-theme') as 'arepa' | 'coffee') || 'arepa';
       if (terminalTitle) {
         terminalTitle.textContent = theme === 'coffee' ? 'coffee-shop.sh' : 'terminal.exe';
       }
-      if (successEmoji) {
-        successEmoji.textContent = theme === 'coffee' ? '☕✨' : '🧆✨';
+      if (successIcon) {
+        successIcon.innerHTML = SUCCESS_ICONS[theme] || SUCCESS_ICONS.arepa;
       }
     }
 

@@ -29,7 +29,7 @@ export default {
     "bio2": identity.about.bio2_es,
     "stats": {
       "years": "Años de experiencia",
-      "projects": "Proyectos completados",
+      "projects": "Proyectos en los que he trabajado",
       "arepas": {
         "arepa": "∞ Arepas",
         "coffee": "∞ Cafés"
@@ -48,7 +48,7 @@ export default {
       "backend": "Backend",
       "databases": "Bases de datos",
       "devops": "DevOps & Cloud",
-      "soft": "Soft Skills"
+      "soft": "Soft & Hard Skills"
     },
     "tooltipHint": "Ver proyectos relacionados"
   },
@@ -109,7 +109,7 @@ export default {
     },
     "initMessage": {
       "arepa": "Inicializando protocolo de comunicación...",
-      "coffee": "Preparando la conexión... ☕"
+      "coffee": "Preparando la conexión..."
     },
     "name": "echo \"¿Cuál es tu nombre?\"",
     "email": "echo \"¿Tu correo electrónico?\"",
