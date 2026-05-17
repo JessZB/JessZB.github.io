@@ -155,26 +155,32 @@
 </style>
 
 <script>
-  const curtain = document.getElementById('theme-curtain');
+  let curtainObserver: MutationObserver | null = null;
 
-  function updateCurtainMessage(targetTheme: string): void {
-    document.querySelectorAll<HTMLElement>('.curtain-message').forEach((msg) => {
-      msg.classList.remove('visible');
-    });
-    const target = document.querySelector<HTMLElement>(
-      `.curtain-message[data-show-on="${targetTheme}"]`
-    );
-    target?.classList.add('visible');
-  }
+  function initThemeCurtain(): void {
+    const curtain = document.getElementById('theme-curtain');
+    if (!curtain) return;
 
-  // Watch for curtain-active class via MutationObserver
-  if (curtain) {
-    const observer = new MutationObserver(() => {
+    // Disconnect existing observer before re-creating
+    if (curtainObserver) {
+      curtainObserver.disconnect();
+      curtainObserver = null;
+    }
+
+    curtainObserver = new MutationObserver(() => {
       if (curtain.classList.contains('curtain-active')) {
         const targetTheme = curtain.getAttribute('data-target-theme') || 'coffee';
-        updateCurtainMessage(targetTheme);
+        document.querySelectorAll<HTMLElement>('.curtain-message').forEach((msg) => {
+          msg.classList.remove('visible');
+        });
+        const target = document.querySelector<HTMLElement>(
+          `.curtain-message[data-show-on="${targetTheme}"]`
+        );
+        target?.classList.add('visible');
       }
     });
-    observer.observe(curtain, { attributes: true, attributeFilter: ['class'] });
+    curtainObserver.observe(curtain, { attributes: true, attributeFilter: ['class'] });
   }
+
+  document.addEventListener('astro:page-load', initThemeCurtain);
 </script>

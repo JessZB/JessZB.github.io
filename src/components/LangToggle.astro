@@ -73,30 +73,40 @@
 </style>
 
 <script>
-  const esBtn = document.getElementById('lang-es');
-  const enBtn = document.getElementById('lang-en');
+  let esClickHandler: (() => void) | null = null;
+  let enClickHandler: (() => void) | null = null;
 
-  function setLang(lang: string): void {
-    localStorage.setItem('jesszb-lang', lang);
-    document.documentElement.setAttribute('data-lang', lang);
+  function initLangToggle(): void {
+    const esBtn = document.getElementById('lang-es');
+    const enBtn = document.getElementById('lang-en');
 
-    // Update button states
-    document.querySelectorAll<HTMLElement>('[data-lang-label]').forEach((el) => {
-      el.setAttribute('aria-current', el.dataset.langLabel === lang ? 'true' : 'false');
-    });
+    // Remove old listeners before adding new ones
+    if (esClickHandler) esBtn?.removeEventListener('click', esClickHandler);
+    if (enClickHandler) enBtn?.removeEventListener('click', enClickHandler);
 
-    // Trigger i18n engine update via custom event
-    window.dispatchEvent(new CustomEvent('jesszb:lang-change', { detail: { lang } }));
-  }
+    function setLang(lang: string): void {
+      localStorage.setItem('jesszb-lang', lang);
+      document.documentElement.setAttribute('data-lang', lang);
 
-  esBtn?.addEventListener('click', () => setLang('es'));
-  enBtn?.addEventListener('click', () => setLang('en'));
+      document.querySelectorAll<HTMLElement>('[data-lang-label]').forEach((el) => {
+        el.setAttribute('aria-current', el.dataset.langLabel === lang ? 'true' : 'false');
+      });
 
-  // Sync initial state from localStorage
-  document.addEventListener('DOMContentLoaded', () => {
+      window.dispatchEvent(new CustomEvent('jesszb:lang-change', { detail: { lang } }));
+    }
+
+    esClickHandler = () => setLang('es');
+    enClickHandler = () => setLang('en');
+    esBtn?.addEventListener('click', esClickHandler);
+    enBtn?.addEventListener('click', enClickHandler);
+
+    // Sync initial state from localStorage after ClientRouter navigation
     const stored = localStorage.getItem('jesszb-lang') || 'es';
+    document.documentElement.setAttribute('data-lang', stored);
     document.querySelectorAll<HTMLElement>('[data-lang-label]').forEach((el) => {
       el.setAttribute('aria-current', el.dataset.langLabel === stored ? 'true' : 'false');
     });
-  });
+  }
+
+  document.addEventListener('astro:page-load', initLangToggle);
 </script>

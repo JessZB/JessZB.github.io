@@ -1,0 +1,699 @@
+{
+  "identity": {
+    "name": "Jesús Zapata",
+    "role_es": "Ingeniero en Informática y Desarrollador Full-Stack",
+    "role_en": "Informatics Engineer & Full-Stack Developer",
+    "email": "contact.jesszb@gmail.com",
+    "social": {
+      "github": "https://github.com/JessZB",
+      "linkedin": "https://www.linkedin.com/in/tech-jesus-zapata/",
+      "twitter": "https://x.com/YessZB",
+      "instagram": "https://www.instagram.com/yess_zb/"
+    }
+  },
+  "about": {
+    "bio_arepa_es": "Como una arepa bien hecha — por fuera dorada, por dentro llena de sabor — así es mi enfoque con el software. Soy un desarrollador full-stack venezolano que construye aplicaciones capa por capa, con precisión y sazón.",
+    "bio_arepa_en": "Like a well-made arepa — golden on the outside, full of flavor on the inside — that's my approach to software. I'm a Venezuelan full-stack developer who builds applications layer by layer, with precision and sazón.",
+    "bio_coffee_es": "Como un buen café de filtro — necesita tiempo, técnica y pasión para ser de calidad — así construyo mis proyectos. Cada línea de código es intencional, cada decisión tiene propósito.",
+    "bio_coffee_en": "Like a good filter coffee — requiring time, technique, and passion to be of quality — that's how I build my projects. Every line of code is intentional, every decision has a purpose.",
+    "bio2_es": "Me especializo en la creación de sistemas administrativos (ERP) y herramientas de monitoreo, desarrollando backends robustos e interfaces que enamoran. Mi experiencia como analista de sistemas me ha enseñado que el mejor código es el que realmente ayuda a las personas, por lo que la empatía y la atención al usuario son clave en mi trabajo. Cuando no estoy programando, me encontrarás explorando nuevas tecnologías.",
+    "bio2_en": "I specialize in creating administrative systems (ERP) and monitoring tools, developing robust backends and captivating interfaces. My experience as a systems analyst has taught me that the best code is the one that truly helps people, which is why empathy and user care are key to my work. When I'm not coding, you'll find me exploring new technologies.",
+    "years_of_experience": "5+ DEV | 3 IT",
+    "projects_count": "15+"
+  },
+  "skills": {
+    "frontend": [
+      "JavaScript (ES6+)",
+      "TypeScript",
+      "React",
+      "Astro",
+      "Tailwind CSS",
+      "Sass / SCSS",
+      "HTML5 & CSS3",
+      "Vite"
+    ],
+    "backend": [
+      "Node.js",
+      "Express.js",
+      "PHP",
+      "Laravel"
+    ],
+    "databases": [
+      "PostgreSQL",
+      "MySQL / MariaDB",
+      "SQL Server",
+      "SQLite",
+      "Prisma ORM"
+    ],
+    "devops": [
+      "Git & GitHub",
+      "Gestión de Infraestructura",
+      "Mantenimiento de Servidores",
+      "Automatización de Tareas"
+    ],
+    "soft": [
+      "Análisis de Requerimientos",
+      "Liderazgo Técnico",
+      "Soporte de Hardware Fiscal (POS)",
+      "Comunicación Asertiva",
+      "Pensamiento Crítico",
+      "Trabajo en Equipo"
+    ]
+  },
+  "projects": [
+    {
+      "slug": "sysadmin-tools",
+      "title": "SysAdmin Tools",
+      "description_es": "Dashboard de administración empresarial para entornos retail multi-sucursal con monitoreo de infraestructura POS y pantallas.",
+      "description_en": "Enterprise administration dashboard for multi-branch retail environments with POS infrastructure and digital signage monitoring.",
+      "fullDescription_es": "Aplicación web interna (Node.js/Express) que centraliza el monitoreo de infraestructura POS (SQL Server), control de cartelería digital mediante WebSockets y Wake-on-LAN, y la gestión de precios a través de un patrón cache-aside. Cuenta con sistema de roles modulares, auditoría completa y encendido remoto de TVs.",
+      "fullDescription_en": "Internal web application (Node.js/Express) that centralizes POS infrastructure monitoring (SQL Server), digital signage control via WebSockets and Wake-on-LAN, and price management through a cache-aside pattern. Features modular role system, complete auditing, and remote TV startup.",
+      "category": "own",
+      "status": "completed",
+      "images": [
+        "/img/projects/sysadmin-tools/hero.webp",
+        "/img/projects/sysadmin-tools/01-audit.webp",
+        "/img/projects/sysadmin-tools/02-branches-1.webp",
+        "/img/projects/sysadmin-tools/03-branches.webp",
+        "/img/projects/sysadmin-tools/04-categories.webp",
+        "/img/projects/sysadmin-tools/05-dashboard.webp",
+        "/img/projects/sysadmin-tools/06-dashboard.webp",
+        "/img/projects/sysadmin-tools/07-dashboard.webp",
+        "/img/projects/sysadmin-tools/08-home.webp",
+        "/img/projects/sysadmin-tools/09-pmc-aisles-2.webp",
+        "/img/projects/sysadmin-tools/10-screens.webp",
+        "/img/projects/sysadmin-tools/11-screens.webp",
+        "/img/projects/sysadmin-tools/12-services.webp"
+      ],
+      "techs": [
+        "Node.js",
+        "TypeScript",
+        "Express",
+        "MSSQL",
+        "MariaDB",
+        "EJS",
+        "Socket.io"
+      ],
+      "tools": [
+        "Opencode",
+        "Git"
+      ],
+      "demo": "",
+      "code": "",
+      "color": "primary",
+      "timeWorked_es": "Más de 6 meses",
+      "timeWorked_en": "More than 6 months",
+      "featured": true,
+      "problemsSolved_es": "Entorno retail multi-sucursal sin visibilidad centralizada de jobs SQL Server, conectividad de cajas, ni control remoto de cartelería digital. La gestión de precios implicaba tocar cada base de datos manualmente y no existía trazabilidad de operaciones administrativas.",
+      "problemsSolved_en": "Multi-branch retail environment with no centralized visibility of SQL Server jobs, terminal connectivity, or remote digital signage control. Price management required manually touching each database, and there was no traceability of administrative operations.",
+      "keyFeatures_es": [
+        "Dashboard de jobs SQL Server en tiempo real con consulta a msdb y graceful degradation",
+        "PMC — Price Management Center con patrón cache-aside e importación masiva desde Excel",
+        "Control remoto de TVs Samsung (Tizen) y LG (WebOS) con rutina WoL y WebSocket",
+        "Monitoreo ICMP de red con ping batch e historial de latencia",
+        "Auditoría transversal de todas las operaciones CREATE/UPDATE/DELETE",
+        "Sistema de permisos modulares N:M con JWT stateless y roles granulares"
+      ],
+      "keyFeatures_en": [
+        "Real-time SQL Server job dashboard querying msdb with graceful degradation",
+        "PMC — Price Management Center with cache-aside pattern and bulk Excel import",
+        "Remote control of Samsung (Tizen) and LG (WebOS) TVs with WoL routine and WebSocket",
+        "ICMP network monitoring with batch ping and latency history",
+        "Cross-cutting audit trail of all CREATE/UPDATE/DELETE operations",
+        "N:M modular permission system with stateless JWT and granular roles"
+      ],
+      "architecture_es": "MVC modular sobre Node.js/Express + TypeScript. Doble base de datos: MariaDB local para configuración y caché, SQL Server remoto (solo lectura) en cada terminal para consulta de jobs. Factory mssql con credenciales encriptadas AES. Frontend EJS con Nothing Style (glassmorphism + tipografía Space Grotesk/Silkscreen). Event delegation pattern obligatorio vía data-action.",
+      "architecture_en": "Modular MVC on Node.js/Express + TypeScript. Dual database: local MariaDB for configuration and cache, remote SQL Server (read-only) on each terminal for job queries. MSSQL factory with AES-encrypted credentials. EJS frontend with Nothing Style (glassmorphism + Space Grotesk/Silkscreen typography). Mandatory event delegation pattern via data-action."
+    },
+    {
+      "slug": "yezzfolio",
+      "title": "Yezzfolio CMS",
+      "description_es": "CMS headless para portafolios de artistas con integración de Google Drive y exportación estática automatizada.",
+      "description_en": "Headless CMS for artist portfolios featuring Google Drive integration and automated static export.",
+      "fullDescription_es": "Plataforma SaaS multi-tenant que permite a artistas gestionar sus portafolios de forma bilingüe sin tocar código. Utiliza Google Drive como almacenamiento y Node.js/Prisma en el backend para generar payloads JSON estructurados que disparan el deploy automatizado de frontends en Astro.",
+      "fullDescription_en": "Multi-tenant SaaS platform allowing artists to manage bilingual portfolios without coding. Uses Google Drive for storage and Node.js/Prisma backend to generate structured JSON payloads that trigger automated deployments of Astro frontends.",
+      "category": "own",
+      "status": "in-progress",
+      "images": [
+        "/img/projects/yezzfolio/hero.webp",
+        "/img/projects/yezzfolio/01-login.webp",
+        "/img/projects/yezzfolio/02-project-bd2d5f8e-5c8d-4a93-96d6-7f7e9c978f5c.webp"
+      ],
+      "techs": [
+        "Node.js",
+        "Express",
+        "TypeScript",
+        "PostgreSQL",
+        "Prisma",
+        "React",
+        "Google Drive API"
+      ],
+      "tools": [
+        "VS Code",
+        "Insomnia",
+        "Git"
+      ],
+      "demo": "",
+      "code": "https://github.com/JessZB/yezzfolio",
+      "color": "highlight",
+      "timeWorked_es": "En desarrollo",
+      "timeWorked_en": "In development",
+      "featured": true,
+      "problemsSolved_es": "Los artistas y creativos necesitan un portafolio online profesional pero carecen de skills técnicas para montarlo y mantenerlo. Las soluciones existentes obligan a lidiar con HTML, hosting y SEO. Además, los archivos multimedia pesados (modelos 3D, texturas) requieren almacenamiento costoso que Yezzfolio resuelve con Google Drive como backend gratuito.",
+      "problemsSolved_en": "Artists and creatives need a professional online portfolio but lack the technical skills to build and maintain one. Existing solutions force them to deal with HTML, hosting, and SEO. Additionally, heavy media files (3D models, textures) require expensive storage — Yezzfolio solves this with Google Drive as a free backend.",
+      "keyFeatures_es": [
+        "Autenticación con Google OAuth 2.0 + JWT (7 días de expiración)",
+        "Proxy público de Google Drive con resolución automática de ownership y caché de 1 año",
+        "Publicación con un clic: genera 4 archivos JSON por idioma y dispara deploy del frontend Astro",
+        "Admin UI en React 19 + Material UI 9 con drag & drop de secciones y assets",
+        "Aislamiento multi-tenant: cada artista solo ve y gestiona su propio contenido",
+        "Validación de entrada con Zod y sanitización HTML automática en todos los textos"
+      ],
+      "keyFeatures_en": [
+        "Google OAuth 2.0 + JWT authentication (7-day expiration)",
+        "Public Google Drive proxy with automatic ownership resolution and 1-year cache",
+        "One-click publishing: generates 4 language JSON files and triggers Astro frontend deploy",
+        "React 19 + Material UI 9 admin panel with drag & drop sections and assets",
+        "Multi-tenant isolation: each artist only sees and manages their own content",
+        "Zod input validation and automatic HTML sanitization on all text fields"
+      ],
+      "architecture_es": "API REST en Express 5 + TypeScript con arquitectura modular (auth, profile, projects, drive, generator, users). PostgreSQL vía Prisma 7 ORM con campos bilingües en JSONB. Google Drive API v3 como almacenamiento de archivos. Sistema de exportación que construye payloads JSON compatibles con Astro SSG. Controller-Service separation estricta: controllers thin wrappers, services con toda la lógica.",
+      "architecture_en": "REST API on Express 5 + TypeScript with modular architecture (auth, profile, projects, drive, generator, users). PostgreSQL via Prisma 7 ORM with bilingual JSONB fields. Google Drive API v3 for file storage. Export system building JSON payloads compatible with Astro SSG. Strict Controller-Service separation: thin controllers, services with all business logic."
+    },
+    {
+      "slug": "gideapp",
+      "title": "GIDE App",
+      "description_es": "Aplicación web para la Gestión de Información del Departamento de Epidemiología de salud pública.",
+      "description_en": "Web application for the Information Management of the Epidemiology Department in public health.",
+      "fullDescription_es": "Sistema integral desarrollado en React y Node.js para registrar pacientes, administrar inventarios de vacunas y registrar resultados de exámenes (VIH, VDRL, Dengue). Incluye un dashboard con estadísticas en tiempo real y módulo de respaldos de base de datos protegidos por roles.",
+      "fullDescription_en": "Comprehensive system built with React and Node.js to register patients, manage vaccine inventories, and log lab test results (HIV, VDRL, Dengue). Includes a real-time statistics dashboard and a role-protected database backup module.",
+      "category": "own",
+      "status": "completed",
+      "images": [
+        "/img/projects/gideapp/hero.webp",
+        "/img/projects/gideapp/01-login.webp",
+        "/img/projects/gideapp/02-login.webp",
+        "/img/projects/gideapp/03-login.webp"
+      ],
+      "techs": [
+        "React",
+        "Node.js",
+        "Express",
+        "MySQL",
+        "Tailwind CSS",
+        "Zustand"
+      ],
+      "tools": [
+        "VS Code",
+        "Git",
+        "Insomnia"
+      ],
+      "demo": "",
+      "code": "",
+      "color": "secondary",
+      "timeWorked_es": "Renovado (2024)",
+      "timeWorked_en": "Renewed (2024)",
+      "featured": true,
+      "problemsSolved_es": "Los departamentos de epidemiología necesitan registrar pacientes, gestionar inventarios de vacunas con control de stock, documentar resultados de exámenes de laboratorio (dengue, VIH, VDRL, hepatitis) y visualizar KPIs en tiempo real. La alternativa son planillas y sistemas fragmentados sin trazabilidad ni control de acceso por roles.",
+      "problemsSolved_en": "Epidemiology departments need to register patients, manage vaccine inventories with stock control, document lab test results (dengue, HIV, VDRL, hepatitis), and visualize real-time KPIs. The alternative is spreadsheets and fragmented systems with no traceability or role-based access control.",
+      "keyFeatures_es": [
+        "Dashboard con KPIs: total pacientes, exámenes, vacunas aplicadas y gráficos de cobertura",
+        "Registro de pacientes con distinción automática adultos/pediátricos (≤10 años requiere tutor)",
+        "Sistema de vacunación con esquema de dosis, fechas y programación de próximas aplicaciones",
+        "Control de inventario con trazabilidad completa: ingresos, egresos (protegidos por triggers) y ajustes",
+        "Módulo de exámenes de laboratorio: dengue, VIH, VDRL y hepatitis con resultados estructurados",
+        "Respaldos y restauración de base de datos desde la interfaz con registro de responsable"
+      ],
+      "keyFeatures_en": [
+        "KPI dashboard: total patients, exams, applied vaccines, and coverage charts",
+        "Patient registration with automatic adult/pediatric distinction (≤10 years requires guardian)",
+        "Vaccination system with dose schedule, dates, and next-dose programming",
+        "Inventory control with full traceability: inputs, outputs (trigger-protected), and adjustments",
+        "Lab test module: dengue, HIV, VDRL, and hepatitis with structured results",
+        "Database backup and restore from the UI with responsible person logging"
+      ],
+      "architecture_es": "Monorepo con npm workspaces: cliente React 19 + Vite + Tailwind CSS + Zustand + Radix UI + Chart.js, servidor Express + mysql2 + express-session + bcryptjs. Base de datos MySQL/MariaDB. Tres roles de acceso: Administrador (total), Usuario (gestión sin backups), Solo lectura (consulta). Testing con Vitest y Playwright E2E.",
+      "architecture_en": "Monorepo with npm workspaces: React 19 + Vite + Tailwind CSS + Zustand + Radix UI + Chart.js client, Express + mysql2 + express-session + bcryptjs server. MySQL/MariaDB database. Three access roles: Administrator (full), User (management without backups), Read-only (query). Testing with Vitest and Playwright E2E."
+    },
+    {
+      "slug": "sigob",
+      "title": "SIGOB Ecosystem",
+      "description_es": "Ecosistema de gestión fiscal gubernamental para el Estado Amazonas que digitaliza presupuestos, nóminas y autoservicio.",
+      "description_en": "Government fiscal management ecosystem for the Amazonas State that digitizes budgets, payrolls, and self-service.",
+      "fullDescription_es": "Conjunto de 3 sistemas interconectados (Core, Entes, Web) en PHP y MariaDB que maneja más de 60 entes descentralizados y 1360 empleados. Implementa reglas de la Ley de Presupuesto, control de dozavos y generación masiva de recibos y TXT bancarios con trazabilidad transaccional.",
+      "fullDescription_en": "Suite of 3 interconnected systems (Core, Entities, Web) built with PHP and MariaDB managing over 60 decentralized entities and 1360 employees. Implements Budget Law rules, fund fraction control, and mass generation of receipts and bank TXT files with transactional traceability.",
+      "category": "collab",
+      "status": "completed",
+      "images": [
+        "/img/projects/sigob/hero.webp",
+        "/img/projects/sigob/01-sigob-front-mod-pl-formulacion-form-distribucion-presupuestaria-vista.webp",
+        "/img/projects/sigob/02-sigob-front-mod-pl-formulacion-index.webp",
+        "/img/projects/sigob/03-sigobweb.webp",
+        "/img/projects/sigob/04-sigobweb-register.webp"
+      ],
+      "techs": [
+        "Vanilla PHP",
+        "JavaScript",
+        "MariaDB",
+        "Bootstrap",
+        "amCharts"
+      ],
+      "tools": [
+        "VS Code",
+        "Git"
+      ],
+      "demo": "https://sigob.net",
+      "code": "",
+      "color": "primary",
+      "timeWorked_es": "9 meses",
+      "timeWorked_en": "9 months",
+      "featured": true,
+      "problemsSolved_es": "La Gobernación del Estado Amazonas gestionaba presupuesto para 60+ entes descentralizados y nómina para ~1.360 empleados con planillas en papel, carpetas físicas y cartas mecanografiadas. Cero trazabilidad entre lo presupuestado y lo ejecutado. Los empleados debían viajar horas hasta Puerto Ayacucho solo para retirar un documento oficial.",
+      "problemsSolved_en": "The Amazonas State Government managed budgets for 60+ decentralized entities and payroll for ~1,360 employees using paper forms, physical folders, and typewritten letters. Zero traceability between budgeted and executed amounts. Employees had to travel hours to Puerto Ayacucho just to retrieve an official document.",
+      "keyFeatures_es": [
+        "Formulación presupuestaria: ejercicio fiscal, distribución por sectores/programas, plan operativo y metas",
+        "Ejecución presupuestaria con control de dozavos, compromisos, gastos, traspasos y dashboard amCharts",
+        "Nómina con ~89 archivos de lógica, conceptos configurables, CESTATICKET y 5 formatos bancarios",
+        "SIGOB Entes: portal para 60+ entes descentralizados con solicitudes, asignaciones, plan operativo y API REST",
+        "SIGOB Web: portal público de autoservicio 24/7 con constancia de trabajo, neto de pago y ARC en PDF",
+        "Registro y control con flujo de aprobación de solicitudes de modificación presupuestaria"
+      ],
+      "keyFeatures_en": [
+        "Budget formulation: fiscal year, sector/program distribution, operational plan and goals",
+        "Budget execution with fund fraction control, commitments, expenses, transfers, and amCharts dashboard",
+        "Payroll with ~89 logic files, configurable concepts, CESTATICKET, and 5 bank formats",
+        "SIGOB Entes: portal for 60+ decentralized entities with requests, allocations, operational plan, and REST API",
+        "SIGOB Web: public 24/7 self-service portal with employment certificate, pay stub, and annual summary in PDF",
+        "Registration and control with budget modification request approval workflow"
+      ],
+      "architecture_es": "Tres sistemas PHP vanilla interconectados compartiendo base de datos MariaDB. SIGOB Core (200+ archivos PHP, 135 JS, 73 tablas, 8 módulos) es la columna vertebral. SIGOB Entes (~95 PHP, 20+ tablas) consume API REST del core. SIGOB Web (~45 archivos, 6 tablas) es el portal público con registro autogestionado y reCAPTCHA. MVC propio sin framework, permisos granulares por menú, auditoría completa.",
+      "architecture_en": "Three interconnected vanilla PHP systems sharing a MariaDB database. SIGOB Core (200+ PHP files, 135 JS, 73 tables, 8 modules) is the backbone. SIGOB Entes (~95 PHP, 20+ tables) consumes Core REST API. SIGOB Web (~45 files, 6 tables) is the public portal with self-registration and reCAPTCHA. Custom MVC without framework, granular menu-based permissions, complete auditing."
+    },
+    {
+      "slug": "sisupp",
+      "title": "SISUPP",
+      "description_es": "ERP web para la gestión integral de fincas pecuarias, incluyendo trazabilidad animal e inventarios.",
+      "description_en": "Web ERP for comprehensive management of livestock farms, including animal traceability and inventories.",
+      "fullDescription_es": "Sistema de Información y Seguimiento de Unidades de Producción Pecuaria (Gobernación de Amazonas). Automatiza el control de animales (genealogía, salud, peso), reproducción y alimentación utilizando una arquitectura MVC propia en PHP con notificaciones push y auditoría profunda.",
+      "fullDescription_en": "Livestock Production Information and Tracking System. Automates animal control (genealogy, health, weight), reproduction, and feeding using a custom MVC architecture in PHP with push notifications and deep auditing.",
+      "category": "collab",
+      "status": "completed",
+      "images": [
+        "/img/projects/sisupp/hero.webp",
+        "/img/projects/sisupp/01-erp-sisupp-acontecimientos-crear.webp",
+        "/img/projects/sisupp/02-erp-sisupp-acontecimientos.webp",
+        "/img/projects/sisupp/03-erp-sisupp-agenda-reproductiva.webp",
+        "/img/projects/sisupp/04-erp-sisupp-agenda-reproductiva.webp",
+        "/img/projects/sisupp/05-erp-sisupp-animales-gestacion.webp",
+        "/img/projects/sisupp/06-erp-sisupp-animales-gestacion.webp",
+        "/img/projects/sisupp/07-erp-sisupp-animales-gestacion.webp",
+        "/img/projects/sisupp/08-erp-sisupp-animales.webp",
+        "/img/projects/sisupp/09-erp-sisupp-configuraciones.webp",
+        "/img/projects/sisupp/10-erp-sisupp-dashboard.webp",
+        "/img/projects/sisupp/11-erp-sisupp-infraestructura.webp",
+        "/img/projects/sisupp/12-erp-sisupp-montas.webp",
+        "/img/projects/sisupp/13-erp-sisupp-montas.webp",
+        "/img/projects/sisupp/14-erp-sisupp-reportes-usuario.webp",
+        "/img/projects/sisupp/15-erp-sisupp-sesiones.webp"
+      ],
+      "techs": [
+        "Vanilla PHP",
+        "MySQL",
+        "JavaScript",
+        "Bootstrap"
+      ],
+      "tools": [
+        "VS Code",
+        "Git"
+      ],
+      "demo": "",
+      "code": "",
+      "color": "accent",
+      "timeWorked_es": "2 meses",
+      "timeWorked_en": "2 months",
+      "featured": true,
+      "problemsSolved_es": "La administración ganadera con planillas y cuadernos genera tres problemas críticos: trazabilidad animal perdida (no se sabe de dónde viene un animal ni su historial), decisiones a ciegas por falta de datos consolidados, y procesos manuales que consumen horas (registrar montas, partos, consumo de alimento).",
+      "problemsSolved_en": "Livestock management with paper and notebooks creates three critical problems: lost animal traceability (unknown origin and history), blind decisions due to lack of consolidated data, and time-consuming manual processes (recording matings, births, feed consumption).",
+      "keyFeatures_es": [
+        "Genealogía animal con árbol genealógico de hasta 6 generaciones y verificación de consanguinidad",
+        "Control reproductivo completo: montas, gestación, partos y camadas con detección automática de cruces",
+        "Salud y sanidad: historial clínico, vacunación, desparasitación, tratamientos e incidencias",
+        "Alimentación con inventario, planes por ubicación y registro de consumo automático vía cron",
+        "Dashboard con KPIs en tiempo real: población, etapa productiva, consumo y gráficos ApexCharts",
+        "Auditoría y soft delete universal: cada registro con created_at/by, updated_at/by, deleted_at/by"
+      ],
+      "keyFeatures_en": [
+        "Animal genealogy with family tree up to 6 generations and automatic inbreeding verification",
+        "Complete reproductive control: matings, gestation, births, and litters with automatic cross detection",
+        "Health and sanitation: clinical history, vaccination, deworming, treatments, and incidents",
+        "Feeding with inventory, location-based plans, and automatic cron-based consumption recording",
+        "Real-time KPI dashboard: population, productive stage, consumption, and ApexCharts graphs",
+        "Universal auditing and soft delete: every record with created_at/by, updated_at/by, deleted_at/by"
+      ],
+      "architecture_es": "MVC artesanal en PHP 7.4 sin framework — 100% código propio. MySQL/MariaDB con UUID v4 como PK en todas las tablas. Router propio con regex, grupos con prefijo/middleware y parámetros dinámicos. Singleton mysqli para conexión a BD. Frontend con Bootstrap 5, JavaScript vanilla, ApexCharts, Select2 y Font Awesome 6. PHPMailer para correo, Web-Push para notificaciones, GeoIP2 para geolocalización.",
+      "architecture_en": "Handcrafted MVC in PHP 7.4 without framework — 100% custom code. MySQL/MariaDB with UUID v4 as PK on all tables. Custom regex-based router with groups, prefix/middleware, and dynamic parameters. Singleton mysqli for DB connection. Frontend with Bootstrap 5, vanilla JavaScript, ApexCharts, Select2, and Font Awesome 6. PHPMailer for email, Web-Push for notifications, GeoIP2 for geolocation."
+    },
+    {
+      "slug": "vitakee",
+      "title": "Vitakee Platform",
+      "description_es": "Ecosistema médico web para telemedicina y segunda opinión con integraciones de OpenAI y Google Meet.",
+      "description_en": "Medical web ecosystem for telemedicine and second opinions with OpenAI and Google Meet integrations.",
+      "fullDescription_es": "Plataforma de salud conformada por dos aplicaciones (Portal de Usuarios y Admin) que comparten base de datos. Los especialistas pueden agendar videollamadas, los usuarios registran biomarcadores y el sistema utiliza GPT-4o para análisis de datos y asistencia en chatbots.",
+      "fullDescription_en": "Healthcare platform consisting of two applications (User Portal and Admin) sharing a single database. Specialists can schedule video calls, users log biomarkers, and the system leverages GPT-4o for data analysis and chatbot assistance.",
+      "category": "collab",
+      "status": "completed",
+      "images": [
+        "/img/projects/vitakee/hero.webp",
+        "/img/projects/vitakee/01-vitakee-users-component-body-composition-id=b770c5de-88ad-455e-b451-d58b2e19cbd6.webp",
+        "/img/projects/vitakee/02-vitakee-users-dashboard.webp",
+        "/img/projects/vitakee/03-vitakee-users-dashboard-specialist-lang=es.webp",
+        "/img/projects/vitakee/04-vitakee-users-dashboard.webp",
+        "/img/projects/vitakee/05-vitakee-users-expert-review.webp",
+        "/img/projects/vitakee/06-vitakee-users-my-profile.webp",
+        "/img/projects/vitakee/07-vitakee-users-my-profile.webp",
+        "/img/projects/vitakee/08-vitakee-users-service-requests.webp",
+        "/img/projects/vitakee/09-vitakee-users-user-request-panel.webp",
+        "/img/projects/vitakee/10-vitakee-users-user.webp"
+      ],
+      "techs": [
+        "Vanilla PHP",
+        "MariaDB",
+        "JavaScript",
+        "OpenAI API",
+        "Google Calendar API"
+      ],
+      "tools": [
+        "Opencode",
+        "Git"
+      ],
+      "demo": "",
+      "code": "",
+      "color": "highlight",
+      "timeWorked_es": "Más de 10 meses",
+      "timeWorked_en": "More than 10 months",
+      "featured": true,
+      "problemsSolved_es": "Pacientes sin acceso a segundas opiniones médicas especializadas. Profesionales de la salud sin plataforma unificada para telemedicina con videollamadas, análisis de biomarcadores y asistencia de IA. Sistemas de salud fragmentados sin canal digital entre médico y paciente.",
+      "problemsSolved_en": "Patients without access to specialized medical second opinions. Healthcare professionals without a unified platform for telemedicine with video calls, biomarker analysis, and AI assistance. Fragmented health systems without a digital channel between doctor and patient.",
+      "keyFeatures_es": [
+        "Videollamadas médico-paciente con Google Calendar + Google Meet integrados",
+        "Registro de biomarcadores por el paciente con visualización de tendencias",
+        "Chatbot médico con GPT-4o entrenado con prompts clínicos para orientación al paciente",
+        "Sistema de notificaciones push en tiempo real entre ambos portales",
+        "Dashboard administrativo con KPIs, gestión de especialistas y analíticas de uso",
+        "Arquitectura de dos aplicaciones independientes (Users + Admin) sobre base de datos compartida"
+      ],
+      "keyFeatures_en": [
+        "Doctor-patient video calls with integrated Google Calendar + Google Meet",
+        "Patient biomarker logging with trend visualization",
+        "Medical chatbot powered by GPT-4o with clinical prompts for patient guidance",
+        "Real-time push notification system between both portals",
+        "Admin dashboard with KPIs, specialist management, and usage analytics",
+        "Two-application architecture (Users + Admin) on a shared database"
+      ],
+      "architecture_es": "Dos aplicaciones PHP independientes (vitakee-users: 40+ controladores, ~30 modelos; vitakee-admin: 30+ controladores, ~25 modelos) compartiendo base de datos MariaDB 11.x. Core framework MVC duplicado manualmente (Router, ViewRenderer, Database singleton, AuthMiddleware). Integraciones externas: OpenAI GPT-4o, Google Calendar/Meet API, MEGA Storage. Frontend con Bootstrap 5 + JavaScript vanilla.",
+      "architecture_en": "Two independent PHP applications (vitakee-users: 40+ controllers, ~30 models; vitakee-admin: 30+ controllers, ~25 models) sharing a MariaDB 11.x database. Manually duplicated MVC core framework (Router, ViewRenderer, Database singleton, AuthMiddleware). External integrations: OpenAI GPT-4o, Google Calendar/Meet API, MEGA Storage. Bootstrap 5 + vanilla JavaScript frontend."
+    },
+    {
+      "slug": "evolve",
+      "title": "EVOLVE Logistics",
+      "description_es": "Sistema de gestión logística y de inventario de contenedores para transporte terrestre con seguimiento GPS.",
+      "description_en": "Container inventory and logistics management system for ground transport with GPS tracking.",
+      "fullDescription_es": "Solución Full-Stack para compañías navieras. Rastrea contenedores, asigna choferes a órdenes de trabajo y permite flujos móviles donde el conductor marca hitos con GPS. Utiliza triggers de MySQL para auditoría inmutable de cada cambio.",
+      "fullDescription_en": "Full-Stack solution for shipping companies. Tracks containers, assigns drivers to work orders, and features mobile workflows where drivers hit GPS milestones. Uses MySQL triggers for an immutable audit trail of every change.",
+      "category": "collab",
+      "status": "completed",
+      "images": [
+        "/img/projects/evolve/hero.webp",
+        "/img/projects/evolve/01-evolve-drivers-dashboard.webp",
+        "/img/projects/evolve/02-evolve-home.webp",
+        "/img/projects/evolve/03-evolve-home.webp",
+        "/img/projects/evolve/04-evolve-home.webp",
+        "/img/projects/evolve/05-evolve-inventory.webp",
+        "/img/projects/evolve/06-evolve-orders.webp",
+        "/img/projects/evolve/07-evolve-orders.webp",
+        "/img/projects/evolve/08-evolve-orders.webp"
+      ],
+      "techs": [
+        "Vanilla PHP",
+        "MySQL",
+        "JavaScript"
+      ],
+      "tools": [
+        "VS Code",
+        "Git"
+      ],
+      "demo": "",
+      "code": "",
+      "color": "secondary",
+      "timeWorked_es": "Varios meses",
+      "timeWorked_en": "Several months",
+      "featured": true,
+      "problemsSolved_es": "Coordinadores logísticos gestionando contenedores con planillas y llamadas telefónicas. Sin visibilidad en tiempo real del estado de órdenes de trabajo. Choferes sin herramienta móvil para confirmar hitos de transporte. Sin auditoría inmutable de operaciones. Sistema bilingüe obligatorio por operación internacional.",
+      "problemsSolved_en": "Logistics coordinators managing containers with spreadsheets and phone calls. No real-time visibility of work order status. Drivers without a mobile tool to confirm transport milestones. No immutable audit trail of operations. Bilingual system required for international operation.",
+      "keyFeatures_es": [
+        "Work Order Lifecycle: máquina de estados completa (draft → scheduled → in_progress → completed/cancelled)",
+        "Flujo móvil para choferes con GPS: confirman llegada, salida, almacenaje, recogida y entrega",
+        "Inventario de contenedores: schema de 28 columnas con ISO codes, dimensiones, CSC y geo-localización",
+        "48 triggers MySQL que capturan snapshots JSON de cada fila modificada con contexto GeoIP del cliente",
+        "Interfaz bilingüe EN/ES con 2,000+ claves de traducción y reportes PDF con TCPDF",
+        "Seguridad de sesión: 4 roles, brute-force protection (3 intentos → 60s lockout), kick/ban de admin"
+      ],
+      "keyFeatures_en": [
+        "Work Order Lifecycle: complete state machine (draft → scheduled → in_progress → completed/cancelled)",
+        "Mobile driver workflow with GPS: confirm arrival, departure, storage, pickup, and delivery",
+        "Container inventory: 28-column schema with ISO codes, dimensions, CSC, and geo-location",
+        "48 MySQL triggers capturing JSON row snapshots on every write with GeoIP client context",
+        "Bilingual EN/ES interface with 2,000+ translation keys and TCPDF PDF reports",
+        "Session security: 4 roles, brute-force protection (3 attempts → 60s lockout), admin kick/ban"
+      ],
+      "architecture_es": "MVC propio en PHP 8+ sin framework. 19 controladores, 17 modelos, 19 servicios. Router con regex y sistema de grupos con herencia de prefijos. MySQL con UUID PKs, soft deletes universales (`deleted_at`) y triggers de auditoría en 48 operaciones. Contactos polimórficos (emails/teléfonos con entity_type ENUM). Notificaciones por template_key + JSON params renderizadas en tiempo de lectura con i18n. PDF bilingües con mapeo de enums a labels localizados.",
+      "architecture_en": "Custom MVC in PHP 8+ without framework. 19 controllers, 17 models, 19 services. Regex-based router with group system and prefix inheritance. MySQL with UUID PKs, universal soft deletes (`deleted_at`), and audit triggers on 48 operations. Polymorphic contacts (emails/phones with entity_type ENUM). Template-based notifications with template_key + JSON params rendered at read-time with i18n. Bilingual PDFs with enum-to-localized-label mapping."
+    },
+    {
+      "slug": "condominio-app",
+      "title": "Condominio App",
+      "description_es": "Plataforma de gestión residencial con control de pagos multidivisa (BS/USD) y scraping de la tasa BCV.",
+      "description_en": "Residential management platform with multi-currency payment control (BS/USD) and BCV rate scraping.",
+      "fullDescription_es": "Sistema en Laravel 8 para administrar condominios en Venezuela. Maneja el registro de residentes, reservas de áreas comunes, control de visitas por vigilancia y facturación en dos monedas mediante scraping diario del Banco Central.",
+      "fullDescription_en": "Laravel 8 system to manage condominiums in Venezuela. Handles resident registration, common area reservations, guard visitor tracking, and dual-currency billing using daily scraping of the Central Bank.",
+      "category": "collab",
+      "status": "completed",
+      "images": [
+        "/img/projects/condominio-app/hero.webp",
+        "/img/projects/condominio-app/01-areas-incidencias-vista.webp",
+        "/img/projects/condominio-app/02-recibos-deudas.webp",
+        "/img/projects/condominio-app/03-sistema-perfil.webp"
+      ],
+      "techs": [
+        "PHP",
+        "Laravel",
+        "MySQL",
+        "JavaScript",
+        "Bootstrap"
+      ],
+      "tools": [
+        "VS Code",
+        "Git"
+      ],
+      "demo": "",
+      "code": "https://github.com/JessZB/condominio-app",
+      "color": "primary",
+      "timeWorked_es": "Varios meses",
+      "timeWorked_en": "Several months",
+      "featured": false,
+      "problemsSolved_es": "La administración de condominios en Venezuela es particularmente compleja por la volatilidad cambiaria: los pagos se manejan en bolívares y dólares simultáneamente, con necesidad de convertir montos a tasa oficial del BCV. Además, los condominios requieren control de visitas con vigilante 24/7, reserva de áreas comunes, y comunicación interna — todo disperso en planillas y grupos de WhatsApp.",
+      "problemsSolved_en": "Condominium management in Venezuela is particularly complex due to currency volatility: payments are handled in bolivars and dollars simultaneously, requiring conversion at the official BCV rate. Additionally, condominiums need 24/7 guard visitor control, common area reservations, and internal communication — all scattered across spreadsheets and WhatsApp groups.",
+      "keyFeatures_es": [
+        "Pagos multidivisa (BS y USD) con scraping automático de la tasa de cambio del BCV vía Guzzle",
+        "Generación de recibos de pago en PDF con DomPDF y reportes financieros con análisis de deudas",
+        "Sistema de reservas de áreas comunes (salón de fiestas, piscina, gimnasio) con alertas de proximidad",
+        "Control de visitas y entregas con registro de entrada/salida, búsqueda avanzada y rol de vigilante dedicado",
+        "Portal de comunicados internos con publicación segmentada por tipo de usuario",
+        "4 niveles de acceso: Super Admin, Admin Condominio, Residente y Vigilante, con respaldos de BD"
+      ],
+      "keyFeatures_en": [
+        "Multi-currency payments (VES and USD) with automatic BCV exchange rate scraping via Guzzle",
+        "PDF payment receipts with DomPDF and financial reports with debt aging analysis",
+        "Common area reservation system (party room, pool, gym) with proximity alerts",
+        "Visitor and delivery tracking with check-in/out, advanced search, and dedicated guard role",
+        "Internal bulletin portal with user-type segmented publishing",
+        "4 access levels: Super Admin, Condo Admin, Resident, and Guard, with database backups"
+      ],
+      "architecture_es": "Laravel 8 con arquitectura MVC. API REST con ~80 endpoints protegidos por autenticación custom basada en tokens de sesión. Frontend JavaScript vanilla organizado en módulos ES6 (api/, controllers/, components/, helpers/) sin dependencia de SPA frameworks. Bootstrap 4 + DataTables + Chart.js para UI. DomPDF para reportes PDF desde vistas Blade independientes. Scraping del BCV con Guzzle.",
+      "architecture_en": "Laravel 8 with MVC architecture. REST API with ~80 endpoints protected by custom session token authentication. Vanilla JavaScript frontend organized in ES6 modules (api/, controllers/, components/, helpers/) with no SPA framework dependency. Bootstrap 4 + DataTables + Chart.js for UI. DomPDF for PDF reports from independent Blade views. BCV scraping with Guzzle."
+    },
+    {
+      "slug": "matriculas-app",
+      "title": "Matrículas App",
+      "description_es": "Aplicación web académica para control de evaluaciones, calificaciones y carga docente.",
+      "description_en": "Academic web application for grading, evaluations, and teaching load control.",
+      "fullDescription_es": "Administrador escolar que digitaliza el ciclo completo: desde profesores y materias hasta el registro final de notas trimestrales. Incluye control de sesiones PHP y arquitectura JS vanilla mediante ES modules.",
+      "fullDescription_en": "School administrator that digitizes the complete cycle: from teachers and subjects to final quarterly grades. Includes PHP session control and vanilla JS architecture via ES modules.",
+      "category": "collab",
+      "status": "completed",
+      "images": [
+        "/img/projects/matriculas-app/hero.webp",
+        "/img/projects/matriculas-app/01-matriculas-app-views-inicio.php.webp"
+      ],
+      "techs": [
+        "Vanilla PHP",
+        "MySQL",
+        "JavaScript",
+        "Bootstrap"
+      ],
+      "tools": [
+        "VS Code",
+        "Git"
+      ],
+      "demo": "",
+      "code": "",
+      "color": "accent",
+      "timeWorked_es": "Varios meses",
+      "timeWorked_en": "Several months",
+      "featured": false,
+      "problemsSolved_es": "Muchas instituciones educativas todavía gestionan el ciclo escolar completo con planillas y sistemas fragmentados. Desde registrar estudiantes y profesores hasta cargar calificaciones trimestrales, la falta de un sistema centralizado genera pérdida de trazabilidad, errores de transcripción y demoras en la entrega de notas.",
+      "problemsSolved_en": "Many educational institutions still manage the complete school cycle with spreadsheets and fragmented systems. From registering students and teachers to entering quarterly grades, the lack of a centralized system causes loss of traceability, transcription errors, and delays in grade delivery.",
+      "keyFeatures_es": [
+        "CRUD de personas, materias, cursos y períodos académicos con fechas de inicio/fin",
+        "Sistema de evaluaciones y calificaciones vinculadas a cursos con carga por estudiante",
+        "Sidebar dinámico que se adapta al rol del usuario autenticado (Admin, Profesor, Estudiante)",
+        "Autenticación con PHP Sessions + token en localStorage, recuperación por preguntas de seguridad",
+        "Respaldos y restauración de base de datos desde la interfaz administrativa",
+        "Interfaz con Bootstrap 5, DataTables (búsqueda/orden/paginación) y SweetAlert2 para notificaciones"
+      ],
+      "keyFeatures_en": [
+        "CRUD for people, subjects, courses, and academic periods with start/end dates",
+        "Evaluation and grading system linked to courses with per-student grade entry",
+        "Dynamic sidebar adapting to authenticated user role (Admin, Teacher, Student)",
+        "Authentication with PHP Sessions + localStorage token, password recovery via security questions",
+        "Database backup and restore from the admin interface",
+        "UI with Bootstrap 5, DataTables (search/sort/pagination), and SweetAlert2 notifications"
+      ],
+      "architecture_es": "PHP 7.4 vanilla con endpoints por módulo (back/*.php) usando patrón de acciones vía JSON {accion, ...}. Frontend JavaScript vanilla con ES Modules: controladores por vista, capa de API centralizada (urlConfig.js), helpers para loader/toasts/validaciones. MariaDB con prepared statements mysqli en todas las consultas. Autenticación dual: sesión PHP para vistas + token Bearer para API. Bootstrap 5, DataTables, Boxicons.",
+      "architecture_en": "Vanilla PHP 7.4 with per-module endpoints (back/*.php) using JSON action pattern {action, ...}. Vanilla JavaScript frontend with ES Modules: per-view controllers, centralized API layer (urlConfig.js), helpers for loader/toasts/validations. MariaDB with mysqli prepared statements on all queries. Dual authentication: PHP session for views + Bearer token for API. Bootstrap 5, DataTables, Boxicons."
+    },
+    {
+      "slug": "littlepigman-portafolio",
+      "title": "LittlePigman Portafolio",
+      "description_es": "Portafolio interactivo estilo OS retro para artistas pixel art y 3D, con visor 3D integrado y gestión de contenido vía Yezzfolio CMS.",
+      "description_en": "Interactive retro-OS-style portfolio for pixel art and 3D artists, with integrated 3D viewer and content management via Yezzfolio CMS.",
+      "fullDescription_es": "Interfaz de dispositivo personal retro-futurista (estilo GBA/JRPG de 16 bits) que reemplaza el portafolio clásico de scroll infinito. Tres vistas (Perfil, Directorio, Comms) con estadísticas RPG, galerías de assets, modelos 3D interactivos y formulario de contacto. Consumo de datos desde Yezzfolio CMS vía JSON estático. Astro SSG con Three.js.",
+      "fullDescription_en": "Retro-futuristic personal device interface (GBA/JRPG 16-bit style) replacing classic infinite-scroll portfolios. Three views (Profile, Directory, Comms) with RPG stats, asset galleries, interactive 3D models, and contact form. Data from Yezzfolio CMS via static JSON. Astro SSG with Three.js.",
+      "category": "own",
+      "status": "in-progress",
+      "images": [
+        "/img/projects/littlepigman-portafolio/hero.webp",
+        "/img/projects/littlepigman-portafolio/01-es.webp"
+      ],
+      "techs": [
+        "Astro 5",
+        "TypeScript",
+        "Tailwind CSS",
+        "Three.js",
+        "Vanilla JS"
+      ],
+      "tools": [
+        "VS Code",
+        "Git"
+      ],
+      "demo": "",
+      "code": "",
+      "color": "secondary",
+      "timeWorked_es": "En desarrollo",
+      "timeWorked_en": "In development",
+      "featured": true,
+      "problemsSolved_es": "Los artistas de pixel art y 3D necesitan un portafolio que muestre trabajo complejo (modelos 3D, sprites, texturas), no solo thumbnails. Las soluciones clásicas son scroll infinito genérico. Además, los assets 3D pesados requieren almacenamiento costoso — este proyecto los sirve desde Google Drive vía Yezzfolio sin costo de ancho de banda.",
+      "problemsSolved_en": "Pixel art and 3D artists need a portfolio that showcases complex work (3D models, sprites, textures), not just thumbnails. Classic solutions are generic infinite scroll. Additionally, heavy 3D assets require expensive storage — this project serves them from Google Drive via Yezzfolio at zero bandwidth cost.",
+      "keyFeatures_es": [
+        "Interfaz retro-futurista estilo Game Boy Advance con 3 vistas (Perfil, Directorio, Comms) sin recargas",
+        "Visor 3D interactivo con Three.js: wireframes procedurales y modelos GLTF texturizados",
+        "Estadísticas del artista en formato RPG (barras de XP, skills) con fuente pixel VT323",
+        "Sistema bilingüe ES/EN nativo con rutas /es/ y /en/ y contenido de proyectos duplicado por idioma",
+        "100% estático (Astro SSG): hosting gratis en cualquier CDN, cero backend en runtime",
+        "Consume datos de Yezzfolio CMS vía JSON estáticos — el artista publica sin tocar código"
+      ],
+      "keyFeatures_en": [
+        "Retro-futuristic Game Boy Advance-style interface with 3 views (Profile, Directory, Comms) and zero reloads",
+        "Interactive 3D viewer with Three.js: procedural wireframes and textured GLTF models",
+        "RPG-style artist stats (XP bars, skills) with VT323 pixel font",
+        "Native ES/EN bilingual system with /es/ and /en/ routes and per-language project content",
+        "100% static (Astro SSG): free hosting on any CDN, zero runtime backend",
+        "Consumes data from Yezzfolio CMS via static JSON — artist publishes without touching code"
+      ],
+      "architecture_es": "Frontend Astro 5 SSG con hidratación cero. TypeScript solo en build time, Vanilla JS en runtime. Tailwind CSS con tree-shaking automático. Three.js desde CDN para visor 3D (wireframes + GLTFLoader). Paleta Purple Synthwave con variables CSS. Fuente VT323 con image-rendering: pixelated. i18n con rutas /es/ y /en/ + redirect desde /. Componentes .astro puros: Sidebar, Panel, StatBar, ProjectCard, ThreeViewer + 3 vistas (ViewProfile, ViewDatabase, ViewComms).",
+      "architecture_en": "Astro 5 SSG frontend with zero hydration. TypeScript only at build time, Vanilla JS at runtime. Tailwind CSS with automatic tree-shaking. Three.js from CDN for 3D viewer (wireframes + GLTFLoader). Purple Synthwave palette with CSS variables. VT323 font with image-rendering: pixelated. i18n with /es/ and /en/ routes + redirect from /. Pure .astro components: Sidebar, Panel, StatBar, ProjectCard, ThreeViewer + 3 views (ViewProfile, ViewDatabase, ViewComms)."
+    }
+  ],
+  "experience": [
+    {
+      "period_es": "Junio 2023 - Abril 2026",
+      "period_en": "June 2023 - April 2026",
+      "role_es": "Analista de Sistemas IT",
+      "role_en": "IT Systems Analyst",
+      "company": "Forum Super Mayorista",
+      "location_es": "Ciudad Bolívar, Presencial",
+      "location_en": "Ciudad Bolívar, On-site",
+      "description_es": "Administración de infraestructura, mantenimiento de servidores y soporte a hardware fiscal y sistemas POS. Desarrollo de una plataforma de monitoreo interna en Node.js y MySQL que redujo significativamente los tiempos de diagnóstico de servicios.",
+      "description_en": "Infrastructure administration, server maintenance, and support for fiscal hardware and POS systems. Development of an internal monitoring platform using Node.js and MySQL that significantly reduced service diagnostic times.",
+      "techs": [
+        "Node.js",
+        "MySQL",
+        "Hardware Fiscal"
+      ],
+      "color": "primary"
+    },
+    {
+      "period_es": "Octubre 2025 - Noviembre 2025",
+      "period_en": "October 2025 - November 2025",
+      "role_es": "Tech Lead & Desarrollador Full-Stack",
+      "role_en": "Tech Lead & Full-Stack Developer",
+      "company": "Sisupp (Gobernación de Amazonas)",
+      "location_es": "Remoto",
+      "location_en": "Remote",
+      "description_es": "Liderazgo técnico y toma de decisiones arquitectónicas para la creación de un ERP especializado en la gestión ganadera. Colaboración estrecha con el equipo de desarrollo para garantizar la escalabilidad y eficiencia de la base de datos y la lógica de negocio.",
+      "description_en": "Technical leadership and architectural decision-making for the creation of an ERP specialized in livestock management. Close collaboration with the development team to ensure the scalability and efficiency of the database and business logic.",
+      "techs": [
+        "Vanilla PHP",
+        "JavaScript",
+        "MySQL",
+        "HTML/CSS"
+      ],
+      "color": "accent"
+    },
+    {
+      "period_es": "Mayo 2025 - Marzo 2026",
+      "period_en": "May 2025 - March 2026",
+      "role_es": "Ingeniero de Aplicaciones",
+      "role_en": "Applications Engineer",
+      "company": "SITI World",
+      "location_es": "Remoto",
+      "location_en": "Remote",
+      "description_es": "Participación activa en el desarrollo de diversos proyectos tecnológicos. Gestión de cuentas corporativas y administración de la infraestructura de sistemas de almacenamiento en la nube para optimizar los flujos de trabajo del equipo.",
+      "description_en": "Active participation in the development of various technological projects. Management of corporate accounts and administration of cloud storage infrastructure to optimize team workflows.",
+      "techs": [
+        "Vanilla PHP",
+        "JavaScript",
+        "MySQL"
+      ],
+      "color": "highlight"
+    },
+    {
+      "period_es": "Mayo 2024 - Enero 2025",
+      "period_en": "May 2024 - January 2025",
+      "role_es": "Desarrollador Full-Stack",
+      "role_en": "Full-Stack Developer",
+      "company": "Gobernación de Amazonas (Proyecto Sigob)",
+      "location_es": "Remoto",
+      "location_en": "Remote",
+      "description_es": "Gestión del desarrollo frontend y la integridad arquitectónica de sistemas ERP gubernamentales. Implementación de módulos críticos de nómina y presupuesto para entidades descentralizadas, gestionando operaciones para más de 2,000 empleados.",
+      "description_en": "Managed frontend development and architectural integrity for government ERP systems. Implemented critical payroll and budget modules for decentralized entities, managing operations for over 2,000 employees.",
+      "techs": [
+        "Vanilla PHP",
+        "JavaScript",
+        "MySQL",
+        "HTML/CSS"
+      ],
+      "color": "secondary"
+    }
+  ]
+}

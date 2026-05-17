@@ -2,6 +2,8 @@
 // Skills — merged with TechStack. No progress bars, grouped by category.
 // Uses data-i18n for i18n support.
 
+import identity from '../data/identity.json';
+
 interface SkillItem {
   name: string;
   icon?: string;
@@ -21,57 +23,36 @@ const categories: SkillCategory[] = [
     labelKey: 'skills.categories.frontend',
     color: 'primary',
     glow: 'shadow-glow-gold',
-    items: [
-      { name: 'React / Next.js' },
-      { name: 'TypeScript' },
-      { name: 'Astro' },
-      { name: 'Tailwind CSS' },
-      { name: 'HTML / CSS / JS' },
-      { name: 'GSAP' },
-    ],
+    items: identity.skills.frontend.map(name => ({ name })),
   },
   {
     key: 'backend',
     labelKey: 'skills.categories.backend',
     color: 'secondary',
     glow: 'shadow-glow-teal',
-    items: [
-      { name: 'Node.js / Express' },
-      { name: 'Python / FastAPI' },
-      { name: 'REST APIs' },
-      { name: 'GraphQL' },
-      { name: 'WebSockets' },
-      { name: 'JWT / Auth' },
-    ],
+    items: identity.skills.backend.map(name => ({ name })),
   },
   {
     key: 'databases',
     labelKey: 'skills.categories.databases',
     color: 'highlight',
     glow: 'shadow-glow-lavender',
-    items: [
-      { name: 'PostgreSQL' },
-      { name: 'MongoDB' },
-      { name: 'Redis' },
-      { name: 'Prisma ORM' },
-      { name: 'SQL Server' },
-      { name: 'Firebase' },
-    ],
+    items: identity.skills.databases.map(name => ({ name })),
   },
   {
     key: 'devops',
     labelKey: 'skills.categories.devops',
     color: 'accent',
     glow: 'shadow-glow-coral',
-    items: [
-      { name: 'Docker' },
-      { name: 'AWS' },
-      { name: 'GitHub Actions' },
-      { name: 'Linux / Shell' },
-      { name: 'Vercel / Netlify' },
-      { name: 'CI/CD' },
-    ],
+    items: identity.skills.devops.map(name => ({ name })),
   },
+  {
+    key: 'soft',
+    labelKey: 'skills.categories.soft',
+    color: 'primary',
+    glow: 'shadow-glow-gold',
+    items: identity.skills.soft.map(name => ({ name })),
+  }
 ];
 
 const colorMap: Record<string, { text: string; bg: string; border: string; chip: string }> = {

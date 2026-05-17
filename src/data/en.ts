@@ -1,19 +1,21 @@
-{
+import identity from './identity.json';
+
+export default {
   "site": {
     "name": "JESSZB.DEV",
     "tagline": "Code with Venezuelan flavor",
-    "description": "Portfolio of Jesús Zapata — Venezuelan Full-Stack Developer. Building applications layer by layer, with precision and seasoning."
+    "description": "Portfolio of Jesús Zapata — Venezuelan Full-Stack Developer. Building applications layer by layer, with precision and sazón."
   },
   "hero": {
     "greeting": "Hi, I'm",
-    "name": "Jesús Zapata",
-    "role": "Full-Stack Developer",
+    "name": identity.identity.name,
+    "role": identity.identity.role_en,
     "subtitle": {
-      "arepa": "> Building software layers, like a perfect arepa_",
+      "arepa": "> Building software layers, like a good arepa_",
       "coffee": "> Code that wakes you up, like the first coffee of the day_"
     },
     "cta1": "View Projects",
-    "cta2": "Contact",
+    "cta2": "Contact Me",
     "badge": "Available for projects",
     "scrollHint": "Keep reading"
   },
@@ -21,25 +23,25 @@
     "title": "About Me",
     "subtitle": "The story behind the code",
     "bio": {
-      "arepa": "Like a well-made arepa — golden on the outside, full of flavor inside — that's my approach to software. I'm a Venezuelan full-stack developer who builds applications layer by layer, with precision and seasoning.",
-      "coffee": "Like a good pour-over coffee — it takes time, technique, and passion to be perfect — that's how I build projects. Every line of code is intentional, every decision has purpose."
+      "arepa": identity.about.bio_arepa_en,
+      "coffee": identity.about.bio_coffee_en
     },
-    "bio2": "I specialize in creating modern web experiences, from robust backends to lovable interfaces. When I'm not coding, you'll find me exploring new technologies.",
+    "bio2": identity.about.bio2_en,
     "stats": {
       "years": "Years of experience",
-      "projects": "Projects completed",
+      "projects": "Completed projects",
       "arepas": {
         "arepa": "∞ Arepas",
         "coffee": "∞ Coffees"
       }
     },
-    "avatarAlt": "Anime avatar of Venezuelan developer"
+    "avatarAlt": "Venezuelan developer anime avatar"
   },
   "skills": {
     "title": "Skills",
     "subtitle": {
-      "arepa": "Technologies I've used to cook code",
-      "coffee": "The arsenal I use to brew great software"
+      "arepa": "Technologies I've cooked code with",
+      "coffee": "The arsenal I use to brew good software"
     },
     "categories": {
       "frontend": "Frontend",
@@ -53,20 +55,20 @@
   "tools": {
     "title": "Tools",
     "subtitle": {
-      "arepa": "The ninja arsenal of the arepero",
-      "coffee": "The barista's instruments for great code"
+      "arepa": "The arepero's ninja arsenal",
+      "coffee": "The code barista's instruments"
     }
   },
   "projects": {
     "title": "Projects",
     "subtitle": {
       "arepa": "What I've cooked",
-      "coffee": "What I've distilled"
+      "coffee": "What I've brewed"
     },
     "filters": {
       "all": "All",
-      "own": "Own Projects",
-      "collab": "Collaborations"
+      "own": "Personal",
+      "collab": "Collaborative"
     },
     "viewDetails": "View details",
     "demo": "Demo",
@@ -83,35 +85,38 @@
       "gallery": "Gallery",
       "otherProjects": "Other projects",
       "back": "← Back to projects",
-      "backHome": "Go to home"
+      "backHome": "Go to home",
+      "problemsSolved": "Problems Solved",
+      "keyFeatures": "Key Features",
+      "architecture": "Architecture"
     }
   },
   "timeline": {
     "title": "Experience",
-    "subtitle": "The road traveled",
+    "subtitle": "The path traveled",
     "present": "Present"
   },
   "contact": {
     "title": "Contact",
     "subtitle": "Let's talk?",
     "terminal": {
-      "arepa": "arepa@jesszb.dev",
-      "coffee": "coffee@jesszb.dev"
+      "arepa": identity.identity.email,
+      "coffee": identity.identity.email
     },
     "init": {
-      "arepa": "start_contact.sh",
+      "arepa": "init_contact.sh",
       "coffee": "brew_contact.sh"
     },
     "initMessage": {
       "arepa": "Initializing communication protocol...",
-      "coffee": "Preparing the connection... ☕"
+      "coffee": "Preparing connection... ☕"
     },
     "name": "echo \"What's your name?\"",
     "email": "echo \"Your email?\"",
     "message": "echo \"What's on your mind?\"",
     "send": "Send Message",
-    "success": "¡Sugoi! Message sent successfully",
-    "alt": "Or find me at:",
+    "success": "Sugoi! Message sent successfully",
+    "alt": "Or find me on:",
     "namePlaceholder": "Your name",
     "emailPlaceholder": "you@email.com",
     "messagePlaceholder": "Write your message..."
@@ -129,15 +134,15 @@
       "arepa": "Code with Venezuelan flavor",
       "coffee": "Code brewed with patience and craft"
     },
-    "copyright": "© 2026 JESS<span class='zb-gradient'>ZB</span>.DEV — Jesús Zapata",
+    "copyright": "© 2026 JESS<span class='zb-gradient'>ZB</span>.DEV — " + identity.identity.name,
     "counter": {
       "arepa": "arepas consumed",
       "coffee": "coffees drunk"
     }
   },
   "theme": {
-    "switchToArepa": "Making the arepas...",
-    "switchToCoffee": "Serving coffee...",
+    "switchToArepa": "Making arepas...",
+    "switchToCoffee": "Brewing coffee...",
     "arepaLabel": "Arepa Theme",
     "coffeeLabel": "Coffee Theme"
   },
@@ -145,4 +150,4 @@
     "es": "ES",
     "en": "EN"
   }
-}
+};

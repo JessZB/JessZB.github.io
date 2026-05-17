@@ -1,4 +1,5 @@
 ---
+import { Image } from 'astro:assets';
 import Layout from '../../layouts/Layout.astro';
 import Navbar from '../../components/Navbar.astro';
 import Footer from '../../components/Footer.astro';
@@ -48,6 +49,12 @@ const timeWorked = project.timeWorked[lang];
     <!-- Hero banner -->
     <div class={`relative pt-24 pb-16 bg-gradient-to-b from-bg-surface to-bg-deep overflow-hidden`}>
       <div class="absolute inset-0 bg-grid opacity-30" aria-hidden="true"></div>
+      {hasImages && (
+        <div class="absolute inset-0 bg-cover bg-center blur-xl scale-110 opacity-40" style={`background-image: url('${project.images[0]}')`} aria-hidden="true"></div>
+      )}
+      {hasImages && (
+        <div class="absolute inset-0 bg-gradient-to-b from-bg-surface/80 to-bg-deep/90" aria-hidden="true"></div>
+      )}
       <!-- Ambient -->
       <div class={`absolute top-0 right-0 w-96 h-96 ${c.bg} rounded-full blur-[120px] pointer-events-none`} aria-hidden="true"></div>
 
@@ -116,18 +123,8 @@ const timeWorked = project.timeWorked[lang];
         <!-- Left: full description + gallery -->
         <div class="lg:col-span-2 space-y-8">
 
-          <!-- Full Description -->
-          <div class="card-base p-6" data-animate>
-            <h2 class={`font-heading text-xl font-semibold mb-4 ${c.text}`} data-i18n="projects.detail.description">
-              Descripción
-            </h2>
-            <p class="text-text-secondary leading-relaxed" data-i18n-text-es={project.fullDescription.es} data-i18n-text-en={project.fullDescription.en}>
-              {fullDescription}
-            </p>
-          </div>
-
           <!-- Media Gallery -->
-          <div class="card-base p-6" data-animate>
+          <div class="card-base p-6 card-base--no-hover" data-animate>
             <h2 class={`font-heading text-xl font-semibold mb-4 ${c.text}`} data-i18n="projects.detail.gallery">
               Galería
             </h2>
@@ -137,11 +134,15 @@ const timeWorked = project.timeWorked[lang];
               <div class="grid grid-cols-2 gap-3">
                 {project.images.map((img, i) => (
                   <div class="aspect-video rounded-lg overflow-hidden bg-bg-surface border border-white/5">
-                    <img
+                    <Image
                       src={img}
                       alt={`${title} screenshot ${i + 1}`}
                       class="w-full h-full object-cover hover:scale-105 transition-transform duration-500"
                       loading="lazy"
+                      decoding="async"
+                      inferSize
+                      width={640}
+                      height={360}
                     />
                   </div>
                 ))}
@@ -160,6 +161,59 @@ const timeWorked = project.timeWorked[lang];
               </div>
             )}
           </div>
+
+          <!-- Full Description -->
+          <div class="card-base p-6" data-animate>
+            <h2 class={`font-heading text-xl font-semibold mb-4 ${c.text}`} data-i18n="projects.detail.description">
+              Descripción
+            </h2>
+            <p class="text-text-secondary leading-relaxed" data-i18n-text-es={project.fullDescription.es} data-i18n-text-en={project.fullDescription.en}>
+              {fullDescription}
+            </p>
+          </div>
+
+          <!-- Problems Solved -->
+          {project.problemsSolved && (
+            <div class="card-base p-6" data-animate>
+              <h2 class={`font-heading text-xl font-semibold mb-4 ${c.text}`} data-i18n="projects.detail.problemsSolved">
+                Problemas que resuelve
+              </h2>
+              <p class="text-text-secondary leading-relaxed" data-i18n-text-es={project.problemsSolved.es} data-i18n-text-en={project.problemsSolved.en}>
+                {project.problemsSolved[lang]}
+              </p>
+            </div>
+          )}
+
+          <!-- Key Features -->
+          {project.keyFeatures && (
+            <div class="card-base p-6" data-animate>
+              <h2 class={`font-heading text-xl font-semibold mb-4 ${c.text}`} data-i18n="projects.detail.keyFeatures">
+                Funcionalidades destacadas
+              </h2>
+              <ul class="text-text-secondary leading-relaxed space-y-2">
+                {project.keyFeatures[lang].map((feature, i) => (
+                  <li class="flex items-start gap-2">
+                    <span class={`mt-1.5 w-1.5 h-1.5 rounded-full ${c.bg} border ${c.border} shrink-0`} aria-hidden="true"></span>
+                    <span data-i18n-text-es={project.keyFeatures!.es[i]} data-i18n-text-en={project.keyFeatures!.en[i]}>
+                      {feature}
+                    </span>
+                  </li>
+                ))}
+              </ul>
+            </div>
+          )}
+
+          <!-- Architecture -->
+          {project.architecture && (
+            <div class="card-base p-6" data-animate>
+              <h2 class={`font-heading text-xl font-semibold mb-4 ${c.text}`} data-i18n="projects.detail.architecture">
+                Arquitectura
+              </h2>
+              <p class="text-text-secondary leading-relaxed" data-i18n-text-es={project.architecture.es} data-i18n-text-en={project.architecture.en}>
+                {project.architecture[lang]}
+              </p>
+            </div>
+          )}
         </div>
 
         <!-- Right: metadata sidebar -->

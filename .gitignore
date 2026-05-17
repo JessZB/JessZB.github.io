@@ -5,3 +5,10 @@ dist-ssr
 .env
 .env.*
 !.env.example
+
+# Local caches & backups
+.engram/
+.atl/.skill-registry.cache.json
+public/fotos de proyectos/
+RESUMEN DE PROYECTOS/
+PORTFOLIO_CONTENT.md

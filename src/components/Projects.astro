@@ -21,21 +21,21 @@ import ProjectCard from './ProjectCard.astro';
     <div id="project-filters" class="flex justify-center gap-3 mb-10 flex-wrap" role="group" aria-label="Filtrar proyectos">
       <button
         data-filter="all"
-        class="filter-btn active px-4 py-2 rounded-full text-sm font-medium border border-primary text-primary bg-primary/10 transition-all"
+        class="filter-btn active px-5 py-2 rounded-full text-sm font-medium border border-primary text-primary bg-primary/10 transition-all hover:bg-primary/20"
         data-i18n="projects.filters.all"
       >
         Todos
       </button>
       <button
         data-filter="own"
-        class="filter-btn px-4 py-2 rounded-full text-sm font-medium border border-secondary/30 text-secondary hover:bg-secondary/10 transition-all"
+        class="filter-btn px-5 py-2 rounded-full text-sm font-medium border border-secondary/30 text-secondary hover:bg-secondary/10 transition-all"
         data-i18n="projects.filters.own"
       >
         Propios
       </button>
       <button
         data-filter="collab"
-        class="filter-btn px-4 py-2 rounded-full text-sm font-medium border border-highlight/30 text-highlight hover:bg-highlight/10 transition-all"
+        class="filter-btn px-5 py-2 rounded-full text-sm font-medium border border-highlight/30 text-highlight hover:bg-highlight/10 transition-all"
         data-i18n="projects.filters.collab"
       >
         Colaborativos
@@ -73,40 +73,45 @@ import ProjectCard from './ProjectCard.astro';
 </style>
 
 <script>
-  const filterBtns = document.querySelectorAll<HTMLButtonElement>('.filter-btn');
-  const cards = document.querySelectorAll<HTMLElement>('.project-card');
-  const emptyState = document.getElementById('projects-empty');
+  function initProjects(): void {
+    const filterBtns = document.querySelectorAll<HTMLButtonElement>('.filter-btn');
+    if (filterBtns.length === 0) return;
 
-  filterBtns.forEach((btn) => {
-    btn.addEventListener('click', () => {
-      // Update active button
-      filterBtns.forEach((b) => b.classList.remove('active'));
-      btn.classList.add('active');
+    const cards = document.querySelectorAll<HTMLElement>('.project-card');
+    const emptyState = document.getElementById('projects-empty');
 
-      const filter = btn.dataset.filter;
-      let visibleCount = 0;
+    filterBtns.forEach((btn) => {
+      btn.addEventListener('click', () => {
+        filterBtns.forEach((b) => b.classList.remove('active'));
+        btn.classList.add('active');
 
-      cards.forEach((card, index) => {
-        const matches = filter === 'all' || card.dataset.category === filter;
-        card.style.transition = `opacity 0.35s ease ${(index % 3) * 0.06}s, transform 0.35s ease ${(index % 3) * 0.06}s`;
+        const filter = btn.dataset.filter;
+        let visibleCount = 0;
 
-        if (matches) {
-          card.style.opacity = '1';
-          card.style.transform = 'scale(1)';
-          card.style.pointerEvents = 'auto';
-          card.style.position = '';
-          visibleCount++;
-        } else {
-          card.style.opacity = '0';
-          card.style.transform = 'scale(0.92)';
-          card.style.pointerEvents = 'none';
-          card.style.position = 'absolute';
+        cards.forEach((card, index) => {
+          const matches = filter === 'all' || card.dataset.category === filter;
+          card.style.transition = `opacity 0.35s ease ${(index % 3) * 0.06}s, transform 0.35s ease ${(index % 3) * 0.06}s`;
+
+          if (matches) {
+            card.style.opacity = '1';
+            card.style.transform = 'scale(1)';
+            card.style.pointerEvents = 'auto';
+            card.style.position = '';
+            visibleCount++;
+          } else {
+            card.style.opacity = '0';
+            card.style.transform = 'scale(0.92)';
+            card.style.pointerEvents = 'none';
+            card.style.position = 'absolute';
+          }
+        });
+
+        if (emptyState) {
+          emptyState.classList.toggle('hidden', visibleCount > 0);
         }
       });
-
-      if (emptyState) {
-        emptyState.classList.toggle('hidden', visibleCount > 0);
-      }
     });
-  });
+  }
+
+  document.addEventListener('astro:page-load', initProjects);
 </script>

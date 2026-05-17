@@ -1,4 +1,6 @@
-{
+import identity from './identity.json';
+
+export default {
   "site": {
     "name": "JESSZB.DEV",
     "tagline": "Código con sazón venezolana",
@@ -6,8 +8,8 @@
   },
   "hero": {
     "greeting": "Hola, soy",
-    "name": "Jesús Zapata",
-    "role": "Full-Stack Developer",
+    "name": identity.identity.name,
+    "role": identity.identity.role_es,
     "subtitle": {
       "arepa": "> Construyendo capas de software, como una buena arepa_",
       "coffee": "> Código que despierta, como el primer café del día_"
@@ -21,10 +23,10 @@
     "title": "Sobre Mí",
     "subtitle": "La historia detrás del código",
     "bio": {
-      "arepa": "Como una arepa bien hecha — por fuera dorada, por dentro llena de sabor — así es mi enfoque con el software. Soy un desarrollador full-stack venezolano que construye aplicaciones capa por capa, con precisión y sazón.",
-      "coffee": "Como un buen café de filtro — necesita tiempo, técnica y pasión para ser perfecto — así construyo mis proyectos. Cada línea de código es intencional, cada decisión tiene propósito."
+      "arepa": identity.about.bio_arepa_es,
+      "coffee": identity.about.bio_coffee_es
     },
-    "bio2": "Me especializo en crear experiencias web modernas, desde backends robustos hasta interfaces que enamoran. Cuando no estoy escribiendo código, me encontrás explorando nuevas tecnologías.",
+    "bio2": identity.about.bio2_es,
     "stats": {
       "years": "Años de experiencia",
       "projects": "Proyectos completados",
@@ -83,7 +85,10 @@
       "gallery": "Galería",
       "otherProjects": "Otros proyectos",
       "back": "← Volver a proyectos",
-      "backHome": "Ir al inicio"
+      "backHome": "Ir al inicio",
+      "problemsSolved": "Problemas que resuelve",
+      "keyFeatures": "Funcionalidades destacadas",
+      "architecture": "Arquitectura"
     }
   },
   "timeline": {
@@ -95,8 +100,8 @@
     "title": "Contacto",
     "subtitle": "¿Hablamos?",
     "terminal": {
-      "arepa": "arepa@jesszb.dev",
-      "coffee": "coffee@jesszb.dev"
+      "arepa": identity.identity.email,
+      "coffee": identity.identity.email
     },
     "init": {
       "arepa": "iniciar_contacto.sh",
@@ -129,7 +134,7 @@
       "arepa": "Código con sazón venezolana",
       "coffee": "Código preparado con paciencia y técnica"
     },
-    "copyright": "© 2026 JESS<span class='zb-gradient'>ZB</span>.DEV — Jesús Zapata",
+    "copyright": "© 2026 JESS<span class='zb-gradient'>ZB</span>.DEV — " + identity.identity.name,
     "counter": {
       "arepa": "arepas consumidas",
       "coffee": "cafés tomados"
@@ -145,4 +150,4 @@
     "es": "ES",
     "en": "EN"
   }
-}
+};

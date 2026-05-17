@@ -1,55 +1,16 @@
 ---
 
-const experiences = [
-  {
-    period: { es: '2024 - Presente', en: '2024 - Present' },
-    role: { es: 'Senior Full-Stack Developer', en: 'Senior Full-Stack Developer' },
-    company: 'TechVenezuela',
-    location: { es: 'Remoto', en: 'Remote' },
-    description: { 
-      es: 'Liderazgo técnico de equipo de 5 desarrolladores. Arquitectura de microservicios. Migración de monolith a micro-frontends.', 
-      en: 'Technical lead for a 5-developer team. Microservices architecture. Migration from monolith to micro-frontends.' 
-    },
-    techs: ['React', 'Node.js', 'AWS', 'Docker'],
-    color: 'primary',
-  },
-  {
-    period: { es: '2022 - 2024', en: '2022 - 2024' },
-    role: { es: 'Full-Stack Developer', en: 'Full-Stack Developer' },
-    company: 'Startup Caribe',
-    location: { es: 'Caracas / Remoto', en: 'Caracas / Remote' },
-    description: { 
-      es: 'Desarrollo de plataforma SaaS de gestión empresarial. Implementación de CI/CD. Optimización de rendimiento frontend.', 
-      en: 'Development of an enterprise management SaaS platform. CI/CD implementation. Frontend performance optimization.' 
-    },
-    techs: ['Next.js', 'Python', 'PostgreSQL', 'GCP'],
-    color: 'secondary',
-  },
-  {
-    period: { es: '2021 - 2022', en: '2021 - 2022' },
-    role: { es: 'Frontend Developer', en: 'Frontend Developer' },
-    company: 'Agencia Creativa Zulia',
-    location: { es: 'Maracaibo', en: 'Maracaibo' },
-    description: { 
-      es: 'Creación de landing pages y aplicaciones web interactivas. Integración de APIs. Animaciones avanzadas con GSAP y Framer Motion.', 
-      en: 'Creation of landing pages and interactive web apps. API integrations. Advanced animations using GSAP and Framer Motion.' 
-    },
-    techs: ['React', 'GSAP', 'Figma', 'TypeScript'],
-    color: 'highlight',
-  },
-  {
-    period: { es: '2019 - 2021', en: '2019 - 2021' },
-    role: { es: 'Junior Developer', en: 'Junior Developer' },
-    company: 'Devs Venezuela',
-    location: { es: 'Valencia', en: 'Valencia' },
-    description: { 
-      es: 'Desarrollo de funcionalidades frontend y backend. Participación en sprints ágiles. Testing unitario y documentación.', 
-      en: 'Development of frontend and backend features. Agile sprint participation. Unit testing and documentation.' 
-    },
-    techs: ['JavaScript', 'Node.js', 'MongoDB', 'CSS'],
-    color: 'accent',
-  },
-];
+import identity from '../data/identity.json';
+
+const experiences = identity.experience.map(exp => ({
+  period: { es: exp.period_es, en: exp.period_en },
+  role: { es: exp.role_es, en: exp.role_en },
+  company: exp.company,
+  location: { es: exp.location_es, en: exp.location_en },
+  description: { es: exp.description_es, en: exp.description_en },
+  techs: exp.techs,
+  color: exp.color || 'primary',
+}));
 
 function getNodeColor(color: string) {
   const map: Record<string, string> = {

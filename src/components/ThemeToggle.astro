@@ -116,48 +116,59 @@
 </style>
 
 <script>
-  const btn = document.getElementById('theme-toggle');
-  const curtain = document.getElementById('theme-curtain');
+  let themeClickHandler: (() => void) | null = null;
 
-  function getCurrentTheme(): string {
-    return document.documentElement.getAttribute('data-theme') || 'arepa';
-  }
+  function initThemeToggle(): void {
+    // Restore theme from localStorage after ClientRouter navigation
+    const stored = localStorage.getItem('jesszb-theme');
+    if (stored === 'coffee') {
+      document.documentElement.setAttribute('data-theme', 'coffee');
+    } else if (stored === 'arepa') {
+      document.documentElement.setAttribute('data-theme', 'arepa');
+    }
 
-  function switchTheme(): void {
-    const current = getCurrentTheme();
-    const next = current === 'arepa' ? 'coffee' : 'arepa';
+    const btn = document.getElementById('theme-toggle');
+    const curtain = document.getElementById('theme-curtain');
 
-    // Show curtain
-    if (curtain) {
-      curtain.setAttribute('data-target-theme', next);
-      curtain.classList.add('curtain-active');
+    // Remove old listener before adding new one
+    if (themeClickHandler) {
+      btn?.removeEventListener('click', themeClickHandler);
+    }
 
-      setTimeout(() => {
-        // Apply theme
+    function switchTheme(): void {
+      const current = document.documentElement.getAttribute('data-theme') || 'arepa';
+      const next = current === 'arepa' ? 'coffee' : 'arepa';
+
+      if (curtain) {
+        curtain.setAttribute('data-target-theme', next);
+        curtain.classList.add('curtain-active');
+
+        setTimeout(() => {
+          document.documentElement.setAttribute('data-theme', next);
+          localStorage.setItem('jesszb-theme', next);
+
+          if (typeof (window as any).refreshThemeTexts === 'function') {
+            (window as any).refreshThemeTexts();
+          }
+
+          setTimeout(() => {
+            curtain.classList.add('curtain-leaving');
+            curtain.classList.remove('curtain-active');
+            
+            setTimeout(() => {
+              curtain.classList.remove('curtain-leaving');
+            }, 500);
+          }, 600);
+        }, 900);
+      } else {
         document.documentElement.setAttribute('data-theme', next);
         localStorage.setItem('jesszb-theme', next);
-
-        // Update theme-aware texts
-        if (typeof (window as any).refreshThemeTexts === 'function') {
-          (window as any).refreshThemeTexts();
-        }
-
-        // Hide curtain with leaving animation
-        setTimeout(() => {
-          curtain.classList.add('curtain-leaving');
-          curtain.classList.remove('curtain-active');
-          
-          setTimeout(() => {
-            curtain.classList.remove('curtain-leaving');
-          }, 500);
-        }, 600);
-      }, 900);
-    } else {
-      // No curtain fallback
-      document.documentElement.setAttribute('data-theme', next);
-      localStorage.setItem('jesszb-theme', next);
+      }
     }
+
+    themeClickHandler = switchTheme;
+    btn?.addEventListener('click', themeClickHandler);
   }
 
-  btn?.addEventListener('click', switchTheme);
+  document.addEventListener('astro:page-load', initThemeToggle);
 </script>

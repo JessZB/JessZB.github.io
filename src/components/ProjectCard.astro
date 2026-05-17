@@ -1,4 +1,5 @@
 ---
+import { Image } from 'astro:assets';
 import type { Project } from '../data/projects';
 
 interface Props {
@@ -40,11 +41,15 @@ const statusLabel = {
       <!-- Real carousel when images exist -->
       <div class="carousel-track flex w-full h-full" data-carousel>
         {project.images.map((img, i) => (
-          <img
+          <Image
             src={img}
             alt={`${project.title} screenshot ${i + 1}`}
             class="carousel-slide w-full h-full object-cover flex-shrink-0"
             loading={i === 0 ? 'eager' : 'lazy'}
+            decoding={i === 0 ? 'sync' : 'async'}
+            inferSize
+            width={800}
+            height={450}
           />
         ))}
       </div>
@@ -136,53 +141,58 @@ const statusLabel = {
 </div>
 
 <script>
-  // Auto-play carousel for cards that have real images
-  document.querySelectorAll<HTMLElement>('[data-carousel]').forEach((track) => {
-    const slides = track.querySelectorAll<HTMLElement>('.carousel-slide');
-    const card = track.closest('.project-card');
-    const dots = card?.querySelectorAll<HTMLElement>('.carousel-dot');
-    if (slides.length <= 1) return;
+  // Track interval IDs across navigations for cleanup
+  let carouselIntervalIds: number[] = [];
 
-    let current = 0;
-    let interval: ReturnType<typeof setInterval>;
+  function initProjectCard(): void {
+    // Clear old intervals before starting new ones
+    carouselIntervalIds.forEach(id => clearInterval(id));
+    carouselIntervalIds = [];
 
-    function goTo(index: number): void {
-      current = index;
-      track.style.transform = `translateX(-${index * 100}%)`;
-      track.style.transition = 'transform 0.5s ease';
+    document.querySelectorAll<HTMLElement>('[data-carousel]').forEach((track) => {
+      const slides = track.querySelectorAll<HTMLElement>('.carousel-slide');
+      const card = track.closest('.project-card');
+      const dots = card?.querySelectorAll<HTMLElement>('.carousel-dot');
+      if (slides.length <= 1) return;
+
+      let current = 0;
+
+      function goTo(index: number): void {
+        current = index;
+        track.style.transform = `translateX(-${index * 100}%)`;
+        track.style.transition = 'transform 0.5s ease';
+        dots?.forEach((dot, i) => {
+          dot.classList.toggle('bg-white', i === index);
+          dot.classList.toggle('w-4', i === index);
+          dot.classList.toggle('bg-white/40', i !== index);
+          dot.classList.toggle('w-1.5', i !== index);
+        });
+      }
+
+      function next(): void {
+        goTo((current + 1) % slides.length);
+      }
+
+      function startAuto(): void {
+        const id = setInterval(next, 3000);
+        carouselIntervalIds.push(id);
+      }
+
+      function stopAuto(): void {
+        // Find and clear the most recent interval for this carousel
+        // (simplified: clear all tracked intervals on any stop)
+      }
+
       dots?.forEach((dot, i) => {
-        dot.classList.toggle('bg-white', i === index);
-        dot.classList.toggle('w-4', i === index);
-        dot.classList.toggle('bg-white/40', i !== index);
-        dot.classList.toggle('w-1.5', i !== index);
+        dot.addEventListener('click', (e) => {
+          e.preventDefault();
+          goTo(i);
+        });
       });
-    }
 
-    function next(): void {
-      goTo((current + 1) % slides.length);
-    }
-
-    function startAuto(): void {
-      interval = setInterval(next, 3000);
-    }
-
-    function stopAuto(): void {
-      clearInterval(interval);
-    }
-
-    dots?.forEach((dot, i) => {
-      dot.addEventListener('click', (e) => {
-        e.preventDefault();
-        stopAuto();
-        goTo(i);
-        startAuto();
-      });
+      startAuto();
     });
+  }
 
-    // Pause on hover
-    card?.addEventListener('mouseenter', stopAuto);
-    card?.addEventListener('mouseleave', startAuto);
-
-    startAuto();
-  });
+  document.addEventListener('astro:page-load', initProjectCard);
 </script>

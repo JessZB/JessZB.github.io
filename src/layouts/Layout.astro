@@ -1,8 +1,9 @@
 ---
 import '../styles/global.css';
+import { ClientRouter } from 'astro:transitions';
 import ThemeCurtain from '../components/ThemeCurtain.astro';
-import esData from '../data/es.json';
-import enData from '../data/en.json';
+import esData from '../data/es.ts';
+import enData from '../data/en.ts';
 
 interface Props {
   title?: string;
@@ -105,7 +106,13 @@ const translations = {
     <script is:inline>
       (function () {
         var stored = localStorage.getItem('jesszb-theme');
-        var theme = stored === 'coffee' ? 'coffee' : 'arepa';
+        var theme;
+        if (stored) {
+          theme = stored === 'coffee' ? 'coffee' : 'arepa';
+        } else {
+          var prefersDark = window.matchMedia && window.matchMedia('(prefers-color-scheme: dark)').matches;
+          theme = prefersDark ? 'coffee' : 'arepa';
+        }
         document.documentElement.setAttribute('data-theme', theme);
       })();
     </script>
@@ -113,6 +120,9 @@ const translations = {
     <!-- GSAP -->
     <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.5/gsap.min.js" is:inline></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.5/ScrollTrigger.min.js" is:inline></script>
+
+    <!-- Client Router for SPA-like navigation -->
+    <ClientRouter />
   </head>
 
   <body class="min-h-screen bg-bg-deep">
@@ -223,8 +233,8 @@ const translations = {
           updateLang(e.detail.lang);
         });
 
-        // Auto-init
-        document.addEventListener('DOMContentLoaded', function () {
+        // Auto-init on initial load AND after ClientRouter navigation
+        document.addEventListener('astro:page-load', function () {
           updateLang();
         });
       })();
@@ -232,9 +242,12 @@ const translations = {
 
     <!-- GSAP Scroll Animations -->
     <script is:inline>
-      document.addEventListener('DOMContentLoaded', function () {
+      document.addEventListener('astro:page-load', function () {
         if (typeof gsap === 'undefined' || typeof ScrollTrigger === 'undefined') return;
         gsap.registerPlugin(ScrollTrigger);
+
+        // Kill stale ScrollTrigger instances from previous page
+        ScrollTrigger.getAll().forEach(function (t) { t.kill(); });
 
         var prefersReduced = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
         if (prefersReduced) return;

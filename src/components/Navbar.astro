@@ -131,59 +131,71 @@ import LangToggle from './LangToggle.astro';
 
 <script>
   let lastScroll = 0;
-  const navbar = document.getElementById('navbar');
-  const menuBtn = document.getElementById('mobile-menu-btn');
-  const mobileMenu = document.getElementById('mobile-menu');
+  let scrollHandler: (() => void) | null = null;
   let menuOpen = false;
 
-  window.addEventListener('scroll', () => {
-    const current = window.scrollY;
+  function initNavbar(): void {
+    const navbar = document.getElementById('navbar');
+    const menuBtn = document.getElementById('mobile-menu-btn');
+    const mobileMenu = document.getElementById('mobile-menu');
 
-    // Hide/show on scroll direction
-    if (current > lastScroll && current > 100) {
-      navbar!.style.transform = 'translateY(-100%)';
-      if (menuOpen) closeMenu();
-    } else {
-      navbar!.style.transform = 'translateY(0)';
+    // Remove old scroll listener before re-adding
+    if (scrollHandler) {
+      window.removeEventListener('scroll', scrollHandler);
     }
 
-    // Frosted glass background on scroll
-    if (current > 50) {
-      navbar!.classList.add('scrolled');
-    } else {
-      navbar!.classList.remove('scrolled');
+    function closeMenu() {
+      menuOpen = false;
+      const lines = menuBtn?.querySelectorAll('.burger-line');
+      if (lines) {
+        (lines[0] as HTMLElement).style.transform = '';
+        (lines[1] as HTMLElement).style.opacity = '1';
+        (lines[2] as HTMLElement).style.transform = '';
+      }
+      mobileMenu?.classList.add('-translate-y-full', 'opacity-0', 'pointer-events-none');
+      menuBtn?.setAttribute('aria-expanded', 'false');
     }
 
-    lastScroll = current;
-  });
+    scrollHandler = () => {
+      const current = window.scrollY;
 
-  function closeMenu() {
-    menuOpen = false;
-    const lines = menuBtn?.querySelectorAll('.burger-line');
-    if (lines) {
-      (lines[0] as HTMLElement).style.transform = '';
-      (lines[1] as HTMLElement).style.opacity = '1';
-      (lines[2] as HTMLElement).style.transform = '';
-    }
-    mobileMenu?.classList.add('-translate-y-full', 'opacity-0', 'pointer-events-none');
-    menuBtn?.setAttribute('aria-expanded', 'false');
+      if (current > lastScroll && current > 100) {
+        navbar!.style.transform = 'translateY(-100%)';
+        if (menuOpen) closeMenu();
+      } else {
+        navbar!.style.transform = 'translateY(0)';
+      }
+
+      if (current > 50) {
+        navbar!.classList.add('scrolled');
+      } else {
+        navbar!.classList.remove('scrolled');
+      }
+
+      lastScroll = current;
+    };
+    window.addEventListener('scroll', scrollHandler);
+
+    // Mobile menu toggle
+    menuBtn?.addEventListener('click', () => {
+      menuOpen = !menuOpen;
+      const lines = menuBtn.querySelectorAll('.burger-line');
+      if (menuOpen) {
+        (lines[0] as HTMLElement).style.transform = 'translateY(7px) rotate(45deg)';
+        (lines[1] as HTMLElement).style.opacity = '0';
+        (lines[2] as HTMLElement).style.transform = 'translateY(-7px) rotate(-45deg)';
+        mobileMenu?.classList.remove('-translate-y-full', 'opacity-0', 'pointer-events-none');
+        menuBtn.setAttribute('aria-expanded', 'true');
+      } else {
+        closeMenu();
+      }
+    });
+
+    // Close mobile menu on nav link click
+    mobileMenu?.querySelectorAll('a').forEach((link) => {
+      link.addEventListener('click', closeMenu);
+    });
   }
 
-  menuBtn?.addEventListener('click', () => {
-    menuOpen = !menuOpen;
-    const lines = menuBtn.querySelectorAll('.burger-line');
-    if (menuOpen) {
-      (lines[0] as HTMLElement).style.transform = 'translateY(7px) rotate(45deg)';
-      (lines[1] as HTMLElement).style.opacity = '0';
-      (lines[2] as HTMLElement).style.transform = 'translateY(-7px) rotate(-45deg)';
-      mobileMenu?.classList.remove('-translate-y-full', 'opacity-0', 'pointer-events-none');
-      menuBtn.setAttribute('aria-expanded', 'true');
-    } else {
-      closeMenu();
-    }
-  });
-
-  mobileMenu?.querySelectorAll('a').forEach((link) => {
-    link.addEventListener('click', closeMenu);
-  });
+  document.addEventListener('astro:page-load', initNavbar);
 </script>
