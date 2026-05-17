@@ -4,6 +4,7 @@ import Layout from '../../layouts/Layout.astro';
 import Navbar from '../../components/Navbar.astro';
 import Footer from '../../components/Footer.astro';
 import ProjectCard from '../../components/ProjectCard.astro';
+import LightboxGallery from '../../components/LightboxGallery.astro';
 import { projects, getProjectBySlug, getRelatedProjects } from '../../data/projects';
 
 export function getStaticPaths() {
@@ -129,25 +130,37 @@ const timeWorked = project.timeWorked[lang];
               Galería
             </h2>
 
-            {hasImages ? (
-              <!-- Gallery grid when real images exist -->
-              <div class="grid grid-cols-2 gap-3">
-                {project.images.map((img, i) => (
-                  <div class="aspect-video rounded-lg overflow-hidden bg-bg-surface border border-white/5">
+          {hasImages ? (
+            <!-- Gallery grid: show max 4 images + overlay for remaining -->
+            <div id="project-gallery" class="grid grid-cols-2 gap-3" data-images={JSON.stringify(project.images)}>
+              {project.images.slice(0, 4).map((img, i) => {
+                const isLast = i === 3;
+                const remaining = project.images.length - 4;
+                return (
+                  <div
+                    class="aspect-video rounded-lg overflow-hidden bg-bg-surface border border-white/5 cursor-pointer group relative"
+                    onclick={`__openLightbox(${i})`}
+                  >
                     <Image
                       src={img}
                       alt={`${title} screenshot ${i + 1}`}
-                      class="w-full h-full object-cover hover:scale-105 transition-transform duration-500"
+                      class="w-full h-full object-cover group-hover:scale-105 transition-transform duration-500"
                       loading="lazy"
                       decoding="async"
                       inferSize
                       width={640}
                       height={360}
                     />
+                    {isLast && remaining > 0 && (
+                      <div class="absolute inset-0 bg-black/60 flex items-center justify-center group-hover:bg-black/70 transition-colors">
+                        <span class="text-white font-heading text-2xl font-bold">+{remaining}</span>
+                      </div>
+                    )}
                   </div>
-                ))}
-              </div>
-            ) : (
+                );
+              })}
+            </div>
+          ) : (
               <!-- Placeholder gallery when no images -->
               <div class="grid grid-cols-2 gap-3">
                 {[1, 2, 3, 4].map((i) => (
@@ -283,4 +296,6 @@ const timeWorked = project.timeWorked[lang];
   </main>
 
   <Footer />
+
+  {hasImages && <LightboxGallery />}
 </Layout>
