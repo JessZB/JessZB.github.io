@@ -112,6 +112,7 @@ const translations = {
         } else {
           var prefersDark = window.matchMedia && window.matchMedia('(prefers-color-scheme: dark)').matches;
           theme = prefersDark ? 'coffee' : 'arepa';
+          localStorage.setItem('jesszb-theme', theme);
         }
         document.documentElement.setAttribute('data-theme', theme);
       })();
