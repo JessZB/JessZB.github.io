@@ -16,7 +16,7 @@ export default {
     },
     "cta1": "View Projects",
     "cta2": "Contact Me",
-    "badge": "Available for projects",
+    "badge": "Available for projects · UTC-4 (VE)",
     "scrollHint": "Keep reading"
   },
   "about": {
