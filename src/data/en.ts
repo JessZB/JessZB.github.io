@@ -116,6 +116,7 @@ export default {
     "message": "echo \"What's on your mind?\"",
     "send": "Send Message",
     "success": "Sugoi! Message sent successfully",
+    "successAlt": "In the meantime, you can also reach me on my social networks",
     "alt": "Or find me on:",
     "namePlaceholder": "Your name",
     "emailPlaceholder": "you@email.com",

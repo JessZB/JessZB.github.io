@@ -116,6 +116,7 @@ export default {
     "message": "echo \"¿Qué tenés en mente?\"",
     "send": "Enviar Mensaje",
     "success": "¡Sugoi! Mensaje enviado con éxito",
+    "successAlt": "Mientras tanto, también podés contactarme en mis redes sociales",
     "alt": "O encontrame en:",
     "namePlaceholder": "Tu nombre",
     "emailPlaceholder": "tu@email.com",
