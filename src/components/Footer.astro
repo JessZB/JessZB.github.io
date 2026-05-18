@@ -115,9 +115,10 @@ import identity from '../data/identity.json';
       themeObserver = null;
     }
 
-    // Reset counter state
-    count = 0;
-    if (display) display.textContent = '0';
+    // Restore counter from localStorage (persists across navigations)
+    const saved = localStorage.getItem('jesszb-counter');
+    count = saved ? parseInt(saved, 10) || 0 : 0;
+    if (display) display.textContent = count.toString();
 
     function updateIcon(): void {
       const theme = document.documentElement.getAttribute('data-theme') || 'arepa';
@@ -129,18 +130,17 @@ import identity from '../data/identity.json';
     // Init icon
     updateIcon();
 
-    // Watch theme changes on <html>
+    // Watch theme changes on <html> (only update icon, don't reset counter)
     const htmlEl = document.documentElement;
     themeObserver = new MutationObserver(() => {
       updateIcon();
-      count = 0;
-      if (display) display.textContent = '0';
     });
     themeObserver.observe(htmlEl, { attributes: true, attributeFilter: ['data-theme'] });
 
     btn?.addEventListener('click', () => {
       count++;
       if (display) display.textContent = count.toString();
+      localStorage.setItem('jesszb-counter', count.toString());
 
       btn.style.transform = 'scale(1.08)';
       setTimeout(() => {
