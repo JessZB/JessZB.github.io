@@ -110,20 +110,8 @@ const statusLabel = {
       <span class={`tag text-xs border ${c.badge}`} data-i18n={`projects.filters.${project.category}`}>{categoryLabels[project.category]}</span>
     </div>
 
-    <!-- Hover overlay with actions (z-20, background passes clicks to stretched link) -->
+    <!-- Hover overlay (z-20, background passes clicks to stretched link) -->
     <div class="absolute inset-0 bg-bg-deep/85 backdrop-blur-sm opacity-0 group-hover:opacity-100 transition-all duration-300 flex items-center justify-center gap-3 z-20 pointer-events-none">
-      {project.demo && (
-        <a
-          href={project.demo}
-          class="btn-primary text-sm px-4 py-2 flex items-center gap-1.5 pointer-events-auto"
-          target="_blank"
-          rel="noopener noreferrer"
-          data-i18n="projects.demo"
-        >
-          <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M1 12s4-8 11-8 11 8 11 8-4 8-11 8-11-8-11-8z"/><circle cx="12" cy="12" r="3"/></svg>
-          Demo
-        </a>
-      )}
       <div
         class="btn-outline text-sm px-4 py-2 flex items-center gap-1.5"
         data-i18n="projects.viewDetails"

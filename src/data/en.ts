@@ -119,7 +119,7 @@ export default {
     "error": "Oops! Something went wrong.",
     "errorDetail": "The message could not be sent. Please try again.",
     "retry": "Retry",
-    "success": "Sugoi! Message sent successfully",
+    "success": "Message sent successfully!",
     "successAlt": "In the meantime, you can also reach me on my social networks",
     "directEmail": "Or if you prefer, write me directly at",
     "alt": "Or find me on:",
