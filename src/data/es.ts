@@ -119,7 +119,7 @@ export default {
     "error": "¡Ups! Algo salió mal.",
     "errorDetail": "No se pudo enviar el mensaje. Por favor, intenta de nuevo.",
     "retry": "Reintentar",
-    "success": "¡Mensaje enviado con éxito!",
+    "success": "¡Chévere! Mensaje enviado con éxito",
     "successAlt": "Mientras tanto, también puedes contactarme en mis redes sociales",
     "directEmail": "O si prefieres, escríbeme directo a",
     "alt": "O encuéntrame en:",
