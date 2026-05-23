@@ -354,27 +354,15 @@
       "architecture_en": "Handcrafted MVC in PHP 7.4 without framework — 100% custom code. MySQL/MariaDB with UUID v4 as PK on all tables. Custom regex-based router with groups, prefix/middleware, and dynamic parameters. Singleton mysqli for DB connection. Frontend with Bootstrap 5, vanilla JavaScript, ApexCharts, Select2, and Font Awesome 6. PHPMailer for email, Web-Push for notifications, GeoIP2 for geolocation."
     },
     {
-      "slug": "vitakee",
-      "title": "Vitakee Platform",
+      "slug": "sistema-telemedicina",
+      "title": "Sistema de Telemedicina y Segunda Opinión",
       "description_es": "Ecosistema médico web para telemedicina y segunda opinión con integraciones de OpenAI y Google Meet.",
       "description_en": "Medical web ecosystem for telemedicine and second opinions with OpenAI and Google Meet integrations.",
       "fullDescription_es": "Plataforma de salud conformada por dos aplicaciones (Portal de Usuarios y Admin) que comparten base de datos. Los especialistas pueden agendar videollamadas, los usuarios registran biomarcadores y el sistema utiliza GPT-4o para análisis de datos y asistencia en chatbots.",
       "fullDescription_en": "Healthcare platform consisting of two applications (User Portal and Admin) sharing a single database. Specialists can schedule video calls, users log biomarkers, and the system leverages GPT-4o for data analysis and chatbot assistance.",
       "category": "collab",
       "status": "completed",
-      "images": [
-        "/img/projects/vitakee/hero.webp",
-        "/img/projects/vitakee/01-vitakee-users-component-body-composition-id=b770c5de-88ad-455e-b451-d58b2e19cbd6.webp",
-        "/img/projects/vitakee/02-vitakee-users-dashboard.webp",
-        "/img/projects/vitakee/03-vitakee-users-dashboard-specialist-lang=es.webp",
-        "/img/projects/vitakee/04-vitakee-users-dashboard.webp",
-        "/img/projects/vitakee/05-vitakee-users-expert-review.webp",
-        "/img/projects/vitakee/06-vitakee-users-my-profile.webp",
-        "/img/projects/vitakee/07-vitakee-users-my-profile.webp",
-        "/img/projects/vitakee/08-vitakee-users-service-requests.webp",
-        "/img/projects/vitakee/09-vitakee-users-user-request-panel.webp",
-        "/img/projects/vitakee/10-vitakee-users-user.webp"
-      ],
+      "images": [],
       "techs": [
         "Vanilla PHP",
         "MariaDB",
@@ -410,29 +398,19 @@
         "Admin dashboard with KPIs, specialist management, and usage analytics",
         "Two-application architecture (Users + Admin) on a shared database"
       ],
-      "architecture_es": "Dos aplicaciones PHP independientes (vitakee-users: 40+ controladores, ~30 modelos; vitakee-admin: 30+ controladores, ~25 modelos) compartiendo base de datos MariaDB 11.x. Core framework MVC duplicado manualmente (Router, ViewRenderer, Database singleton, AuthMiddleware). Integraciones externas: OpenAI GPT-4o, Google Calendar/Meet API, MEGA Storage. Frontend con Bootstrap 5 + JavaScript vanilla.",
-      "architecture_en": "Two independent PHP applications (vitakee-users: 40+ controllers, ~30 models; vitakee-admin: 30+ controllers, ~25 models) sharing a MariaDB 11.x database. Manually duplicated MVC core framework (Router, ViewRenderer, Database singleton, AuthMiddleware). External integrations: OpenAI GPT-4o, Google Calendar/Meet API, MEGA Storage. Bootstrap 5 + vanilla JavaScript frontend."
+      "architecture_es": "Dos aplicaciones PHP independientes (Portal de Usuarios: 40+ controladores, ~30 modelos; Portal Admin: 30+ controladores, ~25 modelos) compartiendo base de datos MariaDB 11.x. Core framework MVC duplicado manualmente (Router, ViewRenderer, Database singleton, AuthMiddleware). Integraciones externas: OpenAI GPT-4o, Google Calendar/Meet API, MEGA Storage. Frontend con Bootstrap 5 + JavaScript vanilla.",
+      "architecture_en": "Two independent PHP applications (User Portal: 40+ controllers, ~30 models; Admin Portal: 30+ controllers, ~25 models) sharing a MariaDB 11.x database. Manually duplicated MVC core framework (Router, ViewRenderer, Database singleton, AuthMiddleware). External integrations: OpenAI GPT-4o, Google Calendar/Meet API, MEGA Storage. Bootstrap 5 + vanilla JavaScript frontend."
     },
     {
-      "slug": "evolve",
-      "title": "EVOLVE Logistics",
+      "slug": "sistema-gestion-logistica",
+      "title": "Sistema de Gestión Logística de Contenedores",
       "description_es": "Sistema de gestión logística y de inventario de contenedores para transporte terrestre con seguimiento GPS.",
       "description_en": "Container inventory and logistics management system for ground transport with GPS tracking.",
       "fullDescription_es": "Solución Full-Stack para compañías navieras. Rastrea contenedores, asigna choferes a órdenes de trabajo y permite flujos móviles donde el conductor marca hitos con GPS. Utiliza triggers de MySQL para auditoría inmutable de cada cambio.",
       "fullDescription_en": "Full-Stack solution for shipping companies. Tracks containers, assigns drivers to work orders, and features mobile workflows where drivers hit GPS milestones. Uses MySQL triggers for an immutable audit trail of every change.",
       "category": "collab",
       "status": "completed",
-      "images": [
-        "/img/projects/evolve/hero.webp",
-        "/img/projects/evolve/01-evolve-drivers-dashboard.webp",
-        "/img/projects/evolve/02-evolve-home.webp",
-        "/img/projects/evolve/03-evolve-home.webp",
-        "/img/projects/evolve/04-evolve-home.webp",
-        "/img/projects/evolve/05-evolve-inventory.webp",
-        "/img/projects/evolve/06-evolve-orders.webp",
-        "/img/projects/evolve/07-evolve-orders.webp",
-        "/img/projects/evolve/08-evolve-orders.webp"
-      ],
+      "images": [],
       "techs": [
         "Vanilla PHP",
         "MySQL",
@@ -665,7 +643,7 @@
       "period_en": "May 2025 - March 2026",
       "role_es": "Ingeniero de Aplicaciones",
       "role_en": "Applications Engineer",
-      "company": "SITI World",
+      "company": "Empresa anónima",
       "location_es": "Remoto",
       "location_en": "Remote",
       "description_es": "Participación activa en el desarrollo de diversos proyectos tecnológicos. Gestión de cuentas corporativas y administración de la infraestructura de sistemas de almacenamiento en la nube para optimizar los flujos de trabajo del equipo.",

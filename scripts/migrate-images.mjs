@@ -29,8 +29,6 @@ const FOLDER_TO_SLUG = {
   'gide-app': 'gideapp',
   'sigob entorno': 'sigob',
   'sisupp': 'sisupp',
-  'vitakee': 'vitakee',
-  'EVOLVE': 'evolve',
   'condominio-app': 'condominio-app',
   'matriculas-app': 'matriculas-app',
   'littlepigman-portafolio': 'littlepigman-portafolio',
