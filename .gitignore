@@ -5,6 +5,8 @@ dist-ssr
 .env
 .env.*
 !.env.example
+.gga
+.atl
 
 # Local caches & backups
 .engram/
