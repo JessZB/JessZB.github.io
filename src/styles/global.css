@@ -1,4 +1,3 @@
-@import url('https://fonts.googleapis.com/css2?family=Chakra+Petch:wght@400;500;600;700&family=Inter:wght@300;400;500;600;700&family=Playfair+Display:wght@400;600;700&display=swap');
 @import "tailwindcss";
 
 
@@ -12,23 +11,29 @@
   /* Primary — warm gold/orange (Arepa) */
   --color-primary: #F5A623;
   --color-primary-light: #FFD966;
+  --color-primary-text: #8A5A00; /* gold for text on light bg: AA 4.5:1+ */
 
   /* Secondary — tropical teal */
   --color-secondary: #16A085;
   --color-secondary-light: #1ABC9C;
+  --color-secondary-text: #0F6C5A; /* teal for text on light bg: AA 4.5:1+ */
 
   /* Accent — bright coral/red */
   --color-accent: #E74C3C;
   --color-accent-light: #FF6B6B;
+  --color-accent-text: #B42516; /* red for text on light bg: AA 4.5:1+ */
+  --color-accent-light-text: #B42516;
 
   /* Highlight — vibrant purple */
   --color-highlight: #9B59B6;
   --color-highlight-light: #BB8FCE;
+  --color-highlight-text: #804399; /* purple for text on light bg: AA 4.5:1+ */
+  --color-highlight-light-text: #804399;
 
   /* Text — dark slate/charcoal for readability on light */
   --color-text-primary: #2D3748;
   --color-text-secondary: #4A5568;
-  --color-text-muted: #718096;
+  --color-text-muted: #5F6B7A; /* AA 4.5:1+ on bg / bg-deep */
 
   --font-heading: 'Chakra Petch', sans-serif;
   --font-body: 'Inter', sans-serif;
@@ -116,6 +121,7 @@
 
   html {
     scroll-behavior: smooth;
+    scroll-padding-top: 4.5rem; /* keep anchored sections clear of the fixed navbar */
     background-color: #0F0F23;
   }
 
@@ -129,6 +135,22 @@
 
   h1, h2, h3, h4, h5, h6 {
     font-family: var(--font-heading);
+  }
+
+  :focus-visible {
+    outline: 2px solid var(--color-primary);
+    outline-offset: 3px;
+  }
+
+  @media (prefers-reduced-motion: reduce) {
+    html {
+      scroll-behavior: auto;
+    }
+    *, *::before, *::after {
+      animation-duration: 0.01ms !important;
+      animation-iteration-count: 1 !important;
+      transition-duration: 0.01ms !important;
+    }
   }
 
   ::selection {
@@ -215,6 +237,12 @@
   .card-base--no-hover:hover {
     transform: none;
     box-shadow: 0 4px 20px rgba(0, 0, 0, 0.3);
+  }
+  /* Touch devices: no sticky hover lift after a tap */
+  @media (hover: none) {
+    .card-base:hover {
+      transform: none;
+    }
   }
 
   .neon-line {
@@ -332,23 +360,29 @@
   /* Primary — coffee amber / caramel */
   --color-primary: #C8874A;
   --color-primary-light: #E8A96B;
+  --color-primary-text: #C8874A;
 
   /* Secondary — warm teal / sage */
   --color-secondary: #7BAE8C;
   --color-secondary-light: #9DC9AB;
+  --color-secondary-text: #7BAE8C;
 
   /* Accent — burgundy / deep wine */
   --color-accent: #A0404A;
   --color-accent-light: #C4606A;
+  --color-accent-text: #A0404A;
+  --color-accent-light-text: #C4606A;
 
   /* Highlight — antique lavender / mauve */
   --color-highlight: #8B6B8B;
   --color-highlight-light: #AA8DAA;
+  --color-highlight-text: #8B6B8B;
+  --color-highlight-light-text: #AA8DAA;
 
   /* Text — warm cream and parchment */
   --color-text-primary: #F5EBD8;
   --color-text-secondary: #C9B89A;
-  --color-text-muted: #7A6852;
+  --color-text-muted: #A08C72; /* AA 4.5:1+ on coffee surfaces */
 
   /* Glow shadows adapted for coffee palette */
   --shadow-glow-gold: 0 0 15px rgba(200, 135, 74, 0.4);

@@ -5,9 +5,10 @@ import identity from '../data/identity.json';
 const experiences = identity.experience.map(exp => ({
   period: { es: exp.period_es, en: exp.period_en },
   role: { es: exp.role_es, en: exp.role_en },
-  company: exp.company,
+  company: { es: exp.company_es, en: exp.company_en },
   location: { es: exp.location_es, en: exp.location_en },
   description: { es: exp.description_es, en: exp.description_en },
+  highlights: exp.highlights_es.map((es: string, i: number) => ({ es, en: exp.highlights_en[i] ?? es })),
   techs: exp.techs,
   color: exp.color || 'primary',
 }));
@@ -58,9 +59,15 @@ function getBorderColor(color: string) {
                     <span class="font-mono text-xs text-text-muted" data-i18n-text-es={exp.period.es} data-i18n-text-en={exp.period.en}>{exp.period.es}</span>
                     <h3 class="font-heading font-semibold text-lg text-text-primary mt-1" data-i18n-text-es={exp.role.es} data-i18n-text-en={exp.role.en}>{exp.role.es}</h3>
                     <p class="text-sm text-text-secondary mt-1">
-                      {exp.company} · <span data-i18n-text-es={exp.location.es} data-i18n-text-en={exp.location.en}>{exp.location.es}</span>
+                      <span class="font-medium text-text-primary" data-i18n-text-es={exp.company.es} data-i18n-text-en={exp.company.en}>{exp.company.es}</span>
+                      <span class="block text-text-muted" data-i18n-text-es={exp.location.es} data-i18n-text-en={exp.location.en}>{exp.location.es}</span>
                     </p>
                     <p class="text-sm text-text-secondary mt-3 leading-relaxed" data-i18n-text-es={exp.description.es} data-i18n-text-en={exp.description.en}>{exp.description.es}</p>
+                    <ul class="exp-highlights mt-3 space-y-2 text-sm text-text-secondary leading-relaxed">
+                      {exp.highlights.map((h) => (
+                        <li data-i18n-text-es={h.es} data-i18n-text-en={h.en}>{h.es}</li>
+                      ))}
+                    </ul>
                     <div class="flex flex-wrap gap-1.5 mt-3">
                       {exp.techs.map((t: string) => (
                         <span class="tag text-xs">{t}</span>
@@ -80,13 +87,19 @@ function getBorderColor(color: string) {
 
                 <div class="flex-1 hidden md:block"></div>
 
-                <div class={`card-base p-5 md:hidden w-full ${bc} border`}>
+                <div class={`card-base card-base--no-hover p-5 md:hidden w-full ${bc} border`}>
                   <span class="font-mono text-xs text-text-muted" data-i18n-text-es={exp.period.es} data-i18n-text-en={exp.period.en}>{exp.period.es}</span>
                   <h3 class="font-heading font-semibold text-lg text-text-primary mt-1" data-i18n-text-es={exp.role.es} data-i18n-text-en={exp.role.en}>{exp.role.es}</h3>
                   <p class="text-sm text-text-secondary mt-1">
-                    {exp.company} · <span data-i18n-text-es={exp.location.es} data-i18n-text-en={exp.location.en}>{exp.location.es}</span>
+                    <span class="font-medium text-text-primary" data-i18n-text-es={exp.company.es} data-i18n-text-en={exp.company.en}>{exp.company.es}</span>
+                      <span class="block text-text-muted" data-i18n-text-es={exp.location.es} data-i18n-text-en={exp.location.en}>{exp.location.es}</span>
                   </p>
                   <p class="text-sm text-text-secondary mt-3 leading-relaxed" data-i18n-text-es={exp.description.es} data-i18n-text-en={exp.description.en}>{exp.description.es}</p>
+                    <ul class="exp-highlights mt-3 space-y-2 text-sm text-text-secondary leading-relaxed">
+                      {exp.highlights.map((h) => (
+                        <li data-i18n-text-es={h.es} data-i18n-text-en={h.en}>{h.es}</li>
+                      ))}
+                    </ul>
                   <div class="flex flex-wrap gap-1.5 mt-3">
                     {exp.techs.map((t: string) => (
                       <span class="tag text-xs">{t}</span>
@@ -105,6 +118,22 @@ function getBorderColor(color: string) {
 </section>
 
 <style>
+  .exp-highlights li {
+    position: relative;
+    padding-left: 1rem;
+  }
+
+  .exp-highlights li::before {
+    content: '';
+    position: absolute;
+    left: 0;
+    top: 0.6em;
+    width: 0.375rem;
+    height: 0.375rem;
+    border-radius: 9999px;
+    background: var(--color-primary);
+  }
+
   .timeline-line {
     background: linear-gradient(
       180deg,

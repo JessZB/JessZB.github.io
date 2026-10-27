@@ -21,21 +21,21 @@ import ProjectCard from './ProjectCard.astro';
     <div id="project-filters" class="flex justify-center gap-3 mb-10 flex-wrap" role="group" aria-label="Filtrar proyectos">
       <button
         data-filter="all"
-        class="filter-btn active px-5 py-2 rounded-full text-sm font-medium border border-primary text-primary bg-primary/10 transition-all hover:bg-primary/20"
+        class="filter-btn active px-5 py-2 min-h-[44px] rounded-full text-sm font-medium border border-primary text-primary-text bg-primary/10 transition-all hover:bg-primary/20"
         data-i18n="projects.filters.all"
       >
         Todos
       </button>
       <button
         data-filter="own"
-        class="filter-btn px-5 py-2 rounded-full text-sm font-medium border border-secondary/30 text-secondary hover:bg-secondary/10 transition-all"
+        class="filter-btn px-5 py-2 min-h-[44px] rounded-full text-sm font-medium border border-secondary/30 text-secondary-text hover:bg-secondary/10 transition-all"
         data-i18n="projects.filters.own"
       >
         Propios
       </button>
       <button
         data-filter="collab"
-        class="filter-btn px-5 py-2 rounded-full text-sm font-medium border border-highlight/30 text-highlight hover:bg-highlight/10 transition-all"
+        class="filter-btn px-5 py-2 min-h-[44px] rounded-full text-sm font-medium border border-highlight/30 text-highlight-text hover:bg-highlight/10 transition-all"
         data-i18n="projects.filters.collab"
       >
         Colaborativos

@@ -21,10 +21,10 @@ if (!project) {
 const related = getRelatedProjects(project.slug, 3);
 
 const colorMap: Record<string, { text: string; bg: string; border: string; chip: string; glow: string }> = {
-  primary:   { text: 'text-primary', bg: 'bg-primary/10', border: 'border-primary/25', chip: 'bg-primary/15 text-primary border-primary/20', glow: 'shadow-glow-gold' },
-  secondary: { text: 'text-secondary', bg: 'bg-secondary/10', border: 'border-secondary/25', chip: 'bg-secondary/15 text-secondary border-secondary/20', glow: 'shadow-glow-teal' },
-  highlight: { text: 'text-highlight-light', bg: 'bg-highlight/10', border: 'border-highlight/25', chip: 'bg-highlight/15 text-highlight-light border-highlight/20', glow: 'shadow-glow-lavender' },
-  accent:    { text: 'text-accent-light', bg: 'bg-accent/10', border: 'border-accent/25', chip: 'bg-accent/15 text-accent-light border-accent/20', glow: 'shadow-glow-coral' },
+  primary:   { text: 'text-primary-text', bg: 'bg-primary/10', border: 'border-primary/25', chip: 'bg-primary/15 text-primary-text border-primary/20', glow: 'shadow-glow-gold' },
+  secondary: { text: 'text-secondary-text', bg: 'bg-secondary/10', border: 'border-secondary/25', chip: 'bg-secondary/15 text-secondary-text border-secondary/20', glow: 'shadow-glow-teal' },
+  highlight: { text: 'text-highlight-light-text', bg: 'bg-highlight/10', border: 'border-highlight/25', chip: 'bg-highlight/15 text-highlight-light-text border-highlight/20', glow: 'shadow-glow-lavender' },
+  accent:    { text: 'text-accent-light-text', bg: 'bg-accent/10', border: 'border-accent/25', chip: 'bg-accent/15 text-accent-light-text border-accent/20', glow: 'shadow-glow-coral' },
 };
 
 const c = colorMap[project.color] || colorMap.primary;
@@ -63,7 +63,7 @@ const timeWorked = project.timeWorked[lang];
         <!-- Back link -->
         <a
           href="/#projects"
-          class="inline-flex items-center gap-2 text-text-muted hover:text-primary transition-colors text-sm mb-8 group"
+          class="inline-flex items-center gap-2 text-text-muted hover:text-primary-text transition-colors text-sm mb-8 group"
           data-i18n="projects.detail.back"
         >
           <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="group-hover:-translate-x-1 transition-transform" aria-hidden="true"><path d="M19 12H5"/><path d="m12 19-7-7 7-7"/></svg>

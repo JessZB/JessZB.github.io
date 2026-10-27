@@ -10,10 +10,10 @@ interface Props {
 const { project, lang = 'es' } = Astro.props;
 
 const colorMap: Record<string, { border: string; text: string; badge: string; glow: string; gradient: string }> = {
-  primary:   { border: 'border-primary/25', text: 'text-primary', badge: 'bg-primary/15 text-primary border-primary/20', glow: 'hover:shadow-glow-gold', gradient: 'from-primary/30 via-primary/15 to-bg-surface' },
-  secondary: { border: 'border-secondary/25', text: 'text-secondary', badge: 'bg-secondary/15 text-secondary border-secondary/20', glow: 'hover:shadow-glow-teal', gradient: 'from-secondary/30 via-secondary/15 to-bg-surface' },
-  highlight: { border: 'border-highlight/25', text: 'text-highlight-light', badge: 'bg-highlight/15 text-highlight-light border-highlight/20', glow: 'hover:shadow-glow-lavender', gradient: 'from-highlight/30 via-highlight/15 to-bg-surface' },
-  accent:    { border: 'border-accent/25', text: 'text-accent-light', badge: 'bg-accent/15 text-accent-light border-accent/20', glow: 'hover:shadow-glow-coral', gradient: 'from-accent/30 via-accent/15 to-bg-surface' },
+  primary:   { border: 'border-primary/25', text: 'text-primary-text', badge: 'bg-primary/15 text-primary-text border-primary/20', glow: 'hover:shadow-glow-gold', gradient: 'from-primary/30 via-primary/15 to-bg-surface' },
+  secondary: { border: 'border-secondary/25', text: 'text-secondary-text', badge: 'bg-secondary/15 text-secondary-text border-secondary/20', glow: 'hover:shadow-glow-teal', gradient: 'from-secondary/30 via-secondary/15 to-bg-surface' },
+  highlight: { border: 'border-highlight/25', text: 'text-highlight-light-text', badge: 'bg-highlight/15 text-highlight-light-text border-highlight/20', glow: 'hover:shadow-glow-lavender', gradient: 'from-highlight/30 via-highlight/15 to-bg-surface' },
+  accent:    { border: 'border-accent/25', text: 'text-accent-light-text', badge: 'bg-accent/15 text-accent-light-text border-accent/20', glow: 'hover:shadow-glow-coral', gradient: 'from-accent/30 via-accent/15 to-bg-surface' },
 };
 
 const c = colorMap[project.color] || colorMap.primary;
@@ -61,8 +61,9 @@ const statusLabel = {
             src={img}
             alt={`${project.title} screenshot ${i + 1}`}
             class="carousel-slide w-full h-full object-cover flex-shrink-0"
-            loading={i === 0 ? 'eager' : 'lazy'}
-            decoding={i === 0 ? 'sync' : 'async'}
+            loading="lazy"
+            decoding="async"
+            sizes="(min-width: 1024px) 400px, (min-width: 640px) 50vw, 100vw"
             inferSize
             width={800}
             height={450}
@@ -89,13 +90,15 @@ const statusLabel = {
 
     <!-- Carousel controls (z-20 to stay above stretched link) -->
     {hasImages && project.images.length > 1 && (
-      <div class="carousel-controls absolute bottom-2 left-1/2 -translate-x-1/2 flex gap-1.5 z-20">
+      <div class="carousel-controls absolute bottom-0 left-1/2 -translate-x-1/2 flex z-20">
         {project.images.map((_, i) => (
           <button
-            class={`carousel-dot w-1.5 h-1.5 rounded-full transition-all ${i === 0 ? 'bg-white w-4' : 'bg-white/40'}`}
+            class="carousel-dot-hit flex items-center justify-center w-11 h-11"
             data-index={i}
             aria-label={`Image ${i + 1}`}
-          />
+          >
+            <span class={`carousel-dot block h-1.5 rounded-full transition-all ${i === 0 ? 'bg-white w-4' : 'bg-white/40 w-1.5'}`}></span>
+          </button>
         ))}
       </div>
     )}
@@ -124,7 +127,7 @@ const statusLabel = {
 
   <!-- Card body -->
   <div class="p-5">
-    <h3 class="font-heading font-semibold text-lg mb-2 text-text-primary group-hover:text-primary transition-colors">
+    <h3 class="font-heading font-semibold text-lg mb-2 text-text-primary group-hover:text-primary-text transition-colors">
       {project.title}
     </h3>
     <p class="text-sm text-text-secondary leading-relaxed mb-4 line-clamp-2" data-i18n-text-es={project.description.es} data-i18n-text-en={project.description.en}>
@@ -156,6 +159,7 @@ const statusLabel = {
       const slides = track.querySelectorAll<HTMLElement>('.carousel-slide');
       const card = track.closest('.project-card');
       const dots = card?.querySelectorAll<HTMLElement>('.carousel-dot');
+      const dotButtons = card?.querySelectorAll<HTMLElement>('.carousel-dot-hit');
       if (slides.length <= 1) return;
 
       let current = 0;
@@ -186,7 +190,7 @@ const statusLabel = {
         // (simplified: clear all tracked intervals on any stop)
       }
 
-      dots?.forEach((dot, i) => {
+      dotButtons?.forEach((dot, i) => {
         dot.addEventListener('click', (e) => {
           e.preventDefault();
           e.stopPropagation();
@@ -194,7 +198,8 @@ const statusLabel = {
         });
       });
 
-      startAuto();
+      // Respect reduced-motion: no autoplay, manual dots only
+      if (!window.matchMedia('(prefers-reduced-motion: reduce)').matches) startAuto();
     });
   }
 

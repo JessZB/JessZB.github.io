@@ -19,7 +19,7 @@ import identity from '../data/identity.json';
       <div class="text-center md:text-left">
         <a href="#hero" class="inline-block mb-2" aria-label="JESSZB.DEV — volver al inicio">
           <span class="font-heading text-2xl font-bold">
-            <span class="text-primary glow-text">JESS</span><span class="zb-gradient">ZB</span><span class="text-accent">.</span><span class="text-primary glow-text">DEV</span>
+            <span class="text-primary-text glow-text">JESS</span><span class="zb-gradient">ZB</span><span class="text-accent-text">.</span><span class="text-primary-text glow-text">DEV</span>
           </span>
         </a>
         <p
@@ -47,11 +47,11 @@ import identity from '../data/identity.json';
         <!-- Theme-aware counter -->
         <button
           id="fun-counter"
-          class="flex items-center gap-2 px-4 py-2 bg-bg-surface rounded-full border border-primary/10 hover:border-primary/40 transition-all text-sm text-text-muted hover:text-primary group"
+          class="flex items-center gap-2 px-4 py-2 bg-bg-surface rounded-full border border-primary/10 hover:border-primary/40 transition-all text-sm text-text-muted hover:text-primary-text group"
           title="¡Hacé click!"
           aria-label="Contador de diversión"
         >
-          <span id="counter-icon" class="flex items-center justify-center group-hover:scale-125 transition-transform text-primary" aria-hidden="true">
+          <span id="counter-icon" class="flex items-center justify-center group-hover:scale-125 transition-transform text-primary-text" aria-hidden="true">
             <!-- Icon will be injected by script -->
           </span>
           <span id="counter-count" class="font-mono font-medium">0</span>
@@ -71,7 +71,7 @@ import identity from '../data/identity.json';
       </p>
       <p class="text-text-muted text-xs opacity-50 flex items-center gap-1">
         Built with Astro · Tailwind · GSAP 
-        <svg width="10" height="10" viewBox="0 0 24 24" fill="currentColor" class="text-accent inline-block">
+        <svg width="10" height="10" viewBox="0 0 24 24" fill="currentColor" class="text-accent-text inline-block">
           <path d="M12 21.35l-1.45-1.32C5.4 15.36 2 12.28 2 8.5 2 5.42 4.42 3 7.5 3c1.74 0 3.41.81 4.5 2.09C13.09 3.81 14.76 3 16.5 3 19.58 3 22 5.42 22 8.5c0 3.78-3.4 6.86-8.55 11.54L12 21.35z"/>
         </svg>
       </p>
@@ -85,12 +85,17 @@ import identity from '../data/identity.json';
 
 <style>
   .footer-icon {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    width: 44px;
+    height: 44px;
     color: var(--color-text-muted);
     transition: color 0.2s ease, transform 0.2s ease;
   }
 
   .footer-icon:hover {
-    color: var(--color-primary);
+    color: var(--color-primary-text);
     transform: translateY(-3px);
   }
 </style>
@@ -100,8 +105,8 @@ import identity from '../data/identity.json';
   let themeObserver: MutationObserver | null = null;
 
   const ICONS = {
-    arepa: `<svg width="20" height="20" viewBox="0 0 100 60" fill="currentColor"><ellipse cx="50" cy="30" rx="45" ry="22" opacity="0.9"/><ellipse cx="50" cy="22" rx="38" ry="14" opacity="0.6"/></svg>`,
-    coffee: `<svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M17 8h1a4 4 0 0 1 0 8h-1"/><path d="M3 8h14v9a4 4 0 0 1-4 4H7a4 4 0 0 1-4-4Z"/><line x1="6" y1="2" x2="6" y2="4"/><line x1="10" y1="2" x2="10" y2="4"/><line x1="14" y1="2" x2="14" y2="4"/></svg>`
+    arepa: `<svg width="20" height="20" viewBox="0 0 100 60" fill="currentColor"><path d="M5 26 v8 a45 24 0 0 0 90 0 v-8z" opacity="0.6"/><ellipse cx="50" cy="26" rx="45" ry="24"/><path d="M14 30 Q20 16 40 14" stroke="#fff" stroke-width="6" stroke-linecap="round" fill="none" opacity="0.4"/><ellipse cx="68" cy="32" rx="12" ry="6" fill="#000" opacity="0.18"/><ellipse cx="34" cy="34" rx="8" ry="4" fill="#000" opacity="0.15"/></svg>`,
+    coffee: `<svg width="20" height="20" viewBox="0 0 100 60" fill="currentColor"><ellipse cx="50" cy="51" rx="46" ry="8" opacity="0.55"/><path d="M20 22 Q20 51 50 51 Q80 51 80 22z"/><ellipse cx="50" cy="22" rx="30" ry="9"/><ellipse cx="50" cy="23" rx="25" ry="6" fill="#000" opacity="0.5"/><path d="M80 26 Q99 26 94 38 Q90 46 76 44" stroke="currentColor" stroke-width="6" stroke-linecap="round" fill="none"/><path d="M28 30 Q30 44 40 48" stroke="#fff" stroke-width="4" stroke-linecap="round" fill="none" opacity="0.35"/><path d="M40 14 Q36 8 40 3 M58 14 Q54 8 58 3" stroke="currentColor" stroke-width="3" stroke-linecap="round" fill="none" opacity="0.5"/></svg>`
   };
 
   function initFooter(): void {
