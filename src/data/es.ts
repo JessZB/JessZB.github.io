@@ -4,10 +4,10 @@ export default {
   "site": {
     "name": "JESSZB.DEV",
     "tagline": "Código con sazón venezolana",
-    "description": "Portafolio de Jesús Zapata — Desarrollador Full-Stack venezolano. Construyo aplicaciones capa por capa, con precisión y sazón."
+    "description": "Portafolio de Jesús Zapata — Ingeniero en Informática y Desarrollador Full-Stack venezolano con más de 3 años de experiencia profesional."
   },
   "hero": {
-    "greeting": "Hola, soy",
+    "greeting": "Hola, soy Jesús Zapata",
     "name": identity.identity.name,
     "role": identity.identity.role_es,
     "subtitle": {
@@ -47,10 +47,13 @@ export default {
       "frontend": "Frontend",
       "backend": "Backend",
       "databases": "Bases de datos",
-      "devops": "DevOps & Cloud",
-      "soft": "Soft & Hard Skills"
+      "devops": "DevOps & Herramientas",
+      "security": "Seguridad",
+      "ai": "IA & Integraciones",
+      "soft": "Análisis & Soporte TI"
     },
-    "tooltipHint": "Ver proyectos relacionados"
+    "tooltipHint": "Ver proyectos relacionados",
+    "mainStack": "— Stack principal —"
   },
   "tools": {
     "title": "Herramientas",
@@ -111,21 +114,13 @@ export default {
       "arepa": "Inicializando protocolo de comunicación...",
       "coffee": "Preparando la conexión..."
     },
-    "name": "echo \"¿Cuál es tu nombre?\"",
-    "email": "echo \"¿Tu correo electrónico?\"",
-    "message": "echo \"¿Qué tienes en mente?\"",
-    "send": "Enviar Mensaje",
-    "sending": "Enviando...",
-    "error": "¡Ups! Algo salió mal.",
-    "errorDetail": "No se pudo enviar el mensaje. Por favor, intenta de nuevo.",
-    "retry": "Reintentar",
-    "success": "¡Chévere! Mensaje enviado con éxito",
-    "successAlt": "Mientras tanto, también puedes contactarme en mis redes sociales",
-    "directEmail": "O si prefieres, escríbeme directo a",
-    "alt": "O encuéntrame en:",
-    "namePlaceholder": "Escribe tu nombre",
-    "emailPlaceholder": "Escribe tu@email.com",
-    "messagePlaceholder": "Escribe tu mensaje",
+    "cta": "Escríbeme un correo",
+    "ctaHint": "Se abrirá tu aplicación de correo con el asunto ya escrito.",
+    "ctaGmail": "Abrir en Gmail",
+    "orWrite": "O puedes escribirme a este correo:",
+    "mailSubject": "Contacto desde tu portafolio",
+    "mailBody": "Hola Jesús,\n\nVi tu portafolio y me gustaría conversar sobre:\n\n",
+    "alt": "O encuéntrame en:"
   },
   "nav": {
     "about": "Sobre Mí",

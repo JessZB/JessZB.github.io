@@ -2,8 +2,8 @@
   "identity": {
     "name": "Jesús Zapata",
     "role_es": "Ingeniero en Informática y Desarrollador Full-Stack",
-    "role_en": "Informatics Engineer & Full-Stack Developer",
-    "email": "contact.jesszb@gmail.com",
+    "role_en": "Computer Engineer & Full-Stack Developer",
+    "email": "jesusnbz22@gmail.com",
     "social": {
       "github": "https://github.com/JessZB",
       "linkedin": "https://www.linkedin.com/in/tech-jesus-zapata/",
@@ -16,9 +16,9 @@
     "bio_arepa_en": "Like a well-made arepa — golden on the outside, full of flavor on the inside — that's my approach to software. I'm a Venezuelan full-stack developer who builds applications layer by layer, with precision and sazón.",
     "bio_coffee_es": "Como un buen café de filtro — necesita tiempo, técnica y pasión para ser de calidad — así construyo mis proyectos. Cada línea de código es intencional, cada decisión tiene propósito.",
     "bio_coffee_en": "Like a good filter coffee — requiring time, technique, and passion to be of quality — that's how I build my projects. Every line of code is intentional, every decision has a purpose.",
-    "bio2_es": "Me especializo en la creación de sistemas administrativos (ERP) y herramientas de monitoreo, desarrollando backends robustos e interfaces que enamoran. Mi experiencia como analista de sistemas me ha enseñado que el mejor código es el que realmente ayuda a las personas, por lo que la empatía y la atención al usuario son clave en mi trabajo. Cuando no estoy programando, me encontrarás explorando nuevas tecnologías.",
-    "bio2_en": "I specialize in creating administrative systems (ERP) and monitoring tools, developing robust backends and captivating interfaces. My experience as a systems analyst has taught me that the best code is the one that truly helps people, which is why empathy and user care are key to my work. When I'm not coding, you'll find me exploring new technologies.",
-    "years_of_experience": "5+ DEV | 3 IT",
+    "bio2_es": "Ingeniero en Informática con más de 3 años de experiencia profesional construyendo plataformas web en producción para salud digital, logística, restaurantes, telefonía con IA y administración pública. Trabajo con arquitecturas MVC en PHP 8, backends en Node.js y TypeScript, seguridad de aplicaciones (RBAC, MFA y auditoría) e integración de IA (OpenAI) y APIs de terceros (Google, Twilio). Como Analista IT en un supermercado mayorista di soporte a 19 cajas y desarrollé una plataforma interna que redujo el diagnóstico de servicios de 5 minutos a 2–5 segundos.",
+    "bio2_en": "Computer Engineer with 3+ years of professional experience building production web platforms for digital health, logistics, restaurants, AI telephony and public administration. I work with PHP 8 MVC architectures, Node.js and TypeScript back ends, application security (RBAC, MFA and auditing) and integration of AI (OpenAI) and third-party APIs (Google, Twilio). As an IT Analyst at a wholesale supermarket I supported 19 checkout lanes and built an internal platform that cut service diagnostics from 5 minutes to 2–5 seconds.",
+    "years_of_experience": "3+",
     "projects_count": "15+"
   },
   "skills": {
@@ -27,37 +27,85 @@
       "TypeScript",
       "React",
       "Astro",
+      "Vite",
       "Tailwind CSS",
-      "Sass / SCSS",
-      "HTML5 & CSS3",
-      "Vite"
+      "Bootstrap",
+      "jQuery",
+      "PWA",
+      "HTML5 & CSS3"
     ],
     "backend": [
+      "PHP (MVC)",
+      "Laravel",
       "Node.js",
-      "Express.js",
-      "PHP",
-      "Laravel"
+      "Express",
+      "NestJS",
+      "REST APIs",
+      "WebSockets"
     ],
     "databases": [
-      "PostgreSQL",
       "MySQL / MariaDB",
+      "PostgreSQL",
       "SQL Server",
-      "SQLite",
-      "Prisma ORM"
+      "Redis",
+      "Prisma",
+      "Drizzle",
+      {
+        "es": "Triggers y procedimientos almacenados",
+        "en": "Triggers & stored procedures"
+      }
+    ],
+    "security": [
+      "JWT",
+      "OAuth 2.0",
+      "RBAC",
+      "MFA (TOTP)",
+      "AES-256",
+      "bcrypt",
+      "CSRF"
+    ],
+    "ai": [
+      "OpenAI (GPT-4o, Realtime)",
+      "Twilio",
+      "Google Calendar / Meet",
+      "Web Push",
+      "MCP (Model Context Protocol)",
+      "Spec-Driven Development (SDD)",
+      "Test-Driven Development (TDD)",
+      "Organic-Driven Development (ODD)"
     ],
     "devops": [
       "Git & GitHub",
-      "Gestión de Infraestructura",
-      "Mantenimiento de Servidores",
-      "Automatización de Tareas"
+      "GitHub Actions",
+      "Docker Compose",
+      "Vitest",
+      "Playwright",
+      "Insomnia"
     ],
     "soft": [
-      "Análisis de Requerimientos",
-      "Liderazgo Técnico",
-      "Soporte de Hardware Fiscal (POS)",
-      "Comunicación Asertiva",
-      "Pensamiento Crítico",
-      "Trabajo en Equipo"
+      {
+        "es": "Levantamiento y especificación de requerimientos",
+        "en": "Requirements gathering & specification"
+      },
+      {
+        "es": "Modelado de procesos y datos",
+        "en": "Process & data modeling"
+      },
+      {
+        "es": "Documentación técnica",
+        "en": "Technical documentation"
+      },
+      {
+        "es": "Liderazgo técnico",
+        "en": "Technical leadership"
+      },
+      {
+        "es": "Soporte TI nivel 1 y 2",
+        "en": "Tier 1 & 2 IT support"
+      },
+      "GLPI",
+      "SQL Server Agent",
+      "Stellar Retail (POS)"
     ]
   },
   "projects": [
@@ -66,8 +114,8 @@
       "title": "SysAdmin Tools",
       "description_es": "Dashboard de administración empresarial para entornos retail multi-sucursal con monitoreo de infraestructura POS y pantallas.",
       "description_en": "Enterprise administration dashboard for multi-branch retail environments with POS infrastructure and digital signage monitoring.",
-      "fullDescription_es": "Aplicación web interna (Node.js/Express) que centraliza el monitoreo de infraestructura POS (SQL Server), control de cartelería digital mediante WebSockets y Wake-on-LAN, y la gestión de precios a través de un patrón cache-aside. Cuenta con sistema de roles modulares, auditoría completa y encendido remoto de TVs.",
-      "fullDescription_en": "Internal web application (Node.js/Express) that centralizes POS infrastructure monitoring (SQL Server), digital signage control via WebSockets and Wake-on-LAN, and price management through a cache-aside pattern. Features modular role system, complete auditing, and remote TV startup.",
+      "fullDescription_es": "Aplicación web interna (Node.js/Express) que centraliza el monitoreo de infraestructura POS (SQL Server), control de cartelería digital mediante WebSockets y Wake-on-LAN, y la gestión de precios a través de un patrón cache-aside. Cuenta con sistema de roles modulares, auditoría completa y encendido remoto de TVs. Adoptada por el equipo de TI de un supermercado mayorista, redujo el diagnóstico de servicios de 5 minutos a 2–5 segundos.",
+      "fullDescription_en": "Internal web application (Node.js/Express) that centralizes POS infrastructure monitoring (SQL Server), digital signage control via WebSockets and Wake-on-LAN, and price management through a cache-aside pattern. Features modular role system, complete auditing, and remote TV startup. Adopted by the IT team of a wholesale supermarket, it cut service diagnostics from 5 minutes to 2–5 seconds.",
       "category": "own",
       "status": "completed",
       "images": [
@@ -95,7 +143,7 @@
         "Socket.io"
       ],
       "tools": [
-        "Opencode",
+        "OpenCode",
         "Git"
       ],
       "demo": "",
@@ -124,6 +172,56 @@
       ],
       "architecture_es": "MVC modular sobre Node.js/Express + TypeScript. Doble base de datos: MariaDB local para configuración y caché, SQL Server remoto (solo lectura) en cada terminal para consulta de jobs. Factory mssql con credenciales encriptadas AES. Frontend EJS con Nothing Style (glassmorphism + tipografía Space Grotesk/Silkscreen). Event delegation pattern obligatorio vía data-action.",
       "architecture_en": "Modular MVC on Node.js/Express + TypeScript. Dual database: local MariaDB for configuration and cache, remote SQL Server (read-only) on each terminal for job queries. MSSQL factory with AES-encrypted credentials. EJS frontend with Nothing Style (glassmorphism + Space Grotesk/Silkscreen typography). Mandatory event delegation pattern via data-action."
+    },
+    {
+      "slug": "guachafit",
+      "title": "Guachafit",
+      "description_es": "PWA offline-first para entrenadores personales y gimnasios con motor financiero bimonetario (VES/USD).",
+      "description_en": "Offline-first PWA for personal trainers and gyms with a dual-currency (VES/USD) finance engine.",
+      "fullDescription_es": "Plataforma que gestiona el ciclo completo entrenador–alumno: planes y cobros en doble moneda, entrenamiento diario con series y descansos reales, antropometría, nutrición y notificaciones multicanal. Proyecto personal (MVP, 2026) en el que fui tech lead y arquitecto, con implementación asistida por IA, más de 1.400 pruebas automatizadas, requisitos en Gherkin y decisiones de arquitectura documentadas (ADR).",
+      "fullDescription_en": "Platform that manages the full trainer–client cycle: dual-currency plans and payments, daily training with real sets and rest times, anthropometry, nutrition and multichannel notifications. Personal project (MVP, 2026) where I was tech lead and architect, with AI-assisted implementation, 1,400+ automated tests, Gherkin requirements and documented architecture decisions (ADRs).",
+      "category": "own",
+      "status": "in-progress",
+      "images": [],
+      "techs": [
+        "React 19",
+        "TypeScript",
+        "NestJS",
+        "PostgreSQL",
+        "Drizzle",
+        "Redis / BullMQ",
+        "Docker Compose"
+      ],
+      "tools": [
+        "OpenCode",
+        "Git"
+      ],
+      "demo": "",
+      "code": "",
+      "color": "accent",
+      "timeWorked_es": "MVP (2026)",
+      "timeWorked_en": "MVP (2026)",
+      "featured": true,
+      "problemsSolved_es": "Los entrenadores operan con rutinas en PDF, notas de voz, hojas de cálculo y comprobantes en WhatsApp: no saben qué entrenó realmente el alumno, y conciliar cobros en bolívares y dólares, con tasas distintas y conectividad intermitente en el gimnasio, les consume tiempo cada semana.",
+      "problemsSolved_en": "Trainers work with PDF routines, voice notes, spreadsheets and WhatsApp receipts: they don't know what the client actually trained, and reconciling payments in bolívars and dollars, with different exchange rates and patchy gym connectivity, eats up time every week.",
+      "keyFeatures_es": [
+        "Entrenamiento diario con checklist de series (peso/reps reales), descansos cronometrados y sincronización offline",
+        "Cobros con deuda maestra en USD, abonos en VES o divisas a tasa congelada e idempotencia de pagos",
+        "Bandeja de conciliación de comprobantes y recordatorios programados de cuotas",
+        "Antropometría con check-in remoto aprobado por el coach, comparador fotográfico y gráficos de evolución",
+        "Nutrición con metas de macronutrientes y cola offline de fotos",
+        "Notificaciones multicanal con reintentos exponenciales y dead-letter queue por cola"
+      ],
+      "keyFeatures_en": [
+        "Daily training with a set checklist (real weight/reps), timed rests and offline sync",
+        "Payments with a USD master debt, VES or foreign-currency installments at a frozen rate, and idempotent payments",
+        "Receipt reconciliation inbox and scheduled installment reminders",
+        "Anthropometry with coach-approved remote check-ins, photo comparison and progress charts",
+        "Nutrition with macronutrient goals and an offline photo queue",
+        "Multichannel notifications with exponential retries and a dead-letter queue per queue"
+      ],
+      "architecture_es": "Monorepo pnpm. PWA en React 19 + TypeScript, Vite, Tailwind CSS v4, Radix UI y TanStack Query, con Service Worker y cola de mutaciones en IndexedDB (Dexie). API NestJS (monolito modular) con guards RBAC y contratos Zod compartidos. PostgreSQL con Drizzle ORM y Row-Level Security multi-tenant; Redis + BullMQ para colas; almacenamiento S3-compatible con URLs prefirmadas. Docker Compose para el entorno local.",
+      "architecture_en": "pnpm monorepo. PWA built with React 19 + TypeScript, Vite, Tailwind CSS v4, Radix UI and TanStack Query, with a Service Worker and an IndexedDB (Dexie) mutation queue. NestJS API (modular monolith) with RBAC guards and shared Zod contracts. PostgreSQL with Drizzle ORM and multi-tenant Row-Level Security; Redis + BullMQ for queues; S3-compatible storage with presigned URLs. Docker Compose for the local environment."
     },
     {
       "slug": "yezzfolio",
@@ -240,8 +338,8 @@
       "title": "SIGOB Ecosystem",
       "description_es": "Ecosistema de gestión fiscal gubernamental para el Estado Amazonas que digitaliza presupuestos, nóminas y autoservicio.",
       "description_en": "Government fiscal management ecosystem for the Amazonas State that digitizes budgets, payrolls, and self-service.",
-      "fullDescription_es": "Conjunto de 3 sistemas interconectados (Core, Entes, Web) en PHP y MariaDB que maneja más de 60 entes descentralizados y 1360 empleados. Implementa reglas de la Ley de Presupuesto, control de dozavos y generación masiva de recibos y TXT bancarios con trazabilidad transaccional.",
-      "fullDescription_en": "Suite of 3 interconnected systems (Core, Entities, Web) built with PHP and MariaDB managing over 60 decentralized entities and 1360 employees. Implements Budget Law rules, fund fraction control, and mass generation of receipts and bank TXT files with transactional traceability.",
+      "fullDescription_es": "Conjunto de 3 sistemas interconectados (Core, Entes, Web) en PHP y MariaDB que maneja más de 60 entes descentralizados y una nómina de más de 1.300 empleados. Implementa reglas de la Ley de Presupuesto, control de dozavos y generación masiva de recibos y TXT bancarios con trazabilidad transaccional.",
+      "fullDescription_en": "Suite of 3 interconnected systems (Core, Entities, Web) built with PHP and MariaDB managing 60+ decentralized entities and a payroll of 1,300+ employees. Implements Budget Law rules, fund fraction control, and mass generation of receipts and bank TXT files with transactional traceability.",
       "category": "collab",
       "status": "completed",
       "images": [
@@ -268,8 +366,8 @@
       "timeWorked_es": "9 meses",
       "timeWorked_en": "9 months",
       "featured": true,
-      "problemsSolved_es": "La Gobernación del Estado Amazonas gestionaba presupuesto para 60+ entes descentralizados y nómina para ~1.360 empleados con planillas en papel, carpetas físicas y cartas mecanografiadas. Cero trazabilidad entre lo presupuestado y lo ejecutado. Los empleados debían viajar horas hasta Puerto Ayacucho solo para retirar un documento oficial.",
-      "problemsSolved_en": "The Amazonas State Government managed budgets for 60+ decentralized entities and payroll for ~1,360 employees using paper forms, physical folders, and typewritten letters. Zero traceability between budgeted and executed amounts. Employees had to travel hours to Puerto Ayacucho just to retrieve an official document.",
+      "problemsSolved_es": "La Gobernación del Estado Amazonas gestionaba presupuesto para 60+ entes descentralizados y nómina para más de 1.300 empleados con planillas en papel, carpetas físicas y cartas mecanografiadas. Cero trazabilidad entre lo presupuestado y lo ejecutado. Los empleados debían viajar horas hasta Puerto Ayacucho solo para retirar un documento oficial.",
+      "problemsSolved_en": "The Amazonas State Government managed budgets for 60+ decentralized entities and payroll for 1,300+ employees using paper forms, physical folders, and typewritten letters. Zero traceability between budgeted and executed amounts. Employees had to travel hours to Puerto Ayacucho just to retrieve an official document.",
       "keyFeatures_es": [
         "Formulación presupuestaria: ejercicio fiscal, distribución por sectores/programas, plan operativo y metas",
         "Ejecución presupuestaria con control de dozavos, compromisos, gastos, traspasos y dashboard amCharts",
@@ -294,8 +392,8 @@
       "title": "SISUPP",
       "description_es": "ERP web para la gestión integral de fincas pecuarias, incluyendo trazabilidad animal e inventarios.",
       "description_en": "Web ERP for comprehensive management of livestock farms, including animal traceability and inventories.",
-      "fullDescription_es": "Sistema de Información y Seguimiento de Unidades de Producción Pecuaria (Gobernación de Amazonas). Automatiza el control de animales (genealogía, salud, peso), reproducción y alimentación utilizando una arquitectura MVC propia en PHP con notificaciones push y auditoría profunda.",
-      "fullDescription_en": "Livestock Production Information and Tracking System. Automates animal control (genealogy, health, weight), reproduction, and feeding using a custom MVC architecture in PHP with push notifications and deep auditing.",
+      "fullDescription_es": "Sistema de Información y Seguimiento de Unidades de Producción Pecuaria (Gobernación de Amazonas). ERP de 13 módulos que automatiza el control de animales (genealogía, salud, peso), reproducción y alimentación utilizando una arquitectura MVC propia en PHP con notificaciones push y auditoría profunda.",
+      "fullDescription_en": "Livestock Production Information and Tracking System. 13-module ERP that automates animal control (genealogy, health, weight), reproduction, and feeding using a custom MVC architecture in PHP with push notifications and deep auditing.",
       "category": "collab",
       "status": "completed",
       "images": [
@@ -371,7 +469,7 @@
         "Google Calendar API"
       ],
       "tools": [
-        "Opencode",
+        "OpenCode",
         "Git"
       ],
       "demo": "",
@@ -446,6 +544,101 @@
       ],
       "architecture_es": "MVC propio en PHP 8+ sin framework. 19 controladores, 17 modelos, 19 servicios. Router con regex y sistema de grupos con herencia de prefijos. MySQL con UUID PKs, soft deletes universales (`deleted_at`) y triggers de auditoría en 48 operaciones. Contactos polimórficos (emails/teléfonos con entity_type ENUM). Notificaciones por template_key + JSON params renderizadas en tiempo de lectura con i18n. PDF bilingües con mapeo de enums a labels localizados.",
       "architecture_en": "Custom MVC in PHP 8+ without framework. 19 controllers, 17 models, 19 services. Regex-based router with group system and prefix inheritance. MySQL with UUID PKs, universal soft deletes (`deleted_at`), and audit triggers on 48 operations. Polymorphic contacts (emails/phones with entity_type ENUM). Template-based notifications with template_key + JSON params rendered at read-time with i18n. Bilingual PDFs with enum-to-localized-label mapping."
+    },
+    {
+      "slug": "sistema-gestion-restaurantes",
+      "title": "Sistema de Gestión de Restaurantes",
+      "description_es": "Sistema integral para restaurantes con punto de venta offline-first, flujo de órdenes mesero–caja–cocina y gastos analizados con IA.",
+      "description_en": "End-to-end restaurant management system with an offline-first point of sale, waiter–cashier–kitchen order flow, and AI-analyzed expenses.",
+      "fullDescription_es": "Plataforma multi-restaurante que centraliza facturación y punto de venta, gastos con análisis por IA (OpenAI), control horario de empleados, autorización de dispositivos y el flujo completo de órdenes entre mesero o cliente, caja, cocina y entrega. El punto de venta sigue cobrando sin conexión: las operaciones se encolan de forma cifrada y se sincronizan al recuperar la red. Proyecto privado desarrollado en SITI WORLD, empresa de desarrollo de software.",
+      "fullDescription_en": "Multi-restaurant platform that centralizes billing and point of sale, AI-analyzed expenses (OpenAI), employee time tracking, device authorization, and the complete order flow between waiter or customer, cashier, kitchen, and delivery. The point of sale keeps charging offline: operations are queued encrypted and synced once the network returns. Private project developed at SITI WORLD, a software development company.",
+      "category": "collab",
+      "status": "completed",
+      "images": [],
+      "techs": [
+        "PHP",
+        "MariaDB",
+        "JavaScript",
+        "Bootstrap",
+        "PWA",
+        "OpenAI API"
+      ],
+      "tools": [
+        "GitHub Actions"
+      ],
+      "demo": "",
+      "code": "",
+      "color": "accent",
+      "timeWorked_es": "Durante mi rol en SITI WORLD",
+      "timeWorked_en": "During my role at SITI WORLD",
+      "featured": true,
+      "problemsSolved_es": "Operación de restaurante fragmentada entre herramientas separadas para órdenes, cobro, gastos, asistencia del personal y coordinación con cocina, con pérdida de trazabilidad y control de costos en horas pico. Cortes de conexión que detenían el cobro.",
+      "problemsSolved_en": "Restaurant operations fragmented across separate tools for orders, billing, expenses, staff attendance, and kitchen coordination, with lost traceability and cost control during peak hours. Connection outages that halted charging.",
+      "keyFeatures_es": [
+        "Punto de venta offline-first: outbox cifrado con AES-GCM en IndexedDB, reintentos con backoff exponencial e idempotencia por operación",
+        "Flujo de órdenes mesero/cliente → caja → cocina → entrega, con tablero de cocina de tres carriles y historial de estados",
+        "Gastos con análisis por IA (OpenAI): extracción de datos de facturas a partir de hasta 8 fotos, con bandeja de revisión y aprobación",
+        "Control horario de empleados con kiosco por PIN, ocho tipos de marcaje y períodos de pago",
+        "Autorización de dispositivos por restaurante: emparejamiento con código de un solo uso y geocerca",
+        "RBAC con revalidación de sesión en cada petición, MFA con TOTP y auditoría con exportación CSV"
+      ],
+      "keyFeatures_en": [
+        "Offline-first point of sale: AES-GCM encrypted IndexedDB outbox, exponential-backoff retries, and per-operation idempotency",
+        "Order flow waiter/customer → cashier → kitchen → delivery, with a three-lane kitchen board and status history",
+        "AI-analyzed expenses (OpenAI): invoice data extraction from up to 8 photos, with a review and approval queue",
+        "Employee time tracking with a PIN kiosk, eight clocking types, and pay periods",
+        "Per-restaurant device authorization: single-use pairing code and geofence",
+        "RBAC with session revalidation on every request, TOTP MFA, and auditing with CSV export"
+      ],
+      "architecture_es": "MVC propio en PHP 8.1+ sin framework: front controller con router de expresiones regulares y cadena de middlewares (dispositivo, autenticación, permisos, CSRF). Acceso a datos con mysqli y statements preparados sobre MariaDB 11.4 con claves UUID. Frontend con módulos ES nativos, Bootstrap 5 y PWA con service worker que solo cachea shells anónimos. Interfaz bilingüe ES/EN. CI/CD con GitHub Actions (lint, pruebas de contrato y migraciones contra MariaDB real).",
+      "architecture_en": "Custom MVC in PHP 8.1+ without framework: front controller with a regex-based router and middleware chain (device, authentication, permissions, CSRF). Data access with mysqli and prepared statements on MariaDB 11.4 with UUID keys. Frontend with native ES modules, Bootstrap 5, and a PWA whose service worker only caches anonymous shells. Bilingual ES/EN interface. CI/CD with GitHub Actions (lint, contract tests, and migrations against a real MariaDB)."
+    },
+    {
+      "slug": "plataforma-llamadas-ia",
+      "title": "Plataforma de Llamadas con IA",
+      "description_es": "Plataforma multiempresa de gestión de llamadas con IVR, menús DTMF y asistentes de voz con IA en tiempo real.",
+      "description_en": "Multi-tenant call management platform with IVR, DTMF menus, and real-time AI voice assistants.",
+      "fullDescription_es": "Plataforma para empresas que atienden por teléfono: IVR con menús DTMF, extensiones, números E.164, mensajes de voz bilingües y asistentes de voz con IA en tiempo real sobre Twilio Media Streams y la API Realtime de OpenAI, con grabaciones, transcripciones y trazabilidad completa de cada llamada. Panel administrativo con RBAC y aislamiento estricto por empresa. Proyecto privado desarrollado en SITI WORLD, empresa de desarrollo de software.",
+      "fullDescription_en": "Platform for businesses that answer by phone: IVR with DTMF menus, extensions, E.164 numbers, bilingual voice messages, and real-time AI voice assistants over Twilio Media Streams and the OpenAI Realtime API, with recordings, transcripts, and full per-call traceability. Admin panel with RBAC and strict per-company isolation. Private project developed at SITI WORLD, a software development company.",
+      "category": "collab",
+      "status": "completed",
+      "images": [],
+      "techs": [
+        "PHP",
+        "Node.js",
+        "Express",
+        "WebSockets",
+        "MariaDB",
+        "Twilio",
+        "OpenAI Realtime API"
+      ],
+      "tools": [],
+      "demo": "",
+      "code": "",
+      "color": "primary",
+      "timeWorked_es": "Durante mi rol en SITI WORLD",
+      "timeWorked_en": "During my role at SITI WORLD",
+      "featured": true,
+      "problemsSolved_es": "Empresas que necesitan menús de atención, enrutamiento por horarios, asistentes que respondan en tiempo real y un registro completo de cada llamada, sin armar por separado centralita, grabador, transcripción y paneles de administración que dejan la información dispersa.",
+      "problemsSolved_en": "Businesses that need attendant menus, schedule-based routing, assistants that answer in real time, and a complete record of every call, without assembling a separate switchboard, recorder, transcription, and admin panels that leave information scattered.",
+      "keyFeatures_es": [
+        "Puente en tiempo real entre Twilio Media Streams y OpenAI Realtime con detección de voz en servidor, interrupción de respuesta (barge-in) y transcripción en vivo",
+        "Function calling para transferir la llamada a un representante mediante la API REST de Twilio",
+        "Motor IVR/DTMF dirigido por metadatos: destinos polimórficos, IVR anidados y enrutamiento por horarios",
+        "Aislamiento multiempresa: el acceso cruzado responde 404 para no revelar recursos ajenos",
+        "Grabaciones y transcripciones, con eventos de llamada append-only para trazabilidad",
+        "Secretos cifrados con AES-256-GCM compartidos entre PHP y Node, RBAC fail-closed, MFA con TOTP y auditoría"
+      ],
+      "keyFeatures_en": [
+        "Real-time bridge between Twilio Media Streams and OpenAI Realtime with server-side voice detection, barge-in, and live transcription",
+        "Function calling to transfer the call to a representative through the Twilio REST API",
+        "Metadata-driven IVR/DTMF engine: polymorphic destinations, nested IVRs, and schedule-based routing",
+        "Multi-tenant isolation: cross-tenant access returns 404 so other tenants' resources are never revealed",
+        "Recordings and transcripts, with append-only call events for traceability",
+        "AES-256-GCM encrypted secrets shared between PHP and Node, fail-closed RBAC, TOTP MFA, and auditing"
+      ],
+      "architecture_es": "Dos servicios que comparten una base de datos MySQL/MariaDB: un panel administrativo en PHP 8.1+ (MVC propio, router con grupos y expresiones regulares, mysqli con statements preparados, 31 tablas con UUID) y un núcleo en tiempo real en Node.js 22 con Express 5 y ws que atiende los webhooks de Twilio, el motor IVR/DTMF y el puente con OpenAI Realtime. Interfaz bilingüe ES/EN.",
+      "architecture_en": "Two services sharing one MySQL/MariaDB database: a PHP 8.1+ admin panel (custom MVC, regex-based router with groups, mysqli with prepared statements, 31 UUID-keyed tables) and a Node.js 22 real-time core with Express 5 and ws that handles Twilio webhooks, the IVR/DTMF engine, and the OpenAI Realtime bridge. Bilingual ES/EN interface."
     },
     {
       "slug": "condominio-app",
@@ -604,72 +797,119 @@
   ],
   "experience": [
     {
-      "period_es": "Junio 2023 - Abril 2026",
-      "period_en": "June 2023 - April 2026",
-      "role_es": "Analista de Sistemas IT",
-      "role_en": "IT Systems Analyst",
-      "company": "Forum Super Mayorista",
-      "location_es": "Ciudad Bolívar, Presencial",
-      "location_en": "Ciudad Bolívar, On-site",
-      "description_es": "Administración de infraestructura, mantenimiento de servidores y soporte a hardware fiscal y sistemas POS. Desarrollo de una plataforma de monitoreo interna en Node.js y MySQL que redujo significativamente los tiempos de diagnóstico de servicios.",
-      "description_en": "Infrastructure administration, server maintenance, and support for fiscal hardware and POS systems. Development of an internal monitoring platform using Node.js and MySQL that significantly reduced service diagnostic times.",
-      "techs": [
-        "Node.js",
-        "MySQL",
-        "Hardware Fiscal"
-      ],
-      "color": "primary"
-    },
-    {
-      "period_es": "Octubre 2025 - Noviembre 2025",
-      "period_en": "October 2025 - November 2025",
-      "role_es": "Tech Lead & Desarrollador Full-Stack",
-      "role_en": "Tech Lead & Full-Stack Developer",
-      "company": "Sisupp (Gobernación de Amazonas)",
-      "location_es": "Remoto",
-      "location_en": "Remote",
-      "description_es": "Liderazgo técnico y toma de decisiones arquitectónicas para la creación de un ERP especializado en la gestión ganadera. Colaboración estrecha con el equipo de desarrollo para garantizar la escalabilidad y eficiencia de la base de datos y la lógica de negocio.",
-      "description_en": "Technical leadership and architectural decision-making for the creation of an ERP specialized in livestock management. Close collaboration with the development team to ensure the scalability and efficiency of the database and business logic.",
-      "techs": [
-        "Vanilla PHP",
-        "JavaScript",
-        "MySQL",
-        "HTML/CSS"
-      ],
-      "color": "accent"
-    },
-    {
-      "period_es": "Mayo 2025 - Marzo 2026",
-      "period_en": "May 2025 - March 2026",
+      "period_es": "Mayo 2025 – Septiembre 2026",
+      "period_en": "May 2025 – September 2026",
       "role_es": "Ingeniero de Aplicaciones",
       "role_en": "Applications Engineer",
-      "company": "Empresa anónima",
-      "location_es": "Remoto",
-      "location_en": "Remote",
-      "description_es": "Participación activa en el desarrollo de diversos proyectos tecnológicos. Gestión de cuentas corporativas y administración de la infraestructura de sistemas de almacenamiento en la nube para optimizar los flujos de trabajo del equipo.",
-      "description_en": "Active participation in the development of various technological projects. Management of corporate accounts and administration of cloud storage infrastructure to optimize team workflows.",
+      "company_es": "SITI WORLD (Empresa de desarrollo de software)",
+      "company_en": "SITI WORLD (Software Development Company)",
+      "location_es": "California, EE. UU. · Remoto",
+      "location_en": "California, USA · Remote",
+      "description_es": "Desarrollo de plataformas en producción para salud digital, gestión de restaurantes, llamadas con IA y logística.",
+      "description_en": "Built production platforms for digital health, restaurant management, AI calling and logistics.",
+      "highlights_es": [
+        "Diseñé una arquitectura MVC en PHP nativo (enrutador con grupos y middlewares) adoptada como estándar técnico de la organización.",
+        "Integré OpenAI en más de 5 casos de uso de una plataforma de salud digital y construí el núcleo en tiempo real (Node.js, WebSockets, Twilio y OpenAI Realtime) de una plataforma de llamadas con IA.",
+        "Reforcé el núcleo de seguridad compartido: RBAC fail-closed, doble factor (TOTP), límites de intentos y auditoría mediante triggers."
+      ],
+      "highlights_en": [
+        "Designed a native PHP MVC architecture (router with groups and middleware) adopted as the organization’s technical standard.",
+        "Integrated OpenAI into 5+ use cases of a digital health platform and built the real-time core (Node.js, WebSockets, Twilio and OpenAI Realtime) of an AI call platform.",
+        "Strengthened the shared security core: fail-closed RBAC, two-factor authentication (TOTP), rate limiting and trigger-based auditing."
+      ],
       "techs": [
-        "Vanilla PHP",
-        "JavaScript",
-        "MySQL"
+        "PHP 8",
+        "Node.js",
+        "MySQL/MariaDB",
+        "OpenAI API",
+        "Twilio",
+        "WebSockets"
       ],
       "color": "highlight"
     },
     {
-      "period_es": "Mayo 2024 - Enero 2025",
-      "period_en": "May 2024 - January 2025",
+      "period_es": "Julio 2023 – Abril 2026",
+      "period_en": "July 2023 – April 2026",
+      "role_es": "Analista IT",
+      "role_en": "IT Analyst",
+      "company_es": "Forum Super Mayorista C.A. (supermercado mayorista)",
+      "company_en": "Forum Super Mayorista C.A. (wholesale supermarket)",
+      "location_es": "Ciudad Bolívar, Venezuela",
+      "location_en": "Ciudad Bolívar, Venezuela",
+      "description_es": "Soporte de nivel 1 y 2, en un equipo de 3 analistas, para 19 cajas con más de 600 transacciones diarias.",
+      "description_en": "Tier 1 and Tier 2 support, in a team of 3 analysts, for 19 checkout lanes handling 600+ daily transactions.",
+      "highlights_es": [
+        "Por iniciativa propia, desarrollé una plataforma web interna de 13 módulos adoptada por el equipo de TI que redujo el diagnóstico de servicios de 5 minutos a 2–5 segundos.",
+        "Consultas SQL en SQL Server, control de jobs de precios y sincronización, y respaldos nocturnos con su verificación.",
+        "Gestión de incidencias en GLPI y soporte a POS Stellar, impresoras fiscales, balanzas y red."
+      ],
+      "highlights_en": [
+        "On my own initiative, built a 13-module internal web platform adopted by the IT team that cut service diagnostics from 5 minutes to 2–5 seconds.",
+        "SQL queries on SQL Server, control of pricing and sync jobs, and verified nightly backups.",
+        "Incident management in GLPI and support for Stellar POS, fiscal printers, scales and the network."
+      ],
+      "techs": [
+        "SQL Server",
+        "GLPI",
+        "Node.js",
+        "TypeScript",
+        "MySQL/MariaDB"
+      ],
+      "color": "primary"
+    },
+    {
+      "period_es": "Octubre 2025 – Noviembre 2025",
+      "period_en": "October 2025 – November 2025",
+      "role_es": "Desarrollador Full-Stack / Arquitecto de Software",
+      "role_en": "Full-Stack Developer / Software Architect",
+      "company_es": "Gobernación del Estado Amazonas – SISUPP (ERP ganadero)",
+      "company_en": "Amazonas State Government – SISUPP (Livestock ERP)",
+      "location_es": "Amazonas, Venezuela · Remoto",
+      "location_en": "Amazonas, Venezuela · Remote",
+      "description_es": "Diseñé la arquitectura MVC en PHP 7.4 y definí el stack de un ERP de 13 módulos (genealogía con control de consanguinidad hasta 6 generaciones, reproducción, sanidad y alimentación).",
+      "description_en": "Designed the PHP 7.4 MVC architecture and defined the stack of a 13-module ERP (genealogy with inbreeding control up to 6 generations, breeding, animal health and feeding).",
+      "highlights_es": [
+        "Dividí la plantilla original (Bootstrap 5) en componentes modulares y establecí los estándares de desarrollo del equipo.",
+        "Orienté las decisiones técnicas del equipo y cumplimos los objetivos antes de la fecha límite."
+      ],
+      "highlights_en": [
+        "Split the original Bootstrap 5 template into modular components and set the team’s development standards.",
+        "Guided the team’s technical decisions and met the objectives ahead of the deadline."
+      ],
+      "techs": [
+        "PHP 7.4",
+        "MySQL",
+        "JavaScript",
+        "Bootstrap 5",
+        "ApexCharts"
+      ],
+      "color": "accent"
+    },
+    {
+      "period_es": "Mayo 2024 – Enero 2025",
+      "period_en": "May 2024 – January 2025",
       "role_es": "Desarrollador Full-Stack",
       "role_en": "Full-Stack Developer",
-      "company": "Gobernación de Amazonas (Proyecto Sigob)",
-      "location_es": "Remoto",
-      "location_en": "Remote",
-      "description_es": "Gestión del desarrollo frontend y la integridad arquitectónica de sistemas ERP gubernamentales. Implementación de módulos críticos de nómina y presupuesto para entidades descentralizadas, gestionando operaciones para más de 2,000 empleados.",
-      "description_en": "Managed frontend development and architectural integrity for government ERP systems. Implemented critical payroll and budget modules for decentralized entities, managing operations for over 2,000 employees.",
+      "company_es": "Gobernación del Estado Amazonas – SIGOB (ERP de presupuesto y nómina)",
+      "company_en": "Amazonas State Government – SIGOB (Budget and Payroll ERP)",
+      "location_es": "Amazonas, Venezuela · Remoto",
+      "location_en": "Amazonas, Venezuela · Remote",
+      "description_es": "Interfaces de nómina y tabuladores salariales para más de 1.300 empleados, con revisión comparativa e historial de auditoría.",
+      "description_en": "Payroll and salary scale interfaces for 1,300+ employees, with comparative review and an audit history.",
+      "highlights_es": [
+        "Validación bidireccional (cliente y servidor) en tiempo real de la asignación y el traspaso de partidas, evitando errores y sobregiros.",
+        "Sincronización entre bases de datos distribuidas para que más de 60 entes descentralizados gestionaran sus solicitudes de fondos (dozavos)."
+      ],
+      "highlights_en": [
+        "Real-time two-way (client and server) validation of budget allocations and transfers, preventing user errors and overspending.",
+        "Synchronization between distributed databases so 60+ decentralized agencies could manage their monthly fund requests (dozavos)."
+      ],
       "techs": [
-        "Vanilla PHP",
+        "PHP",
+        "MariaDB/MySQL",
         "JavaScript",
-        "MySQL",
-        "HTML/CSS"
+        "jQuery",
+        "Bootstrap 5"
       ],
       "color": "secondary"
     }

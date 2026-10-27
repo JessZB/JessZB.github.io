@@ -4,10 +4,10 @@ export default {
   "site": {
     "name": "JESSZB.DEV",
     "tagline": "Code with Venezuelan flavor",
-    "description": "Portfolio of Jesús Zapata — Venezuelan Full-Stack Developer. Building applications layer by layer, with precision and sazón."
+    "description": "Portfolio of Jesús Zapata — Venezuelan Computer Engineer and Full-Stack Developer with 3+ years of professional experience."
   },
   "hero": {
-    "greeting": "Hi, I'm",
+    "greeting": "Hi, I'm Jesús Zapata",
     "name": identity.identity.name,
     "role": identity.identity.role_en,
     "subtitle": {
@@ -47,10 +47,13 @@ export default {
       "frontend": "Frontend",
       "backend": "Backend",
       "databases": "Databases",
-      "devops": "DevOps & Cloud",
-      "soft": "Soft & Hard Skills"
+      "devops": "DevOps & Tools",
+      "security": "Security",
+      "ai": "AI & Integrations",
+      "soft": "Analysis & IT Support"
     },
-    "tooltipHint": "View related projects"
+    "tooltipHint": "View related projects",
+    "mainStack": "— Main stack —"
   },
   "tools": {
     "title": "Tools",
@@ -111,21 +114,13 @@ export default {
       "arepa": "Initializing communication protocol...",
       "coffee": "Preparing connection..."
     },
-    "name": "echo \"What's your name?\"",
-    "email": "echo \"Your email?\"",
-    "message": "echo \"What's on your mind?\"",
-    "send": "Send Message",
-    "sending": "Sending...",
-    "error": "Oops! Something went wrong.",
-    "errorDetail": "The message could not be sent. Please try again.",
-    "retry": "Retry",
-    "success": "Awesome! Message sent successfully",
-    "successAlt": "In the meantime, you can also reach me on my social networks",
-    "directEmail": "Or if you prefer, write me directly at",
-    "alt": "Or find me on:",
-    "namePlaceholder": "Your name",
-    "emailPlaceholder": "you@email.com",
-    "messagePlaceholder": "Write your message..."
+    "cta": "Email me",
+    "ctaHint": "Your email app will open with the subject already filled in.",
+    "ctaGmail": "Open in Gmail",
+    "orWrite": "Or you can write to me at this address:",
+    "mailSubject": "Contact from your portfolio",
+    "mailBody": "Hi Jesús,\n\nI saw your portfolio and would like to talk about:\n\n",
+    "alt": "Or find me on:"
   },
   "nav": {
     "about": "About",
