@@ -5,7 +5,7 @@ export default defineConfig({
   vite: {
     plugins: [tailwindcss()],
   },
-  site: 'https://jesszb.dev',
+  site: 'https://jesszb.github.io',
   image: {
     service: {
       entrypoint: 'astro/assets/services/sharp',

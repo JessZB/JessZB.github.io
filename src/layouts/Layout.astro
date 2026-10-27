@@ -22,15 +22,15 @@ const {
 } = Astro.props;
 
 const siteName = 'JESSZB.DEV';
-const siteUrl = 'https://jesszb.dev';
+const siteUrl = 'https://jesszb.github.io';
 const pageTitle = title
   ? `${title} | ${siteName}`
-  : `${siteName} — Jesús Zapata | Full-Stack Developer`;
+  : `${siteName} — Jesús Zapata | Computer Engineer & Full-Stack Developer`;
 const pageDesc =
   description ||
   (locale === 'es'
-    ? 'Portafolio de Jesús Zapata — Desarrollador Full-Stack venezolano. Construyo aplicaciones capa por capa, con precisión y sazón.'
-    : 'Portfolio of Jesús Zapata — Venezuelan Full-Stack Developer. Building applications layer by layer, with precision and seasoning.');
+    ? 'Portafolio de Jesús Zapata — Ingeniero en Informática y Desarrollador Full-Stack venezolano con más de 3 años de experiencia profesional.'
+    : 'Portfolio of Jesús Zapata — Venezuelan Computer Engineer and Full-Stack Developer with 3+ years of professional experience.');
 
 const canonicalUrl = `${siteUrl}${canonicalPath}`;
 
@@ -64,6 +64,9 @@ const translations = {
     <meta property="og:title" content={pageTitle} />
     <meta property="og:description" content={pageDesc} />
     <meta property="og:image" content={`${siteUrl}${ogImage}`} />
+    <meta property="og:image:width" content="1200" />
+    <meta property="og:image:height" content="630" />
+    <meta property="og:image:alt" content={`${siteName} — Jesús Zapata, Computer Engineer & Full-Stack Developer`} />
     <meta property="og:site_name" content={siteName} />
     <meta property="og:locale" content={locale === 'es' ? 'es_VE' : 'en_US'} />
 
@@ -82,7 +85,7 @@ const translations = {
     <link rel="preconnect" href="https://fonts.googleapis.com" />
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
     <link
-      href="https://fonts.googleapis.com/css2?family=Chakra+Petch:wght@400;500;600;700&family=Inter:wght@300;400;500;600;700&family=Playfair+Display:ital,wght@0,400;0,600;0,700;1,400&display=swap"
+      href="https://fonts.googleapis.com/css2?family=Chakra+Petch:wght@400;500;600;700&family=Inter:wght@300;400;500;600;700&display=swap"
       rel="stylesheet"
     />
 
@@ -92,12 +95,12 @@ const translations = {
         "@context": "https://schema.org",
         "@type": "Person",
         "name": "Jesús Zapata",
-        "url": "https://jesszb.dev",
-        "jobTitle": "Full-Stack Developer",
+        "url": "https://jesszb.github.io",
+        "jobTitle": "Computer Engineer & Full-Stack Developer",
         "nationality": "Venezuelan",
         "sameAs": [
           "https://github.com/JessZB",
-          "https://linkedin.com/in/jesusZapata"
+          "https://www.linkedin.com/in/tech-jesus-zapata/"
         ]
       }
     </script>
