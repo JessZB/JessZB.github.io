@@ -147,6 +147,9 @@ export default {
     "arepaLabel": "Arepa Theme",
     "coffeeLabel": "Coffee Theme"
   },
+  "a11y": {
+    "skip": "Skip to content"
+  },
   "lang": {
     "es": "ES",
     "en": "EN"

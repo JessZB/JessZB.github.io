@@ -59,6 +59,28 @@
   --animate-spin-slow: spin 8s linear infinite;
 }
 
+.skip-link {
+  position: fixed;
+  top: 0.5rem;
+  left: 0.5rem;
+  z-index: 10000;
+  padding: 0.6rem 1rem;
+  border-radius: 0.5rem;
+  background: var(--color-bg-surface);
+  color: var(--color-text-primary);
+  border: 2px solid var(--color-primary-text);
+  font-weight: 600;
+  transform: translateY(-200%);
+}
+
+.skip-link:focus {
+  transform: translateY(0);
+}
+
+main:focus {
+  outline: none;
+}
+
 @keyframes glow-pulse {
   0%, 100% { box-shadow: 0 0 5px rgba(245, 197, 66, 0.5); }
   50% { box-shadow: 0 0 20px rgba(245, 197, 66, 0.8), 0 0 40px rgba(245, 197, 66, 0.3); }
@@ -370,13 +392,13 @@
   /* Accent — burgundy / deep wine */
   --color-accent: #A0404A;
   --color-accent-light: #C4606A;
-  --color-accent-text: #A0404A;
-  --color-accent-light-text: #C4606A;
+  --color-accent-text: #CC6670;
+  --color-accent-light-text: #D0707A;
 
   /* Highlight — antique lavender / mauve */
   --color-highlight: #8B6B8B;
   --color-highlight-light: #AA8DAA;
-  --color-highlight-text: #8B6B8B;
+  --color-highlight-text: #9C7C9C;
   --color-highlight-light-text: #AA8DAA;
 
   /* Text — warm cream and parchment */

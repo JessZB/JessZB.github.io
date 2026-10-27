@@ -122,8 +122,8 @@ const translations = {
     </script>
 
     <!-- GSAP -->
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.5/gsap.min.js" is:inline></script>
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.5/ScrollTrigger.min.js" is:inline></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.5/gsap.min.js" defer is:inline></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.5/ScrollTrigger.min.js" defer is:inline></script>
 
     <!-- Client Router for SPA-like navigation -->
     <ClientRouter />
@@ -132,6 +132,7 @@ const translations = {
   <body class="min-h-screen bg-bg-deep">
     <!-- Theme curtain (must be first child for z-index stacking) -->
     <ThemeCurtain />
+    <a href="#main" class="skip-link" data-i18n="a11y.skip">Saltar al contenido</a>
 
     <slot />
 
@@ -246,7 +247,7 @@ const translations = {
 
     <!-- GSAP Scroll Animations -->
     <script is:inline>
-      document.addEventListener('astro:page-load', function () {
+      function initScrollAnimations() {
         if (typeof gsap === 'undefined' || typeof ScrollTrigger === 'undefined') return;
         gsap.registerPlugin(ScrollTrigger);
 
@@ -300,6 +301,15 @@ const translations = {
             }
           );
         });
+      }
+
+      // gsap is loaded with defer: if it is not ready yet, wait for window load once
+      document.addEventListener('astro:page-load', function () {
+        if (typeof gsap !== 'undefined' && typeof ScrollTrigger !== 'undefined') {
+          initScrollAnimations();
+        } else if (document.readyState !== 'complete') {
+          window.addEventListener('load', initScrollAnimations, { once: true });
+        }
       });
     </script>
   </body>
