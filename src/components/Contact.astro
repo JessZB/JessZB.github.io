@@ -66,7 +66,7 @@ const email = identity.identity.email;
             href={`https://mail.google.com/mail/?view=cm&fs=1&to=${email}`}
             target="_blank"
             rel="noopener noreferrer"
-            class="inline-flex items-center justify-center min-h-[44px] mt-2 px-3 text-sm text-secondary-text hover:text-primary-text underline underline-offset-4 transition-colors"
+            class="inline-flex items-center justify-center min-h-[44px] mt-2 px-3 text-sm text-secondary-text hover:text-primary-text active:text-primary-text underline underline-offset-4 transition-colors"
             data-i18n="contact.ctaGmail"
           >Abrir en Gmail</a>
           <p class="text-text-muted text-sm mt-4" data-i18n="contact.orWrite">O puedes escribirme a este correo:</p>
@@ -110,12 +110,19 @@ const email = identity.identity.email;
     padding: 0 0.5rem;
     color: var(--color-text-secondary);
     text-decoration: none;
-    transition: color 0.2s ease, transform 0.2s ease;
+    transition: color 0.2s ease, translate 0.2s ease, scale 0.12s ease-out;
   }
 
-  .social-link:hover {
+  @media (hover: hover) and (pointer: fine) {
+    .social-link:hover {
+      color: var(--color-primary-text);
+      translate: 0 -2px;
+    }
+  }
+
+  .social-link:active {
     color: var(--color-primary-text);
-    transform: translateY(-2px);
+    scale: 0.94;
   }
 </style>
 

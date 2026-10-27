@@ -78,9 +78,16 @@
     transition: all 0.2s ease;
   }
 
-  .lightbox-close:hover {
-    background: rgba(255, 255, 255, 0.2);
-    transform: scale(1.1);
+  @media (hover: hover) and (pointer: fine) {
+    .lightbox-close:hover {
+      background: rgba(255, 255, 255, 0.2);
+      transform: scale(1.1);
+    }
+  }
+
+  .lightbox-close:active {
+    background: rgba(255, 255, 255, 0.3);
+    transform: scale(0.92);
   }
 
   .lightbox-nav {
@@ -101,9 +108,16 @@
     transition: all 0.2s ease;
   }
 
-  .lightbox-nav:hover {
-    background: rgba(255, 255, 255, 0.15);
-    transform: translateY(-50%) scale(1.1);
+  @media (hover: hover) and (pointer: fine) {
+    .lightbox-nav:hover {
+      background: rgba(255, 255, 255, 0.15);
+      transform: translateY(-50%) scale(1.1);
+    }
+  }
+
+  .lightbox-nav:active {
+    background: rgba(255, 255, 255, 0.3);
+    transform: translateY(-50%) scale(0.92);
   }
 
   .lightbox-prev { left: 1.25rem; }

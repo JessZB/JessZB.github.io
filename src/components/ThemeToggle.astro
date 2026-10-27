@@ -39,10 +39,18 @@
     min-height: 44px;
   }
 
-  .theme-toggle-btn:hover {
+  @media (hover: hover) and (pointer: fine) {
+    .theme-toggle-btn:hover {
+      border-color: var(--color-primary);
+      color: var(--color-primary-text);
+      box-shadow: 0 0 10px rgba(var(--color-primary), 0.2); /* this works globally */
+    }
+  }
+
+  .theme-toggle-btn:active {
+    transform: scale(0.94);
     border-color: var(--color-primary);
-    color: var(--color-primary-text);
-    box-shadow: 0 0 10px rgba(var(--color-primary), 0.2); /* this works globally */
+    background: color-mix(in srgb, var(--color-primary) 15%, transparent);
   }
 
   .theme-icon {

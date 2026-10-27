@@ -1,5 +1,8 @@
 @import "tailwindcss";
 
+/* Real pointer devices only (mouse/trackpad): no sticky hover on touch. */
+@custom-variant fine (@media (hover: hover) and (pointer: fine));
+
 
 /* ─── Arepa-Tropical (default) ─────────────────────────────── */
 @theme {
@@ -248,22 +251,16 @@ main:focus {
   .card-base {
     @apply bg-bg-surface border border-white/5 rounded-2xl;
     box-shadow: 0 4px 20px rgba(0, 0, 0, 0.3);
-    transition: transform 0.3s ease, box-shadow 0.3s ease;
+    /* translate/scale (not transform) so GSAP's inline transform cannot override them */
+    transition: translate 0.3s ease, scale 0.15s ease-out, box-shadow 0.3s ease;
   }
 
-  .card-base:hover {
-    transform: translateY(-6px);
-    box-shadow: 0 8px 30px rgba(0, 0, 0, 0.5), 0 0 20px rgba(245, 197, 66, 0.1);
-  }
-
-  .card-base--no-hover:hover {
-    transform: none;
-    box-shadow: 0 4px 20px rgba(0, 0, 0, 0.3);
-  }
-  /* Touch devices: no sticky hover lift after a tap */
-  @media (hover: none) {
-    .card-base:hover {
-      transform: none;
+  /* Hover lift: mouse/trackpad only, so touch never gets a "stuck" state */
+  @media (hover: hover) and (pointer: fine) {
+    .card-base:not(.card-base--no-hover):hover {
+      /* !important: GSAP stagger writes inline translate/scale: none on project cards */
+      translate: 0 -6px !important;
+      box-shadow: 0 8px 30px rgba(0, 0, 0, 0.5), 0 0 20px rgba(245, 197, 66, 0.1);
     }
   }
 
@@ -296,24 +293,37 @@ main:focus {
 
   .btn-primary {
     @apply inline-flex items-center gap-2 px-6 py-3 rounded-full font-heading font-semibold
-           hover:scale-105 transition-all duration-300;
+           fine:hover:scale-105 active:scale-95 transition-all duration-300;
     color: #110D0A;
     background-image: linear-gradient(135deg, var(--color-primary), var(--color-primary-light));
     box-shadow: 0 4px 10px rgba(245, 166, 35, 0.2);
   }
 
-  .btn-primary:hover {
-    box-shadow: 0 6px 20px rgba(245, 166, 35, 0.4);
+  @media (hover: hover) and (pointer: fine) {
+    .btn-primary:hover {
+      box-shadow: 0 6px 20px rgba(245, 166, 35, 0.4);
+    }
+  }
+
+  .btn-primary:active {
+    box-shadow: 0 2px 6px rgba(245, 166, 35, 0.35);
   }
 
   .btn-outline {
     @apply inline-flex items-center gap-2 px-6 py-3 rounded-full font-heading font-semibold
            border-2 border-primary text-text-primary
-           hover:bg-primary
+           fine:hover:bg-primary active:bg-primary active:scale-95
            transition-all duration-300;
   }
 
-  .btn-outline:hover {
+  /* Dark label only while the fill is shown (hover on real pointers, or pressed) */
+  @media (hover: hover) and (pointer: fine) {
+    .btn-outline:hover {
+      color: #110D0A;
+    }
+  }
+
+  .btn-outline:active {
     color: #110D0A;
   }
 
@@ -440,8 +450,10 @@ main:focus {
   box-shadow: 0 0 15px rgba(200, 135, 74, 0.4);
 }
 
-[data-theme="coffee"] .btn-primary:hover {
-  box-shadow: 0 0 30px rgba(200, 135, 74, 0.6);
+@media (hover: hover) and (pointer: fine) {
+  [data-theme="coffee"] .btn-primary:hover {
+    box-shadow: 0 0 30px rgba(200, 135, 74, 0.6);
+  }
 }
 
 [data-theme="coffee"] html {

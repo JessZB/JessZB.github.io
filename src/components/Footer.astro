@@ -47,10 +47,10 @@ import identity from '../data/identity.json';
         <!-- Theme-aware counter -->
         <button
           id="fun-counter"
-          class="flex items-center gap-2 px-4 py-2 bg-bg-surface rounded-full border border-primary/10 hover:border-primary/40 transition-all text-sm text-text-muted hover:text-primary-text group"
+          class="flex items-center gap-2 px-4 py-2 bg-bg-surface rounded-full border border-primary/10 hover:border-primary/40 transition-all text-sm text-text-muted hover:text-primary-text active:border-primary active:scale-95 group"
           title="¡Hacé click!"
         >
-          <span id="counter-icon" class="flex items-center justify-center group-hover:scale-125 transition-transform text-primary-text" aria-hidden="true">
+          <span id="counter-icon" class="flex items-center justify-center group-hover:scale-125 group-active:scale-125 transition-transform text-primary-text" aria-hidden="true">
             <!-- Icon will be injected by script -->
           </span>
           <span id="counter-count" class="font-mono font-medium">0</span>
@@ -90,12 +90,19 @@ import identity from '../data/identity.json';
     width: 44px;
     height: 44px;
     color: var(--color-text-muted);
-    transition: color 0.2s ease, transform 0.2s ease;
+    transition: color 0.2s ease, translate 0.2s ease, scale 0.12s ease-out;
   }
 
-  .footer-icon:hover {
+  @media (hover: hover) and (pointer: fine) {
+    .footer-icon:hover {
+      color: var(--color-primary-text);
+      translate: 0 -3px;
+    }
+  }
+
+  .footer-icon:active {
     color: var(--color-primary-text);
-    transform: translateY(-3px);
+    scale: 0.88;
   }
 </style>
 

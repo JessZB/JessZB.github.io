@@ -56,8 +56,19 @@
     transition: all 0.2s ease;
   }
 
-  .lang-btn:hover {
+  @media (hover: hover) and (pointer: fine) {
+    .lang-btn:hover {
+      color: var(--color-primary-text);
+    }
+  }
+
+  .lang-btn:active {
+    transform: scale(0.92);
+  }
+
+  .lang-btn:not([aria-current="true"]):active {
     color: var(--color-primary-text);
+    background: color-mix(in srgb, var(--color-primary) 18%, transparent);
   }
 
   .lang-btn[aria-current="true"] {

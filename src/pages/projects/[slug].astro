@@ -63,10 +63,10 @@ const timeWorked = project.timeWorked[lang];
         <!-- Back link -->
         <a
           href="/#projects"
-          class="inline-flex items-center gap-2 text-text-muted hover:text-primary-text transition-colors text-sm mb-8 group"
+          class="inline-flex items-center gap-2 text-text-muted hover:text-primary-text active:text-primary-text transition-colors text-sm mb-8 group min-h-[44px]"
           data-i18n="projects.detail.back"
         >
-          <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="group-hover:-translate-x-1 transition-transform" aria-hidden="true"><path d="M19 12H5"/><path d="m12 19-7-7 7-7"/></svg>
+          <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="group-hover:-translate-x-1 group-active:-translate-x-1 transition-transform" aria-hidden="true"><path d="M19 12H5"/><path d="m12 19-7-7 7-7"/></svg>
           ← Volver a proyectos
         </a>
 
@@ -126,13 +126,13 @@ const timeWorked = project.timeWorked[lang];
                 const remaining = project.images.length - 4;
                 return (
                   <div
-                    class="aspect-video rounded-lg overflow-hidden bg-bg-surface border border-white/5 cursor-pointer group relative"
+                    class="aspect-video rounded-lg overflow-hidden bg-bg-surface border border-white/5 cursor-pointer group relative active:scale-[0.97] transition-transform"
                     onclick={`__openLightbox(${i})`}
                   >
                     <Image
                       src={img}
                       alt={`${title} screenshot ${i + 1}`}
-                      class="w-full h-full object-cover group-hover:scale-105 transition-transform duration-500"
+                      class="w-full h-full object-cover group-hover:scale-105 group-active:scale-105 transition-transform duration-500"
                       loading="lazy"
                       decoding="async"
                       inferSize
