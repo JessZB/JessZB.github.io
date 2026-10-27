@@ -37,13 +37,16 @@ export default {
     },
     "avatarAlt": "Venezuelan developer anime avatar"
   },
-  "skills": {
-    "title": "Skills",
+  "stack": {
+    "title": "Stack",
     "subtitle": {
       "arepa": "Technologies I've cooked code with",
       "coffee": "The arsenal I use to brew good software"
     },
-    "categories": {
+    "used": "Used in {n} projects",
+    "projectsWord": "projects",
+    "domainsTitle": "Skills by domain",
+    "domains": {
       "frontend": "Frontend",
       "backend": "Backend",
       "databases": "Databases",
@@ -52,14 +55,22 @@ export default {
       "ai": "AI & Integrations",
       "soft": "Analysis & IT Support"
     },
-    "tooltipHint": "View related projects",
-    "mainStack": "— Main stack —"
-  },
-  "tools": {
-    "title": "Tools",
-    "subtitle": {
-      "arepa": "The arepero's ninja arsenal",
-      "coffee": "The code barista's instruments"
+    "benchTitle": "Workbench",
+    "groups": {
+      "base": "Core development",
+      "agents": "AI agents & CLIs",
+      "support": "Support"
+    },
+    "toolTypes": {
+      "editor": "Editor",
+      "aiCli": "AI CLI",
+      "versioning": "Version control",
+      "repos": "Repositories",
+      "aiAgent": "AI Agent",
+      "cloudIde": "Cloud IDE",
+      "orm": "ORM",
+      "apiTesting": "API Testing",
+      "notes": "Notes"
     }
   },
   "projects": {
@@ -124,8 +135,7 @@ export default {
   },
   "nav": {
     "about": "About",
-    "skills": "Skills",
-    "tools": "Tools",
+    "stack": "Stack",
     "projects": "Projects",
     "experience": "Experience",
     "contact": "Contact"

@@ -20,8 +20,7 @@ import LangToggle from './LangToggle.astro';
       <!-- Nav links (desktop) -->
       <div class="hidden md:flex items-center gap-6">
         <a href="/#about" class="nav-link" data-i18n="nav.about">Sobre Mí</a>
-        <a href="/#skills" class="nav-link" data-i18n="nav.skills">Habilidades</a>
-        <a href="/#tools" class="nav-link" data-i18n="nav.tools">Herramientas</a>
+        <a href="/#stack" class="nav-link" data-i18n="nav.stack">Stack</a>
         <a href="/#projects" class="nav-link" data-i18n="nav.projects">Proyectos</a>
         <a href="/#experience" class="nav-link" data-i18n="nav.experience">Experiencia</a>
         <a href="/#contact" class="nav-link" data-i18n="nav.contact">Contacto</a>
@@ -55,8 +54,7 @@ import LangToggle from './LangToggle.astro';
   >
     <div class="flex flex-col gap-1 px-4 py-4">
       <a href="/#about" class="mobile-nav-link" data-i18n="nav.about">Sobre Mí</a>
-      <a href="/#skills" class="mobile-nav-link" data-i18n="nav.skills">Habilidades</a>
-      <a href="/#tools" class="mobile-nav-link" data-i18n="nav.tools">Herramientas</a>
+      <a href="/#stack" class="mobile-nav-link" data-i18n="nav.stack">Stack</a>
       <a href="/#projects" class="mobile-nav-link" data-i18n="nav.projects">Proyectos</a>
       <a href="/#experience" class="mobile-nav-link" data-i18n="nav.experience">Experiencia</a>
       <a href="/#contact" class="mobile-nav-link" data-i18n="nav.contact">Contacto</a>
@@ -85,12 +83,14 @@ import LangToggle from './LangToggle.astro';
     transition: width 0.3s ease;
   }
 
-  .nav-link:hover {
-    color: var(--color-primary-text);
-  }
+  @media (hover: hover) and (pointer: fine) {
+    .nav-link:hover {
+      color: var(--color-primary-text);
+    }
 
-  .nav-link:hover::after {
-    width: 100%;
+    .nav-link:hover::after {
+      width: 100%;
+    }
   }
 
   .mobile-nav-link {
@@ -103,22 +103,23 @@ import LangToggle from './LangToggle.astro';
     transition: all 0.2s ease;
   }
 
-  .mobile-nav-link:hover {
-    color: var(--color-primary-text);
-    background: rgba(var(--color-primary), 0.05); /* Optional: Use hex or adjust if needed, or leave as was. Actually, let's keep it simple: */
-    /* wait, var(--color-primary) is hex. So we can't do rgba. We'll use opacity or just background. */
-  }
-  
   #navbar.scrolled {
     background-color: color-mix(in srgb, var(--color-bg-deep) 92%, transparent);
     backdrop-filter: blur(16px);
     border-bottom: 1px solid color-mix(in srgb, var(--color-primary) 10%, transparent);
   }
 
-  /* Just fixing the hover with color-mix */
-  .mobile-nav-link:hover {
+  @media (hover: hover) and (pointer: fine) {
+    .mobile-nav-link:hover {
+      color: var(--color-primary-text);
+      background-color: color-mix(in srgb, var(--color-primary) 5%, transparent);
+    }
+  }
+
+  /* Touch feedback: visible tint while pressed */
+  .mobile-nav-link:active {
     color: var(--color-primary-text);
-    background-color: color-mix(in srgb, var(--color-primary) 5%, transparent);
+    background-color: color-mix(in srgb, var(--color-primary) 18%, transparent);
   }
 
   .burger-line {

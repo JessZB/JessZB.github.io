@@ -37,13 +37,16 @@ export default {
     },
     "avatarAlt": "Avatar anime de desarrollador venezolano"
   },
-  "skills": {
-    "title": "Habilidades",
+  "stack": {
+    "title": "Stack",
     "subtitle": {
       "arepa": "Tecnologías con las que he cocinado código",
       "coffee": "El arsenal que uso para preparar buen software"
     },
-    "categories": {
+    "used": "Usada en {n} proyectos",
+    "projectsWord": "proyectos",
+    "domainsTitle": "Habilidades por dominio",
+    "domains": {
       "frontend": "Frontend",
       "backend": "Backend",
       "databases": "Bases de datos",
@@ -52,14 +55,22 @@ export default {
       "ai": "IA & Integraciones",
       "soft": "Análisis & Soporte TI"
     },
-    "tooltipHint": "Ver proyectos relacionados",
-    "mainStack": "— Stack principal —"
-  },
-  "tools": {
-    "title": "Herramientas",
-    "subtitle": {
-      "arepa": "El arsenal ninja del arepero",
-      "coffee": "Los instrumentos del barista de código"
+    "benchTitle": "Banco de trabajo",
+    "groups": {
+      "base": "Desarrollo base",
+      "agents": "Agentes y CLI de IA",
+      "support": "Apoyo"
+    },
+    "toolTypes": {
+      "editor": "Editor",
+      "aiCli": "AI CLI",
+      "versioning": "Versionado",
+      "repos": "Repositorios",
+      "aiAgent": "AI Agent",
+      "cloudIde": "Cloud IDE",
+      "orm": "ORM",
+      "apiTesting": "API Testing",
+      "notes": "Notas"
     }
   },
   "projects": {
@@ -124,8 +135,7 @@ export default {
   },
   "nav": {
     "about": "Sobre Mí",
-    "skills": "Habilidades",
-    "tools": "Herramientas",
+    "stack": "Stack",
     "projects": "Proyectos",
     "experience": "Experiencia",
     "contact": "Contacto"
