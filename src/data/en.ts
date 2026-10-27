@@ -110,28 +110,52 @@ export default {
     "subtitle": "The path traveled",
     "present": "Present"
   },
+  "experience": {
+    "techs": "Technologies"
+  },
+  "education": {
+    "title": "Education",
+    "verify": "Verify certificate"
+  },
   "contact": {
     "title": "Contact",
     "subtitle": "Let's talk?",
-    "terminal": {
-      "arepa": identity.identity.email,
-      "coffee": identity.identity.email
+    "lead": "Pick a reason and an email opens with the subject already written.",
+    "legend": "What would you like to write about?",
+    "intents": {
+      "job": {
+        "label": "Job offer",
+        "desc": "You have an opening and want to talk",
+        "subject": "Job offer (from your portfolio)",
+        "body": "Hi Jesús,\n\nI saw your portfolio and would like to talk with you about a job offer.\n\nCompany and role:\n\nDetails:\n\n"
+      },
+      "project": {
+        "label": "Project",
+        "desc": "You need something built or improved",
+        "subject": "Project (from your portfolio)",
+        "body": "Hi Jesús,\n\nI saw your portfolio and would like to talk with you about a project.\n\nWhat I need:\n\nEstimated timeline:\n\n"
+      },
+      "other": {
+        "label": "Collaboration or other inquiry",
+        "desc": "An idea, a collaboration or a question",
+        "subject": "Collaboration or inquiry (from your portfolio)",
+        "body": "Hi Jesús,\n\nI saw your portfolio and would like to write to you about:\n\n"
+      }
     },
-    "init": {
-      "arepa": "init_contact.sh",
-      "coffee": "brew_contact.sh"
-    },
-    "initMessage": {
-      "arepa": "Initializing communication protocol...",
-      "coffee": "Preparing connection..."
-    },
-    "cta": "Email me",
-    "ctaHint": "Your email app will open with the subject already filled in.",
-    "ctaGmail": "Open in Gmail",
-    "orWrite": "Or you can write to me at this address:",
-    "mailSubject": "Contact from your portfolio",
-    "mailBody": "Hi Jesús,\n\nI saw your portfolio and would like to talk about:\n\n",
-    "alt": "Or find me on:"
+    "cta": "Write by email",
+    "ctaHint": "Your email app will open.",
+    "ctaGmail": "No mail app? Open in Gmail",
+    "emailLabel": "Email",
+    "copy": "Copy email",
+    "copied": "Copied",
+    "copiedStatus": "Email copied to clipboard.",
+    "copyManual": "Couldn't copy. The address is selected: press Ctrl+C.",
+    "lookingLabel": "Looking for",
+    "looking": "IT roles, technical support and systems analysis. Also full-stack development.",
+    "availLabel": "Availability",
+    "langLabel": "Languages",
+    "langs": "Spanish · English B1 (EF SET certified)",
+    "alt": "My code and my career"
   },
   "nav": {
     "about": "About",

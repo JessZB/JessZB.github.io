@@ -825,6 +825,10 @@
         "Twilio",
         "WebSockets"
       ],
+      "figure_value_es": "5+",
+      "figure_value_en": "5+",
+      "figure_label_es": "casos de uso de OpenAI en una plataforma de salud digital",
+      "figure_label_en": "OpenAI use cases in a digital health platform",
       "color": "highlight"
     },
     {
@@ -855,6 +859,10 @@
         "TypeScript",
         "MySQL/MariaDB"
       ],
+      "figure_value_es": "5 min → 2–5 s",
+      "figure_value_en": "5 min → 2–5 s",
+      "figure_label_es": "en el diagnóstico de servicios, con la plataforma interna",
+      "figure_label_en": "service diagnostics, with the internal platform",
       "color": "primary"
     },
     {
@@ -883,6 +891,10 @@
         "Bootstrap 5",
         "ApexCharts"
       ],
+      "figure_value_es": "13",
+      "figure_value_en": "13",
+      "figure_label_es": "módulos en el ERP ganadero",
+      "figure_label_en": "modules in the livestock ERP",
       "color": "accent"
     },
     {
@@ -911,7 +923,63 @@
         "jQuery",
         "Bootstrap 5"
       ],
+      "figure_value_es": "1.300+",
+      "figure_value_en": "1,300+",
+      "figure_label_es": "empleados en nómina",
+      "figure_label_en": "employees on payroll",
       "color": "secondary"
+    }
+  ],
+  "education": [
+    {
+      "institution": "UPTEB",
+      "institution_full": "Universidad Politécnica Territorial del Estado Bolívar",
+      "place_es": "Bolívar, Venezuela",
+      "place_en": "Bolívar, Venezuela",
+      "title_es": "Ingeniería en Informática",
+      "title_en": "Bachelor’s Degree in Computer Science (Computer Engineer)",
+      "date_es": "Julio 2023",
+      "date_en": "July 2023"
+    },
+    {
+      "institution": "UPTEB",
+      "institution_full": "Universidad Politécnica Territorial del Estado Bolívar",
+      "place_es": "Bolívar, Venezuela",
+      "place_en": "Bolívar, Venezuela",
+      "title_es": "TSU en Informática",
+      "title_en": "TSU in Computer Science (higher technical degree)",
+      "date_es": "",
+      "date_en": ""
+    },
+    {
+      "institution": "freeCodeCamp",
+      "place_es": "En línea",
+      "place_en": "Online",
+      "title_es": "Certificado, Algorithms and Data Structures V7",
+      "title_en": "Certification, Algorithms and Data Structures V7",
+      "date_es": "Julio 2022",
+      "date_en": "July 2022"
+    },
+    {
+      "institution": "freeCodeCamp",
+      "place_es": "En línea",
+      "place_en": "Online",
+      "title_es": "Certificado, Responsive Web Design V8",
+      "title_en": "Certification, Responsive Web Design V8",
+      "date_es": "Mayo 2021",
+      "date_en": "May 2021"
+    },
+    {
+      "institution": "EF SET",
+      "place_es": "En línea",
+      "place_en": "Online",
+      "title_es": "Inglés B1 Intermedio, EF SET 44/100",
+      "title_en": "English B1 Intermediate, EF SET 44/100",
+      "detail_es": "Comprensión lectora y auditiva B1.",
+      "detail_en": "Reading and listening B1.",
+      "date_es": "",
+      "date_en": "",
+      "verify_url": "https://cert.efset.org/8hkdpM"
     }
   ]
 }

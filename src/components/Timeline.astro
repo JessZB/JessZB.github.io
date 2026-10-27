@@ -1,37 +1,33 @@
 ---
-
+// Experience — editorial list (same language as Stack): period column on the left,
+// role + key figure + achievements on the right. Education closes the section.
 import identity from '../data/identity.json';
 
-const experiences = identity.experience.map(exp => ({
+const experiences = identity.experience.map((exp) => ({
   period: { es: exp.period_es, en: exp.period_en },
   role: { es: exp.role_es, en: exp.role_en },
   company: { es: exp.company_es, en: exp.company_en },
   location: { es: exp.location_es, en: exp.location_en },
   description: { es: exp.description_es, en: exp.description_en },
   highlights: exp.highlights_es.map((es: string, i: number) => ({ es, en: exp.highlights_en[i] ?? es })),
-  techs: exp.techs,
-  color: exp.color || 'primary',
+  techs: exp.techs as string[],
+  figure: (exp as any).figure_value_es
+    ? {
+        value: { es: (exp as any).figure_value_es, en: (exp as any).figure_value_en },
+        label: { es: (exp as any).figure_label_es, en: (exp as any).figure_label_en },
+      }
+    : null,
 }));
 
-function getNodeColor(color: string) {
-  const map: Record<string, string> = {
-    primary: 'bg-primary shadow-glow-gold',
-    secondary: 'bg-secondary shadow-glow-teal',
-    highlight: 'bg-highlight shadow-glow-lavender',
-    accent: 'bg-accent shadow-glow-coral',
-  };
-  return map[color] || map.primary;
-}
-
-function getBorderColor(color: string) {
-  const map: Record<string, string> = {
-    primary: 'border-primary/20',
-    secondary: 'border-secondary/20',
-    highlight: 'border-highlight/20',
-    accent: 'border-accent/20',
-  };
-  return map[color] || map.primary;
-}
+const education = (identity as any).education.map((e: any) => ({
+  institution: e.institution,
+  full: e.institution_full ?? '',
+  place: { es: e.place_es, en: e.place_en },
+  title: { es: e.title_es, en: e.title_en },
+  detail: e.detail_es ? { es: e.detail_es, en: e.detail_en } : null,
+  date: e.date_es ? { es: e.date_es, en: e.date_en } : null,
+  url: e.verify_url ?? null,
+}));
 ---
 
 <section id="experience" class="relative overflow-hidden">
@@ -42,106 +38,118 @@ function getBorderColor(color: string) {
 
     <div class="section-divider"></div>
 
-    <div class="relative max-w-3xl mx-auto">
-      <div class="timeline-line absolute left-1/2 top-0 bottom-0 w-0.5 -translate-x-1/2 hidden md:block"></div>
+    <ol class="exp-list max-w-5xl mx-auto" data-animate-stagger>
+      {
+        experiences.map((exp, i) => (
+          <li class={`exp-row grid gap-5 md:grid-cols-[13rem_1fr] md:gap-12 border-t border-text-primary/15 ${i === 0 ? 'exp-lead py-10 md:py-12' : 'py-8 md:py-10'}`}>
+            <div>
+              <span class="exp-mark" aria-hidden="true"></span>
+              <p
+                class="font-heading text-lg font-semibold leading-snug text-text-primary"
+                data-i18n-text-es={exp.period.es}
+                data-i18n-text-en={exp.period.en}
+              >{exp.period.es}</p>
+            </div>
 
-      <div class="space-y-0">
-        {
-          experiences.map((exp, i) => {
-            const isLeft = i % 2 === 0;
-            const nc = getNodeColor(exp.color);
-            const bc = getBorderColor(exp.color);
-            return (
-              <div class={`relative flex items-start gap-6 mb-8 md:mb-12 ${isLeft ? 'md:flex-row' : 'md:flex-row-reverse'}`} data-animate>
-                <div class={`hidden md:flex flex-1 ${isLeft ? 'justify-end' : 'justify-start'}`}>
-                  <div class={`card-base p-5 max-w-sm ${bc} border`}
-                    style={`${isLeft ? 'margin-right: 40px;' : 'margin-left: 40px;'}`}>
-                    <span class="font-mono text-xs text-text-muted" data-i18n-text-es={exp.period.es} data-i18n-text-en={exp.period.en}>{exp.period.es}</span>
-                    <h3 class="font-heading font-semibold text-lg text-text-primary mt-1" data-i18n-text-es={exp.role.es} data-i18n-text-en={exp.role.en}>{exp.role.es}</h3>
-                    <p class="text-sm text-text-secondary mt-1">
-                      <span class="font-medium text-text-primary" data-i18n-text-es={exp.company.es} data-i18n-text-en={exp.company.en}>{exp.company.es}</span>
-                      <span class="block text-text-muted" data-i18n-text-es={exp.location.es} data-i18n-text-en={exp.location.en}>{exp.location.es}</span>
-                    </p>
-                    <p class="text-sm text-text-secondary mt-3 leading-relaxed" data-i18n-text-es={exp.description.es} data-i18n-text-en={exp.description.en}>{exp.description.es}</p>
-                    <ul class="exp-highlights mt-3 space-y-2 text-sm text-text-secondary leading-relaxed">
-                      {exp.highlights.map((h) => (
-                        <li data-i18n-text-es={h.es} data-i18n-text-en={h.en}>{h.es}</li>
-                      ))}
-                    </ul>
-                    <div class="flex flex-wrap gap-1.5 mt-3">
-                      {exp.techs.map((t: string) => (
-                        <span class="tag text-xs">{t}</span>
-                      ))}
-                    </div>
-                  </div>
-                </div>
+            <div class="min-w-0">
+              <h3
+                class={`exp-role font-heading font-bold leading-tight text-text-primary ${i === 0 ? 'text-3xl md:text-4xl' : 'text-2xl md:text-3xl'}`}
+                data-i18n-text-es={exp.role.es}
+                data-i18n-text-en={exp.role.en}
+              >{exp.role.es}</h3>
+              <p class="mt-2 text-lg font-medium leading-snug text-text-primary" data-i18n-text-es={exp.company.es} data-i18n-text-en={exp.company.en}>{exp.company.es}</p>
+              <p class="mt-1 text-[0.9375rem] text-text-muted" data-i18n-text-es={exp.location.es} data-i18n-text-en={exp.location.en}>{exp.location.es}</p>
 
-                <div class="absolute left-1/2 -translate-x-1/2 hidden md:flex items-center justify-center z-10">
-                  <div class={`w-10 h-10 ${nc} rounded-full flex items-center justify-center border-2 border-bg-surface`}>
-                    <svg width="16" height="16" viewBox="0 0 100 100" class="text-bg-deep">
-                      <circle cx="50" cy="48" r="28" fill="currentColor"/>
-                      <ellipse cx="50" cy="40" rx="10" ry="4" fill="#1A1A2E" opacity="0.3"/>
-                    </svg>
-                  </div>
-                </div>
+              {exp.figure && (
+                <p class="exp-fig mt-6">
+                  <span class="exp-fig-num font-heading font-bold text-primary-text" data-i18n-text-es={exp.figure.value.es} data-i18n-text-en={exp.figure.value.en}>{exp.figure.value.es}</span>
+                  <span class="exp-fig-label text-base font-medium text-text-secondary" data-i18n-text-es={exp.figure.label.es} data-i18n-text-en={exp.figure.label.en}>{exp.figure.label.es}</span>
+                </p>
+              )}
 
-                <div class="flex-1 hidden md:block"></div>
+              <p class="mt-6 text-base leading-relaxed text-text-secondary max-w-prose" data-i18n-text-es={exp.description.es} data-i18n-text-en={exp.description.en}>{exp.description.es}</p>
 
-                <div class={`card-base card-base--no-hover p-5 md:hidden w-full ${bc} border`}>
-                  <span class="font-mono text-xs text-text-muted" data-i18n-text-es={exp.period.es} data-i18n-text-en={exp.period.en}>{exp.period.es}</span>
-                  <h3 class="font-heading font-semibold text-lg text-text-primary mt-1" data-i18n-text-es={exp.role.es} data-i18n-text-en={exp.role.en}>{exp.role.es}</h3>
-                  <p class="text-sm text-text-secondary mt-1">
-                    <span class="font-medium text-text-primary" data-i18n-text-es={exp.company.es} data-i18n-text-en={exp.company.en}>{exp.company.es}</span>
-                      <span class="block text-text-muted" data-i18n-text-es={exp.location.es} data-i18n-text-en={exp.location.en}>{exp.location.es}</span>
-                  </p>
-                  <p class="text-sm text-text-secondary mt-3 leading-relaxed" data-i18n-text-es={exp.description.es} data-i18n-text-en={exp.description.en}>{exp.description.es}</p>
-                    <ul class="exp-highlights mt-3 space-y-2 text-sm text-text-secondary leading-relaxed">
-                      {exp.highlights.map((h) => (
-                        <li data-i18n-text-es={h.es} data-i18n-text-en={h.en}>{h.es}</li>
-                      ))}
-                    </ul>
-                  <div class="flex flex-wrap gap-1.5 mt-3">
-                    {exp.techs.map((t: string) => (
-                      <span class="tag text-xs">{t}</span>
-                    ))}
-                  </div>
-                </div>
+              <ul class="exp-highlights mt-4 space-y-3 text-base leading-relaxed text-text-secondary max-w-prose">
+                {exp.highlights.map((h) => (
+                  <li data-i18n-text-es={h.es} data-i18n-text-en={h.en}>{h.es}</li>
+                ))}
+              </ul>
+
+              <div class="mt-5">
+                <p class="text-[0.8125rem] font-semibold text-text-muted mb-1" data-i18n="experience.techs">Tecnologías</p>
+                <ul class="exp-techs text-[0.9375rem] text-text-secondary">
+                  {exp.techs.map((t) => <li>{t}</li>)}
+                </ul>
               </div>
-            );
-          })
+            </div>
+          </li>
+        ))
+      }
+    </ol>
+
+    <div class="max-w-5xl mx-auto mt-24">
+      <h3 class="font-heading text-3xl md:text-4xl font-bold text-text-primary mb-10" data-i18n="education.title">Formación</h3>
+      <ul data-animate-stagger>
+        {
+          education.map((e: any) => (
+            <li class="edu-row grid gap-2 md:grid-cols-[13rem_1fr] md:gap-12 border-t border-text-primary/15 py-6">
+              <p class="font-heading text-lg font-semibold leading-snug text-text-primary">{e.institution}</p>
+              <div class="min-w-0">
+                <p class="font-heading text-xl font-bold leading-snug text-text-primary" data-i18n-text-es={e.title.es} data-i18n-text-en={e.title.en}>{e.title.es}</p>
+                <p class="mt-1 text-[0.9375rem] text-text-secondary">
+                  {e.full && <span>{e.full}, </span>}
+                  <span data-i18n-text-es={e.place.es} data-i18n-text-en={e.place.en}>{e.place.es}</span>
+                  {e.date && <span> · </span>}
+                  {e.date && <span data-i18n-text-es={e.date.es} data-i18n-text-en={e.date.en}>{e.date.es}</span>}
+                </p>
+                {e.detail && (
+                  <p class="mt-1 text-[0.9375rem] text-text-secondary" data-i18n-text-es={e.detail.es} data-i18n-text-en={e.detail.en}>{e.detail.es}</p>
+                )}
+                {e.url && (
+                  <a
+                    href={e.url}
+                    target="_blank"
+                    rel="noopener noreferrer"
+                    class="edu-link mt-1 inline-flex min-h-11 items-center gap-2 text-[0.9375rem] font-semibold text-primary-text"
+                  >
+                    <span data-i18n="education.verify">Verificar certificado</span>
+                    <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M7 17 17 7M8 7h9v9"/></svg>
+                  </a>
+                )}
+              </div>
+            </li>
+          ))
         }
-      </div>
+      </ul>
     </div>
   </div>
-
-  <div class="absolute top-0 left-0 w-64 h-64 bg-primary/5 rounded-full blur-[100px] pointer-events-none" aria-hidden="true"></div>
 </section>
 
 <style>
-  .exp-highlights li {
-    position: relative;
-    padding-left: 1rem;
-  }
+  .exp-mark { display: block; width: 2.5rem; height: 3px; margin-bottom: 0.75rem; background: var(--color-primary); border-radius: 2px; }
 
+  .exp-highlights li { position: relative; padding-left: 1.25rem; }
   .exp-highlights li::before {
     content: '';
     position: absolute;
     left: 0;
-    top: 0.6em;
-    width: 0.375rem;
-    height: 0.375rem;
-    border-radius: 9999px;
+    top: 0.7em;
+    width: 0.5rem;
+    height: 2px;
     background: var(--color-primary);
   }
 
-  .timeline-line {
-    background: linear-gradient(
-      180deg,
-      var(--color-primary) 0%,
-      var(--color-secondary) 35%,
-      var(--color-highlight) 70%,
-      var(--color-accent) 100%
-    );
-    box-shadow: 0 0 15px color-mix(in srgb, var(--color-primary) 30%, transparent);
+  .exp-fig { display: flex; flex-wrap: wrap; align-items: baseline; gap: 0.25rem 1rem; }
+  .exp-fig-num {
+    font-size: clamp(2.25rem, 7vw, 3.5rem);
+    line-height: 1;
+    letter-spacing: -0.03em;
+    font-variant-numeric: tabular-nums;
   }
+  .exp-lead .exp-fig-num { font-size: clamp(2.5rem, 8vw, 4.5rem); }
+  .exp-fig-label { max-width: 24rem; text-wrap: balance; }
+
+  .exp-techs { display: flex; flex-wrap: wrap; gap: 0.25rem 1.25rem; }
+
+  .edu-link { text-decoration: underline; text-decoration-thickness: 2px; text-underline-offset: 0.3em; text-decoration-color: var(--color-primary); }
 </style>

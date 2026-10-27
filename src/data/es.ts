@@ -110,28 +110,52 @@ export default {
     "subtitle": "El camino recorrido",
     "present": "Presente"
   },
+  "experience": {
+    "techs": "Tecnologías"
+  },
+  "education": {
+    "title": "Formación",
+    "verify": "Verificar certificado"
+  },
   "contact": {
     "title": "Contacto",
     "subtitle": "¿Hablamos?",
-    "terminal": {
-      "arepa": identity.identity.email,
-      "coffee": identity.identity.email
+    "lead": "Elige el motivo y se abre un correo con el asunto ya escrito.",
+    "legend": "¿Sobre qué quieres escribirme?",
+    "intents": {
+      "job": {
+        "label": "Oferta de empleo",
+        "desc": "Tienes una vacante y quieres conversar",
+        "subject": "Oferta de empleo (desde tu portafolio)",
+        "body": "Hola Jesús,\n\nVi tu portafolio y quiero conversar contigo sobre una oferta de empleo.\n\nEmpresa y puesto:\n\nDetalles:\n\n"
+      },
+      "project": {
+        "label": "Proyecto",
+        "desc": "Necesitas desarrollar o mejorar algo",
+        "subject": "Proyecto (desde tu portafolio)",
+        "body": "Hola Jesús,\n\nVi tu portafolio y me gustaría hablar contigo sobre un proyecto.\n\nQué necesito:\n\nPlazo estimado:\n\n"
+      },
+      "other": {
+        "label": "Colaboración u otra consulta",
+        "desc": "Una idea, una colaboración o una pregunta",
+        "subject": "Colaboración o consulta (desde tu portafolio)",
+        "body": "Hola Jesús,\n\nVi tu portafolio y me gustaría escribirte sobre:\n\n"
+      }
     },
-    "init": {
-      "arepa": "iniciar_contacto.sh",
-      "coffee": "brew_contact.sh"
-    },
-    "initMessage": {
-      "arepa": "Inicializando protocolo de comunicación...",
-      "coffee": "Preparando la conexión..."
-    },
-    "cta": "Escríbeme un correo",
-    "ctaHint": "Se abrirá tu aplicación de correo con el asunto ya escrito.",
-    "ctaGmail": "Abrir en Gmail",
-    "orWrite": "O puedes escribirme a este correo:",
-    "mailSubject": "Contacto desde tu portafolio",
-    "mailBody": "Hola Jesús,\n\nVi tu portafolio y me gustaría conversar sobre:\n\n",
-    "alt": "O encuéntrame en:"
+    "cta": "Escribir por correo",
+    "ctaHint": "Se abrirá tu aplicación de correo.",
+    "ctaGmail": "¿Sin app de correo? Abrir en Gmail",
+    "emailLabel": "Correo",
+    "copy": "Copiar correo",
+    "copied": "Copiado",
+    "copiedStatus": "Correo copiado al portapapeles.",
+    "copyManual": "No se pudo copiar. El correo quedó seleccionado: cópialo con Ctrl+C.",
+    "lookingLabel": "Busco",
+    "looking": "Puestos de IT, soporte técnico y análisis de sistemas. También desarrollo full stack.",
+    "availLabel": "Disponibilidad",
+    "langLabel": "Idiomas",
+    "langs": "Español · Inglés B1 (certificado EF SET)",
+    "alt": "Mi código y mi trayectoria"
   },
   "nav": {
     "about": "Sobre Mí",
