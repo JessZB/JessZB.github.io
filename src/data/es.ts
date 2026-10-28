@@ -92,14 +92,19 @@ export default {
       "in-progress": "En desarrollo"
     },
     "detail": {
-      "timeWorked": "Tiempo de desarrollo",
+      "period": "Periodo",
+      "status": "Estado",
+      "type": "Tipo",
       "techStack": "Stack tecnológico",
       "tools": "Herramientas",
       "description": "Descripción",
       "gallery": "Galería",
       "otherProjects": "Otros proyectos",
-      "back": "← Volver a proyectos",
-      "backHome": "Ir al inicio",
+      "back": "Volver a proyectos",
+      "prev": "Proyecto anterior",
+      "next": "Proyecto siguiente",
+      "contactTitle": "¿Te interesa este tipo de trabajo?",
+      "contactCta": "Contactar",
       "problemsSolved": "Problemas que resuelve",
       "keyFeatures": "Funcionalidades destacadas",
       "architecture": "Arquitectura"

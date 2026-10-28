@@ -92,14 +92,19 @@ export default {
       "in-progress": "In progress"
     },
     "detail": {
-      "timeWorked": "Development time",
+      "period": "Period",
+      "status": "Status",
+      "type": "Type",
       "techStack": "Tech stack",
       "tools": "Tools",
       "description": "Description",
       "gallery": "Gallery",
       "otherProjects": "Other projects",
-      "back": "← Back to projects",
-      "backHome": "Go to home",
+      "back": "Back to projects",
+      "prev": "Previous project",
+      "next": "Next project",
+      "contactTitle": "Interested in this kind of work?",
+      "contactCta": "Get in touch",
       "problemsSolved": "Problems Solved",
       "keyFeatures": "Key Features",
       "architecture": "Architecture"

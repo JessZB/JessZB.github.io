@@ -1,4 +1,7 @@
 ---
+// Project detail — editorial layout (same language as Stack / Timeline):
+// header with key-facts strip, reading column (description, gallery, problem, features,
+// architecture), sticky side column, previous/next navigation and a contact closing.
 import { Image, getImage } from 'astro:assets';
 import Layout from '../../layouts/Layout.astro';
 import Navbar from '../../components/Navbar.astro';
@@ -20,22 +23,31 @@ if (!project) {
 }
 
 const related = getRelatedProjects(project.slug, 3);
-
-const colorMap: Record<string, { text: string; bg: string; border: string; chip: string; glow: string }> = {
-  primary:   { text: 'text-primary-text', bg: 'bg-primary/10', border: 'border-primary/25', chip: 'bg-primary/15 text-primary-text border-primary/20', glow: 'shadow-glow-gold' },
-  secondary: { text: 'text-secondary-text', bg: 'bg-secondary/10', border: 'border-secondary/25', chip: 'bg-secondary/15 text-secondary-text border-secondary/20', glow: 'shadow-glow-teal' },
-  highlight: { text: 'text-highlight-light-text', bg: 'bg-highlight/10', border: 'border-highlight/25', chip: 'bg-highlight/15 text-highlight-light-text border-highlight/20', glow: 'shadow-glow-lavender' },
-  accent:    { text: 'text-accent-light-text', bg: 'bg-accent/10', border: 'border-accent/25', chip: 'bg-accent/15 text-accent-light-text border-accent/20', glow: 'shadow-glow-coral' },
-};
-
-const c = colorMap[project.color] || colorMap.primary;
 const hasImages = project.images && project.images.length > 0;
 
-// Lightbox gets a 1600px variant (not the 1920px original); hero backdrop is blurred, so a small one is enough
+// Lightbox gets a 1600px variant (not the 1920px original)
 const lightboxImages = hasImages
   ? await Promise.all(project.images.map(async (img) => (await getImage({ src: getProjectImage(img), width: 1600 })).src))
   : [];
-const heroBackdrop = hasImages ? (await getImage({ src: getProjectImage(project.images[0]), width: 480 })).src : '';
+
+// Gallery: one large lead shot + a strip of up to 5 thumbnails (the last one carries "+N" when there are more)
+const MAX_THUMBS = 5;
+const thumbs = hasImages ? project.images.slice(1, 1 + MAX_THUMBS) : [];
+const moreCount = hasImages ? Math.max(0, project.images.length - 1 - MAX_THUMBS) : 0;
+const shotLabel = (i: number) => ({
+  es: `Ampliar captura ${i + 1} de ${project.title}`,
+  en: `Enlarge screenshot ${i + 1} of ${project.title}`,
+});
+
+// Previous / next follow the order of the projects array (circular)
+const index = projects.findIndex((p) => p.slug === project.slug);
+const neighbours = [
+  { key: 'prev' as const, project: projects[(index - 1 + projects.length) % projects.length] },
+  { key: 'next' as const, project: projects[(index + 1) % projects.length] },
+];
+
+const codeUrl = project.code && project.code !== '#' ? project.code : '';
+const demoUrl = project.demo && project.demo !== '#' ? project.demo : '';
 
 // Default lang es — i18n engine will swap on client
 const lang: 'es' | 'en' = 'es';
@@ -43,10 +55,11 @@ const title = project.title;
 const description = project.description[lang];
 const fullDescription = project.fullDescription[lang];
 const timeWorked = project.timeWorked[lang];
+const figure = project.figure;
 ---
 
 <Layout
-  title={`${title} | JESSZB.DEV`}
+  title={title}
   description={description}
   locale="es"
   canonicalPath={`/projects/${slug}`}
@@ -54,238 +67,222 @@ const timeWorked = project.timeWorked[lang];
   <Navbar />
 
   <main id="main" tabindex="-1" class="min-h-screen bg-bg-deep">
-    <!-- Hero banner -->
-    <div class={`relative pt-24 pb-16 bg-gradient-to-b from-bg-surface to-bg-deep overflow-hidden`}>
-      <div class="absolute inset-0 bg-grid opacity-30" aria-hidden="true"></div>
-      {hasImages && (
-        <div class="absolute inset-0 bg-cover bg-center blur-xl scale-110 opacity-40" style={`background-image: url('${heroBackdrop}')`} aria-hidden="true"></div>
-      )}
-      {hasImages && (
-        <div class="absolute inset-0 bg-gradient-to-b from-bg-surface/80 to-bg-deep/90" aria-hidden="true"></div>
-      )}
-      <!-- Ambient -->
-      <div class={`absolute top-0 right-0 w-96 h-96 ${c.bg} rounded-full blur-[120px] pointer-events-none`} aria-hidden="true"></div>
-
-      <div class="section-container relative z-10">
-        <!-- Back link -->
+    <!-- Header: title, one-line summary, key facts -->
+    <header class="detail-hero pt-24 md:pt-28 pb-10 md:pb-14">
+      <div class="section-container !py-0">
         <a
           href="/#projects"
-          class="inline-flex items-center gap-2 text-text-muted hover:text-primary-text active:text-primary-text transition-colors text-sm mb-8 group min-h-[44px]"
-          data-i18n="projects.detail.back"
+          class="back-link inline-flex items-center gap-2 min-h-11 -ml-1 pr-3 text-base font-medium text-text-secondary active:text-primary-text fine:hover:text-primary-text transition-colors"
         >
-          <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="group-hover:-translate-x-1 group-active:-translate-x-1 transition-transform" aria-hidden="true"><path d="M19 12H5"/><path d="m12 19-7-7 7-7"/></svg>
-          ← Volver a proyectos
+          <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M19 12H5"/><path d="m12 19-7-7 7-7"/></svg>
+          <span data-i18n="projects.detail.back">Volver a proyectos</span>
         </a>
 
-        <div class="flex flex-wrap items-start gap-4 mb-6">
-          <!-- Status & category badges -->
-          <span class={`tag text-xs border ${c.chip}`} data-i18n={`projects.status.${project.status}`}>
-            {project.status === 'completed' ? 'Completado' : 'En desarrollo'}
-          </span>
-          <span class={`tag text-xs border ${c.chip}`} data-i18n={`projects.filters.${project.category}`}>
-            {{own: 'Propios', collab: 'Colaborativos'}[project.category]}
-          </span>
-        </div>
+        <h1 class="detail-title font-heading font-bold text-text-primary mt-6">{title}</h1>
+        <p
+          class="mt-5 max-w-2xl text-lg md:text-xl leading-relaxed text-text-secondary"
+          data-i18n-text-es={project.description.es}
+          data-i18n-text-en={project.description.en}
+        >{description}</p>
 
-        <h1 class={`font-heading text-4xl md:text-5xl lg:text-6xl font-bold mb-4 ${c.text}`}>
-          {title}
-        </h1>
-        <p class="text-text-secondary text-lg max-w-2xl leading-relaxed mb-8" data-i18n-text-es={project.description.es} data-i18n-text-en={project.description.en}>
-          {description}
-        </p>
-
-        <!-- Action buttons -->
-        <div class="flex flex-wrap gap-4">
-          {project.code && project.code !== '#' && (
-            <a
-              href={project.code}
-              class="btn-outline px-6 py-3 flex items-center gap-2"
-              target="_blank"
-              rel="noopener noreferrer"
-              data-i18n="projects.code"
-            >
-              <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M16 18l6-6-6-6"/><path d="M8 6l-6 6 6 6"/></svg>
-              Código
-            </a>
+        <dl class="facts mt-10 md:mt-12">
+          {figure && (
+            <div class="fact fact-figure">
+              <dt class="text-base font-medium leading-snug text-text-secondary" data-i18n-text-es={figure.label.es} data-i18n-text-en={figure.label.en}>{figure.label.es}</dt>
+              <dd class="fact-figure-num font-heading font-bold text-primary-text" data-i18n-text-es={figure.value.es} data-i18n-text-en={figure.value.en}>{figure.value.es}</dd>
+            </div>
           )}
-        </div>
+          <div class="fact">
+            <dt class="fact-label" data-i18n="projects.detail.period">Periodo</dt>
+            <dd class="fact-value" data-i18n-text-es={project.timeWorked.es} data-i18n-text-en={project.timeWorked.en}>{timeWorked}</dd>
+          </div>
+          <div class="fact">
+            <dt class="fact-label" data-i18n="projects.detail.status">Estado</dt>
+            <dd class="fact-value" data-i18n={`projects.status.${project.status}`}>{project.status === 'completed' ? 'Completado' : 'En desarrollo'}</dd>
+          </div>
+          <div class="fact">
+            <dt class="fact-label" data-i18n="projects.detail.type">Tipo</dt>
+            <dd class="fact-value" data-i18n={`projects.filters.${project.category}`}>{project.category === 'own' ? 'Propios' : 'Colaborativos'}</dd>
+          </div>
+        </dl>
       </div>
-    </div>
+    </header>
 
-    <!-- Main content grid -->
-    <div class="section-container py-12">
-      <div class="grid lg:grid-cols-3 gap-8">
+    <!-- Body: reading column + sticky side column -->
+    <div class="section-container !pt-4 md:!pt-6 !pb-16 md:!pb-20">
+      <div class="grid gap-12 lg:grid-cols-[minmax(0,1fr)_16rem] lg:gap-16 xl:grid-cols-[minmax(0,1fr)_17rem] xl:gap-20">
 
-        <!-- Left: full description + gallery -->
-        <div class="lg:col-span-2 space-y-8">
+        <div class="min-w-0">
+          <section class="detail-section" data-animate>
+            <h2 class="detail-h2" data-i18n="projects.detail.description">Descripción</h2>
+            <p class="detail-prose" data-i18n-text-es={project.fullDescription.es} data-i18n-text-en={project.fullDescription.en}>{fullDescription}</p>
+          </section>
 
-          <!-- Media Gallery -->
-          <div class="card-base p-6 card-base--no-hover" data-animate>
-            <h2 class={`font-heading text-xl font-semibold mb-4 ${c.text}`} data-i18n="projects.detail.gallery">
-              Galería
-            </h2>
+          {hasImages && (
+            <section class="detail-section" data-animate>
+              <h2 class="detail-h2" data-i18n="projects.detail.gallery">Galería</h2>
+              <div id="project-gallery" data-images={JSON.stringify(lightboxImages)}>
+                <button
+                  type="button"
+                  class="shot shot-lead"
+                  data-shot="0"
+                  aria-label={shotLabel(0).es}
+                  data-aria-es={shotLabel(0).es}
+                  data-aria-en={shotLabel(0).en}
+                >
+                  <Image
+                    src={getProjectImage(project.images[0])}
+                    alt=""
+                    loading="lazy"
+                    decoding="async"
+                    widths={[480, 800, 1200, 1600]}
+                    sizes="(min-width: 1280px) 780px, (min-width: 1024px) 640px, calc(100vw - 2rem)"
+                  />
+                  <span class="shot-zoom" aria-hidden="true">
+                    <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M15 3h6v6"/><path d="m21 3-7 7"/><path d="m3 21 7-7"/><path d="M9 21H3v-6"/></svg>
+                  </span>
+                </button>
 
-          {hasImages ? (
-            <!-- Gallery grid: show max 4 images + overlay for remaining -->
-            <div id="project-gallery" class="grid grid-cols-2 gap-3" data-images={JSON.stringify(lightboxImages)}>
-              {project.images.slice(0, 4).map((img, i) => {
-                const isLast = i === 3;
-                const remaining = project.images.length - 4;
-                return (
-                  <div
-                    class="aspect-video rounded-lg overflow-hidden bg-bg-surface border border-white/5 cursor-pointer group relative active:scale-[0.97] transition-transform"
-                    onclick={`__openLightbox(${i})`}
-                  >
-                    <Image
-                      src={getProjectImage(img)}
-                      alt={`${title} screenshot ${i + 1}`}
-                      class="w-full h-full object-cover group-hover:scale-105 group-active:scale-105 transition-transform duration-500"
-                      loading="lazy"
-                      decoding="async"
-                      widths={[320, 480, 800]}
-                      sizes="(min-width: 1024px) 380px, 40vw"
-                    />
-                    {isLast && remaining > 0 && (
-                      <div class="absolute inset-0 bg-black/60 flex items-center justify-center group-hover:bg-black/70 transition-colors">
-                        <span class="text-white font-heading text-2xl font-bold">+{remaining}</span>
-                      </div>
-                    )}
-                  </div>
-                );
-              })}
-            </div>
-          ) : (
-              <!-- Placeholder gallery when no images -->
-              <div class="grid grid-cols-2 gap-3">
-                {[1, 2, 3, 4].map((i) => (
-                  <div class={`aspect-video rounded-lg overflow-hidden border ${c.border} ${c.bg} flex items-center justify-center`}>
-                    <div class="text-center">
-                      <svg width="32" height="32" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" class={`mx-auto mb-2 ${c.text} opacity-40`} aria-hidden="true"><rect width="18" height="18" x="3" y="3" rx="2" ry="2"/><circle cx="9" cy="9" r="2"/><path d="m21 15-3.086-3.086a2 2 0 0 0-2.828 0L6 21"/></svg>
-                      <p class="text-xs text-text-muted opacity-60">Screenshot {i}</p>
-                    </div>
-                  </div>
-                ))}
+                {thumbs.length > 0 && (
+                  <ul class="mt-3 grid grid-cols-3 gap-3 sm:grid-cols-5">
+                    {thumbs.map((img, k) => {
+                      const i = k + 1;
+                      const isLast = k === thumbs.length - 1 && moreCount > 0;
+                      return (
+                        <li>
+                          <button
+                            type="button"
+                            class="shot shot-thumb"
+                            data-shot={i}
+                            aria-label={shotLabel(i).es}
+                            data-aria-es={shotLabel(i).es}
+                            data-aria-en={shotLabel(i).en}
+                          >
+                            <Image
+                              src={getProjectImage(img)}
+                              alt=""
+                              loading="lazy"
+                              decoding="async"
+                              widths={[160, 240, 360]}
+                              sizes="(min-width: 1024px) 120px, (min-width: 640px) 18vw, 30vw"
+                            />
+                            {isLast && (
+                              <span class="shot-more font-heading" aria-hidden="true">+{moreCount}</span>
+                            )}
+                          </button>
+                        </li>
+                      );
+                    })}
+                  </ul>
+                )}
               </div>
-            )}
-          </div>
-
-          <!-- Full Description -->
-          <div class="card-base p-6" data-animate>
-            <h2 class={`font-heading text-xl font-semibold mb-4 ${c.text}`} data-i18n="projects.detail.description">
-              Descripción
-            </h2>
-            <p class="text-text-secondary leading-relaxed" data-i18n-text-es={project.fullDescription.es} data-i18n-text-en={project.fullDescription.en}>
-              {fullDescription}
-            </p>
-          </div>
-
-          <!-- Problems Solved -->
-          {project.problemsSolved && (
-            <div class="card-base p-6" data-animate>
-              <h2 class={`font-heading text-xl font-semibold mb-4 ${c.text}`} data-i18n="projects.detail.problemsSolved">
-                Problemas que resuelve
-              </h2>
-              <p class="text-text-secondary leading-relaxed" data-i18n-text-es={project.problemsSolved.es} data-i18n-text-en={project.problemsSolved.en}>
-                {project.problemsSolved[lang]}
-              </p>
-            </div>
+            </section>
           )}
 
-          <!-- Key Features -->
+          {project.problemsSolved && (
+            <section class="detail-section" data-animate>
+              <h2 class="detail-h2" data-i18n="projects.detail.problemsSolved">Problemas que resuelve</h2>
+              <p class="detail-prose" data-i18n-text-es={project.problemsSolved.es} data-i18n-text-en={project.problemsSolved.en}>{project.problemsSolved[lang]}</p>
+            </section>
+          )}
+
           {project.keyFeatures && (
-            <div class="card-base p-6" data-animate>
-              <h2 class={`font-heading text-xl font-semibold mb-4 ${c.text}`} data-i18n="projects.detail.keyFeatures">
-                Funcionalidades destacadas
-              </h2>
-              <ul class="text-text-secondary leading-relaxed space-y-2">
+            <section class="detail-section">
+              <h2 class="detail-h2" data-i18n="projects.detail.keyFeatures">Funcionalidades destacadas</h2>
+              <ol class="feature-list" data-animate-stagger>
                 {project.keyFeatures[lang].map((feature, i) => (
-                  <li class="flex items-start gap-2">
-                    <span class={`mt-1.5 w-1.5 h-1.5 rounded-full ${c.bg} border ${c.border} shrink-0`} aria-hidden="true"></span>
-                    <span data-i18n-text-es={project.keyFeatures!.es[i]} data-i18n-text-en={project.keyFeatures!.en[i]}>
-                      {feature}
-                    </span>
-                  </li>
+                  <li data-i18n-text-es={project.keyFeatures!.es[i]} data-i18n-text-en={project.keyFeatures!.en[i]}>{feature}</li>
                 ))}
+              </ol>
+            </section>
+          )}
+
+          {project.architecture && (
+            <section class="detail-section" data-animate>
+              <h2 class="detail-h2" data-i18n="projects.detail.architecture">Arquitectura</h2>
+              <p class="detail-prose detail-tech" data-i18n-text-es={project.architecture.es} data-i18n-text-en={project.architecture.en}>{project.architecture[lang]}</p>
+            </section>
+          )}
+        </div>
+
+        <aside class="lg:sticky lg:top-24 lg:self-start border-t border-text-primary/15 pt-8 lg:border-t-0 lg:pt-0 space-y-8" data-animate>
+          <div>
+            <h2 class="aside-h" data-i18n="projects.detail.techStack">Stack tecnológico</h2>
+            <ul class="aside-run">
+              {project.techs.map((tech) => <li>{tech}</li>)}
+            </ul>
+          </div>
+
+          {project.tools && project.tools.length > 0 && (
+            <div>
+              <h2 class="aside-h" data-i18n="projects.detail.tools">Herramientas</h2>
+              <ul class="aside-run">
+                {project.tools.map((tool) => <li>{tool}</li>)}
               </ul>
             </div>
           )}
 
-          <!-- Architecture -->
-          {project.architecture && (
-            <div class="card-base p-6" data-animate>
-              <h2 class={`font-heading text-xl font-semibold mb-4 ${c.text}`} data-i18n="projects.detail.architecture">
-                Arquitectura
-              </h2>
-              <p class="text-text-secondary leading-relaxed" data-i18n-text-es={project.architecture.es} data-i18n-text-en={project.architecture.en}>
-                {project.architecture[lang]}
-              </p>
-            </div>
+          {(codeUrl || demoUrl) && (
+            <ul class="border-t border-text-primary/15 pt-4">
+              {codeUrl && (
+                <li>
+                  <a href={codeUrl} target="_blank" rel="noopener noreferrer" class="ext-link">
+                    <span data-i18n="projects.code">Código</span>
+                    <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M7 17 17 7M8 7h9v9"/></svg>
+                  </a>
+                </li>
+              )}
+              {demoUrl && (
+                <li>
+                  <a href={demoUrl} target="_blank" rel="noopener noreferrer" class="ext-link">
+                    <span data-i18n="projects.demo">Demo</span>
+                    <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M7 17 17 7M8 7h9v9"/></svg>
+                  </a>
+                </li>
+              )}
+            </ul>
           )}
-        </div>
-
-        <!-- Right: metadata sidebar -->
-        <div class="space-y-6">
-
-          <!-- Time worked -->
-          <div class={`card-base p-5 border ${c.border}`} data-animate>
-            <h3 class={`font-heading text-sm font-semibold uppercase tracking-wider ${c.text} mb-2`} data-i18n="projects.detail.timeWorked">
-              Tiempo de desarrollo
-            </h3>
-            <p class="text-text-primary font-medium text-lg" data-i18n-text-es={project.timeWorked.es} data-i18n-text-en={project.timeWorked.en}>{timeWorked}</p>
-          </div>
-
-          <!-- Tech Stack -->
-          <div class={`card-base p-5 border ${c.border} ${c.glow}`} data-animate>
-            <h3 class={`font-heading text-sm font-semibold uppercase tracking-wider ${c.text} mb-4`} data-i18n="projects.detail.techStack">
-              Stack tecnológico
-            </h3>
-            <div class="flex flex-wrap gap-2">
-              {project.techs.map((tech) => (
-                <span class={`text-xs font-medium px-3 py-1.5 rounded-full border ${c.chip}`}>
-                  {tech}
-                </span>
-              ))}
-            </div>
-          </div>
-
-          <!-- Tools -->
-          {project.tools && project.tools.length > 0 && (
-            <div class={`card-base p-5 border ${c.border}`} data-animate>
-              <h3 class={`font-heading text-sm font-semibold uppercase tracking-wider ${c.text} mb-4`} data-i18n="projects.detail.tools">
-                Herramientas
-              </h3>
-              <div class="flex flex-wrap gap-2">
-                {project.tools.map((tool) => (
-                  <span class="tag text-xs">{tool}</span>
-                ))}
-              </div>
-            </div>
-          )}
-
-          <!-- Back to home -->
-          <a
-            href="/"
-            class="btn-outline w-full text-center py-3 flex items-center justify-center gap-2 text-sm"
-            data-i18n="projects.detail.backHome"
-          >
-            <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="m3 9 9-7 9 7v11a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2z"/></svg>
-            Ir al inicio
-          </a>
-        </div>
+        </aside>
       </div>
 
-      <!-- Related Projects -->
-      <div class="mt-16" data-animate>
-        <h2 class="font-heading text-2xl font-bold text-text-primary mb-2" data-i18n="projects.detail.otherProjects">
+      <!-- Previous / next project -->
+      <nav
+        class="mt-16 md:mt-20 grid sm:grid-cols-2 sm:gap-10"
+        aria-label="Navegación entre proyectos"
+        data-aria-es="Navegación entre proyectos"
+        data-aria-en="Project navigation"
+      >
+        {neighbours.map((n) => (
+          <a href={`/projects/${n.project.slug}`} class={`neighbour ${n.key === 'next' ? 'neighbour-next' : ''}`}>
+            <span class="neighbour-dir" data-i18n={`projects.detail.${n.key}`}>{n.key === 'prev' ? 'Proyecto anterior' : 'Proyecto siguiente'}</span>
+            <span class="neighbour-title font-heading font-bold text-text-primary">{n.project.title}</span>
+            <span class="text-[0.9375rem] text-text-secondary" data-i18n={`projects.filters.${n.project.category}`}>{n.project.category === 'own' ? 'Propios' : 'Colaborativos'}</span>
+          </a>
+        ))}
+      </nav>
+
+      <!-- Other projects -->
+      <div class="mt-16 md:mt-20" data-animate>
+        <h2 class="font-heading text-2xl md:text-3xl font-bold text-text-primary border-t border-text-primary/15 pt-8 mb-8" data-i18n="projects.detail.otherProjects">
           Otros proyectos
         </h2>
-        <div class="section-divider mb-8"></div>
         <div class="grid sm:grid-cols-2 lg:grid-cols-3 gap-5">
           {related.map((p) => (
             <ProjectCard project={p} lang="es" />
           ))}
         </div>
       </div>
+
+      <!-- Contact closing -->
+      <section class="mt-16 md:mt-24 border-t border-text-primary/15 pt-10 md:pt-12 flex flex-col items-start gap-6 md:flex-row md:items-center md:justify-between" data-animate>
+        <h2 class="font-heading text-3xl md:text-4xl font-bold leading-tight text-text-primary max-w-xl text-balance" data-i18n="projects.detail.contactTitle">
+          ¿Te interesa este tipo de trabajo?
+        </h2>
+        <a href="/#contact" class="btn-primary min-h-11 shrink-0">
+          <span data-i18n="projects.detail.contactCta">Contactar</span>
+          <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M5 12h14"/><path d="m12 5 7 7-7 7"/></svg>
+        </a>
+      </section>
     </div>
   </main>
 
@@ -293,3 +290,218 @@ const timeWorked = project.timeWorked[lang];
 
   {hasImages && <LightboxGallery />}
 </Layout>
+
+<style>
+  .detail-hero {
+    background: linear-gradient(to bottom, var(--color-bg-surface), var(--color-bg-deep));
+  }
+  .back-link { -webkit-tap-highlight-color: transparent; }
+
+  .detail-title {
+    font-size: clamp(2.5rem, 1.2rem + 5.5vw, 5rem);
+    line-height: 1.03;
+    letter-spacing: -0.025em;
+    text-wrap: balance;
+    overflow-wrap: break-word;
+  }
+
+  /* Key facts strip: adapts to the number of cells, no empty slot when there is no figure */
+  .facts { display: flex; flex-wrap: wrap; gap: 0 2.5rem; }
+  .fact {
+    flex: 1 1 8.5rem;
+    min-width: 0;
+    padding: 1rem 0 1.25rem;
+    border-top: 1px solid color-mix(in srgb, var(--color-text-primary) 15%, transparent);
+  }
+  .fact-label { font-size: 0.8125rem; font-weight: 600; color: var(--color-text-muted); }
+  .fact-value {
+    margin-top: 0.25rem;
+    font-family: var(--font-heading);
+    font-size: 1.25rem;
+    font-weight: 600;
+    line-height: 1.25;
+    color: var(--color-text-primary);
+  }
+  .fact-figure { flex: 2 1 17rem; display: flex; flex-direction: column-reverse; justify-content: flex-end; }
+  .fact-figure > dt { margin-top: 0.25rem; max-width: 22rem; text-wrap: balance; }
+  .fact-figure-num {
+    font-size: clamp(2.25rem, 7vw, 3.5rem);
+    line-height: 1;
+    letter-spacing: -0.03em;
+    font-variant-numeric: tabular-nums;
+  }
+
+  /* Reading column sections */
+  .detail-section {
+    padding: 2rem 0 3rem;
+    border-top: 1px solid color-mix(in srgb, var(--color-text-primary) 15%, transparent);
+  }
+  .detail-h2 {
+    font-family: var(--font-heading);
+    font-size: clamp(1.5rem, 1.2rem + 1.2vw, 2rem);
+    font-weight: 700;
+    line-height: 1.2;
+    color: var(--color-text-primary);
+    margin-bottom: 1.25rem;
+  }
+  .detail-prose {
+    max-width: 68ch;
+    font-size: 1.0625rem;
+    line-height: 1.75;
+    color: var(--color-text-secondary);
+    text-wrap: pretty;
+  }
+  .detail-tech { font-size: 0.9375rem; line-height: 1.7; }
+
+  /* Features: ruled, numbered list */
+  .feature-list { counter-reset: feat; max-width: 68ch; }
+  .feature-list li {
+    counter-increment: feat;
+    position: relative;
+    padding: 1rem 0 1rem 3.25rem;
+    border-top: 1px solid color-mix(in srgb, var(--color-text-primary) 12%, transparent);
+    font-size: 1rem;
+    line-height: 1.7;
+    color: var(--color-text-secondary);
+  }
+  .feature-list li:last-child { border-bottom: 1px solid color-mix(in srgb, var(--color-text-primary) 12%, transparent); }
+  .feature-list li::before {
+    content: counter(feat, decimal-leading-zero);
+    position: absolute;
+    left: 0;
+    top: 1rem;
+    font-family: var(--font-heading);
+    font-size: 1.125rem;
+    font-weight: 700;
+    line-height: 1.55;
+    font-variant-numeric: tabular-nums;
+    color: var(--color-primary-text, var(--color-primary));
+  }
+
+  /* Gallery */
+  .shot {
+    position: relative;
+    display: block;
+    width: 100%;
+    padding: 0;
+    overflow: hidden;
+    cursor: zoom-in;
+    border-radius: 0.75rem;
+    border: 1px solid color-mix(in srgb, var(--color-text-primary) 15%, transparent);
+    background: var(--color-bg-surface);
+    transition: transform 0.2s ease, filter 0.2s ease;
+    -webkit-tap-highlight-color: transparent;
+  }
+  .shot-lead { aspect-ratio: 16 / 9; }
+  .shot-thumb { aspect-ratio: 4 / 3; min-height: 2.75rem; border-radius: 0.5rem; }
+  .shot :global(img) {
+    display: block;
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    object-position: top center;
+    transition: transform 0.5s ease;
+  }
+  .shot:active { transform: scale(0.985); filter: brightness(0.92); }
+  @media (hover: hover) and (pointer: fine) {
+    .shot:hover :global(img) { transform: scale(1.03); }
+  }
+  .shot-zoom {
+    position: absolute;
+    right: 0.75rem;
+    bottom: 0.75rem;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    width: 2.25rem;
+    height: 2.25rem;
+    border-radius: 9999px;
+    color: #fff;
+    background: rgba(17, 13, 10, 0.72);
+  }
+  .shot-more {
+    position: absolute;
+    inset: 0;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 1.375rem;
+    font-weight: 700;
+    color: #fff;
+    background: rgba(17, 13, 10, 0.68);
+  }
+
+  /* Side column */
+  .aside-h {
+    font-family: var(--font-heading);
+    font-size: 1.125rem;
+    font-weight: 700;
+    color: var(--color-text-primary);
+    margin-bottom: 0.5rem;
+  }
+  .aside-run { display: flex; flex-wrap: wrap; gap: 0.125rem 1.25rem; font-size: 0.9375rem; line-height: 1.7; color: var(--color-text-secondary); }
+  .ext-link {
+    display: inline-flex;
+    align-items: center;
+    gap: 0.5rem;
+    min-height: 2.75rem;
+    font-size: 0.9375rem;
+    font-weight: 600;
+    color: var(--color-primary-text, var(--color-text-primary));
+    text-decoration: underline;
+    text-decoration-thickness: 2px;
+    text-underline-offset: 0.3em;
+    text-decoration-color: var(--color-primary);
+  }
+  .ext-link:active { opacity: 0.7; }
+
+  /* Previous / next */
+  .neighbour {
+    display: flex;
+    flex-direction: column;
+    gap: 0.25rem;
+    min-height: 2.75rem;
+    padding: 1.5rem 0;
+    border-top: 1px solid color-mix(in srgb, var(--color-text-primary) 15%, transparent);
+    -webkit-tap-highlight-color: transparent;
+    transition: background-color 0.2s ease;
+  }
+  @media (min-width: 640px) {
+    .neighbour-next { align-items: flex-end; text-align: right; }
+  }
+  .neighbour-dir { font-size: 0.8125rem; font-weight: 600; color: var(--color-text-muted); }
+  .neighbour-title { font-size: 1.5rem; line-height: 1.2; }
+  .neighbour:active { background: color-mix(in srgb, var(--color-primary) 10%, transparent); }
+  @media (hover: hover) and (pointer: fine) {
+    .neighbour:hover .neighbour-title { text-decoration: underline; text-decoration-thickness: 2px; text-underline-offset: 0.25em; text-decoration-color: var(--color-primary); }
+  }
+</style>
+
+<script>
+  // Accessible names that must follow the active language (the i18n engine only swaps text).
+  function currentLang(): 'es' | 'en' {
+    return document.documentElement.getAttribute('data-lang') === 'en' ? 'en' : 'es';
+  }
+
+  function syncAriaLabels(): void {
+    const lang = currentLang();
+    document.querySelectorAll<HTMLElement>('[data-aria-es]').forEach((el) => {
+      const value = el.getAttribute(`data-aria-${lang}`);
+      if (value) el.setAttribute('aria-label', value);
+    });
+  }
+
+  syncAriaLabels();
+  document.addEventListener('astro:page-load', syncAriaLabels);
+  new MutationObserver(syncAriaLabels).observe(document.documentElement, {
+    attributes: true,
+    attributeFilter: ['data-lang'],
+  });
+
+  // Gallery buttons open the existing lightbox
+  document.addEventListener('click', (e) => {
+    const shot = (e.target as Element | null)?.closest<HTMLElement>('[data-shot]');
+    if (!shot) return;
+    (window as any).__openLightbox?.(Number(shot.dataset.shot));
+  });
+</script>

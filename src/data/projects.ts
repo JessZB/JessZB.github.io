@@ -18,6 +18,7 @@ export interface Project {
   problemsSolved?: { es: string; en: string };
   keyFeatures?: { es: string[]; en: string[] };
   architecture?: { es: string; en: string };
+  figure?: { value: { es: string; en: string }; label: { es: string; en: string } };
 }
 
 // Convert from identity.json format to the Project interface
@@ -53,6 +54,12 @@ export const projects: Project[] = identityData.projects.map(project => ({
     : undefined,
   architecture: project.architecture_es
     ? { es: project.architecture_es, en: project.architecture_en }
+    : undefined,
+  figure: (project as any).figure_value_es
+    ? {
+        value: { es: (project as any).figure_value_es, en: (project as any).figure_value_en },
+        label: { es: (project as any).figure_label_es, en: (project as any).figure_label_en },
+      }
     : undefined,
 }));
 

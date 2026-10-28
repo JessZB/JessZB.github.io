@@ -1,28 +1,37 @@
 ---
 // LightboxGallery — Full-screen image viewer with keyboard navigation
-// Triggered by clicking gallery thumbnails on project detail pages
+// Opened from the gallery buttons (window.__openLightbox) on project detail pages
 ---
 
-<div id="lightbox-gallery" class="lightbox-overlay" aria-hidden="true" role="dialog" aria-modal="true">
+<div
+  id="lightbox-gallery"
+  class="lightbox-overlay"
+  aria-hidden="true"
+  role="dialog"
+  aria-modal="true"
+  aria-label="Galería de capturas"
+  data-aria-es="Galería de capturas"
+  data-aria-en="Screenshot gallery"
+>
   <!-- Backdrop -->
   <div class="lightbox-backdrop"></div>
 
   <!-- Close button -->
-  <button id="lightbox-close" class="lightbox-close" aria-label="Cerrar galería">
+  <button id="lightbox-close" type="button" class="lightbox-close" aria-label="Cerrar galería" data-aria-es="Cerrar galería" data-aria-en="Close gallery">
     <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
       <path d="M18 6 6 18"/><path d="m6 6 12 12"/>
     </svg>
   </button>
 
   <!-- Previous button -->
-  <button id="lightbox-prev" class="lightbox-nav lightbox-prev" aria-label="Imagen anterior">
+  <button id="lightbox-prev" type="button" class="lightbox-nav lightbox-prev" aria-label="Imagen anterior" data-aria-es="Imagen anterior" data-aria-en="Previous image">
     <svg width="28" height="28" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
       <path d="M15 18l-6-6 6-6"/>
     </svg>
   </button>
 
   <!-- Next button -->
-  <button id="lightbox-next" class="lightbox-nav lightbox-next" aria-label="Imagen siguiente">
+  <button id="lightbox-next" type="button" class="lightbox-nav lightbox-next" aria-label="Imagen siguiente" data-aria-es="Imagen siguiente" data-aria-en="Next image">
     <svg width="28" height="28" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
       <path d="m9 18 6-6-6-6"/>
     </svg>
@@ -30,7 +39,7 @@
 
   <!-- Image container -->
   <div class="lightbox-content">
-    <img id="lightbox-image" src="" alt="" class="lightbox-image" />
+    <!-- #lightbox-image is created on first open (no empty-src placeholder) -->
     <div id="lightbox-counter" class="lightbox-counter"></div>
   </div>
 </div>
@@ -51,6 +60,7 @@
   .lightbox-overlay.active {
     opacity: 1;
     visibility: visible;
+    transition: opacity 0.3s ease, visibility 0s;
   }
 
   .lightbox-backdrop {
@@ -65,8 +75,8 @@
     top: 1.25rem;
     right: 1.25rem;
     z-index: 10;
-    width: 2.5rem;
-    height: 2.5rem;
+    width: 2.75rem;
+    height: 2.75rem;
     display: flex;
     align-items: center;
     justify-content: center;
@@ -75,7 +85,7 @@
     border-radius: 9999px;
     color: #fff;
     cursor: pointer;
-    transition: all 0.2s ease;
+    transition: background-color 0.2s ease, transform 0.2s ease;
   }
 
   @media (hover: hover) and (pointer: fine) {
@@ -105,7 +115,7 @@
     border-radius: 9999px;
     color: #fff;
     cursor: pointer;
-    transition: all 0.2s ease;
+    transition: background-color 0.2s ease, transform 0.2s ease;
   }
 
   @media (hover: hover) and (pointer: fine) {
@@ -133,7 +143,7 @@
     align-items: center;
   }
 
-  .lightbox-image {
+  .lightbox-content :global(.lightbox-image) {
     max-width: 90vw;
     max-height: 80vh;
     object-fit: contain;
@@ -144,20 +154,20 @@
 
   .lightbox-counter {
     margin-top: 1rem;
-    color: rgba(255, 255, 255, 0.6);
+    color: rgba(255, 255, 255, 0.75);
     font-size: 0.875rem;
-    font-family: monospace;
+    font-variant-numeric: tabular-nums;
     letter-spacing: 0.05em;
   }
 
   @media (max-width: 640px) {
     .lightbox-nav {
-      width: 2.25rem;
-      height: 2.25rem;
+      width: 2.75rem;
+      height: 2.75rem;
     }
     .lightbox-prev { left: 0.5rem; }
     .lightbox-next { right: 0.5rem; }
-    .lightbox-image {
+    .lightbox-content :global(.lightbox-image) {
       max-width: 95vw;
       max-height: 75vh;
     }
@@ -169,6 +179,9 @@
   let currentIndex = 0;
   let lightboxClickHandler: ((e: MouseEvent) => void) | null = null;
   let lightboxKeyHandler: ((e: KeyboardEvent) => void) | null = null;
+  let lastFocus: HTMLElement | null = null;
+
+  const isEn = () => document.documentElement.getAttribute('data-lang') === 'en';
 
   function initLightboxGallery(imgs: string[]): void {
     images = imgs;
@@ -202,8 +215,25 @@
       if (e.key === 'Escape') closeLightbox();
       if (e.key === 'ArrowLeft') navigate(-1);
       if (e.key === 'ArrowRight') navigate(1);
+      if (e.key === 'Tab') trapFocus(e, overlay);
     };
     document.addEventListener('keydown', lightboxKeyHandler);
+  }
+
+  // Keep Tab inside the dialog while it is open
+  function trapFocus(e: KeyboardEvent, overlay: HTMLElement): void {
+    const items = Array.from(overlay.querySelectorAll<HTMLElement>('button')).filter((b) => b.offsetParent !== null);
+    if (items.length === 0) return;
+    const first = items[0];
+    const last = items[items.length - 1];
+    const active = document.activeElement as HTMLElement | null;
+    if (e.shiftKey && (active === first || !overlay.contains(active))) {
+      e.preventDefault();
+      last.focus();
+    } else if (!e.shiftKey && (active === last || !overlay.contains(active))) {
+      e.preventDefault();
+      first.focus();
+    }
   }
 
   function openLightbox(index: number): void {
@@ -211,9 +241,18 @@
     const overlay = document.getElementById('lightbox-gallery');
     if (!overlay) return;
 
+    lastFocus = document.activeElement instanceof HTMLElement ? document.activeElement : null;
+    const single = images.length < 2;
+    overlay.querySelectorAll<HTMLElement>('#lightbox-prev, #lightbox-next').forEach((b) => { b.hidden = single; });
+
     updateImage();
     overlay.classList.add('active');
+    overlay.setAttribute('aria-hidden', 'false');
     document.body.style.overflow = 'hidden';
+    // The overlay fades in via a visibility transition: focus once it is actually focusable
+    const closeBtn = document.getElementById('lightbox-close');
+    closeBtn?.focus();
+    if (document.activeElement !== closeBtn) requestAnimationFrame(() => closeBtn?.focus());
   }
 
   function closeLightbox(): void {
@@ -221,7 +260,10 @@
     if (!overlay) return;
 
     overlay.classList.remove('active');
+    overlay.setAttribute('aria-hidden', 'true');
     document.body.style.overflow = '';
+    lastFocus?.focus();
+    lastFocus = null;
   }
 
   function navigate(direction: number): void {
@@ -230,15 +272,25 @@
   }
 
   function updateImage(): void {
-    const img = document.getElementById('lightbox-image') as HTMLImageElement;
     const counter = document.getElementById('lightbox-counter');
-    if (!img) return;
+    let img = document.getElementById('lightbox-image') as HTMLImageElement | null;
+    if (!img) {
+      img = document.createElement('img');
+      img.id = 'lightbox-image';
+      img.className = 'lightbox-image';
+      img.alt = '';
+      img.style.opacity = '0';
+      counter?.before(img);
+    }
+    const el = img;
 
-    img.style.opacity = '0';
+    el.style.opacity = '0';
     setTimeout(() => {
-      img.src = images[currentIndex];
-      img.alt = `Imagen ${currentIndex + 1} de ${images.length}`;
-      img.style.opacity = '1';
+      el.src = images[currentIndex];
+      el.alt = isEn()
+        ? `Image ${currentIndex + 1} of ${images.length}`
+        : `Imagen ${currentIndex + 1} de ${images.length}`;
+      el.style.opacity = '1';
     }, 150);
 
     if (counter) {
