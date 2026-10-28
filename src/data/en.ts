@@ -16,8 +16,7 @@ export default {
     },
     "cta1": "View Projects",
     "cta2": "Contact Me",
-    "badge": "Available for projects · UTC-4 (VE)",
-    "scrollHint": "Keep reading"
+    "badge": "Available for projects · UTC-4 (VE)"
   },
   "about": {
     "title": "About Me",
@@ -84,6 +83,7 @@ export default {
       "own": "Personal",
       "collab": "Collaborative"
     },
+    "shown": "Projects shown:",
     "viewDetails": "View details",
     "demo": "Demo",
     "code": "Code",
@@ -174,6 +174,7 @@ export default {
       "arepa": "Code with Venezuelan flavor",
       "coffee": "Code brewed with patience and craft"
     },
+    "builtWith": "Built with Astro · Tailwind · GSAP",
     "copyright": "© 2026 JESS<span class='zb-gradient'>ZB</span>.DEV — " + identity.identity.name,
     "counter": {
       "arepa": "arepas consumed",

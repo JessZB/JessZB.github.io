@@ -16,8 +16,7 @@ export default {
     },
     "cta1": "Ver Proyectos",
     "cta2": "Contactar",
-    "badge": "Disponible para proyectos · UTC-4 (VE)",
-    "scrollHint": "Seguir leyendo"
+    "badge": "Disponible para proyectos · UTC-4 (VE)"
   },
   "about": {
     "title": "Sobre Mí",
@@ -84,6 +83,7 @@ export default {
       "own": "Propios",
       "collab": "Colaborativos"
     },
+    "shown": "Proyectos mostrados:",
     "viewDetails": "Ver detalles",
     "demo": "Demo",
     "code": "Código",
@@ -174,6 +174,7 @@ export default {
       "arepa": "Código con sazón venezolana",
       "coffee": "Código preparado con paciencia y técnica"
     },
+    "builtWith": "Hecho con Astro · Tailwind · GSAP",
     "copyright": "© 2026 JESS<span class='zb-gradient'>ZB</span>.DEV — " + identity.identity.name,
     "counter": {
       "arepa": "arepas consumidas",

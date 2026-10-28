@@ -48,7 +48,9 @@ import identity from '../data/identity.json';
         <button
           id="fun-counter"
           class="flex items-center gap-2 px-4 py-2 bg-bg-surface rounded-full border border-primary/10 hover:border-primary/40 transition-all text-sm text-text-muted hover:text-primary-text active:border-primary active:scale-95 group"
-          title="¡Hacé click!"
+          title="¡Dale click!"
+          data-title-es="¡Dale click!"
+          data-title-en="Click me!"
         >
           <span id="counter-icon" class="flex items-center justify-center group-hover:scale-125 group-active:scale-125 transition-transform text-primary-text" aria-hidden="true">
             <!-- Icon will be injected by script -->
@@ -69,8 +71,8 @@ import identity from '../data/identity.json';
         © 2026 JESS<span class="zb-gradient">ZB</span>.DEV — Jesús Zapata
       </p>
       <p class="text-text-muted text-xs flex items-center gap-1">
-        Built with Astro · Tailwind · GSAP 
-        <svg width="10" height="10" viewBox="0 0 24 24" fill="currentColor" class="text-accent-text inline-block">
+        <span data-i18n="footer.builtWith">Hecho con Astro · Tailwind · GSAP</span>
+        <svg width="10" height="10" viewBox="0 0 24 24" fill="currentColor" class="text-accent-text inline-block" aria-hidden="true">
           <path d="M12 21.35l-1.45-1.32C5.4 15.36 2 12.28 2 8.5 2 5.42 4.42 3 7.5 3c1.74 0 3.41.81 4.5 2.09C13.09 3.81 14.76 3 16.5 3 19.58 3 22 5.42 22 8.5c0 3.78-3.4 6.86-8.55 11.54L12 21.35z"/>
         </svg>
       </p>
@@ -107,6 +109,8 @@ import identity from '../data/identity.json';
 </style>
 
 <script>
+  import '../scripts/aria-lang';
+
   let count = 0;
   let themeObserver: MutationObserver | null = null;
 

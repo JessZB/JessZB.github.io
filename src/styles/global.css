@@ -152,7 +152,6 @@
 
   --animate-glow-pulse: glow-pulse 2s ease-in-out infinite;
   --animate-float: float 6s ease-in-out infinite;
-  --animate-scanline: scanline 8s linear infinite;
   --animate-fade-in-up: fade-in-up 0.6s ease-out;
   --animate-fade-in: fade-in 0.8s ease-out;
   --animate-slide-in-left: slide-in-left 0.6s ease-out;
@@ -192,11 +191,6 @@ main:focus {
 @keyframes float {
   0%, 100% { transform: translateY(0px); }
   50% { transform: translateY(-20px); }
-}
-
-@keyframes scanline {
-  0% { transform: translateY(-100%); }
-  100% { transform: translateY(100%); }
 }
 
 @keyframes fade-in-up {
@@ -271,10 +265,15 @@ main:focus {
     html {
       scroll-behavior: auto;
     }
+    /* Decorative animation stops; state feedback (color/opacity) keeps a short fade.
+       Movement-based transitions (transform, translate, scale, shadow) become instant. */
     *, *::before, *::after {
       animation-duration: 0.01ms !important;
+      animation-delay: 0s !important;
       animation-iteration-count: 1 !important;
-      transition-duration: 0.01ms !important;
+      transition-property: color, background-color, border-color, text-decoration-color, fill, stroke, opacity !important;
+      transition-duration: 0.15s !important;
+      transition-delay: 0s !important;
     }
   }
 
@@ -320,11 +319,9 @@ main:focus {
                  0 0 80px rgba(245, 197, 66, 0.1);
   }
 
+  /* Solid brand coral (theme-aware, AA on its surface): "ZB" in the logo and footer */
   .zb-gradient {
-    background: linear-gradient(135deg, #FF6B9D, #E84545);
-    -webkit-background-clip: text;
-    -webkit-text-fill-color: transparent;
-    background-clip: text;
+    color: var(--color-accent-text);
     font-weight: 800;
   }
 
@@ -441,23 +438,6 @@ main:focus {
 
   .card-glow-lavender {
     box-shadow: 0 0 15px rgba(155, 89, 182, 0.15);
-  }
-
-  .scanline-overlay {
-    position: relative;
-    overflow: hidden;
-  }
-
-  .scanline-overlay::after {
-    content: '';
-    position: absolute;
-    top: 0;
-    left: 0;
-    right: 0;
-    height: 2px;
-    background: linear-gradient(90deg, transparent, rgba(245, 197, 66, 0.1), transparent);
-    animation: scanline 8s linear infinite;
-    pointer-events: none;
   }
 
   .particle {

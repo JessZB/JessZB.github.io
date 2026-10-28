@@ -18,29 +18,44 @@ import ProjectCard from './ProjectCard.astro';
     <div class="section-divider"></div>
 
     <!-- Filters -->
-    <div id="project-filters" class="flex justify-center gap-3 mb-10 flex-wrap" role="group" aria-label="Filtrar proyectos">
+    <div
+      id="project-filters"
+      class="grid grid-cols-3 gap-2 sm:flex sm:justify-center sm:gap-3 mb-10"
+      role="group"
+      aria-label="Filtrar proyectos"
+      data-aria-es="Filtrar proyectos"
+      data-aria-en="Filter projects"
+    >
       <button
         data-filter="all"
-        class="filter-btn active px-5 py-2 min-h-[44px] rounded-full text-sm font-medium border border-primary text-primary-text bg-primary/10 active:scale-95 transition-all hover:bg-primary/20"
+        aria-pressed="true"
+        class="filter-btn active px-1 sm:px-5 py-2 min-h-[44px] rounded-full text-sm font-medium border border-primary text-primary-text bg-primary/10 active:scale-95 transition-all hover:bg-primary/20"
         data-i18n="projects.filters.all"
       >
         Todos
       </button>
       <button
         data-filter="own"
-        class="filter-btn px-5 py-2 min-h-[44px] rounded-full text-sm font-medium border border-secondary/30 text-secondary-text hover:bg-secondary/10 active:scale-95 transition-all"
+        aria-pressed="false"
+        class="filter-btn px-1 sm:px-5 py-2 min-h-[44px] rounded-full text-sm font-medium border border-secondary/30 text-secondary-text hover:bg-secondary/10 active:scale-95 transition-all"
         data-i18n="projects.filters.own"
       >
         Propios
       </button>
       <button
         data-filter="collab"
-        class="filter-btn px-5 py-2 min-h-[44px] rounded-full text-sm font-medium border border-highlight/30 text-highlight-text hover:bg-highlight/10 active:scale-95 transition-all"
+        aria-pressed="false"
+        class="filter-btn px-1 sm:px-5 py-2 min-h-[44px] rounded-full text-sm font-medium border border-highlight/30 text-highlight-text hover:bg-highlight/10 active:scale-95 transition-all"
         data-i18n="projects.filters.collab"
       >
         Colaborativos
       </button>
     </div>
+
+    <!-- Result count, announced politely when a filter is applied -->
+    <p id="projects-status" class="sr-only" role="status" aria-live="polite">
+      <span data-i18n="projects.shown">Proyectos mostrados:</span> <span id="projects-count">{projects.length}</span>
+    </p>
 
     <!-- Projects grid -->
     <div id="projects-grid" class="grid sm:grid-cols-2 lg:grid-cols-3 gap-5" data-animate-stagger>
@@ -79,11 +94,16 @@ import ProjectCard from './ProjectCard.astro';
 
     const cards = document.querySelectorAll<HTMLElement>('.project-card');
     const emptyState = document.getElementById('projects-empty');
+    const countEl = document.getElementById('projects-count');
+    const hideTimers = new Map<HTMLElement, number>();
 
     filterBtns.forEach((btn) => {
       btn.addEventListener('click', () => {
-        filterBtns.forEach((b) => b.classList.remove('active'));
-        btn.classList.add('active');
+        filterBtns.forEach((b) => {
+          const isActive = b === btn;
+          b.classList.toggle('active', isActive);
+          b.setAttribute('aria-pressed', String(isActive));
+        });
 
         const filter = btn.dataset.filter;
         let visibleCount = 0;
@@ -91,8 +111,13 @@ import ProjectCard from './ProjectCard.astro';
         cards.forEach((card, index) => {
           const matches = filter === 'all' || card.dataset.category === filter;
           card.style.transition = `opacity 0.35s ease ${(index % 3) * 0.06}s, transform 0.35s ease ${(index % 3) * 0.06}s`;
+          clearTimeout(hideTimers.get(card));
 
           if (matches) {
+            // Re-enter layout first so the entrance transition has a starting frame
+            card.hidden = false;
+            card.inert = false;
+            void card.offsetWidth;
             card.style.opacity = '1';
             card.style.transform = 'scale(1)';
             card.style.pointerEvents = 'auto';
@@ -103,8 +128,13 @@ import ProjectCard from './ProjectCard.astro';
             card.style.transform = 'scale(0.92)';
             card.style.pointerEvents = 'none';
             card.style.position = 'absolute';
+            // Out of the tab order and the a11y tree immediately, out of layout once faded
+            card.inert = true;
+            hideTimers.set(card, window.setTimeout(() => { card.hidden = true; }, 520));
           }
         });
+
+        if (countEl) countEl.textContent = String(visibleCount);
 
         if (emptyState) {
           emptyState.classList.toggle('hidden', visibleCount > 0);
@@ -114,4 +144,8 @@ import ProjectCard from './ProjectCard.astro';
   }
 
   document.addEventListener('astro:page-load', initProjects);
+</script>
+
+<script>
+  import '../scripts/aria-lang';
 </script>
