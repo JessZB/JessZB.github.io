@@ -122,7 +122,6 @@ const translations = {
 
     <!-- GSAP -->
     <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.5/gsap.min.js" defer is:inline></script>
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.5/ScrollTrigger.min.js" defer is:inline></script>
 
     <!-- Client Router for SPA-like navigation -->
     <ClientRouter />
@@ -250,67 +249,88 @@ const translations = {
       })();
     </script>
 
-    <!-- GSAP Scroll Animations -->
+    <!-- GSAP Scroll Reveals (IntersectionObserver: no measured positions, so zoom/resize/layout shift cannot break them) -->
     <script is:inline>
-      function initScrollAnimations() {
-        if (typeof gsap === 'undefined' || typeof ScrollTrigger === 'undefined') return;
-        gsap.registerPlugin(ScrollTrigger);
+      var revealState = { observers: [], pending: [], timer: null, checkTimer: null };
 
-        // Kill stale ScrollTrigger instances from previous page
-        ScrollTrigger.getAll().forEach(function (t) { t.kill(); });
+      function revealItem(item) {
+        if (item.done) return;
+        item.done = true;
+        if (item.io) item.io.unobserve(item.el);
+        if (item.stagger) {
+          gsap.to(item.el.children, { opacity: 1, y: 0, duration: 0.6, stagger: 0.1, overwrite: 'auto' });
+        } else {
+          gsap.to(item.el, { opacity: 1, x: 0, y: 0, duration: 0.8, overwrite: 'auto' });
+        }
+      }
 
-        var prefersReduced = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
-        if (prefersReduced) return;
-
-        document.querySelectorAll('[data-animate]').forEach(function (el) {
-          gsap.fromTo(el,
-            { opacity: 0, y: 40 },
-            {
-              opacity: 1, y: 0,
-              duration: 0.8,
-              scrollTrigger: { trigger: el, start: 'top 85%', toggleActions: 'play none none none' }
-            }
-          );
-        });
-
-        document.querySelectorAll('[data-animate-left]').forEach(function (el) {
-          gsap.fromTo(el,
-            { opacity: 0, x: -60 },
-            {
-              opacity: 1, x: 0,
-              duration: 0.8,
-              scrollTrigger: { trigger: el, start: 'top 85%', toggleActions: 'play none none none' }
-            }
-          );
-        });
-
-        document.querySelectorAll('[data-animate-right]').forEach(function (el) {
-          gsap.fromTo(el,
-            { opacity: 0, x: 60 },
-            {
-              opacity: 1, x: 0,
-              duration: 0.8,
-              scrollTrigger: { trigger: el, start: 'top 85%', toggleActions: 'play none none none' }
-            }
-          );
-        });
-
-        document.querySelectorAll('[data-animate-stagger]').forEach(function (el) {
-          gsap.fromTo(el.children,
-            { opacity: 0, y: 30 },
-            {
-              opacity: 1, y: 0,
-              duration: 0.6,
-              stagger: 0.1,
-              scrollTrigger: { trigger: el, start: 'top 85%', toggleActions: 'play none none none' }
-            }
-          );
+      // Reveal anything not below the viewport (visible or already scrolled past)
+      function revealReachable() {
+        revealState.pending.forEach(function (item) {
+          if (!item.done && item.el.getBoundingClientRect().top < window.innerHeight) revealItem(item);
         });
       }
 
+      function teardownReveals() {
+        revealState.observers.forEach(function (io) { io.disconnect(); });
+        revealState.observers = [];
+        revealState.pending = [];
+        clearTimeout(revealState.timer);
+        window.__revealObservers = revealState.observers;
+      }
+
+      function initScrollAnimations() {
+        teardownReveals();
+        if (typeof gsap === 'undefined') return;
+        if (window.matchMedia('(prefers-reduced-motion: reduce)').matches) return;
+        if (!('IntersectionObserver' in window)) return;
+
+        var defs = [
+          { sel: '[data-animate]', from: { opacity: 0, y: 40 } },
+          { sel: '[data-animate-left]', from: { opacity: 0, x: -60 } },
+          { sel: '[data-animate-right]', from: { opacity: 0, x: 60 } },
+          { sel: '[data-animate-stagger]', from: { opacity: 0, y: 30 }, stagger: true }
+        ];
+
+        var io = new IntersectionObserver(function (entries) {
+          entries.forEach(function (entry) {
+            var item = entry.target.__revealItem;
+            if (!item || item.done) return;
+            var limit = entry.rootBounds ? entry.rootBounds.bottom : window.innerHeight;
+            if (entry.isIntersecting || entry.boundingClientRect.top < limit) revealItem(item);
+          });
+        }, { threshold: 0, rootMargin: '0px 0px -15% 0px' });
+        revealState.observers.push(io);
+        window.__revealObservers = revealState.observers;
+
+        defs.forEach(function (def) {
+          document.querySelectorAll(def.sel).forEach(function (el) {
+            var item = { el: el, stagger: !!def.stagger, io: io, done: false };
+            el.__revealItem = item;
+            gsap.set(def.stagger ? el.children : el, def.from);
+            revealState.pending.push(item);
+            io.observe(el);
+          });
+        });
+
+        // Belt and braces: reveal whatever is still hidden but reachable
+        revealState.timer = setTimeout(revealReachable, 2500);
+      }
+
+      function scheduleRevealCheck() {
+        clearTimeout(revealState.checkTimer);
+        revealState.checkTimer = setTimeout(revealReachable, 150);
+      }
+      window.addEventListener('resize', scheduleRevealCheck);
+      window.addEventListener('orientationchange', scheduleRevealCheck);
+      if (window.visualViewport) window.visualViewport.addEventListener('resize', scheduleRevealCheck);
+
+      // Drop the outgoing page's observers before the DOM is swapped
+      document.addEventListener('astro:before-swap', teardownReveals);
+
       // gsap is loaded with defer: if it is not ready yet, wait for window load once
       document.addEventListener('astro:page-load', function () {
-        if (typeof gsap !== 'undefined' && typeof ScrollTrigger !== 'undefined') {
+        if (typeof gsap !== 'undefined') {
           initScrollAnimations();
         } else if (document.readyState !== 'complete') {
           window.addEventListener('load', initScrollAnimations, { once: true });
