@@ -1,10 +1,11 @@
 ---
-import { Image } from 'astro:assets';
+import { Image, getImage } from 'astro:assets';
 import Layout from '../../layouts/Layout.astro';
 import Navbar from '../../components/Navbar.astro';
 import Footer from '../../components/Footer.astro';
 import ProjectCard from '../../components/ProjectCard.astro';
 import LightboxGallery from '../../components/LightboxGallery.astro';
+import { getProjectImage } from '../../utils/projectImages';
 import { projects, getProjectBySlug, getRelatedProjects } from '../../data/projects';
 
 export function getStaticPaths() {
@@ -30,6 +31,12 @@ const colorMap: Record<string, { text: string; bg: string; border: string; chip:
 const c = colorMap[project.color] || colorMap.primary;
 const hasImages = project.images && project.images.length > 0;
 
+// Lightbox gets a 1600px variant (not the 1920px original); hero backdrop is blurred, so a small one is enough
+const lightboxImages = hasImages
+  ? await Promise.all(project.images.map(async (img) => (await getImage({ src: getProjectImage(img), width: 1600 })).src))
+  : [];
+const heroBackdrop = hasImages ? (await getImage({ src: getProjectImage(project.images[0]), width: 480 })).src : '';
+
 // Default lang es — i18n engine will swap on client
 const lang: 'es' | 'en' = 'es';
 const title = project.title;
@@ -51,7 +58,7 @@ const timeWorked = project.timeWorked[lang];
     <div class={`relative pt-24 pb-16 bg-gradient-to-b from-bg-surface to-bg-deep overflow-hidden`}>
       <div class="absolute inset-0 bg-grid opacity-30" aria-hidden="true"></div>
       {hasImages && (
-        <div class="absolute inset-0 bg-cover bg-center blur-xl scale-110 opacity-40" style={`background-image: url('${project.images[0]}')`} aria-hidden="true"></div>
+        <div class="absolute inset-0 bg-cover bg-center blur-xl scale-110 opacity-40" style={`background-image: url('${heroBackdrop}')`} aria-hidden="true"></div>
       )}
       {hasImages && (
         <div class="absolute inset-0 bg-gradient-to-b from-bg-surface/80 to-bg-deep/90" aria-hidden="true"></div>
@@ -120,7 +127,7 @@ const timeWorked = project.timeWorked[lang];
 
           {hasImages ? (
             <!-- Gallery grid: show max 4 images + overlay for remaining -->
-            <div id="project-gallery" class="grid grid-cols-2 gap-3" data-images={JSON.stringify(project.images)}>
+            <div id="project-gallery" class="grid grid-cols-2 gap-3" data-images={JSON.stringify(lightboxImages)}>
               {project.images.slice(0, 4).map((img, i) => {
                 const isLast = i === 3;
                 const remaining = project.images.length - 4;
@@ -130,14 +137,13 @@ const timeWorked = project.timeWorked[lang];
                     onclick={`__openLightbox(${i})`}
                   >
                     <Image
-                      src={img}
+                      src={getProjectImage(img)}
                       alt={`${title} screenshot ${i + 1}`}
                       class="w-full h-full object-cover group-hover:scale-105 group-active:scale-105 transition-transform duration-500"
                       loading="lazy"
                       decoding="async"
-                      inferSize
-                      width={640}
-                      height={360}
+                      widths={[320, 480, 800]}
+                      sizes="(min-width: 1024px) 380px, 40vw"
                     />
                     {isLast && remaining > 0 && (
                       <div class="absolute inset-0 bg-black/60 flex items-center justify-center group-hover:bg-black/70 transition-colors">

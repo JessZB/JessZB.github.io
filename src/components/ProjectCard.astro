@@ -1,6 +1,7 @@
 ---
 import { Image } from 'astro:assets';
 import type { Project } from '../data/projects';
+import { getProjectImage } from '../utils/projectImages';
 
 interface Props {
   project: Project;
@@ -58,15 +59,13 @@ const statusLabel = {
       <div class="carousel-track flex w-full h-full" data-carousel>
         {project.images.map((img, i) => (
           <Image
-            src={img}
+            src={getProjectImage(img)}
             alt={`${project.title} screenshot ${i + 1}`}
             class="carousel-slide w-full h-full object-cover flex-shrink-0"
             loading="lazy"
             decoding="async"
+            widths={[480, 800]}
             sizes="(min-width: 1024px) 400px, (min-width: 640px) 50vw, 100vw"
-            inferSize
-            width={800}
-            height={450}
           />
         ))}
       </div>
