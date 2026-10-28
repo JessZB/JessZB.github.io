@@ -81,13 +81,12 @@ const translations = {
     <link rel="icon" type="image/svg+xml" href="/favicon.svg" />
     <link rel="apple-touch-icon" href="/favicon.svg" />
 
-    <!-- Fonts -->
-    <link rel="preconnect" href="https://fonts.googleapis.com" />
-    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
-    <link
-      href="https://fonts.googleapis.com/css2?family=Chakra+Petch:wght@400;500;600;700&family=Inter:wght@300;400;500;600;700&display=swap"
-      rel="stylesheet"
-    />
+    <!-- Fonts (self-hosted; preload only the above-the-fold files) -->
+    <link rel="preload" as="font" type="font/woff2" crossorigin href="/fonts/chakra-petch-latin-700.woff2" />
+    <link rel="preload" as="font" type="font/woff2" crossorigin href="/fonts/chakra-petch-latin-400.woff2" />
+    <link rel="preload" as="font" type="font/woff2" crossorigin href="/fonts/chakra-petch-latin-500.woff2" />
+    <link rel="preload" as="font" type="font/woff2" crossorigin href="/fonts/chakra-petch-latin-600.woff2" />
+    <link rel="preload" as="font" type="font/woff2" crossorigin href="/fonts/inter-latin-400-700.woff2" />
 
     <!-- Structured Data: Person -->
     <script type="application/ld+json">
@@ -238,8 +237,14 @@ const translations = {
           updateLang(e.detail.lang);
         });
 
+        // Translate as soon as the DOM above is parsed, so the first paint is already in the
+        // active language (avoids a late ES->EN reflow when GSAP/module scripts are slow).
+        updateLang();
+        var skipFirstPageLoad = true;
+
         // Auto-init on initial load AND after ClientRouter navigation
         document.addEventListener('astro:page-load', function () {
+          if (skipFirstPageLoad) { skipFirstPageLoad = false; return; }
           updateLang();
         });
       })();
