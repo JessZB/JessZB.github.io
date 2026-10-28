@@ -1,5 +1,8 @@
 import identity from './identity.json';
 
+// Short bio split into its three sentences (one paragraph each in the About section)
+const [bio2a, bio2b, bio2c] = identity.about.bio2_en.split(/(?<=\.)\s+/);
+
 export default {
   "site": {
     "name": "JESSZB.DEV",
@@ -25,14 +28,14 @@ export default {
       "arepa": identity.about.bio_arepa_en,
       "coffee": identity.about.bio_coffee_en
     },
-    "bio2": identity.about.bio2_en,
+    "bio2": {
+      "p1": bio2a,
+      "p2": bio2b,
+      "p3": bio2c
+    },
     "stats": {
       "years": "Years of experience",
-      "projects": "Projects I've worked on",
-      "arepas": {
-        "arepa": "∞ Arepas",
-        "coffee": "∞ Coffees"
-      }
+      "projects": "projects"
     },
     "avatarAlt": "Venezuelan developer anime avatar"
   },
@@ -84,6 +87,7 @@ export default {
       "collab": "Collaborative"
     },
     "shown": "Projects shown:",
+    "noDemo": "No public demo",
     "viewDetails": "View details",
     "demo": "Demo",
     "code": "Code",
@@ -174,6 +178,7 @@ export default {
       "arepa": "Code with Venezuelan flavor",
       "coffee": "Code brewed with patience and craft"
     },
+    "backToTop": "Back to top",
     "builtWith": "Built with Astro · Tailwind · GSAP",
     "copyright": "© 2026 JESS<span class='zb-gradient'>ZB</span>.DEV — " + identity.identity.name,
     "counter": {

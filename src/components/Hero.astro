@@ -1,23 +1,22 @@
 ---
-// Hero — merged with About section content
+// Hero — greeting, name, role, typing line and CTAs (the bio lives in About.astro)
 // Uses data-i18n and data-i18n-arepa/coffee for theme-aware texts
-import identity from '../data/identity.json';
 ---
 
-<section id="hero" class="relative min-h-screen flex items-center justify-center overflow-hidden bg-bg-deep bg-grid">
+<section id="hero" class="relative min-h-[100svh] flex items-center justify-center overflow-hidden bg-bg-deep bg-grid">
 
   <!-- Ambient blobs -->
   <div class="absolute inset-0 pointer-events-none [contain:layout_paint]" aria-hidden="true">
     <div class="absolute top-0 left-1/4 w-96 h-96 bg-primary/10 rounded-full blur-[120px] animate-float"></div>
-    <div class="absolute bottom-0 right-1/4 w-96 h-96 bg-secondary/10 rounded-full blur-[120px] animate-float" style="animation-delay: 2s;"></div>
-    <div class="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-[500px] h-[500px] bg-highlight/5 rounded-full blur-[150px]"></div>
+    <div class="absolute top-[calc(100svh-24rem)] right-1/4 w-96 h-96 bg-secondary/10 rounded-full blur-[120px] animate-float" style="animation-delay: 2s;"></div>
+    <div class="absolute top-[calc(50svh-250px)] left-1/2 -translate-x-1/2 w-[500px] h-[500px] bg-highlight/5 rounded-full blur-[150px]"></div>
   </div>
 
   <!-- Particles -->
   <div id="particles-container" class="absolute inset-0 pointer-events-none" aria-hidden="true"></div>
 
   <!-- Main content -->
-  <div class="relative z-10 text-center px-4 max-w-5xl mx-auto pt-20 sm:pt-24 pb-16">
+  <div class="relative z-10 text-center px-4 max-w-5xl mx-auto pt-20 sm:pt-24 pb-24">
 
     <!-- Avatar / Hero icon — theme-aware -->
     <div class="mb-5 sm:mb-8 inline-block" aria-hidden="true">
@@ -90,7 +89,7 @@ import identity from '../data/identity.json';
     </p>
 
     <!-- Typing subtitle — theme-aware -->
-    <div class="inline-block mb-8 sm:mb-10 min-h-[3.5rem] sm:min-h-[2rem]">
+    <div class="inline-block mb-8 sm:mb-10 min-h-[3.5rem] md:min-h-[2rem]">
       <p
         id="typing-text"
         class="font-heading text-base sm:text-lg md:text-xl text-secondary-text font-medium"
@@ -101,7 +100,7 @@ import identity from '../data/identity.json';
     </div>
 
     <!-- CTAs -->
-    <div class="flex flex-row flex-wrap items-center justify-center gap-3 sm:gap-4 mb-12 sm:mb-16">
+    <div class="flex flex-row flex-wrap items-center justify-center gap-3 sm:gap-4">
       <a href="#projects" id="cta-projects" class="btn-primary text-base px-5 sm:px-8 py-3 sm:py-3.5 min-h-[48px] flex items-center gap-2">
         <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="m6 9 6 6 6-6"/></svg>
         <span data-i18n="hero.cta1">Ver Proyectos</span>
@@ -111,70 +110,11 @@ import identity from '../data/identity.json';
         <span data-i18n="hero.cta2">Contactar</span>
       </a>
     </div>
-
-    <!-- About Me — merged section -->
-    <div id="about" class="about-merged max-w-3xl mx-auto text-left" data-animate>
-      <div class="card-base card-base--no-hover p-5 sm:p-8 relative overflow-hidden">
-        <!-- Decorative accent -->
-        <div class="absolute top-0 left-0 w-1 h-full bg-gradient-to-b from-primary via-secondary to-highlight rounded-l-xl"></div>
-
-        <div class="pl-4">
-          <div class="flex flex-wrap items-center gap-x-3 gap-y-1 mb-1">
-            <h2 class="font-heading text-2xl font-bold text-primary-text" data-i18n="about.title">Sobre Mí</h2>
-             <!-- Socials -->
-            <div class="flex items-center gap-1">
-              <a href={identity.identity.social.github} target="_blank" rel="noopener noreferrer" class="inline-flex items-center justify-center w-11 h-11 rounded-full border border-primary/30 bg-primary/10 text-text-muted hover:text-primary-text active:text-primary-text active:bg-primary/25 active:scale-90 transition-all hover:-translate-y-1" aria-label="GitHub">
-                <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M15 22v-4a4.8 4.8 0 0 0-1-3.5c3 0 6-2 6-5.5.08-1.25-.27-2.48-1-3.5.28-1.15.28-2.35 0-3.5 0 0-1 0-3 1.5-2.64-.5-5.36-.5-8 0C6 2 5 2 5 2c-.3 1.15-.3 2.35 0 3.5A5.403 5.403 0 0 0 4 9c0 3.5 3 5.5 6 5.5-.39.49-.68 1.05-.85 1.65-.17.6-.22 1.23-.15 1.85v4"/><path d="M9 18c-4.51 2-5-2-7-2"/></svg>
-              </a>
-              <a href={identity.identity.social.linkedin} target="_blank" rel="noopener noreferrer" class="inline-flex items-center justify-center w-11 h-11 rounded-full border border-secondary/30 bg-secondary/10 text-text-muted hover:text-secondary-text active:text-secondary-text active:bg-secondary/25 active:scale-90 transition-all hover:-translate-y-1" aria-label="LinkedIn">
-                <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M16 8a6 6 0 0 1 6 6v7h-4v-7a2 2 0 0 0-2-2 2 2 0 0 0-2 2v7h-4v-7a6 6 0 0 1 6-6z"/><rect width="4" height="12" x="2" y="9"/><circle cx="4" cy="4" r="2"/></svg>
-              </a>
-              <a href={identity.identity.social.twitter} target="_blank" rel="noopener noreferrer" class="inline-flex items-center justify-center w-11 h-11 rounded-full border border-highlight/30 bg-highlight/10 text-text-muted hover:text-highlight-text active:text-highlight-text active:bg-highlight/25 active:scale-90 transition-all hover:-translate-y-1" aria-label="Twitter / X">
-                <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M22 4s-.7 2.1-2 3.4c1.6 10-9.4 17.3-18 11.6 2.2.1 4.4-.6 6-2C3 15.5.5 9.6 3 5c2.2 2.6 5.6 4.1 9 4-.9-4.2 4-6.6 7-3.8 1.1 0 3-1.2 3-1.2z"/></svg>
-              </a>
-            </div>
-
-          </div>
-          <p class="text-xs text-text-muted font-heading tracking-widest mb-6" data-i18n="about.subtitle">La historia detrás del código</p>
-
-          <p
-            class="text-text-secondary leading-relaxed mb-4"
-            data-i18n-arepa="about.bio.arepa"
-            data-i18n-coffee="about.bio.coffee"
-          >
-            Como una arepa bien hecha — por fuera dorada, por dentro llena de sabor — así es mi enfoque con el software.
-          </p>
-          <p class="text-text-secondary leading-relaxed mb-6" data-i18n="about.bio2">
-            Me especializo en crear experiencias web modernas, desde backends robustos hasta interfaces que enamoran.
-          </p>
-
-          <!-- Stats -->
-          <div class="grid grid-cols-3 gap-3 sm:gap-4 pt-4 border-t border-text-primary/10">
-            <div class="text-center">
-              <p class="font-heading text-xl sm:text-2xl font-bold text-primary-text glow-text leading-tight">{identity.about.years_of_experience}</p>
-              <p class="text-xs text-text-muted mt-1 uppercase tracking-wide" data-i18n="about.stats.years">Años de experiencia</p>
-            </div>
-            <div class="text-center">
-              <p class="font-heading text-3xl font-bold text-secondary-text leading-tight">{identity.projects.length}+</p>
-              <p class="text-xs text-text-muted mt-1 uppercase tracking-wide" data-i18n="about.stats.projects">Proyectos en los que he trabajado</p>
-            </div>
-            <div class="text-center">
-              <p
-                class="font-heading text-2xl font-bold text-accent-text leading-tight"
-                data-i18n-arepa="about.stats.arepas.arepa"
-                data-i18n-coffee="about.stats.arepas.coffee"
-              >∞ Arepas</p>
-              <p class="text-xs text-text-muted mt-1">&nbsp;</p>
-            </div>
-          </div>
-        </div>
-      </div>
-    </div>
   </div>
 
-  <!-- Scroll hint -->
-  <div class="absolute bottom-8 left-1/2 -translate-x-1/2">
-    <a href="#stack" class="block p-2 text-text-muted fine:hover:translate-y-1 hover:text-primary-text active:text-primary-text active:scale-90 transition-all" aria-label="Bajar" data-aria-es="Bajar" data-aria-en="Scroll down">
+  <!-- Scroll hint (static) -->
+  <div class="absolute bottom-4 left-1/2 -translate-x-1/2">
+    <a href="#about" class="flex items-center justify-center w-11 h-11 text-text-muted hover:text-primary-text active:text-primary-text active:scale-90 transition-colors" aria-label="Bajar" data-aria-es="Bajar" data-aria-en="Scroll down">
       <svg width="28" height="28" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M12 5v14"/><path d="m19 12-7 7-7-7"/></svg>
     </a>
   </div>
@@ -187,10 +127,6 @@ import identity from '../data/identity.json';
 
   .hero-icon.hidden {
     display: none;
-  }
-
-  .about-merged {
-    scroll-margin-top: 5rem;
   }
 </style>
 

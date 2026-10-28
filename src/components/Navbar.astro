@@ -8,11 +8,11 @@ import LangToggle from './LangToggle.astro';
   class="fixed top-0 left-0 right-0 z-50 transition-transform duration-300"
 >
   <div class="max-w-7xl mx-auto px-3 sm:px-6 lg:px-8">
-    <div class="flex items-center justify-between h-16 md:h-20">
+    <div class="flex items-center justify-between gap-2 h-16 md:h-20">
 
       <!-- Logotipo JESSZB.DEV -->
       <a href="/#hero" class="flex items-center gap-2 group min-h-[44px] shrink-0" aria-label="JESSZB.DEV — inicio">
-        <span class="font-heading text-lg sm:text-xl md:text-2xl font-bold">
+        <span class="font-heading text-base min-[400px]:text-lg sm:text-xl md:text-2xl font-bold">
           <span class="text-primary-text glow-text">JESS</span><span class="zb-gradient">ZB</span><span class="text-accent-text">.</span><span class="text-primary-text glow-text">DEV</span>
         </span>
       </a>
@@ -27,7 +27,7 @@ import LangToggle from './LangToggle.astro';
       </div>
 
       <!-- Controls -->
-      <div class="flex items-center gap-1.5 sm:gap-2">
+      <div class="flex items-center gap-2">
         <LangToggle />
         <ThemeToggle />
 
@@ -93,6 +93,16 @@ import LangToggle from './LangToggle.astro';
     }
   }
 
+  /* Active section (set by the observer below) */
+  .nav-link[aria-current="true"] {
+    color: var(--color-primary-text);
+  }
+
+  .nav-link[aria-current="true"]::after {
+    width: 100%;
+    height: 2px;
+  }
+
   .mobile-nav-link {
     display: block;
     padding: 0.75rem 1rem;
@@ -116,6 +126,12 @@ import LangToggle from './LangToggle.astro';
     }
   }
 
+  .mobile-nav-link[aria-current="true"] {
+    color: var(--color-primary-text);
+    font-weight: 600;
+    background-color: color-mix(in srgb, var(--color-primary) 10%, transparent);
+  }
+
   /* Touch feedback: visible tint while pressed */
   .mobile-nav-link:active {
     color: var(--color-primary-text);
@@ -136,6 +152,46 @@ import LangToggle from './LangToggle.astro';
   let lastScroll = 0;
   let scrollHandler: (() => void) | null = null;
   let menuOpen = false;
+  let sectionObserver: IntersectionObserver | null = null;
+
+  const SECTION_IDS = ['about', 'stack', 'projects', 'experience', 'contact'];
+
+  function teardownSectionSpy(): void {
+    sectionObserver?.disconnect();
+    sectionObserver = null;
+  }
+
+  // Marks the nav link of the section that holds the upper-centre line of the viewport.
+  // Home only: detail pages have none of these sections, so no link is active there.
+  function initSectionSpy(): void {
+    teardownSectionSpy();
+    const links = document.querySelectorAll<HTMLAnchorElement>('#navbar a[href^="/#"]');
+    const setActive = (id: string | null) => {
+      links.forEach((link) => {
+        const linkId = link.getAttribute('href')?.slice(2);
+        if (id !== null && linkId === id) link.setAttribute('aria-current', 'true');
+        else link.removeAttribute('aria-current');
+      });
+    };
+    setActive(null);
+
+    const sections = SECTION_IDS.map((id) => document.getElementById(id)).filter((el): el is HTMLElement => !!el);
+    if (sections.length === 0 || !('IntersectionObserver' in window)) return;
+
+    // The observer only signals when a section crosses a thin band at ~38% of the viewport;
+    // the active section is then the last one whose top is above that line.
+    const update = () => {
+      const line = window.innerHeight * 0.38;
+      let active: string | null = null;
+      sections.forEach((section) => {
+        if (section.getBoundingClientRect().top <= line) active = section.id;
+      });
+      setActive(active);
+    };
+    sectionObserver = new IntersectionObserver(update, { rootMargin: '-38% 0px -60% 0px' });
+    sections.forEach((section) => sectionObserver!.observe(section));
+    update();
+  }
 
   function initNavbar(): void {
     const navbar = document.getElementById('navbar');
@@ -198,7 +254,10 @@ import LangToggle from './LangToggle.astro';
     mobileMenu?.querySelectorAll('a').forEach((link) => {
       link.addEventListener('click', closeMenu);
     });
+
+    initSectionSpy();
   }
 
   document.addEventListener('astro:page-load', initNavbar);
+  document.addEventListener('astro:before-swap', teardownSectionSpy);
 </script>

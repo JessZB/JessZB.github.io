@@ -125,6 +125,13 @@
       display: flex;
     }
   }
+  /* Narrow phones: tighter pill so the navbar controls keep >= 8px between them */
+  @media (max-width: 400px) {
+    .theme-toggle-btn {
+      gap: 0.25rem;
+      padding: 0.3rem 0.4rem;
+    }
+  }
 </style>
 
 <script>

@@ -10,16 +10,23 @@ interface Props {
 
 const { project, lang = 'es' } = Astro.props;
 
-const colorMap: Record<string, { border: string; text: string; badge: string; glow: string; gradient: string }> = {
-  primary:   { border: 'border-primary/25', text: 'text-primary-text', badge: 'bg-bg-deep text-primary-text border-primary/60 shadow-sm', glow: 'hover:shadow-glow-gold', gradient: 'from-primary/30 via-primary/15 to-bg-surface' },
-  secondary: { border: 'border-secondary/25', text: 'text-secondary-text', badge: 'bg-bg-deep text-secondary-text border-secondary/60 shadow-sm', glow: 'hover:shadow-glow-teal', gradient: 'from-secondary/30 via-secondary/15 to-bg-surface' },
-  highlight: { border: 'border-highlight/25', text: 'text-highlight-light-text', badge: 'bg-bg-deep text-highlight-light-text border-highlight/60 shadow-sm', glow: 'hover:shadow-glow-lavender', gradient: 'from-highlight/30 via-highlight/15 to-bg-surface' },
-  accent:    { border: 'border-accent/25', text: 'text-accent-light-text', badge: 'bg-bg-deep text-accent-light-text border-accent/60 shadow-sm', glow: 'hover:shadow-glow-coral', gradient: 'from-accent/30 via-accent/15 to-bg-surface' },
+const colorMap: Record<string, { tint: string; rule: string; border: string; text: string; badge: string; glow: string; gradient: string }> = {
+  primary:   { tint: 'bg-primary/10', rule: 'bg-primary', border: 'border-primary/25', text: 'text-primary-text', badge: 'bg-bg-deep text-primary-text border-primary/60 shadow-sm', glow: 'hover:shadow-glow-gold', gradient: 'from-primary/30 via-primary/15 to-bg-surface' },
+  secondary: { tint: 'bg-secondary/10', rule: 'bg-secondary', border: 'border-secondary/25', text: 'text-secondary-text', badge: 'bg-bg-deep text-secondary-text border-secondary/60 shadow-sm', glow: 'hover:shadow-glow-teal', gradient: 'from-secondary/30 via-secondary/15 to-bg-surface' },
+  highlight: { tint: 'bg-highlight/10', rule: 'bg-highlight', border: 'border-highlight/25', text: 'text-highlight-light-text', badge: 'bg-bg-deep text-highlight-light-text border-highlight/60 shadow-sm', glow: 'hover:shadow-glow-lavender', gradient: 'from-highlight/30 via-highlight/15 to-bg-surface' },
+  accent:    { tint: 'bg-accent/10', rule: 'bg-accent', border: 'border-accent/25', text: 'text-accent-light-text', badge: 'bg-bg-deep text-accent-light-text border-accent/60 shadow-sm', glow: 'hover:shadow-glow-coral', gradient: 'from-accent/30 via-accent/15 to-bg-surface' },
 };
 
 const c = colorMap[project.color] || colorMap.primary;
 const hasImages = project.images && project.images.length > 0;
 const description = project.description[lang] || project.description.es;
+
+// Cards without screenshots get a typographic cover: the key technologies, not an invented interface.
+const coverTechs = project.techs.slice(0, 4);
+const noPublicDemo = !project.demo && !project.code;
+const chipStart = hasImages ? 0 : coverTechs.length;
+const chipTechs = project.techs.slice(chipStart, chipStart + 4);
+const hiddenTechs = project.techs.length - (chipStart + chipTechs.length);
 
 const categoryLabels: Record<string, string> = {
   own: lang === 'es' ? 'Propios' : 'Own',
@@ -72,20 +79,19 @@ const statusLabel = {
         ))}
       </div>
     ) : (
-      <!-- Elegant gradient placeholder -->
-      <div class={`w-full h-full bg-gradient-to-br ${c.gradient} flex items-center justify-center relative`}>
-        <!-- Decorative geo shape -->
-        <svg viewBox="0 0 200 160" class="w-32 h-32 opacity-15 group-hover:opacity-25 transition-opacity duration-500" aria-hidden="true">
-          <polygon points="100,20 170,70 150,140 50,140 30,70" fill="currentColor" class={c.text}/>
-          <circle cx="100" cy="85" r="20" fill="none" stroke="currentColor" stroke-width="2" class={c.text} opacity="0.6"/>
-          <line x1="60" y1="85" x2="140" y2="85" stroke="currentColor" stroke-width="1" class={c.text} opacity="0.4"/>
-          <line x1="100" y1="45" x2="100" y2="125" stroke="currentColor" stroke-width="1" class={c.text} opacity="0.4"/>
-        </svg>
-
-        <!-- Project initial -->
-        <span class={`absolute font-heading text-6xl font-black opacity-10 ${c.text} select-none`}>
-          {project.title.charAt(0)}
-        </span>
+      <!-- Typographic cover: key technologies in display type, accent rule, honest availability label -->
+      <div class={`cover w-full h-full flex flex-col px-5 pt-[3.25rem] pb-3 ${c.tint}`}>
+        <span class={`block w-10 h-[3px] rounded-full mb-2 ${c.rule}`} aria-hidden="true"></span>
+        <ul class="font-heading text-base font-semibold leading-5 text-text-primary">
+          {coverTechs.map((tech) => (
+            <li class="border-t border-text-primary/15 py-px">{tech}</li>
+          ))}
+        </ul>
+        {noPublicDemo && (
+          <p class="mt-auto text-sm leading-none text-text-secondary" data-i18n="projects.noDemo">
+            {lang === 'es' ? 'Sin demo pública' : 'No public demo'}
+          </p>
+        )}
       </div>
     )}
 
@@ -139,11 +145,11 @@ const statusLabel = {
 
     <!-- Tech chips -->
     <div class="flex flex-wrap gap-1.5 relative z-20 pointer-events-none">
-      {project.techs.slice(0, 4).map((tech) => (
+      {chipTechs.map((tech) => (
         <span class="tag text-xs">{tech}</span>
       ))}
-      {project.techs.length > 4 && (
-        <span class="tag text-xs text-text-muted">+{project.techs.length - 4}</span>
+      {hiddenTechs > 0 && (
+        <span class="tag text-xs text-text-muted">+{hiddenTechs}</span>
       )}
     </div>
   </div>

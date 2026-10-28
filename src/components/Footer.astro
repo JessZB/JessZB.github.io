@@ -66,11 +66,15 @@ import identity from '../data/identity.json';
     </div>
 
     <!-- Bottom bar -->
-    <div class="mt-8 pt-6 border-t border-white/5 flex flex-col sm:flex-row items-center justify-between gap-3 text-center">
-      <p class="text-text-muted text-xs" data-i18n="footer.copyright">
+    <div class="mt-8 pt-6 border-t border-white/5 flex flex-col sm:flex-row items-center justify-between gap-x-6 gap-y-1 text-center">
+      <p class="text-text-muted text-sm" data-i18n="footer.copyright">
         © 2026 JESS<span class="zb-gradient">ZB</span>.DEV — Jesús Zapata
       </p>
-      <p class="text-text-muted text-xs flex items-center gap-1">
+      <a href="#main" class="back-to-top inline-flex items-center gap-2 min-h-[44px] px-2 text-sm font-medium text-text-secondary">
+        <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="m5 12 7-7 7 7"/><path d="M12 19V5"/></svg>
+        <span data-i18n="footer.backToTop">Volver arriba</span>
+      </a>
+      <p class="text-text-muted text-sm flex items-center gap-1">
         <span data-i18n="footer.builtWith">Hecho con Astro · Tailwind · GSAP</span>
         <svg width="10" height="10" viewBox="0 0 24 24" fill="currentColor" class="text-accent-text inline-block" aria-hidden="true">
           <path d="M12 21.35l-1.45-1.32C5.4 15.36 2 12.28 2 8.5 2 5.42 4.42 3 7.5 3c1.74 0 3.41.81 4.5 2.09C13.09 3.81 14.76 3 16.5 3 19.58 3 22 5.42 22 8.5c0 3.78-3.4 6.86-8.55 11.54L12 21.35z"/>
@@ -100,6 +104,16 @@ import identity from '../data/identity.json';
       color: var(--color-primary-text);
       translate: 0 -3px;
     }
+  }
+
+  @media (hover: hover) and (pointer: fine) {
+    .back-to-top:hover {
+      color: var(--color-primary-text);
+    }
+  }
+
+  .back-to-top:active {
+    color: var(--color-primary-text);
   }
 
   .footer-icon:active {
